@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>8.benchmark 怎么写 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《benchmark 怎么写》目标有一个字符串 var number = &amp;#39;100&amp;#39;，我们要将它转换成 Number 类型的 100。 目前有三个选项：+, parseInt, Number 请测试哪个方法更快。 知识点 学习使用 benchmark 库 学习使用 http://jsperf.com/ 分享你的 benchmark  课程内容首先去弄个 benchmark 库，ht">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.benchmark 怎么写">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/nodebenchmark 怎么写/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《benchmark 怎么写》目标有一个字符串 var number = &amp;#39;100&amp;#39;，我们要将它转换成 Number 类型的 100。 目前有三个选项：+, parseInt, Number 请测试哪个方法更快。 知识点 学习使用 benchmark 库 学习使用 http://jsperf.com/ 分享你的 benchmark  课程内容首先去弄个 benchmark 库，ht">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson10/1.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8.benchmark 怎么写">
+<meta name="twitter:description" content="《benchmark 怎么写》目标有一个字符串 var number = &amp;#39;100&amp;#39;，我们要将它转换成 Number 类型的 100。 目前有三个选项：+, parseInt, Number 请测试哪个方法更快。 知识点 学习使用 benchmark 库 学习使用 http://jsperf.com/ 分享你的 benchmark  课程内容首先去弄个 benchmark 库，ht">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson10/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">8.benchmark 怎么写</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">8.benchmark 怎么写</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《benchmark-怎么写》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《benchmark 怎么写》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在线分享"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">在线分享</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-nodebenchmark 怎么写"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">8.benchmark 怎么写</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《benchmark-怎么写》"><a href="#《benchmark-怎么写》" class="headerlink" title="《benchmark 怎么写》"></a>《benchmark 怎么写》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>有一个字符串 <code>var number = &#39;100&#39;</code>，我们要将它转换成 Number 类型的 100。</p>
+<p>目前有三个选项：+, parseInt, Number</p>
+<p>请测试哪个方法更快。</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>学习使用 benchmark 库</li>
+<li>学习使用 <a href="http://jsperf.com/" target="_blank" rel="noopener">http://jsperf.com/</a> 分享你的 benchmark</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>首先去弄个 benchmark 库，<a href="https://github.com/bestiejs/benchmark.js" target="_blank" rel="noopener">https://github.com/bestiejs/benchmark.js</a> 。</p>
+<p><del> 这个库已经两年没有更新了，两年前发了个 1.0.0 版本，直到现在。 </del></p>
+<p>这个库的最新版本是 2.1.0</p>
+<p>用法也特别简单，照着官网的 copy 下来就好。</p>
+<p>我们先来实现这三个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> int1 = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> +str;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> int2 = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">parseInt</span>(str, <span class="number">10</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> int3 = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Number</span>(str);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然后照着官方的模板写 benchmark suite：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = <span class="string">'100'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加测试</span></span><br><span class="line">suite</span><br><span class="line">.add(<span class="string">'+'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  int1(number);</span><br><span class="line">&#125;)</span><br><span class="line">.add(<span class="string">'parseInt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  int2(number);</span><br><span class="line">&#125;)</span><br><span class="line">.add(<span class="string">'Number'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  int3(number);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 每个测试跑完后，输出信息</span></span><br><span class="line">.on(<span class="string">'cycle'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">String</span>(event.target));</span><br><span class="line">&#125;)</span><br><span class="line">.on(<span class="string">'complete'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Fastest is '</span> + <span class="keyword">this</span>.filter(<span class="string">'fastest'</span>).map(<span class="string">'name'</span>));</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 这里的 async 不是 mocha 测试那个 async 的意思，这个选项与它的时间计算有关，默认勾上就好了。</span></span><br><span class="line">.run(&#123; <span class="string">'async'</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>直接运行：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson10/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>可以看到，parseInt 是最快的。</p>
+<h3 id="在线分享"><a href="#在线分享" class="headerlink" title="在线分享"></a>在线分享</h3><p>如果想要在线分享你的 js benchmark，用这个网站：<a href="http://jsperf.com/" target="_blank" rel="noopener">http://jsperf.com/</a> 。</p>
+<p>比如我在上面测试 <code>Math.log</code> 的效率：</p>
+<p><a href="http://jsperf.com/math-perf-alsotang" target="_blank" rel="noopener">http://jsperf.com/math-perf-alsotang</a></p>
+<p>进入之后点击那个 <code>Run tests</code> 按钮，就可以在浏览器中看到它们的效率差异了，毕竟浏览器也是可以跑 js 的。</p>
+<p>点击这里：<a href="http://jsperf.com/math-perf-alsotang/edit" target="_blank" rel="noopener">http://jsperf.com/math-perf-alsotang/edit</a> ，就可以看到这个 benchmark 是怎么配置的，很简单。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/&title=《8.benchmark 怎么写》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/&title=《8.benchmark 怎么写》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《8.benchmark 怎么写》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/node使用 promise 替代回调函数/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">17.使用 promise 替代回调函数</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/nodecookie 和 session/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">16.cookie 和 session</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/&title=《8.benchmark 怎么写》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/&title=《8.benchmark 怎么写》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《8.benchmark 怎么写》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/nodebenchmark 怎么写/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3a0YrDMAxE0fz/T6evhWJ1ZuQWrFw/La1DfbIgJFnXJa/7bb1/Un/7uT6frX9l84IBA8axjLtcykFdqguu98CAAeM5jFUEq/fU+5XAquDr34IBAwaMLHTqKWP2+mDAgAGjH3Cz8AoDBgwYNcNN1/RSU38Ff6rFYcCAcSBD77r//++f3G/AgAHjKMZtLjcFVI64+sQ4FQwYMEYz3AJVL3c3t9KU88CAAWMoo35gV0HbSQpXL8X4P8CAAWMQI2v9K80vHRBeIcCAAWM0wz3irpGL7BXYfUEYMGAMZXQOrYdvHWnDYMCAMY6hDDG4haXeenNLYvsKEwYMGIMYbpq4q/TtXxh8uRiAAQPGIEY2kKqMk+4aaZWuMGHAgDGaUYdU94JTz9mya4Av0yIwYMAYzdAbcHoalw1buKkkDBgwnsBQHu6XnW6TzjgDDBgwRjOUBDFrlmVjGa2kEwYMGEMZehMtC836fjfpNGpiGDBgHM7Qkzl3XCwL6G5QhgEDxnMY2cBEdsR+iRv2DmHAgDGIkRWo+nWCHlKVb69OdxAGDBgHMtxBBze8ur9oPwUDBoyhjNtc7oCXi3GLZ/sdw4AB40CGvnYNZGQjGtKwBQwYMEYz3FTPPfovAu7lxn4YMGCMYGSBLys+O6necicMGDBgyCldJ/mrT/XDgAsDBoxxDCMIymMZeshePgsDBowHMPSRiGz8dNtQxWo/DBgwRjOy0rFTguoXnFnqCQMGjEGMF9e0S6noVkvdAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

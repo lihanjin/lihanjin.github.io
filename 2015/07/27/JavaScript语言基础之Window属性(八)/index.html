@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JavaScript语言基础之Window属性(八) | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript">
+    <meta name="description" content="一些讨论">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript语言基础之Window属性(八)">
+<meta property="og:url" content="http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="一些讨论">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7xq6al.com1.z0.glb.clouddn.com/js%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-window%E5%B1%9E%E6%80%A7.gif">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript语言基础之Window属性(八)">
+<meta name="twitter:description" content="一些讨论">
+<meta name="twitter:image" content="http://7xq6al.com1.z0.glb.clouddn.com/js%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-window%E5%B1%9E%E6%80%A7.gif">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JavaScript语言基础之Window属性(八)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JavaScript语言基础之Window属性(八)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-07-26T16:05:43.000Z" itemprop="datePublished" class="page-time">
+  2015-07-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#附录：思维导图总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">附录：思维导图总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-JavaScript语言基础之Window属性(八)"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JavaScript语言基础之Window属性(八)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li><p><strong>一些讨论</strong></p>
+<a id="more"></a>
+<ul>
+<li><code>window</code> 是<code>Window</code>构造器造出来的一个对象 <code>alert(window instanceof Window)</code></li>
+<li><p><code>document</code> 是<code>Document</code>构造器造出来的一个对象</p>
+</li>
+<li><p>任何对象在我们的内存中他都是由某个构造器创建出来的 也就是说 有构造器一定有对应的原型prototype</p>
+</li>
+<li><p>例如：div是由HTMLDivElement 这个构造器创建的一个实例 <code>div = new HTMLDivElement()</code>  <code>span = new HTMLSpanElement()</code></p>
+</li>
+<li><p>查看某个对象对应的构造器：console.log();</p>
+</li>
+<li><p>整个浏览器的实现就是一个面向对象的编程思想 一切皆是对象</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>BOM 浏览器对象模型</strong></p>
+<ul>
+<li><p>a.<code>screen</code> 指的不是浏览器的宽度，指的是整个电脑屏幕的分辨率<br>   可以拿到屏幕可用分辨率</p>
+</li>
+<li><p>b.<code>navigator</code><br>   可以通过<code>userAgent</code>判断当前浏览器信息</p>
+</li>
+<li><p>c.<code>location</code></p>
+<ul>
+<li><p><code>URL</code>：统一资源定位符 <code>Union Resource Location</code></p>
+</li>
+<li><p>可以通过<code>href</code>属性重定向（改变）页面的URL，进行页面跳转</p>
+</li>
+</ul>
+</li>
+<li><p>d.<code>history</code><br>   go方法能够让我们进行历史回退或者前进</p>
+</li>
+<li><p>e.<code>frames</code><br>   获得当前窗体的子页面（<code>iframe</code>）</p>
+</li>
+<li><p>f.<code>document</code><br>   <code>DOM</code>模型的核心对象</p>
+</li>
+</ul>
+</li>
+<li><p><strong><code>DOM</code> 文档对象模型</strong></p>
+<ul>
+<li><p>document</p>
+<ul>
+<li><p>功能</p>
+<ul>
+<li><code>getElementById</code>：通过传入的ID，返回标识了这个ID的唯一对象的内存地址</li>
+<li><code>getElementsByTagName</code>:通过传入的标签名字，返回所有该标签对象（<code>HTMLCollection</code>）</li>
+<li><code>getElementsByClassName</code>:通过类的名字，返回所有该类的元素对象（<code>HTMLCollection</code>）</li>
+<li><code>createElement</code>:想要创建出来的元素能够绘制在页面中，那么它必须在DOM树中</li>
+</ul>
+</li>
+<li><p><strong>总结：</strong> <code>document</code>对象是DOM原型的核心对象，它是内存DOM树的根，所以它提供了很多功能让我们快速的找到DOM树中的某些DOM节点（对象）</p>
+</li>
+<li><p><code>element</code></p>
+<ul>
+<li><p>功能方法：（自定义属性非常灵活好用）</p>
+<ul>
+<li><code>setAttribute/getAttribute</code> //getAttribute获取标签的属性 –用来操作标签的属性</li>
+<li><code>setAttribute</code>设置标签的属性</li>
+<li><code>appendChild</code>:添加子元素</li>
+</ul>
+</li>
+<li><p>属性：</p>
+<ul>
+<li><code>id</code></li>
+<li><code>className</code>，<code>style</code></li>
+<li><code>name</code>,<code>value</code>(只有表单元素有 其他是没有的)</li>
+<li><code>href</code>,<code>src</code>…(对应的元素)</li>
+<li><code>innerHTML/innerText</code>  innerText返回文本信息</li>
+<li><code>children</code>://子元素集合</li>
+<li><code>parentNode</code>//父元素</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>总结：元素的功能属性直接可以通过元素对象<code>点</code>出来，除此意外的<code>自定义属性</code>，请通过<code>get/setAtribute</code>去操作</li>
+</ul>
+<hr>
+<h3 id="附录：思维导图总结"><a href="#附录：思维导图总结" class="headerlink" title="附录：思维导图总结"></a>附录：思维导图总结</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xq6al.com1.z0.glb.clouddn.com/js%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-window%E5%B1%9E%E6%80%A7.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/&title=《JavaScript语言基础之Window属性(八)》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/&title=《JavaScript语言基础之Window属性(八)》 — _sUper.LEE的个人空间&source=
+一些讨论" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript语言基础之Window属性(八)》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/07/27/JavaScript语言基础之正则表达式(十)/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaScript语言基础之正则表达式(十)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/27/JavaScript语言基础之数组(七)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JavaScript语言基础之数组(七)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/&title=《JavaScript语言基础之Window属性(八)》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/&title=《JavaScript语言基础之Window属性(八)》 — _sUper.LEE的个人空间&source=
+一些讨论" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript语言基础之Window属性(八)》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/27/JavaScript语言基础之Window属性(八)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpUlEQVR42u3aQW7jQAwEQP//09nrXmx0kzOKA5ROgSJbU2NAIpp8veLj57+jvfInOPLved048PDw8BZLf3fj/Py7Be2Xm28ZHh4e3jO85Os+X5OcebeIZCNm68HDw8P7Nt7nK/NFJ4U1Hh4e3t/l5aX2qfgDDw8P7zt5baxwNoxIYuLrWQseHh5e12+qI9Tf/ftKfw8PDw9v3VWfhQXtQEDyghmuFg8PD+8CL3/g5jfePJ/zQa7iSjw8PLwLvH1TP79ZsjXt4Fcd5uLh4eEteMnjfhP4JmeKVta+9YWHh4d35nwdE7Qhb/vZfLOSrcTDw8M7y8vDhf24wKbxX/xK7S+Gh4eHt+DlIezs4Z4vMS/06/4eHh4e3iHe7EGck9or8wbb5xcSHh4e3g3e7DHdtqZaUtvBiwYL8PDw8A7xEtKpIYB2pCAvtd++MPDw8PCu8ZIodjZiNYt9V9EtHh4e3mXeZuJgH93myz3QEsPDw8M7xGvb/7NoIMpCjjbP8PDw8G7z8gdxHQfELf9TZXQ0OoCHh4e34CVxwGYEalPpz8YF8PDw8J7nJc2tWZzasttr8PDw8J7h5YNWbbmcLygPketvw8PDw/sl3qYN9jmczbdyGHzg4eHhXeC1zafZbdoxrDZEjop+PDw8vKO82YDULFZoS+dZgb7Kg/Hw8PBKXnJswt/NVrZNODw8PLzbvLYU3sesyfblzTY8PDy8Z3ibV0IeAScvlVmEgYeHh/c8b/M+aUPYWYTRBhN4eHh4z/A20UPyAsgHEdpCPPrd8PDw8K7xNs2qWTneDhAcy1rw8PDwvoDXlrn72r8o7vHw8PC+hrdplc02qB1HwMPDw7vNm5XCn18b+X/zb87DCzw8PLx7vNnHZgMEybYmm3Kgp4eHh4c34f0DV4HuA0hTN8UAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

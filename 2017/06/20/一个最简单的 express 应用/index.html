@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>2.一个最简单的 express 应用 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《一个最简单的 express 应用》目标建立一个 lesson1 项目，在其中编写代码。当在浏览器中访问 http://localhost:3000/ 时，输出 Hello World。 挑战访问 http://localhost:3000/ 时，输出 你好，世界。 知识点 包管理器 npm 。使用 npm 安装包，并自动安装所需依赖。 框架 express 。学习新建 express 实例，并">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.一个最简单的 express 应用">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/一个最简单的 express 应用/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《一个最简单的 express 应用》目标建立一个 lesson1 项目，在其中编写代码。当在浏览器中访问 http://localhost:3000/ 时，输出 Hello World。 挑战访问 http://localhost:3000/ 时，输出 你好，世界。 知识点 包管理器 npm 。使用 npm 安装包，并自动安装所需依赖。 框架 express 。学习新建 express 实例，并">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2.一个最简单的 express 应用">
+<meta name="twitter:description" content="《一个最简单的 express 应用》目标建立一个 lesson1 项目，在其中编写代码。当在浏览器中访问 http://localhost:3000/ 时，输出 Hello World。 挑战访问 http://localhost:3000/ 时，输出 你好，世界。 知识点 包管理器 npm 。使用 npm 安装包，并自动安装所需依赖。 框架 express 。学习新建 express 实例，并">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">2.一个最简单的 express 应用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">2.一个最简单的 express 应用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《一个最简单的-express-应用》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《一个最简单的 express 应用》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#挑战"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">挑战</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">课程内容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#包管理器-npm"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">包管理器 npm</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#框架-Express"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">框架 Express</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充知识"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">补充知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#端口"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">端口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#URL"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">URL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#尾声"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">尾声</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-一个最简单的 express 应用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">2.一个最简单的 express 应用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《一个最简单的-express-应用》"><a href="#《一个最简单的-express-应用》" class="headerlink" title="《一个最简单的 express 应用》"></a>《一个最简单的 express 应用》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>建立一个 lesson1 项目，在其中编写代码。当在浏览器中访问 <code>http://localhost:3000/</code> 时，输出 <code>Hello World</code>。</p>
+<h2 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h2><p>访问 <code>http://localhost:3000/</code> 时，输出 <code>你好，世界</code>。</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>包管理器 npm 。使用 npm 安装包，并自动安装所需依赖。</li>
+<li>框架 express 。学习新建 express 实例，并定义 routes ，产生输出。</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>按照惯例，我们来个 helloworld 入门。</p>
+<h3 id="包管理器-npm"><a href="#包管理器-npm" class="headerlink" title="包管理器 npm"></a>包管理器 npm</h3><p>npm 可以自动管理包的依赖. 只需要安装你想要的包, 不必考虑这个包的依赖包.</p>
+<p>在 PHP 中, 包管理使用的 <code>Composer</code>, python 中，包管理使用 <code>easy_install</code> 或者 <code>pip</code>，ruby 中我们使用 <code>gem</code>。而在 Node.js 中，对应就是 <code>npm</code>，npm 是 <code>Node.js Package Manager</code> 的意思。</p>
+<h3 id="框架-Express"><a href="#框架-Express" class="headerlink" title="框架 Express"></a>框架 Express</h3><p>express 是 Node.js 应用最广泛的 web 框架，现在是 4.x 版本，它非常薄。跟 Rails 比起来，完全两个极端。</p>
+<p>express 的官网是 <a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a> ，我常常上去看它的 API。</p>
+<p>首先我们需要得到一个 express。</p>
+<p>不同于 ruby 的 gem 装在全局，Node.js 的依赖是以项目为单位管理的，直接就安装在项目的 <code>node_modules</code> 目录下，而且每个依赖都可以有指定版本的其他依赖，这些依赖像一棵树一样。根据我自己的使用经验来说，npm 的体验在 pip 和 gem 之上。</p>
+<p>OK，新建一个文件夹叫 lesson1 的，进去里面安装 express</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir lesson1 &amp;&amp; cd lesson1</span><br><span class="line"># 这里没有从官方 npm 安装，而是使用了大淘宝的 npm 镜像</span><br><span class="line">$ npm install express --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<p>安装完成后，我们的 lesson1 目录下应该会出现一个 <code>node_modules</code> 文件夹，<code>ls</code> 看看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls node_modules</span><br></pre></td></tr></table></figure>
+<p>里面如果出现 express 文件夹则说明安装成功。</p>
+<p>或者 npm命令提供更清晰直观的显示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm list</span><br></pre></td></tr></table></figure></p>
+<p>我们继续应用程序的编写。</p>
+<p>新建一个 app.js 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch app.js</span><br></pre></td></tr></table></figure>
+<p>copy 进去这些代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这句的意思就是引入 `express` 模块，并将它赋予 `express` 这个变量等待使用。</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="comment">// 调用 express 实例，它是一个函数，不带参数调用时，会返回一个 express 实例，将这个变量赋予 app 变量。</span></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// app 本身有很多方法，其中包括最常用的 get、post、put/patch、delete，在这里我们调用其中的 get 方法，为我们的 `/` 路径指定一个 handler 函数。</span></span><br><span class="line"><span class="comment">// 这个 handler 函数会接收 req 和 res 两个对象，他们分别是请求的 request 和 response。</span></span><br><span class="line"><span class="comment">// request 中包含了浏览器传来的各种信息，比如 query 啊，body 啊，headers 啊之类的，都可以通过 req 对象访问到。</span></span><br><span class="line"><span class="comment">// res 对象，我们一般不从里面取信息，而是通过它来定制我们向浏览器输出的信息，比如 header 信息，比如想要向浏览器输出的内容。这里我们调用了它的 #send 方法，向浏览器输出一个字符串。</span></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'Hello World'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义好我们 app 的行为之后，让它监听本地的 3000 端口。这里的第二个函数是个回调函数，会在 listen 动作成功后执行，我们这里执行了一个命令行输出操作，告诉我们监听动作已完成。</span></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'app is listening at port 3000'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>执行</p>
+<p><code>$ node app.js</code></p>
+<p>这时候我们的 app 就跑起来了，终端中会输出 <code>app is listening at port 3000</code>。这时我们打开浏览器，访问 <code>http://localhost:3000/</code>，会出现 <code>Hello World</code>。如果没有出现的话，肯定是上述哪一步弄错了，自己调试一下。</p>
+<h2 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h2><p>在这个例子中，node代码监听了3000端口，用户通过访问<code>http://localhost:3000/</code> 得到了内容，为什么呢？</p>
+<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>端口的作用：<code>通过端口来区分出同一电脑内不同应用或者进程，从而实现一条物理网线(通过分组交换技术-比如internet)同时链接多个程序</code><br><a href="http://en.wikipedia.org/wiki/Port_(computer_networking" target="_blank" rel="noopener">Port_(computer_networking)</a>)</p>
+<p>端口号是一个 16位的 uint, 所以其范围为 1 to 65535 (对TCP来说, port 0 被保留，不能被使用. 对于UDP来说, source端的端口号是可选的， 为0时表示无端口).</p>
+<p><code>app.listen(3000)</code>，进程就被打标，电脑接收到的3000端口的网络消息就会被发送给我们启动的这个进程</p>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p><a href="http://www.ietf.org/rfc/rfc1738.txt" target="_blank" rel="noopener">RFC1738</a> 定义的url格式笼统版本<code>&lt;scheme&gt;:&lt;scheme-specific-part&gt;</code>，<br>scheme有我们很熟悉的<code>http</code>、<code>https</code>、<code>ftp</code>，以及著名的<code>ed2k</code>，<code>thunder</code>。</p>
+<p>通常我们熟悉的url定义成这个样子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scheme&gt;://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;url-path&gt;</span><br></pre></td></tr></table></figure></p>
+<p>用过ftp的估计能体会这么长的，网页上很少带auth信息，所以就精简成这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;url-path&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在上面的例子中, scheme=http, host=localhost, port=3000, url-path=/, 再联想对照一下浏览器端<code>window.location</code>对象。<br>著名的<code>localhost</code>，你可以在电脑的hosts文件上找到</p>
+<p><a href="http://en.wikipedia.org/wiki/URI_scheme" target="_blank" rel="noopener">在这篇文章中提到</a>： <code>URI schemes are frequently and incorrectly referred to as &quot;protocols&quot;, or specifically as URI protocols or URL protocols, since most were originally designed to be used with a particular protocol, and often have the same name</code>，比较认同这个观点，尤其是今天移动设备的时代里， android和ios的开发中大量使用uri作为跨app通讯通道，把scheme理解为协议略狭隘了。</p>
+<h3 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h3><p>在了解完端口和url之后，再去看例子代码，相信应该好理解很多。<br>有必要的话，还可以在解刨一下express的use逻辑，对峙<code>http.createServer</code>，相信还有火花，:)</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/&title=《2.一个最简单的 express 应用》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/&title=《2.一个最简单的 express 应用》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/一个最简单的 express 应用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《2.一个最简单的 express 应用》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/node线上部署：heroku/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">12.线上部署：heroku</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/15/Git常用命令备忘记录/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git常用命令备忘记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/&title=《2.一个最简单的 express 应用》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/&title=《2.一个最简单的 express 应用》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/一个最简单的 express 应用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《2.一个最简单的 express 应用》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/一个最简单的 express 应用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwklEQVR42u3aQY7bMBAEwP3/pxMg14RS95CMfSidjIUjsWhAnPTMz098/fpz/f2X1d9X30k+J//28IWHh4c3Wvrqer716pvP7HZDn5+yWjMeHh7ebV7+gJbaLrE9VF4seHh4eB/lJSV1cofohT4qr/Hw8PC+jde+rJNSOzl48PDw8L6Td6rAfV5cHl4k23o4a8HDw8OLebNQ9bOfL/b38PDw8Da66nl0mxe+7QhCfhj8Y7V4eHh4F3j5InYeMCuLZ+20Yl4MDw8Pb8SbNbHyV3kbRsxCkOXPg4eHh3eBdzbGbQvopHDPw4iXkhoPDw/vEC8PT/O2/eyes1g5ylrw8PDwLvDa13r7+J3Yd2ucCw8PD+8CL4kbkgXlR8VwiXFJvQwj8PDw8A7xii5ZcJDkL/Q82tj5Dh4eHt4NXjsu0ALap7RldBFt4OHh4R3itcV0O5LVltHtYfCyuXh4eHgXeDuBbBsrtGMEO8fPsJOGh4eHt11G/8+yu/01kk3Bw8PDu8GbBa/5UZE00to221arDA8PD2+b9xwxtCMCSUm9X6An+LdhCTw8PLwzvDyMaIcG2kI8DyZekHh4eHiXebNF7yxlFjEUa8DDw8O7wGtjiBa8D5vdP0qs8fDw8DZ4s+b9fmPsVCvuZfvw8PDwjvLaV3nemsp3dyfefdkIPDw8vGu8WfQwC22TYrodQVh+xsPDw7vAS1pcO+NWbdOrLdCTYh0PDw/vLC95Hc9e9/l98pi4HlbAw8PDu8xLrlljbCe2yBtgy6ErPDw8vKO8/Eoe3C6iPRhmZTceHh7eDV77yp79T392DOTtuuUvhoeHh3eNN2uA3diC2cAWHh4e3nfyZmMEdUeuXNtw9AoPDw/vo7zZKMBOOJuX5nh4eHj3eHnTq35AeYdZULLcbjw8PLwLvFlpm5fL7dJz2Gw8Cw8PD2+D9xueu5KXj1PDLQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

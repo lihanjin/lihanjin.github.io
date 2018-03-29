@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>5.使用 async 控制并发 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《使用 async 控制并发》目标建立一个 lesson5 项目，在其中编写代码。 代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(https://cnodejs.org/ ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。 注意：与上节课不同，并发连接数需要控制在 5 个。 输出示例： 123456789101112[  &amp;#123;">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5.使用 async 控制并发">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《使用 async 控制并发》目标建立一个 lesson5 项目，在其中编写代码。 代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(https://cnodejs.org/ ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。 注意：与上节课不同，并发连接数需要控制在 5 个。 输出示例： 123456789101112[  &amp;#123;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson5/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson5/2.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5.使用 async 控制并发">
+<meta name="twitter:description" content="《使用 async 控制并发》目标建立一个 lesson5 项目，在其中编写代码。 代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(https://cnodejs.org/ ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。 注意：与上节课不同，并发连接数需要控制在 5 个。 输出示例： 123456789101112[  &amp;#123;">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson5/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">5.使用 async 控制并发</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">5.使用 async 控制并发</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《使用-async-控制并发》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《使用 async 控制并发》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node使用 eventproxy 控制并发"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">5.使用 async 控制并发</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《使用-async-控制并发》"><a href="#《使用-async-控制并发》" class="headerlink" title="《使用 async 控制并发》"></a>《使用 async 控制并发》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>建立一个 lesson5 项目，在其中编写代码。</p>
+<p>代码的入口是 <code>app.js</code>，当调用 <code>node app.js</code> 时，它会输出 CNode(<a href="https://cnodejs.org/" target="_blank" rel="noopener">https://cnodejs.org/</a> ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。</p>
+<p>注意：与上节课不同，并发连接数需要控制在 5 个。</p>
+<p>输出示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"title"</span>: <span class="string">"【公告】发招聘帖的同学留意一下这里"</span>,</span><br><span class="line">    <span class="string">"href"</span>: <span class="string">"http://cnodejs.org/topic/541ed2d05e28155f24676a12"</span>,</span><br><span class="line">    <span class="string">"comment1"</span>: <span class="string">"呵呵呵呵"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"title"</span>: <span class="string">"发布一款 Sublime Text 下的 JavaScript 语法高亮插件"</span>,</span><br><span class="line">    <span class="string">"href"</span>: <span class="string">"http://cnodejs.org/topic/54207e2efffeb6de3d61f68f"</span>,</span><br><span class="line">    <span class="string">"comment1"</span>: <span class="string">"沙发！"</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>学习 async(<a href="https://github.com/caolan/async" target="_blank" rel="noopener">https://github.com/caolan/async</a> ) 的使用。这里有个详细的 async demo 演示：<a href="https://github.com/alsotang/async_demo" target="_blank" rel="noopener">https://github.com/alsotang/async_demo</a></li>
+<li>学习使用 async 来控制并发连接数。</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>lesson4 的代码其实是不完美的。为什么这么说，是因为在 lesson4 中，我们一次性发了 40 个并发请求出去，要知道，除去 CNode 的话，别的网站有可能会因为你发出的并发连接数太多而当你是在恶意请求，把你的 IP 封掉。</p>
+<p>我们在写爬虫的时候，如果有 1000 个链接要去爬，那么不可能同时发出 1000 个并发链接出去对不对？我们需要控制一下并发的数量，比如并发 10 个就好，然后慢慢抓完这 1000 个链接。</p>
+<p>用 async 来做这件事很简单。</p>
+<p>这次我们要介绍的是 async 的 <code>mapLimit(arr, limit, iterator, callback)</code> 接口。另外，还有个常用的控制并发连接数的接口是 <code>queue(worker, concurrency)</code>，大家可以去 <a href="https://github.com/caolan/async#queueworker-concurrency" target="_blank" rel="noopener">https://github.com/caolan/async#queueworker-concurrency</a> 看看说明。</p>
+<p>这回我就不带大家爬网站了，我们来专注知识点：并发连接数控制。</p>
+<p>对了，还有个问题是，什么时候用 eventproxy，什么时候使用 async 呢？它们不都是用来做异步流程控制的吗？</p>
+<p>我的答案是：</p>
+<p>当你需要去多个源(一般是小于 10 个)汇总数据的时候，用 eventproxy 方便；当你需要用到队列，需要控制并发数，或者你喜欢函数式编程思维时，使用 async。大部分场景是前者，所以我个人大部分时间是用 eventproxy 的。</p>
+<p>正题开始。</p>
+<p>首先，我们伪造一个 <code>fetchUrl(url, callback)</code> 函数，这个函数的作用就是，当你通过</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fetchUrl(<span class="string">'http://www.baidu.com'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, content</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something with `content`</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>调用它时，它会返回 <code>http://www.baidu.com</code> 的页面内容回来。</p>
+<p>当然，我们这里的返回内容是假的，返回延时是随机的。并且在它被调用时，会告诉你它现在一共被多少个地方并发调用着。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并发连接数的计数器</span></span><br><span class="line"><span class="keyword">var</span> concurrencyCount = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> fetchUrl = <span class="function"><span class="keyword">function</span> (<span class="params">url, callback</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// delay 的值在 2000 以内，是个随机的整数</span></span><br><span class="line">  <span class="keyword">var</span> delay = <span class="built_in">parseInt</span>((<span class="built_in">Math</span>.random() * <span class="number">10000000</span>) % <span class="number">2000</span>, <span class="number">10</span>);</span><br><span class="line">  concurrencyCount++;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'现在的并发数是'</span>, concurrencyCount, <span class="string">'，正在抓取的是'</span>, url, <span class="string">'，耗时'</span> + delay + <span class="string">'毫秒'</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    concurrencyCount--;</span><br><span class="line">    callback(<span class="literal">null</span>, url + <span class="string">' html content'</span>);</span><br><span class="line">  &#125;, delay);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我们接着来伪造一组链接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> urls = [];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) &#123;</span><br><span class="line">  urls.push(<span class="string">'http://datasource_'</span> + i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这组链接的长这样：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson5/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>接着，我们使用 <code>async.mapLimit</code> 来并发抓取，并获取结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span>.mapLimit(urls, <span class="number">5</span>, <span class="function"><span class="keyword">function</span> (<span class="params">url, callback</span>) </span>&#123;</span><br><span class="line">  fetchUrl(url, callback);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'final:'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>运行输出是这样的：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson5/2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>可以看到，一开始，并发链接数是从 1 开始增长的，增长到 5 时，就不再增加。当其中有任务完成时，再继续抓取。并发连接数始终控制在 5 个。</p>
+<p>完整代码请参见 app.js 文件。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/&title=《5.使用 async 控制并发》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/&title=《5.使用 async 控制并发》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《5.使用 async 控制并发》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/node使用 superagent 与 cheerio 完成简单爬虫/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">3.使用 superagent 与 cheerio 完成简单爬虫</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/node学习使用外部模块/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">学习使用外部模块</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/&title=《5.使用 async 控制并发》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/&title=《5.使用 async 控制并发》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《5.使用 async 控制并发》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node使用 eventproxy 控制并发/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aQW7jMAwF0Nz/0h1gVgMM6vxPSm0Wz6vAdWI9FRAJkq9XfH39vf79/P+d777VXs+/8Lpx4eHh4Y2W/vyy5xfnC8rvJxuabBAeHh7ePd4+GCThIT/uE/DzmvHw8PA+gbcJDMVRHv8aHh4e3ufz2sM9+e4sEcfDw8P7BF5SjJiVLfLS8PO2Xq+14OHh4U0y2ANL+ZnP1/t7eHh4eKOuetvUn7WvZml9tFo8PDy8C7xNKysn7e9vBr/w8PDwbvByatvO3weATakCDw8P7wYvaVzNBqGSY7otvOZbiYeHh3eb1xYO2rGAfImntgAPDw/vHq89dk892Wb6eblkFVXw8PDwFmME+RjTLMmOEuIAOQTj4eHhrXnJsfs8QJA3t5KibR5mklXh4eHhneW1yz01KNCGn7xh9qZKjYeHh7fmrdpLQTrbBoNNy+1AGRcPDw8veP7rwtWGhNn9qASMh4eH9yO8U+NW+Ra0oeJAowsPDw9vwZtR2xZUW95tw0M0zoWHh4d3lJe8eDaAdWqoKw8hb/5veHh4eGvepsSwGRdow0m7uXUZFw8PD2+Rc+bL3STBm03JCx94eHh493ib9Dp5cUvNC8T5uC0eHh7eKd4sYd2XCdqkfJas4+Hh4d3jJUXbtiWWFzj2BeK6p4eHh4e35m1KqzfKDcmWReENDw8P7wKvXVDe4N8c7nnyvapS4+Hh4Y14beKbN8DyQnBeJs4vPDw8vN/lnWrw50f/ZsCrmInAw8PDG/Hqo3ZUeJ21//eFXTw8PLx7vHb4aZMK50l5PgnwZrV4eHh413jJoTwb0kqGsdqAkfwOHh4e3ifw8hR5c6znxd/oeTw8PLwP4LXHensnH2i4Ehjw8PDwYl47epUczfm4wIEA8N1f8fDw8C7w2vLrrMjbblkOO9Drw8PDw0t5fwBw/l/06dcTGQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

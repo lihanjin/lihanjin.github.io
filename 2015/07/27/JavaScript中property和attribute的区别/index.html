@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JavaScript中property和attribute的区别 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript">
+    <meta name="description" content="1. 定义  property（元素属性）：DOM 节点是一个对象，因此，可以添加自定义的属性以及方法。property 的值可以是任何的数据类型，对大小写敏感。自定义的property不会出现在 html 中，只存在 JavaSctipt 中。 attribute（标签属性）：attribute 只能是字符串，大小写不敏感，出现在 innerHTML 中，通过类数组attributes可以罗列">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中property和attribute的区别">
+<meta property="og:url" content="http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="1. 定义  property（元素属性）：DOM 节点是一个对象，因此，可以添加自定义的属性以及方法。property 的值可以是任何的数据类型，对大小写敏感。自定义的property不会出现在 html 中，只存在 JavaSctipt 中。 attribute（标签属性）：attribute 只能是字符串，大小写不敏感，出现在 innerHTML 中，通过类数组attributes可以罗列">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中property和attribute的区别">
+<meta name="twitter:description" content="1. 定义  property（元素属性）：DOM 节点是一个对象，因此，可以添加自定义的属性以及方法。property 的值可以是任何的数据类型，对大小写敏感。自定义的property不会出现在 html 中，只存在 JavaSctipt 中。 attribute（标签属性）：attribute 只能是字符串，大小写不敏感，出现在 innerHTML 中，通过类数组attributes可以罗列">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JavaScript中property和attribute的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JavaScript中property和attribute的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-07-27T05:50:20.000Z" itemprop="datePublished" class="page-time">
+  2015-07-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+<article id="post-JavaScript中property和attribute的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JavaScript中property和attribute的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-07-27 13:50:20" datetime="2015-07-27T05:50:20.000Z"  itemprop="datePublished">2015-07-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li><p><strong>1. 定义</strong></p>
+<ul>
+<li><code>property</code>（元素属性）：<code>DOM</code> 节点是一个对象，因此，可以添加自定义的属性以及方法。<code>property</code> 的值可以是任何的数据类型，对大小写敏感。自定义的<code>property</code>不会出现在 <code>html</code> 中，只存在 <code>JavaSctipt</code> 中。<ul>
+<li><code>attribute</code>（标签属性）：<code>attribute</code> 只能是字符串，大小写不敏感，出现在 <code>innerHTML</code> 中，通过类数组<code>attributes</code>可以罗列所有的 <code>attribute</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>2. 相同之处</strong></p>
+<a id="more"></a>
+<ul>
+<li>标准 <code>DOM</code> 的 <code>properties</code>（元素属性）与<code>attributes</code>（标签属性）是同步的。公认的 <code>attributes</code>（标签属性）会添加到<code>DOM</code>对象 <code>property</code>（元素属性）上，如 <code>id、style、className、disabled、checked</code>等。这时候直接操作 <code>property  (el. checked)</code> 或者使用 <code>el.getAttribute() / el.setAttribute()</code>效果一致。但是参数不一定相同，如：<code>el.className 与 el.getAttribute(&#39;class&#39;)</code></li>
+</ul>
+</li>
+<li><p><strong>3. 不同之处</strong></p>
+</li>
+<li><p>对于有些标准的特性的操作，<code>el.getAttribute 与 el.property</code>获取的值存在差异性。如: `href、src、value、style、onclic 等</p>
+</li>
+<li><p><code>Demo1：</code>el.getAttribute 获取的是 href 的实际值，el.property 获取的是完整的 url</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alEl.href = <span class="string">'/'</span>;</span><br><span class="line">alert(alEl.getAttribute(<span class="string">'href'</span>));  <span class="comment">// '/'</span></span><br><span class="line">alert(alEl.href);  				 <span class="comment">// full URL</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Demo2：</code>el.property 可以从 el.setAttribute 获得同步</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inputEl.setAttribute(<span class="string">'value'</span>, <span class="string">'hello'</span>);</span><br><span class="line">alert(inputEl.value );	 		    <span class="comment">// 'hello' -- property changed!</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Demo3： el.getAttribute 不能从 el.property 获得同步</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inputEl.value = <span class="string">'bye'</span>;</span><br><span class="line">alert(inputEl.getAttribute(<span class="string">'value'</span>)); <span class="comment">// 'hello' – attribute not changed!</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Demo4：el.getAttribute 只能获取输入框的原始值，el.property 可以获取输入框修改后值</li>
+</ul>
+<p>用户输入 ‘good’，inputEl.value 获得 ‘good’，inputEl.getAttribute(‘value’) 获得原始值 ‘hello’。<br>可以利用 inputEl.value == inputEl.getAttribute(‘value’) 检验 input 是否变化</p>
+<ul>
+<li>Demo5：checkbox 未选中时 – el.getAttribute 返回 null，el.property 返回 false</li>
+</ul>
+<p>checkbox 选中时 – el.getAttribute 仍返回 null，el.property 返回 ture<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(checkboxEl.checked); 					<span class="comment">//  boolean true</span></span><br><span class="line">alert(checkboxEl.getAttribute(<span class="string">'checked'</span>)); 		<span class="comment">//  object null</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Demo6：style – el.getAttribute 返回 string, el.property 返回 object</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(divEl.style); 					<span class="comment">// 'width:200px;height:200px;'</span></span><br><span class="line">alert(divEl.getAttribute(<span class="string">'style'</span>) ) 	<span class="comment">//  [object CSSStyleDeclaration]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>4. 浏览器兼容性上的差别</strong></p>
+<ul>
+<li>1)<code>IE&lt;9</code> 浏览器中，el.property 和 el.getAttribute 可以相互访问自定义属性</li>
+<li>2)<code>IE&lt;8</code>（包括IE8种的IE7兼容模式），el.property 和 el.getAttribute 相同</li>
+<li>因为 <code>attribute</code> 对大小写不敏感，在这种情况下，用 el.getAttribute 访问特性时，浏览器会选择第一次出现的值。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.abba = <span class="number">1</span> <span class="comment">// assign property (now can read it by getAttribute)</span></span><br><span class="line"><span class="built_in">document</span>.body.ABBA = <span class="number">5</span> <span class="comment">// assign property with another case</span></span><br><span class="line"><span class="comment">// must get a property named 'ABba' in case-insensitive way.</span></span><br><span class="line">alert( <span class="built_in">document</span>.body.getAttribute(<span class="string">'ABba'</span>) ) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>5. 优先选择 property</strong></p>
+<ul>
+<li><p>在实际应用中，98% 的 DOM 操作都是使用 properties。</p>
+</li>
+<li><p>总结：只有两种情形需要使用<code>attributes ：</code></p>
+<ul>
+<li>1) 自定义的 <code>HTML attributes</code>，因为它并不同步到<code>DOM property</code></li>
+<li>2) 访问内置的<code>HTML attributes</code>（设置的初始值），这些 <code>attribute</code>不能从<code>property</code> 同步过来。例如<code>input</code>标签的 value 值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/&title=《JavaScript中property和attribute的区别》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/&title=《JavaScript中property和attribute的区别》 — _sUper.LEE的个人空间&source=
+1. 定义
+
+property（元素属性）：DOM 节点是一个对象，因此，可以添加自定义的属性以及方法。property 的值可以是任何的数据类型，对大..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript中property和attribute的区别》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/08/13/实用的60个CSS代码片段/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">实用的60个CSS代码片段</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/27/JavaScript之事件的中断传播与行为阻止/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JavaScript之事件的中断传播与行为阻止</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/&title=《JavaScript中property和attribute的区别》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/&title=《JavaScript中property和attribute的区别》 — _sUper.LEE的个人空间&source=
+1. 定义
+
+property（元素属性）：DOM 节点是一个对象，因此，可以添加自定义的属性以及方法。property 的值可以是任何的数据类型，对大..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript中property和attribute的区别》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/27/JavaScript中property和attribute的区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3ay47CMAwFUP7/p2ek2TKl148Ai8MKlTbNCVLj2n484s/P3+f5yPPn+dfXI7we7Wr85Q8eHh5ea+rJdHv4K8x8PtES4OHh4R3jvZ70/LGeX/v6nHzOeHh4eN/AmwS7OXiyteDh4eF9G6+6SSTnJ/d6676Hh4eHF/OqL/9VXjXV+4FcCx4eHt6BKtL3fD9Y38PDw8MbVNXzhOx8XXsJ35t54uHh4R3g9abYS8VW0xmTZMdj8g/g4eHhxbwklVBtupo0CvTw/xzBw8PDW+XladAkqbobTOd3vxwHDw8P7wCvWgarlqYmm8fysuLh4eEt8aorMUnmThoF8mTHzbsCHh4e3phXTSvkV00mUV2mwl+Fh4eHN+b1kgjJxtAraCVXjbYBPDw8vDEvn0rvnN5msNzshYeHh7fKy1/+t8r88+2k0OiAh4eH9xZeHshWW7XyAluvPIaHh4f3Hl6eDsgj9ElaYdKOcDlDPDw8vFVenk7Nl2DezpVkEqLCGB4eHt4xXq+9aZImSH6tNjT8MwIeHh7eAV7y/KySqk0G1cavZmCNh4eHt8SrpmV7E82TDr1mr8vveHh4eId5eeq2d061HTZZ4pvx8fDw8A7z5qmEhTJ/MZS/mQ8eHh7eAV7S6lQNuKs37hW9kmIbHh4e3mletbQ/CYLzlEe+EDeBOx4eHt4qr/qIz8Pcaug8T/te1vfw8PDwDvCqgW91O9lqPqgWxvDw8PB2eb3H8WQhqhtJ7zgeHh7eOV61nF9NIiTH84Rsb1nx8PDwTvB6m0GvDJY/uPOWgpuR8fDw8I7xqo/vvFSWpBhGu1beaIWHh4f3IV41KZA3IlQD6Ci4x8PDw/sor3pmctXWmAshNR4eHl6R12uc2kooVBPE5VgbDw8Pb5U3etVvpVl77Vn5XfDw8PCO8X4B2OBBBdtNOs4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

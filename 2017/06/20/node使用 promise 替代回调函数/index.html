@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>17.使用 promise 替代回调函数 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《使用 promise 替代回调函数》知识点 理解 Promise 概念，为什么需要 promise 学习 q 的 API，利用 q 来替代回调函数(https://github.com/kriskowal/q )  课程内容第五课(https://github.com/alsotang/node-lessons/tree/master/lesson5 )讲述了如何使用 async 来控制并发。a">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="17.使用 promise 替代回调函数">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《使用 promise 替代回调函数》知识点 理解 Promise 概念，为什么需要 promise 学习 q 的 API，利用 q 来替代回调函数(https://github.com/kriskowal/q )  课程内容第五课(https://github.com/alsotang/node-lessons/tree/master/lesson5 )讲述了如何使用 async 来控制并发。a">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="17.使用 promise 替代回调函数">
+<meta name="twitter:description" content="《使用 promise 替代回调函数》知识点 理解 Promise 概念，为什么需要 promise 学习 q 的 API，利用 q 来替代回调函数(https://github.com/kriskowal/q )  课程内容第五课(https://github.com/alsotang/node-lessons/tree/master/lesson5 )讲述了如何使用 async 来控制并发。a">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">17.使用 promise 替代回调函数</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">17.使用 promise 替代回调函数</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《使用-promise-替代回调函数》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《使用 promise 替代回调函数》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">课程内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#promise基本概念"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">promise基本概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#promise的传递"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">promise的传递</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法传递"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">方法传递</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#promise链"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">promise链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#promise组合"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">promise组合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结束promise链"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">结束promise链</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结束语"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">结束语</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node使用 promise 替代回调函数"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">17.使用 promise 替代回调函数</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《使用-promise-替代回调函数》"><a href="#《使用-promise-替代回调函数》" class="headerlink" title="《使用 promise 替代回调函数》"></a>《使用 promise 替代回调函数》</h1><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>理解 Promise 概念，为什么需要 promise</li>
+<li>学习 q 的 API，利用 q 来替代回调函数(<a href="https://github.com/kriskowal/q" target="_blank" rel="noopener">https://github.com/kriskowal/q</a> )</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>第五课(<a href="https://github.com/alsotang/node-lessons/tree/master/lesson5" target="_blank" rel="noopener">https://github.com/alsotang/node-lessons/tree/master/lesson5</a> )讲述了如何使用 async 来控制并发。async 的本质是一个流程控制。其实在异步编程中，还有一个更为经典的模型，叫做 Promise/Deferred 模型。</p>
+<p>本节我们就来学习这个模型的代表实现：<a href="https://github.com/kriskowal/q" target="_blank" rel="noopener">q</a></p>
+<p>首先，我们思考一个典型的异步编程模型，考虑这样一个题目：读取一个文件，在控制台输出这个文件内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line">fs.readFile(<span class="string">'sample.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>看起来很简单，再进一步: 读取两个文件，在控制台输出这两个文件内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line">fs.readFile(<span class="string">'sample01.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(data);</span><br><span class="line">	fs.readFile(<span class="string">'sample02.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err,data</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>要是读取更多的文件呢?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line">fs.readFile(<span class="string">'sample01.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">	fs.readFile(<span class="string">'sample02.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err,data</span>) </span>&#123;</span><br><span class="line">		fs.readFile(<span class="string">'sample03.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">			fs.readFile(<span class="string">'sample04.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这段代码就是臭名昭著的邪恶金字塔(Pyramid of Doom)。可以使用async来改善这段代码，但是在本课中我们要用promise/defer来改善它。</p>
+<h2 id="promise基本概念"><a href="#promise基本概念" class="headerlink" title="promise基本概念"></a>promise基本概念</h2><p>先学习promise的基本概念。</p>
+<ul>
+<li>promise只有三种状态，未完成，完成(fulfilled)和失败(rejected)。</li>
+<li>promise的状态可以由未完成转换成完成，或者未完成转换成失败。</li>
+<li>promise的状态转换只发生一次</li>
+</ul>
+<p>promise有一个then方法，then方法可以接受3个函数作为参数。前两个函数对应promise的两种状态fulfilled, rejected的回调函数。第三个函数用于处理进度信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">promiseSomething().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">		<span class="comment">//当promise状态变成fulfilled时，调用此函数</span></span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">		<span class="comment">//当promise状态变成rejected时，调用此函数</span></span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">progress</span>)</span>&#123;</span><br><span class="line">		<span class="comment">//当返回进度信息时，调用此函数</span></span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<p>学习一个简单的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取初始promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInitialPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 为promise设置三种状态的回调函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">getInitialPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">success</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(success);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">progress</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(progress);</span><br><span class="line">&#125;);</span><br><span class="line">defer.notify(<span class="string">'in progress'</span>);<span class="comment">//控制台打印in progress</span></span><br><span class="line">defer.resolve(<span class="string">'resolve'</span>);   <span class="comment">//控制台打印resolve</span></span><br><span class="line">defer.reject(<span class="string">'reject'</span>);		<span class="comment">//没有输出。promise的状态只能改变一次</span></span><br></pre></td></tr></table></figure>
+<h2 id="promise的传递"><a href="#promise的传递" class="headerlink" title="promise的传递"></a>promise的传递</h2><p>then方法会返回一个promise，在下面这个例子中，我们用outputPromise指向then返回的promise。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span> (<span class="params">fulfilled</span>) </span>&#123;</span><br><span class="line">	&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">rejected</span>) </span>&#123;</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<p>现在outputPromise就变成了受 <code>function(fulfilled)</code> 或者 <code>function(rejected)</code>控制状态的promise了。怎么理解这句话呢？</p>
+<ul>
+<li>当function(fulfilled)或者function(rejected)返回一个值，比如一个字符串，数组，对象等等，那么outputPromise的状态就会变成fulfilled。</li>
+</ul>
+<p>在下面这个例子中，我们可以看到，当我们把inputPromise的状态通过defer.resovle()变成fulfilled时，控制台输出fulfilled.</p>
+<p>当我们把inputPromise的状态通过defer.reject()变成rejected，控制台输出rejected</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过defer获得promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInputPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成fulfil时，调用function(fulfilled)</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成rejected时，调用function(rejected)</span></span><br><span class="line"><span class="comment"> * 将then返回的promise赋给outputPromise</span></span><br><span class="line"><span class="comment"> * function(fulfilled) 和 function(rejected) 通过返回字符串将outputPromise的状态由</span></span><br><span class="line"><span class="comment"> * 未完成改变为fulfilled</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'fulfilled'</span>;</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'rejected'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当outputPromise状态由未完成变成fulfil时，调用function(fulfilled)，控制台打印'fulfilled: fulfilled'。</span></span><br><span class="line"><span class="comment"> * 当outputPromise状态由未完成变成rejected, 调用function(rejected), 控制台打印'rejected: rejected'。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">outputPromise.then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'fulfilled: '</span> + fulfilled);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'rejected: '</span> + rejected);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成rejected</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">defer.reject(); <span class="comment">//输出 fulfilled: rejected</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成fulfilled</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//defer.resolve(); //输出 fulfilled: fulfilled</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>当function(fulfilled)或者function(rejected)抛出异常时，那么outputPromise的状态就会变成rejected</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过defer获得promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInputPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成fulfil时，调用function(fulfilled)</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成rejected时，调用function(rejected)</span></span><br><span class="line"><span class="comment"> * 将then返回的promise赋给outputPromise</span></span><br><span class="line"><span class="comment"> * function(fulfilled) 和 function(rejected) 通过抛出异常将outputPromise的状态由</span></span><br><span class="line"><span class="comment"> * 未完成改变为reject</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'fulfilled'</span>);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'rejected'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当outputPromise状态由未完成变成fulfil时，调用function(fulfilled)。</span></span><br><span class="line"><span class="comment"> * 当outputPromise状态由未完成变成rejected, 调用function(rejected)。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">outputPromise.then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'fulfilled: '</span> + fulfilled);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'rejected: '</span> + rejected);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成rejected</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">defer.reject();     <span class="comment">//控制台打印 rejected [Error:rejected]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成fulfilled</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//defer.resolve(); //控制台打印 rejected [Error:fulfilled]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>当function(fulfilled)或者function(rejected)返回一个promise时，outputPromise就会成为这个新的promise.</li>
+</ul>
+<p>这样做有什么意义呢? 主要在于聚合结果(Q.all)，管理延时，异常恢复等等</p>
+<p>比如说我们想要读取一个文件的内容，然后把这些内容打印出来。可能会写出这样的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误的写法</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	fs.readFile(<span class="string">'test.txt'</span>,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>然而这样写是错误的，因为function(fulfilled)并没有返回任何值。需要下面的方式:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过defer获得promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInputPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成fulfil时，调用function(fulfilled)</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成rejected时，调用function(rejected)</span></span><br><span class="line"><span class="comment"> * 将then返回的promise赋给outputPromise</span></span><br><span class="line"><span class="comment"> * function(fulfilled)将新的promise赋给outputPromise</span></span><br><span class="line"><span class="comment"> * 未完成改变为reject</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> myDefer = Q.defer();</span><br><span class="line">	fs.readFile(<span class="string">'test.txt'</span>,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!err &amp;&amp; data) &#123;</span><br><span class="line">			myDefer.resolve(data);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> myDefer.promise;</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'rejected'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当outputPromise状态由未完成变成fulfil时，调用function(fulfilled)，控制台打印test.txt文件内容。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">outputPromise.then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(fulfilled);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(rejected);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成rejected</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//defer.reject();</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成fulfilled</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">defer.resolve(); <span class="comment">//控制台打印出 test.txt 的内容</span></span><br></pre></td></tr></table></figure>
+<h2 id="方法传递"><a href="#方法传递" class="headerlink" title="方法传递"></a>方法传递</h2><p>方法传递有些类似于Java中的try和catch。当一个异常没有响应的捕获时，这个异常会接着往下传递。</p>
+<p>方法传递的含义是当一个状态没有响应的回调函数，就会沿着then往下找。</p>
+<ul>
+<li>没有提供function(rejected)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>如果inputPromise的状态由未完成变成rejected, 此时对rejected的处理会由outputPromise来完成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过defer获得promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInputPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成fulfil时，调用function(fulfilled)</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成rejected时，这个rejected会传向outputPromise</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'fulfilled'</span></span><br><span class="line">&#125;);</span><br><span class="line">outputPromise.then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'fulfilled: '</span> + fulfilled);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'rejected: '</span> + rejected);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成rejected</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">defer.reject(<span class="string">'inputpromise rejected'</span>); <span class="comment">//控制台打印rejected: inputpromise rejected</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成fulfilled</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//defer.resolve();</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>没有提供function(fulfilled)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="literal">null</span>,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>如果inputPromise的状态由未完成变成fulfilled, 此时对fulfil的处理会由outputPromise来完成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过defer获得promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInputPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成fulfil时，传递给outputPromise</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成rejected时，调用function(rejected)</span></span><br><span class="line"><span class="comment"> * function(fulfilled)将新的promise赋给outputPromise</span></span><br><span class="line"><span class="comment"> * 未完成改变为reject</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="literal">null</span>,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'rejected'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">outputPromise.then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'fulfilled: '</span> + fulfilled);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">rejected</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'rejected: '</span> + rejected);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成rejected</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//defer.reject('inputpromise rejected');</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成fulfilled</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">defer.resolve(<span class="string">'inputpromise fulfilled'</span>); <span class="comment">//控制台打印fulfilled: inputpromise fulfilled</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以使用fail(function(error))来专门针对错误处理，而不是使用then(null,function(error))</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().fail(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>看这个例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过defer获得promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInputPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成fulfil时，调用then(function(fulfilled))</span></span><br><span class="line"><span class="comment"> * 当inputPromise状态由未完成变成rejected时，调用fail(function(error))</span></span><br><span class="line"><span class="comment"> * function(fulfilled)将新的promise赋给outputPromise</span></span><br><span class="line"><span class="comment"> * 未完成改变为reject</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInputPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">fulfilled</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> fulfilled;</span><br><span class="line">&#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'fail: '</span> + error);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成rejected</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">defer.reject(<span class="string">'inputpromise rejected'</span>);<span class="comment">//控制台打印fail: inputpromise rejected</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将inputPromise的状态由未完成变成fulfilled</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//defer.resolve('inputpromise fulfilled');</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以使用progress(function(progress))来专门针对进度信息进行处理，而不是使用 <code>then(function(success){},function(error){},function(progress){})</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取初始promise</span></span><br><span class="line"><span class="comment"> * @private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInitialPromise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 为promise设置progress信息处理函数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> outputPromise = getInitialPromise().then(<span class="function"><span class="keyword">function</span>(<span class="params">success</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;).progress(<span class="function"><span class="keyword">function</span>(<span class="params">progress</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(progress);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">defer.notify(<span class="number">1</span>);</span><br><span class="line">defer.notify(<span class="number">2</span>); <span class="comment">//控制台打印1，2</span></span><br></pre></td></tr></table></figure>
+<h2 id="promise链"><a href="#promise链" class="headerlink" title="promise链"></a>promise链</h2><p>promise链提供了一种让函数顺序执行的方法。</p>
+<p>函数顺序执行是很重要的一个功能。比如知道用户名，需要根据用户名从数据库中找到相应的用户，然后将用户信息传给下一个函数进行处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> defer = Q.defer();</span><br><span class="line"></span><br><span class="line"><span class="comment">//一个模拟数据库</span></span><br><span class="line"><span class="keyword">var</span> users = [&#123;<span class="string">'name'</span>:<span class="string">'andrew'</span>,<span class="string">'passwd'</span>:<span class="string">'password'</span>&#125;];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUsername</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUser</span>(<span class="params">username</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> user;</span><br><span class="line">	users.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">element</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(element.name === username) &#123;</span><br><span class="line">			user = element;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//promise链</span></span><br><span class="line">getUsername().then(<span class="function"><span class="keyword">function</span>(<span class="params">username</span>)</span>&#123;</span><br><span class="line"> <span class="keyword">return</span> getUser(username);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">user</span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(user);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">defer.resolve(<span class="string">'andrew'</span>);</span><br></pre></td></tr></table></figure>
+<p>我们通过两个then达到让函数顺序执行的目的。</p>
+<p>then的数量其实是没有限制的。当然，then的数量过多，要手动把他们链接起来是很麻烦的。比如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo(initialVal).then(bar).then(baz).then(qux)</span><br></pre></td></tr></table></figure>
+<p>这时我们需要用代码来动态制造promise链</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funcs = [foo,bar,baz,qux]</span><br><span class="line"><span class="keyword">var</span> result = Q(initialVal)</span><br><span class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>)</span>&#123;</span><br><span class="line">	result = result.then(func)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<p>当然，我们可以再简洁一点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funcs = [foo,bar,baz,qux]</span><br><span class="line">funcs.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">pre,current</span>),<span class="title">Q</span>(<span class="params">initialVal</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> pre.then(current)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>看一个具体的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(result);</span><br><span class="line">	<span class="keyword">return</span> result+result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//手动链接</span></span><br><span class="line">Q(<span class="string">'hello'</span>).then(foo).then(foo).then(foo); 									<span class="comment">//控制台输出： hello</span></span><br><span class="line">																			<span class="comment">//			   hellohello</span></span><br><span class="line">																			<span class="comment">//			   hellohellohello</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//动态链接</span></span><br><span class="line"><span class="keyword">var</span> funcs = [foo,foo,foo];</span><br><span class="line"><span class="keyword">var</span> result = Q(<span class="string">'hello'</span>);</span><br><span class="line">funcs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">func</span>)</span>&#123;</span><br><span class="line">	result = result.then(func);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//精简后的动态链接</span></span><br><span class="line">funcs.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev,current</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> prev.then(current);</span><br><span class="line">&#125;,Q(<span class="string">'hello'</span>));</span><br></pre></td></tr></table></figure>
+<p>对于promise链，最重要的是需要理解为什么这个链能够顺序执行。如果能够理解这点，那么以后自己写promise链可以说是轻车熟路啊。</p>
+<h2 id="promise组合"><a href="#promise组合" class="headerlink" title="promise组合"></a>promise组合</h2><p>回到我们一开始读取文件内容的例子。如果现在让我们把它改写成promise链，是不是很简单呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>),</span><br><span class="line">	fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printFileContent</span>(<span class="params">fileName</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> defer = Q.defer();</span><br><span class="line">		fs.readFile(fileName,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">		  <span class="keyword">if</span>(!err &amp;&amp; data) &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(data);</span><br><span class="line">			defer.resolve();</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span> defer.promise;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//手动链接</span></span><br><span class="line">printFileContent(<span class="string">'sample01.txt'</span>)()</span><br><span class="line">	.then(printFileContent(<span class="string">'sample02.txt'</span>))</span><br><span class="line">	.then(printFileContent(<span class="string">'sample03.txt'</span>))</span><br><span class="line">	.then(printFileContent(<span class="string">'sample04.txt'</span>));   <span class="comment">//控制台顺序打印sample01到sample04的内容</span></span><br></pre></td></tr></table></figure>
+<p>很有成就感是不是。然而如果仔细分析，我们会发现为什么要他们顺序执行呢，如果他们能够并行执行不是更好吗? 我们只需要在他们都执行完成之后，得到他们的执行结果就可以了。</p>
+<p>我们可以通过Q.all([promise1,promise2…])将多个promise组合成一个promise返回。<br>注意：</p>
+<ol>
+<li>当all里面所有的promise都fulfil时，Q.all返回的promise状态变成fulfil</li>
+<li>当任意一个promise被reject时，Q.all返回的promise状态立即变成reject</li>
+</ol>
+<p>我们来把上面读取文件内容的例子改成并行执行吧</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *读取文件内容</span></span><br><span class="line"><span class="comment"> *@private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printFileContent</span>(<span class="params">fileName</span>) </span>&#123;</span><br><span class="line">		<span class="comment">//Todo: 这段代码不够简洁。可以使用Q.denodeify来简化</span></span><br><span class="line">		<span class="keyword">var</span> defer = Q.defer();</span><br><span class="line">		fs.readFile(fileName,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">		  <span class="keyword">if</span>(!err &amp;&amp; data) &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(data);</span><br><span class="line">			defer.resolve(fileName + <span class="string">' success '</span>);</span><br><span class="line">		  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			defer.reject(fileName + <span class="string">' fail '</span>);</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Q.all([printFileContent(<span class="string">'sample01.txt'</span>),printFileContent(<span class="string">'sample02.txt'</span>),printFileContent(<span class="string">'sample03.txt'</span>),printFileContent(<span class="string">'sample04.txt'</span>)])</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params">success</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(success);</span><br><span class="line">	&#125;); <span class="comment">//控制台打印各个文件内容 顺序不一定</span></span><br></pre></td></tr></table></figure>
+<p>现在知道Q.all会在任意一个promise进入reject状态后立即进入reject状态。如果我们需要等到所有的promise都发生状态后(有的fulfil, 有的reject)，再转换Q.all的状态, 这时我们可以使用Q.allSettled</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>),</span><br><span class="line">	fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *读取文件内容</span></span><br><span class="line"><span class="comment"> *@private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printFileContent</span>(<span class="params">fileName</span>) </span>&#123;</span><br><span class="line">	<span class="comment">//Todo: 这段代码不够简洁。可以使用Q.denodeify来简化</span></span><br><span class="line">	<span class="keyword">var</span> defer = Q.defer();</span><br><span class="line">	fs.readFile(fileName,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">	  <span class="keyword">if</span>(!err &amp;&amp; data) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(data);</span><br><span class="line">		defer.resolve(fileName + <span class="string">' success '</span>);</span><br><span class="line">	  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		defer.reject(fileName + <span class="string">' fail '</span>);</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Q.allSettled([printFileContent(<span class="string">'nosuchfile.txt'</span>),printFileContent(<span class="string">'sample02.txt'</span>),printFileContent(<span class="string">'sample03.txt'</span>),printFileContent(<span class="string">'sample04.txt'</span>)])</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params">results</span>)</span>&#123;</span><br><span class="line">		results.forEach(</span><br><span class="line">			<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">				<span class="built_in">console</span>.log(result.state);</span><br><span class="line">			&#125;</span><br><span class="line">		);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="结束promise链"><a href="#结束promise链" class="headerlink" title="结束promise链"></a>结束promise链</h2><p>通常，对于一个promise链，有两种结束的方式。第一种方式是返回最后一个promise</p>
+<p>如 <code>return foo().then(bar);</code></p>
+<p>第二种方式就是通过done来结束promise链</p>
+<p>如 <code>foo().then(bar).done()</code></p>
+<p>为什么需要通过done来结束一个promise链呢? 如果在我们的链中有错误没有被处理，那么在一个正确结束的promise链中，这个没被处理的错误会通过异常抛出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *@private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPromise</span>(<span class="params">msg,timeout,opt</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> defer = Q.defer();</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(msg);</span><br><span class="line">		<span class="keyword">if</span>(opt)</span><br><span class="line">			defer.reject(msg);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			defer.resolve(msg);</span><br><span class="line">	&#125;,timeout);</span><br><span class="line">	<span class="keyword">return</span> defer.promise;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *没有用done()结束的promise链</span></span><br><span class="line"><span class="comment"> *由于getPromse('2',2000,'opt')返回rejected, getPromise('3',1000)就没有执行</span></span><br><span class="line"><span class="comment"> *然后这个异常并没有任何提醒，是一个潜在的bug</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">getPromise(<span class="string">'1'</span>,<span class="number">3000</span>)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> getPromise(<span class="string">'2'</span>,<span class="number">2000</span>,<span class="string">'opt'</span>)&#125;)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> getPromise(<span class="string">'3'</span>,<span class="number">1000</span>)&#125;);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *用done()结束的promise链</span></span><br><span class="line"><span class="comment"> *有异常抛出</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">getPromise(<span class="string">'1'</span>,<span class="number">3000</span>)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> getPromise(<span class="string">'2'</span>,<span class="number">2000</span>,<span class="string">'opt'</span>)&#125;)</span><br><span class="line">	.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> getPromise(<span class="string">'3'</span>,<span class="number">1000</span>)&#125;)</span><br><span class="line">	.done();</span><br></pre></td></tr></table></figure>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>当你理解完上面所有的知识点时，你就会正确高效的使用promise了。本节只是讲了promise的原理和几个基本的API，不过你掌握了这些之后，再去看q的文档，应该很容易就能理解各个api的意图。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/&title=《17.使用 promise 替代回调函数》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/&title=《17.使用 promise 替代回调函数》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《17.使用 promise 替代回调函数》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/08/20/web开发中跨域解决方案/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">web开发中跨域解决方案</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/nodebenchmark 怎么写/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">8.benchmark 怎么写</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/&title=《17.使用 promise 替代回调函数》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/&title=《17.使用 promise 替代回调函数》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《17.使用 promise 替代回调函数》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node使用 promise 替代回调函数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awW7bMBAE0Pz/T6dATy1aqzO7pJMCTydDsSg9GtBuhvz4iI/Pn8evn1+d+fP8q9Ger/rz2lejHTjw8PDwRo+e3DJ/xPw7z99Ppvgf4+Ph4eFd4yXF4Lkw5NcmpOe7JM+Mh4eH9x14mzKQlIT8DB4eHt7/wnuFacOCPGiYxRx4eHh47+G10WrecLdT1jbcx7IWPDw8vJg3WwD72s/X1/fw8PDwRqvqm6O9S15+imfAw8PDu8BLmuBT8W7eiOebBqKCgYeHh3eUd+rV3Haz+zY6Gg0PDw/vAi9f3Mrft3nwOot96w0KeHh4eJd57T//Z0fIJ64IdvHw8PCO8jYv6/2rP98okG9gfRng4uHh4R3ibdbf24Agf4jkr+3U4OHh4Z3ltT14vmngbKzQ3hEPDw/vPbzZo7TTtC82SXnAw8PDu83LF6JORQltKRqWBzw8PLyjvNkSVN5wzxbbNj/Ab9/Bw8PDu8DbRxKzF3q+saAtWkWRwMPDw1vwZhue8uWoPAJONnLVBQkPDw/vAi8fov1m2/jOtlvVLTUeHh7egpfEAe0tk/PtpqtkS8FfzuDh4eFd5uUF4Ln5blvq/X2LPRF4eHh413htTJCDZ813W6Lw8PDw7vHyJnUTJbQv980SGh4eHt47ee0CWLt9Km+g20Y8aqzx8PDwjvL2YcTztZt4N5/64VocHh4e3oi331Y1KxjtQw9/Kzw8PLy38GZNbY5sC0NewKLduHh4eHgL3md53CgJ7fjFaHh4eHgXeJtgog0R8lu2BWbVcOPh4eGNeHkxaEPYszHxMNLFw8PDu8arM4x1c9zeK09r8fDw8L4/bz8d+UaEduLw8PDwvpY3C0/zFjkJgvP4GA8PD+82L2+Ok0giv7adiGECjYeHh3eUt18AmxWAdoR2WvHw8PAu8H4AQ6DaT5se5nsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

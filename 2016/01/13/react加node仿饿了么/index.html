@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>react加node仿饿了么 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="React">
+    <meta name="description" content="前言　　最近一段时间一直在学习React的相关知识，，这次决定用React去模仿一个移动端App,看了很多自己用过的App,最后决定模仿做饿了么移动端App,写下这篇博客，记录实践中的心得体会 项目构建基于react、react-redux、react-router、antd、mongodb实现单个商家页部分，后台数据通过nodejs模拟实现。1.安装脚手架工具   （单文件组件项目生成工具）">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react加node仿饿了么">
+<meta property="og:url" content="http://yoursite.com/2016/01/13/react加node仿饿了么/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="前言　　最近一段时间一直在学习React的相关知识，，这次决定用React去模仿一个移动端App,看了很多自己用过的App,最后决定模仿做饿了么移动端App,写下这篇博客，记录实践中的心得体会 项目构建基于react、react-redux、react-router、antd、mongodb实现单个商家页部分，后台数据通过nodejs模拟实现。1.安装脚手架工具   （单文件组件项目生成工具）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/35682381.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/96299879.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/54613544.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/92226705.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/52113968.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/34231641.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/74801433.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/12618238.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/82983607.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/49835193.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/82778838.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/94716560.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/61232016.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/7739692.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/36502811.jpg">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/14750992.jpg">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react加node仿饿了么">
+<meta name="twitter:description" content="前言　　最近一段时间一直在学习React的相关知识，，这次决定用React去模仿一个移动端App,看了很多自己用过的App,最后决定模仿做饿了么移动端App,写下这篇博客，记录实践中的心得体会 项目构建基于react、react-redux、react-router、antd、mongodb实现单个商家页部分，后台数据通过nodejs模拟实现。1.安装脚手架工具   （单文件组件项目生成工具）">
+<meta name="twitter:image" content="http://otue68nu2.bkt.clouddn.com/17-7-31/35682381.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">react加node仿饿了么</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">react加node仿饿了么</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-13T06:55:24.000Z" itemprop="datePublished" class="page-time">
+  2016-01-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目构建"><span class="post-toc-number">2.</span> <span class="post-toc-text">项目构建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目目录文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">项目目录文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目详情"><span class="post-toc-number">4.</span> <span class="post-toc-text">项目详情</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#主页"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">主页</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#商家列表"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">商家列表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#搜索页面"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">搜索页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户个人中心"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">用户个人中心</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户注册页面"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">用户注册页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户登录页面"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">用户登录页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户订单页面"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">用户订单页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#loading加载页面"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">loading加载页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#商家商品详情页面"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">商家商品详情页面</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-react加node仿饿了么"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">react加node仿饿了么</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-13 14:55:24" datetime="2016-01-13T06:55:24.000Z"  itemprop="datePublished">2016-01-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>　　最近一段时间一直在学习<code>React</code>的相关知识，，这次决定用<code>React</code>去模仿一个移动端<code>App</code>,看了很多自己用过的<code>App</code>,最后决定模仿做饿了么移动端<code>App</code>,写下这篇博客，记录实践中的心得体会</p>
+<h3 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h3><p>基于<code>react、react-redux、react-router、antd、mongodb</code>实现单个商家页部分，后台数据通过<code>nodejs</code>模拟实现。<br>1.安装脚手架工具   （单文件组件项目生成工具）   只需要安装一次</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-app   /  cnpm install -g create-react-app</span><br></pre></td></tr></table></figure>
+<p>2.创建项目   （可能创建多次）</p>
+<pre><code>找到项目要创建的目录：
+
+create-react-app reactdemo
+</code></pre><p>3.cd  到项目里面    </p>
+<pre><code>cd  reactdemo
+
+
+npm start  运行项目
+
+
+npm run build 生成项目
+</code></pre><h3 id="项目目录文件"><a href="#项目目录文件" class="headerlink" title="项目目录文件"></a>项目目录文件</h3><p>使用插件</p>
+<p>1、react（组件编写）</p>
+<p>2、react-router（控制路由3.x）</p>
+<p>3、react-dom（渲染dom）</p>
+<p>4、redux（控制状态）</p>
+<p>5、react-redux（更新组件状态）</p>
+<p>6、react-promise（异步处理）</p>
+<p>7、react-tap-event-plugin（手机tap事件）</p>
+<p>8、ant-design-mobile（移动端ui组件）</p>
+<p>9、better-scroll（页面滚动）<br>1.package.json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;dependencies&quot;: &#123;</span><br><span class="line">   &quot;antd&quot;: &quot;^2.11.2&quot;,</span><br><span class="line">   &quot;antd-mobile&quot;: &quot;^1.4.1&quot;,</span><br><span class="line">   &quot;axios&quot;: &quot;^0.16.2&quot;,</span><br><span class="line">   &quot;md5&quot;: &quot;^2.2.1&quot;,</span><br><span class="line">   &quot;react&quot;: &quot;^15.6.1&quot;,</span><br><span class="line">   &quot;react-dom&quot;: &quot;^15.6.1&quot;,</span><br><span class="line">   &quot;react-router-scroll&quot;: &quot;^0.4.2&quot;,</span><br><span class="line">   &quot;touchjs&quot;: &quot;^0.2.14&quot;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p>2.入口app.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &apos;./component/static/css/antd.css&apos;;</span><br><span class="line">import &quot;./component/static/css/reset.css&quot;;</span><br><span class="line">import &quot;./component/static/css/common.css&quot;;</span><br><span class="line">import $ from &quot;jquery&quot;;</span><br><span class="line">import Footer from &quot;./component/footer&quot;;</span><br><span class="line">import Order from &apos;./component/order&apos;;</span><br><span class="line">import User from &apos;./component/user&apos;;</span><br><span class="line">import Find from &apos;./component/find&apos;;</span><br><span class="line">import Home from &quot;./component/home&quot;;</span><br><span class="line">class App extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div className=&quot;App&quot;&gt;</span><br><span class="line">        </span><br><span class="line">       </span><br><span class="line">        &#123;this.props.children&#125;</span><br><span class="line">        </span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<p>3.index.js路由配置界面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;;</span><br><span class="line">import &quot;./component/static/css/index.css&quot;;</span><br><span class="line">import App from &apos;./App&apos;;</span><br><span class="line">import registerServiceWorker from &apos;./registerServiceWorker&apos;;</span><br><span class="line">import &#123;Router,Route,Link,IndexRoute,browserHistory&#125; from &apos;react-router&apos;</span><br><span class="line">import Order from &apos;./component/order&apos;;</span><br><span class="line">import User from &apos;./component/user&apos;;</span><br><span class="line">import Collection from &apos;./component/user/collection&apos;;</span><br><span class="line">import Login from &apos;./component/user/Login&apos;;</span><br><span class="line">import Reg from &quot;./component/user/Reg&quot;;</span><br><span class="line">import Reg1 from &quot;./component/user/Reg1&quot;;</span><br><span class="line">import Reg2 from &quot;./component/user/Reg2&quot;;</span><br><span class="line">import Find from &apos;./component/find&apos;;</span><br><span class="line">import Search from &apos;./component/search&apos;;</span><br><span class="line">import Home from &quot;./component/home&quot;;</span><br><span class="line">import Seller from &quot;./component/home/seller&quot;;</span><br><span class="line">import Detail from &quot;./component/detail&quot;;</span><br><span class="line">import Collect from &quot;./component/collect&quot;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">&lt;Router history=&#123;browserHistory&#125;&gt;</span><br><span class="line">    &lt;Route path=&quot;/&quot; component=&#123;App&#125;&gt;</span><br><span class="line">        &lt;IndexRoute component=&#123;Home&#125;/&gt;</span><br><span class="line">        &lt;Route path=&quot;home&quot; component=&#123;Home&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;find&quot; component=&#123;Find&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;order&quot; component=&#123;Order&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user&quot; component=&#123;User&#125;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user/collection&quot; component=&#123;Collection&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user/login&quot; component=&#123;Login&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;login&quot; component=&#123;Login&#125;&gt;&lt;/Route&gt;</span><br><span class="line">          &lt;Route path=&quot;reg&quot; component=&#123;Reg&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user/reg&quot; component=&#123;Reg&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;reg1&quot; component=&#123;Reg1&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user/reg1&quot; component=&#123;Reg1&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;reg2&quot; component=&#123;Reg2&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user/reg2&quot; component=&#123;Reg2&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;user/collect&quot; component=&#123;Collect&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;/quite&quot; component=&#123;User&#125;&gt;&lt;/Route&gt;</span><br><span class="line">          &lt;Route path=&quot;seller/:aid&quot; component=&#123;Seller&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &#123;/*&lt;Route path=&quot;seller&quot; component=&#123;Seller&#125;&gt;&lt;/Route&gt;*/&#125;</span><br><span class="line">           &lt;Route path=&quot;search&quot; component=&#123;Search&#125;&gt;&lt;/Route&gt;</span><br><span class="line">        &lt;Route path=&quot;detail&quot; component=&#123;Detail&#125;&gt;&lt;/Route&gt;</span><br><span class="line">    &lt;/Route&gt;</span><br><span class="line">&lt;/Router&gt;, </span><br><span class="line">document.getElementById(&apos;root&apos;)</span><br><span class="line">);</span><br><span class="line">registerServiceWorker();</span><br></pre></td></tr></table></figure>
+<p><code>browserHistory</code>去路径的#号<br><code>IndexRoute</code>设置默认路由<br>4.storage.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">var app=&#123;</span><br><span class="line"></span><br><span class="line">    set:function(key,value)&#123;</span><br><span class="line">        localStorage.setItem(key,JSON.stringify(value));</span><br><span class="line">    &#125;,</span><br><span class="line">    get:function(key)&#123;</span><br><span class="line">        return JSON.parse(localStorage.getItem(key));</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    hasCollectionData(aid,collectdata)&#123;  /*判断collectdata里面有没有数据*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            //forEach是个异步</span><br><span class="line"></span><br><span class="line">        for(var i=0;i&lt;collectdata.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            if(aid==collectdata[i].aid)&#123;</span><br><span class="line"></span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return false;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default  app;</span><br></pre></td></tr></table></figure>
+<p><code>localstorage</code>方法封装</p>
+<h3 id="项目详情"><a href="#项目详情" class="headerlink" title="项目详情"></a>项目详情</h3><h4 id="主页"><a href="#主页" class="headerlink" title="主页"></a>主页</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/35682381.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>使用Swiper实现轮播图效果<br>flex布局</p>
+<h4 id="商家列表"><a href="#商家列表" class="headerlink" title="商家列表"></a>商家列表</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/96299879.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>商家列表通过下拉更新请求pai接口从数据库获取模拟数据渲染页面</p>
+<h4 id="搜索页面"><a href="#搜索页面" class="headerlink" title="搜索页面"></a>搜索页面</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/54613544.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>历史搜索使用localstorage保存本地进行渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">router.post(&quot;/search&quot;,function(req,res,next)&#123;</span><br><span class="line"></span><br><span class="line">    var keyword=req.body.data</span><br><span class="line">   DB.Find(&quot;trade&quot;,&#123;$or:[&#123;&quot;title&quot;:&#123; $regex:new RegExp(keyword)&#125;&#125;,&#123;&quot;name&quot;:&#123; $regex:new RegExp(keyword)&#125;&#125;]&#125;,function(err,data)&#123;</span><br><span class="line"></span><br><span class="line">       if(data.length&gt;0)&#123;</span><br><span class="line">           res.json(data)</span><br><span class="line">       &#125;else &#123;</span><br><span class="line">           res.json(404)</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>服务端通过nodejs的模糊匹配搜索数据库符合的商家进行调整至商家详情页面</p>
+<h4 id="用户个人中心"><a href="#用户个人中心" class="headerlink" title="用户个人中心"></a>用户个人中心</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/92226705.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h4 id="用户注册页面"><a href="#用户注册页面" class="headerlink" title="用户注册页面"></a>用户注册页面</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/52113968.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>1.通过验证码点击事件判断，获取用户输入的账号，查询数据库是否已经存在，如果不存在会返回验证码信息<br>2.通过确认点击事件，获取用户输入的账号信息和验证码是否正确，如果正确保存在数据库，提示注册成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">router.post(&apos;/doReg1&apos;, function(req, res, next) &#123;</span><br><span class="line">    Rphone = req.body.getphone;</span><br><span class="line">    var longstr = &apos;1,2,3,4,5,6,7,8,9,0,A,B,C,D,E,F,G,H,I,G,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z&apos;;</span><br><span class="line">    var str = longstr.split(&apos;,&apos;);</span><br><span class="line">    var prevNum = &apos;&apos;;</span><br><span class="line">    for(var i = 0; i &lt; 6; i++) &#123;</span><br><span class="line">        prevNum += str[Math.floor(Math.random() * 36)];</span><br><span class="line">    &#125;</span><br><span class="line">    DB.Find(&quot;user&quot;,&#123;phone&#125;,function(err,data)&#123;</span><br><span class="line">        if(err)&#123;</span><br><span class="line">            console(&apos;error&apos;);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            phone=Rphone</span><br><span class="line">            if(data==&quot;&quot;)&#123;</span><br><span class="line">                res.json(&#123;&apos;msg&apos;:&quot;手机号可用&quot;,&quot;status&quot;:&quot;1&quot;,&quot;prevNum&quot;:prevNum&#125;)</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                res.json(&#123;&apos;msg&apos;:&quot;手机号已被注册&quot;,&quot;status&quot;:&quot;0&quot;&#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="用户登录页面"><a href="#用户登录页面" class="headerlink" title="用户登录页面"></a>用户登录页面</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/34231641.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h4 id="用户订单页面"><a href="#用户订单页面" class="headerlink" title="用户订单页面"></a>用户订单页面</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/74801433.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>用户已经登录未购买商品页面<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/12618238.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>用户未登录页面<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/82983607.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>用户登录并且购买过商品页面<br>通过判断localstorage的是否存在来判断用户是否登录，如果登录通过localstorage的信息查询数据来改变state的状态并且显示不同的页面。</p>
+<h4 id="loading加载页面"><a href="#loading加载页面" class="headerlink" title="loading加载页面"></a>loading加载页面</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/49835193.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">.load-top&#123;</span><br><span class="line">background: url(&quot;../img/loading.png&quot;) no-repeat;</span><br><span class="line">width:.5rem;</span><br><span class="line">height:.5rem;</span><br><span class="line">background-size: 100% auto;</span><br><span class="line">position:absolute;</span><br><span class="line">background-size: 100% auto;</span><br><span class="line">transform-origin: 50% 50%;</span><br><span class="line">animation: change 3.6s infinite steps(6),trans .3s ease-in-out infinite alternate;</span><br><span class="line">&#125;</span><br><span class="line">.w12&#123;</span><br><span class="line">width:.22rem;</span><br><span class="line">border-radius: 30%;</span><br><span class="line">&#125;</span><br><span class="line">.load-bot&#123;</span><br><span class="line">background: url(&quot;../img/load.png&quot;) no-repeat;</span><br><span class="line">top: 50%;</span><br><span class="line">width:.5rem;</span><br><span class="line">height:.5rem;</span><br><span class="line">background-size: 100% auto;</span><br><span class="line">position:absolute;</span><br><span class="line">background-size: 100% auto;</span><br><span class="line">transform-origin: 50% 50%;</span><br><span class="line">background-position-y: .2rem;</span><br><span class="line">animation: scale .3s ease-in-out infinite alternate;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes scale&#123;</span><br><span class="line">100%&#123;</span><br><span class="line">transform: scale(.3);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes change&#123;</span><br><span class="line">100%&#123;</span><br><span class="line">background-position: 0 -3rem;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes trans&#123;</span><br><span class="line">100%&#123;</span><br><span class="line">transform: translateY(-2.5em)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/82778838.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>通过css3动画实现</p>
+<h4 id="商家商品详情页面"><a href="#商家商品详情页面" class="headerlink" title="商家商品详情页面"></a>商家商品详情页面</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/94716560.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>使用fly实现购物车飞入效果，右上角为用户收藏事件，通过storage拿到用户信息查询数据库搜索用户收藏列表返回状态改变，用户点击以后再更改用户收藏店铺表的状态。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/61232016.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/7739692.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>购物车和付款页面，通过redux实现用户跳转订单页面没有购买调回，用户购物车信息不丢失，如果用户付款成功清空rendux的购物车，并且跳转至订单页面；<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/36502811.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>订单页面<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/17-7-31/14750992.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>用户收藏页面</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/13/react加node仿饿了么/&title=《react加node仿饿了么》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/13/react加node仿饿了么/&title=《react加node仿饿了么》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/13/react加node仿饿了么/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《react加node仿饿了么》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/13/react加node仿饿了么/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/13/react加node仿饿了么/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/13/gulp/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">gulp学习总结篇</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/10/js-scope/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JavaScript作用域分析总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/13/react加node仿饿了么/&title=《react加node仿饿了么》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/13/react加node仿饿了么/&title=《react加node仿饿了么》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/13/react加node仿饿了么/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《react加node仿饿了么》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/13/react加node仿饿了么/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/13/react加node仿饿了么/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3aQXKDQAwFUd//0qQqW2zoL4ETND0rV8AZPRaykOb1wmv7XfvPx3/Zr/3VT9963bFkyJDxWMZ2uHjoJBT+CHhsMmTIWIdBkiwJkSRTEiiPTYYMGTKO70lLurRklCFDhoxOwuUlHWH/2e+GDBkyHsXoN8g6i/MueBeXIUPGAxmdwcDdn78035AhQ8Y/ZvTTYq1xljbmTqKSIUPGaEZ/PJni72vAyZAhYyojbeX3K7G0uUZaezJkyJjN4ANL3hQjAZGBaO2qDBky5jHS19T0KAZJlLVm3Mm7uAwZMsYxrmqW8XEjT9Do8cmQIWM0g5dxnZZc7SgY2VeGDBmrMcirYydF8nRcw8uQIWMqI01/6WCg1ozjTTcZMmSswEibYmnCTdt2/KoMGTJWY/DBZHE6SrbH/xlNYmXIkDGakRZqhF07+JUeAZEhQ8ZURnrYi29Ta/cX75EhQ8ZoRqew42MAnlhrYwMZMmSsw0iLtk7oHepJbStDhoxxDDJ6rB2Y4MPIWqGJsrUMGTIGMUjQpG9XS7sp+82dMmTIGM1Im/s8ddaKyNYQVIYMGUMZW7jIgDNNwbURwpvfDRkyZAxlpInyqoZ+p2RMd5EhQ8YMBk+y/eMRtUeD0qsMGTIWYJDGVn+cyXcnd6IzIzJkyFiMwbfnr758UBp0DWXIkLE8o1YOXnXs7GQ8IEOGjNGMa4cBxWkqCP3jLjJkyBjN6A8G+Mb8Hj4ElSFDxmjGD9cgN/XeO6MlAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

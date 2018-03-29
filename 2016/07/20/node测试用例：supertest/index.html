@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>10.测试用例：supertest | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《测试用例：supertest》目标建立一个 lesson8 项目，在其中编写代码。 app.js: 其中有个 fibonacci 接口。fibonacci 的介绍见：http://en.wikipedia.org/wiki/Fibonacci_number 。 fibonacci 函数的定义为 int fibonacci(int n)，调用函数的路径是 ‘/fib?n=10’，然后这个接口会返回">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10.测试用例：supertest">
+<meta property="og:url" content="http://yoursite.com/2016/07/20/node测试用例：supertest/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《测试用例：supertest》目标建立一个 lesson8 项目，在其中编写代码。 app.js: 其中有个 fibonacci 接口。fibonacci 的介绍见：http://en.wikipedia.org/wiki/Fibonacci_number 。 fibonacci 函数的定义为 int fibonacci(int n)，调用函数的路径是 ‘/fib?n=10’，然后这个接口会返回">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10.测试用例：supertest">
+<meta name="twitter:description" content="《测试用例：supertest》目标建立一个 lesson8 项目，在其中编写代码。 app.js: 其中有个 fibonacci 接口。fibonacci 的介绍见：http://en.wikipedia.org/wiki/Fibonacci_number 。 fibonacci 函数的定义为 int fibonacci(int n)，调用函数的路径是 ‘/fib?n=10’，然后这个接口会返回">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">10.测试用例：supertest</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">10.测试用例：supertest</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2016-07-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《测试用例：supertest》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《测试用例：supertest》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于-cookie-持久化"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">关于 cookie 持久化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展学习"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">拓展学习</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node测试用例：supertest"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">10.测试用例：supertest</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-07-20 09:35:08" datetime="2016-07-20T01:35:08.000Z"  itemprop="datePublished">2016-07-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《测试用例：supertest》"><a href="#《测试用例：supertest》" class="headerlink" title="《测试用例：supertest》"></a>《测试用例：supertest》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>建立一个 lesson8 项目，在其中编写代码。</p>
+<p>app.js: 其中有个 fibonacci 接口。fibonacci 的介绍见：<a href="http://en.wikipedia.org/wiki/Fibonacci_number" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Fibonacci_number</a> 。</p>
+<p>fibonacci 函数的定义为 <code>int fibonacci(int n)</code>，调用函数的路径是 ‘/fib?n=10’，然后这个接口会返回 ‘55’。函数的行为定义如下：</p>
+<ul>
+<li>当 n === 0 时，返回 0；n === 1时，返回 1;</li>
+<li>n &gt; 1 时，返回 <code>fibonacci(n) === fibonacci(n-1) + fibonacci(n-2)</code>，如 <code>fibonacci(10) === 55</code>;</li>
+<li>n 不可大于10，否则抛错，http status 500，因为 Node.js 的计算性能没那么强。</li>
+<li>n 也不可小于 0，否则抛错，500，因为没意义。</li>
+<li>n 不为数字时，抛错，500。</li>
+</ul>
+<p>test/main.test.js: 对 app 的接口进行测试，覆盖以上所有情况。</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>学习 supertest 的使用 (<a href="https://github.com/tj/supertest" target="_blank" rel="noopener">https://github.com/tj/supertest</a> )</li>
+<li>复习 mocha，should 的使用</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>这是连续第三节课讲测试了..我自己都烦..看着烦的可以考虑跳下一课。</p>
+<p>OK，基础知识前面都讲得很多了，这节课我不会事无巨细地写过程了。</p>
+<p>噢，对了，说到 fibonacci，Node 中文圈的大神 @苏千(<a href="https://github.com/fengmk2" target="_blank" rel="noopener">https://github.com/fengmk2</a> ) 写过一个页面，对各种语言的 fibonacci 效率进行了测试：<a href="http://fengmk2.cnpmjs.org/blog/2011/fibonacci/nodejs-python-php-ruby-lua.html" target="_blank" rel="noopener">http://fengmk2.cnpmjs.org/blog/2011/fibonacci/nodejs-python-php-ruby-lua.html</a> 。其中，Node 的表现不知道比 Python 和 Ruby 高到哪里去了，与 CPU 谈笑风生。怀疑 js 的人啊，都 too simple，sometimes naive。</p>
+<p>先来介绍一下 supertest。supertest 是 superagent 的孪生库。他的作者叫 tj，这是个在 Node.js 的历史上会永远被记住的名字，因为他一个人撑起了 npm 的半边天。别误会成他是 npm 的开发者，他的贡献是在 Node.js 的方方面面都贡献了非常高质量和口碑的库，比如 mocha 是他的，superagent 是他的，express 是他的，should 也是他的，还有其他很多很多，比如 koa，都是他的。如果你更详细点了解一些 Node 圈内的八卦，一定也会像我一样对 tj 佩服得五体投地。他的 github 首页是：<a href="https://github.com/tj" target="_blank" rel="noopener">https://github.com/tj</a> 。</p>
+<p>假使你作为一个有志之士，想要以他为榜样，跟随他前进的步伐，那么我指条明路给你，不收费的：<a href="http://tour.golang.org/" target="_blank" rel="noopener">http://tour.golang.org/</a></p>
+<p>为什么说 supertest 是 superagent 的孪生库呢，因为他们的 API 是一模一样的。superagent 是用来抓取页面用的，而 supertest，是专门用来配合 express （准确来说是所有兼容 connect 的 web 框架）进行集成测试的。</p>
+<p>将使你有一个 app: <code>var app = express();</code>，想对它的 get 啊，post 接口啊之类的进行测试，那么只要把它传给 supertest：<code>var request = require(&#39;supertest&#39;)(app)</code>。之后调用 <code>requset.get(&#39;/path&#39;)</code> 时，就可以对 app 的 path 路径进行访问了。它的 API 参照 superagent 的来就好了：<a href="http://visionmedia.github.io/superagent/" target="_blank" rel="noopener">http://visionmedia.github.io/superagent/</a> 。</p>
+<p>我们来新建一个项目</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm init <span class="comment"># ..一阵乱填</span></span></span><br></pre></td></tr></table></figure>
+<p>然后安装我们的依赖（记得去弄清楚 <code>npm i --save</code> 与 <code>npm i --save-dev</code> 的区别）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"devDependencies"</span>: &#123;</span><br><span class="line">  <span class="string">"mocha"</span>: <span class="string">"^1.21.4"</span>,</span><br><span class="line">  <span class="string">"should"</span>: <span class="string">"^4.0.4"</span>,</span><br><span class="line">  <span class="string">"supertest"</span>: <span class="string">"^0.14.0"</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"dependencies"</span>: &#123;</span><br><span class="line">  <span class="string">"express"</span>: <span class="string">"^4.9.6"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着，编写 app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 与之前一样</span></span><br><span class="line"><span class="keyword">var</span> fibonacci = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// typeof NaN === 'number' 是成立的，所以要判断 NaN</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> n !== <span class="string">'number'</span> || <span class="built_in">isNaN</span>(n)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'n should be a Number'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'n should &gt;= 0'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'n should &lt;= 10'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fibonacci(n<span class="number">-1</span>) + fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// END 与之前一样</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/fib'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// http 传来的东西默认都是没有类型的，都是 String，所以我们要手动转换类型</span></span><br><span class="line">  <span class="keyword">var</span> n = <span class="built_in">Number</span>(req.query.n);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 为何使用 String 做类型转换，是因为如果你直接给个数字给 res.send 的话，</span></span><br><span class="line">    <span class="comment">// 它会当成是你给了它一个 http 状态码，所以我们明确给 String</span></span><br><span class="line">    res.send(<span class="built_in">String</span>(fibonacci(n)));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="comment">// 如果 fibonacci 抛错的话，错误信息会记录在 err 对象的 .message 属性中。</span></span><br><span class="line">    <span class="comment">// 拓展阅读：https://www.joyent.com/developers/node/design/errors</span></span><br><span class="line">    res</span><br><span class="line">      .status(<span class="number">500</span>)</span><br><span class="line">      .send(e.message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 暴露 app 出去。module.exports 与 exports 的区别请看《深入浅出 Node.js》</span></span><br><span class="line"><span class="built_in">module</span>.exports = app;</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'app is listening at port 3000'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>好了，启动一下看看。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> node app.js</span></span><br></pre></td></tr></table></figure>
+<p>然后访问 <code>http://localhost:3000/fib?n=10</code>，看到 55 就说明启动成功了。再访问 <code>http://localhost:3000/fib?n=111</code>，会看到 <code>n should &lt;= 10</code>。</p>
+<p>对了，大家去装个 <code>nodemon</code> <a href="https://github.com/remy/nodemon" target="_blank" rel="noopener">https://github.com/remy/nodemon</a> 。</p>
+<p><code>$ npm i -g nodemon</code></p>
+<p>这个库是专门调试时候使用的，它会自动检测 node.js 代码的改动，然后帮你自动重启应用。在调试时可以完全用 nodemon 命令代替 node 命令。</p>
+<p><code>$ nodemon app.js</code> 启动我们的应用试试，然后随便改两行代码，就可以看到 nodemon 帮我们重启应用了。</p>
+<p>那么 app 写完了，接着开始测试，测试代码在 test/app.test.js。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">'../app'</span>);</span><br><span class="line"><span class="keyword">var</span> supertest = <span class="built_in">require</span>(<span class="string">'supertest'</span>);</span><br><span class="line"><span class="comment">// 看下面这句，这是关键一句。得到的 request 对象可以直接按照</span></span><br><span class="line"><span class="comment">// superagent 的 API 进行调用</span></span><br><span class="line"><span class="keyword">var</span> request = supertest(app);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> should = <span class="built_in">require</span>(<span class="string">'should'</span>);</span><br><span class="line"></span><br><span class="line">describe(<span class="string">'test/app.test.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 我们的第一个测试用例，好好理解一下</span></span><br><span class="line">  it(<span class="string">'should return 55 when n is 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 之所以这个测试的 function 要接受一个 done 函数，是因为我们的测试内容</span></span><br><span class="line">    <span class="comment">// 涉及了异步调用，而 mocha 是无法感知异步调用完成的。所以我们主动接受它提供</span></span><br><span class="line">    <span class="comment">// 的 done 函数，在测试完毕时，自行调用一下，以示结束。</span></span><br><span class="line">    <span class="comment">// mocha 可以感知到我们的测试函数是否接受 done 参数。js 中，function</span></span><br><span class="line">    <span class="comment">// 对象是有长度的，它的长度由它的参数数量决定</span></span><br><span class="line">    <span class="comment">// (function (a, b, c, d) &#123;&#125;).length === 4</span></span><br><span class="line">    <span class="comment">// 所以 mocha 通过我们测试函数的长度就可以确定我们是否是异步测试。</span></span><br><span class="line"></span><br><span class="line">    request.get(<span class="string">'/fib'</span>)</span><br><span class="line">    <span class="comment">// .query 方法用来传 querystring，.send 方法用来传 body。</span></span><br><span class="line">    <span class="comment">// 它们都可以传 Object 对象进去。</span></span><br><span class="line">    <span class="comment">// 在这里，我们等于访问的是 /fib?n=10</span></span><br><span class="line">      .query(&#123;<span class="attr">n</span>: <span class="number">10</span>&#125;)</span><br><span class="line">      .end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 由于 http 返回的是 String，所以我要传入 '55'。</span></span><br><span class="line">        res.text.should.equal(<span class="string">'55'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// done(err) 这种用法写起来很鸡肋，是因为偷懒不想测 err 的值</span></span><br><span class="line">        <span class="comment">// 如果勤快点，这里应该写成</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        should.not.exist(err);</span></span><br><span class="line"><span class="comment">        res.text.should.equal('55');</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        done(err);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 下面我们对于各种边界条件都进行测试，由于它们的代码雷同，</span></span><br><span class="line">  <span class="comment">// 所以我抽象出来了一个 testFib 方法。</span></span><br><span class="line">  <span class="keyword">var</span> testFib = <span class="function"><span class="keyword">function</span> (<span class="params">n, statusCode, expect, done</span>) </span>&#123;</span><br><span class="line">    request.get(<span class="string">'/fib'</span>)</span><br><span class="line">      .query(&#123;<span class="attr">n</span>: n&#125;)</span><br><span class="line">      .expect(statusCode)</span><br><span class="line">      .end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">        res.text.should.equal(expect);</span><br><span class="line">        done(err);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  it(<span class="string">'should return 0 when n === 0'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    testFib(<span class="number">0</span>, <span class="number">200</span>, <span class="string">'0'</span>, done);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should equal 1 when n === 1'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    testFib(<span class="number">1</span>, <span class="number">200</span>, <span class="string">'1'</span>, done);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should equal 55 when n === 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    testFib(<span class="number">10</span>, <span class="number">200</span>, <span class="string">'55'</span>, done);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should throw when n &gt; 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    testFib(<span class="number">11</span>, <span class="number">500</span>, <span class="string">'n should &lt;= 10'</span>, done);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should throw when n &lt; 0'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    testFib(<span class="number">-1</span>, <span class="number">500</span>, <span class="string">'n should &gt;= 0'</span>, done);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should throw when n isnt Number'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    testFib(<span class="string">'good'</span>, <span class="number">500</span>, <span class="string">'n should be a Number'</span>, done);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 单独测试一下返回码 500</span></span><br><span class="line">  it(<span class="string">'should status 500 when error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">    request.get(<span class="string">'/fib'</span>)</span><br><span class="line">      .query(&#123;<span class="attr">n</span>: <span class="number">100</span>&#125;)</span><br><span class="line">      .expect(<span class="number">500</span>)</span><br><span class="line">      .end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">        done(err);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>完。</p>
+<h2 id="关于-cookie-持久化"><a href="#关于-cookie-持久化" class="headerlink" title="关于 cookie 持久化"></a>关于 cookie 持久化</h2><p>有两种思路</p>
+<ol>
+<li><p>在 supertest 中，可以通过 <code>var agent = supertest.agent(app)</code> 获取一个 agent 对象，这个对象的 API 跟直接在 superagent 上调用各种方法是一样的。agent 对象在被多次调用 <code>get</code> 和 <code>post</code> 之后，可以一路把 cookie 都保存下来。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> supertest = <span class="built_in">require</span>(<span class="string">'supertest'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> agent = supertest.agent(app);</span><br><span class="line"></span><br><span class="line">agent.post(<span class="string">'login'</span>).end(...);</span><br><span class="line"><span class="comment">// then ..</span></span><br><span class="line">agent.post(<span class="string">'create_topic'</span>).end(...); <span class="comment">// 此时的 agent 中有用户登陆后的 cookie</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在发起请求时，调用 <code>.set(&#39;Cookie&#39;, &#39;a cookie string&#39;)</code> 这样的方式。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> supertest = <span class="built_in">require</span>(<span class="string">'supertest'</span>);</span><br><span class="line"><span class="keyword">var</span> userCookie;</span><br><span class="line">supertest.post(<span class="string">'login'</span>).end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;</span><br><span class="line">    userCookie = res.headers[<span class="string">'set-cookie'</span>]</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="comment">// then ..</span></span><br><span class="line"></span><br><span class="line">supertest.post(<span class="string">'create_topic'</span>)</span><br><span class="line">  .set(<span class="string">'cookie'</span>, userCookie)</span><br><span class="line">  .end(...)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这里有个相关讨论：<a href="https://github.com/tj/supertest/issues/46" target="_blank" rel="noopener">https://github.com/tj/supertest/issues/46</a></p>
+<h2 id="拓展学习"><a href="#拓展学习" class="headerlink" title="拓展学习"></a>拓展学习</h2><p>Nodeclub 里面的测试使用的技术跟前面介绍的是一样的，should mocha supertest 那套，应该是很容易看懂的:</p>
+<p><a href="https://github.com/cnodejs/nodeclub/blob/master/test/controllers/topic.test.js" target="_blank" rel="noopener">https://github.com/cnodejs/nodeclub/blob/master/test/controllers/topic.test.js</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/07/20/node测试用例：supertest/&title=《10.测试用例：supertest》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/07/20/node测试用例：supertest/&title=《10.测试用例：supertest》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/07/20/node测试用例：supertest/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《10.测试用例：supertest》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/07/20/node测试用例：supertest/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/07/20/node测试用例：supertest/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/10/27/JavaScript-code-snippets/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaScript常用的代码片段</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/20/nodeMongodb 与 Mongoose 的使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">15.Mongodb 与 Mongoose 的使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/07/20/node测试用例：supertest/&title=《10.测试用例：supertest》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/07/20/node测试用例：supertest/&title=《10.测试用例：supertest》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/07/20/node测试用例：supertest/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《10.测试用例：supertest》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/07/20/node测试用例：supertest/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/07/20/node测试用例：supertest/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3aW26DUAxFUeY/aSr1K1UE7GOTqPju+xURmrBSyfJr2/DZf8/r69crR/e/n/dPO/qr7RNHhgwZj2Xsp+foi4/ePf8EjuHPJkOGjHUY6cfxcEkeohaaZciQIaMWHHlCeU6SIUOGjHsDbpoIkndlyJAho1bEngfHtOzk+JtrcRkyZDyQURsMfOf1x+cbMmTI+PeMPTwkyPYnjPFTyZAhYzSDtMlIMpeWpp2W3OGPJUOGjGUYtYDIw2U6sOTFswwZMqYy+CPyFlsastN7Wv8HGTJkPJxRu0K+krfSeDMuLl9lyJDxWEa80AASO5729akyZMhYgVELuKTdn/4QneUMGTJkrMDoF5+dlbI+W4YMGSsw+o9VDJTtBFGGDBkrMPhAsbPyRZBp5S1Dhox1GKTR1hlkpoOE4sqaDBkyRjPIykWa3vHHShc7WsthMmTIGMEgw0jeSuODz1qhe5HhypAhYyij1uTiyxZpQhkvgsiQIWMBRucLOC8NwUEbToYMGUMZNUANWWveoXJXhgwZCzBq3fU0HSR38rbdnztlyJAxmpE26PlyGG+9pUOFixGmDBkyxjHuWudKF8v4z4FKXxkyZIxm8NNp3Kf9v04aKkOGjKkMvlSRJnad8WScPsqQIWMBxr1DSrLg1WquHbXbZMiQsTyjlsylRS8J/WiQKUOGjIUZ51fS8J2OBC6KWBkyZIxmFMNc2M+rAdB1GTJkjGZ0BgPpOgVpoqWrZjJkyBjN+AH73/oIGb3EwAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

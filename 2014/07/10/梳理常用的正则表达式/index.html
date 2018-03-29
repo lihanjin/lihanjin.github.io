@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>梳理常用的正则表达式 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="正则表达式">
+    <meta name="description" content="一、校验数字的表达式">
+<meta name="keywords" content="正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="梳理常用的正则表达式">
+<meta property="og:url" content="http://yoursite.com/2014/07/10/梳理常用的正则表达式/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="一、校验数字的表达式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="梳理常用的正则表达式">
+<meta name="twitter:description" content="一、校验数字的表达式">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">梳理常用的正则表达式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">梳理常用的正则表达式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-07-09T17:04:51.000Z" itemprop="datePublished" class="page-time">
+  2014-07-10
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、校验数字的表达式"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、校验数字的表达式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、校验字符的表达式"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、校验字符的表达式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、特殊需求表达式"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、特殊需求表达式</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-梳理常用的正则表达式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">梳理常用的正则表达式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014-07-10 01:04:51" datetime="2014-07-09T17:04:51.000Z"  itemprop="datePublished">2014-07-10</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、校验数字的表达式"><a href="#一、校验数字的表达式" class="headerlink" title="一、校验数字的表达式"></a>一、校验数字的表达式</h3><hr>
+<a id="more"></a>
+<p>1 数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]*$</span><br></pre></td></tr></table></figure></p>
+<p>2 n位的数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;n&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>3 至少n位的数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;n,&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>4 m-n位的数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;m,n&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>5 零和非零开头的数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(<span class="number">0</span>|[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]*)$</span><br></pre></td></tr></table></figure></p>
+<p>6 非零开头的最多带两位小数的数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^([<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]*)+(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>7 带1-2位小数的正数或负数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(-)?\d+(.\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>8 正数、负数、和小数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(-|+)?\d+(.\d+)?$</span><br></pre></td></tr></table></figure></p>
+<p>9 有两位小数的正实数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]+(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>10 有1~3位小数的正实数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]+(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">3</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>11 非零的正整数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[1-9]\d$ 或 ^([1-9][0-9])&#123;1,3&#125;$ 或 ^+?[1-9][0-9]*$</span><br></pre></td></tr></table></figure></p>
+<p>12 非零的负整数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^-[<span class="number">1</span><span class="number">-9</span>][]<span class="number">0</span><span class="number">-9</span>″$ 或 ^-[<span class="number">1</span><span class="number">-9</span>]\d$</span><br></pre></td></tr></table></figure></p>
+<p>13 非负整数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d+$ 或 ^[<span class="number">1</span><span class="number">-9</span>]\d*|<span class="number">0</span>$</span><br></pre></td></tr></table></figure></p>
+<p>14 非正整数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^-[<span class="number">1</span><span class="number">-9</span>]\d*|<span class="number">0</span>$ 或 ^((-\d+)|(<span class="number">0</span>+))$</span><br></pre></td></tr></table></figure></p>
+<p>15 非负浮点数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d+(.\d+)?$ 或 ^[<span class="number">1</span><span class="number">-9</span>]\d.\d|<span class="number">0.</span>\d[<span class="number">1</span><span class="number">-9</span>]\d|<span class="number">0</span>?<span class="number">.0</span>+|<span class="number">0</span>$</span><br></pre></td></tr></table></figure></p>
+<p>16 非正浮点数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^((-\d+(.\d+)?)|(<span class="number">0</span>+(<span class="number">.0</span>+)?))$ 或 ^(-([<span class="number">1</span><span class="number">-9</span>]\d.\d|<span class="number">0.</span>\d[<span class="number">1</span><span class="number">-9</span>]\d))|<span class="number">0</span>?<span class="number">.0</span>+|<span class="number">0</span>$</span><br></pre></td></tr></table></figure></p>
+<p>17 浮点数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(-?\d+)(.\d+)?$ 或 ^-?([<span class="number">1</span><span class="number">-9</span>]\d.\d|<span class="number">0.</span>\d[<span class="number">1</span><span class="number">-9</span>]\d|<span class="number">0</span>?<span class="number">.0</span>+|<span class="number">0</span>)$</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、校验字符的表达式"><a href="#二、校验字符的表达式" class="headerlink" title="二、校验字符的表达式"></a>二、校验字符的表达式</h3><hr>
+<p>1 汉字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[\u4e00-\u9fa5]&#123;<span class="number">0</span>,&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>2 英文和数字：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Za-z0<span class="number">-9</span>]+$ 或 ^[A-Za-z0<span class="number">-9</span>]&#123;<span class="number">4</span>,<span class="number">40</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>3 长度为3-20的所有字符：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^.&#123;<span class="number">3</span>,<span class="number">20</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>4 由26个英文字母组成的字符串：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Za-z]+$</span><br></pre></td></tr></table></figure></p>
+<p>5 由26个大写英文字母组成的字符串：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Z]+$</span><br></pre></td></tr></table></figure></p>
+<p>6 由26个小写英文字母组成的字符串：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[a-z]+$</span><br></pre></td></tr></table></figure></p>
+<p>7 由数字和26个英文字母组成的字符串：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[A-Za-z0<span class="number">-9</span>]+$</span><br></pre></td></tr></table></figure></p>
+<p>8 由数字、26个英文字母或者下划线组成的字符串：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\w+$ 或 ^\w&#123;<span class="number">3</span>,<span class="number">20</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>9 中文、英文、数字包括下划线：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[\u4E00-\u9FA5A-Za-z0<span class="number">-9</span>_]+$</span><br></pre></td></tr></table></figure></p>
+<p>10 可以输入含有<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^%&amp;’,;=?$\”等字符：<span class="string">`[^%&amp;’,;=?$\x22]+</span></span><br></pre></td></tr></table></figure></p>
+<p>11 禁止输入含有~的字符：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[^~\x22]+</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、特殊需求表达式"><a href="#三、特殊需求表达式" class="headerlink" title="三、特殊需求表达式"></a>三、特殊需求表达式</h3><hr>
+<p>1 Email地址：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\w+([-+.]\w+)@\w+([-.]\w+).\w+([-.]\w+)*$</span><br></pre></td></tr></table></figure></p>
+<p>2 域名：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-Z0<span class="number">-9</span>][-a-zA-Z0<span class="number">-9</span>]&#123;<span class="number">0</span>,<span class="number">62</span>&#125;(<span class="regexp">/.[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;)+/</span>.?</span><br></pre></td></tr></table></figure></p>
+<p>3 InternetURL：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a-zA-z]+:<span class="comment">//[^\s] 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=])?$</span></span><br></pre></td></tr></table></figure></p>
+<p>4 手机号码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(<span class="number">13</span>[<span class="number">0</span><span class="number">-9</span>]|<span class="number">14</span>[<span class="number">5</span>|<span class="number">7</span>]|<span class="number">15</span>[<span class="number">0</span>|<span class="number">1</span>|<span class="number">2</span>|<span class="number">3</span>|<span class="number">5</span>|<span class="number">6</span>|<span class="number">7</span>|<span class="number">8</span>|<span class="number">9</span>]|<span class="number">18</span>[<span class="number">0</span>|<span class="number">1</span>|<span class="number">2</span>|<span class="number">3</span>|<span class="number">5</span>|<span class="number">6</span>|<span class="number">7</span>|<span class="number">8</span>|<span class="number">9</span>])\d&#123;<span class="number">8</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>5 电话号码:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(“XXX-XXXXXXX”、”XXXX-XXXXXXXX”、”XXX-XXXXXXX”、”XXX-XXXXXXXX”、”XXXXXXX”和”XXXXXXXX)：^((\d&#123;<span class="number">3</span>,<span class="number">4</span>&#125;-)|\d&#123;<span class="number">3.4</span>&#125;-)?\d&#123;<span class="number">7</span>,<span class="number">8</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>6 国内电话号码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">0511</span><span class="number">-4405222</span>、<span class="number">021</span><span class="number">-87888822</span>)：\d&#123;<span class="number">3</span>&#125;-\d&#123;<span class="number">8</span>&#125;|\d&#123;<span class="number">4</span>&#125;-\d&#123;<span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>7 身份证号(15位、18位数字)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;<span class="number">15</span>&#125;|\d&#123;<span class="number">18</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>8 短身份证号码(数字、字母x结尾)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^([<span class="number">0</span><span class="number">-9</span>])&#123;<span class="number">7</span>,<span class="number">18</span>&#125;(x|X)?$ 或 ^\d&#123;<span class="number">8</span>,<span class="number">18</span>&#125;|[<span class="number">0</span><span class="number">-9</span>x]&#123;<span class="number">8</span>,<span class="number">18</span>&#125;|[<span class="number">0</span><span class="number">-9</span>X]&#123;<span class="number">8</span>,<span class="number">18</span>&#125;?$</span><br></pre></td></tr></table></figure></p>
+<p>9 帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[a-zA-Z][a-zA-Z0<span class="number">-9</span>_]&#123;<span class="number">4</span>,<span class="number">15</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>10 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[a-zA-Z]\w&#123;<span class="number">5</span>,<span class="number">17</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>11 强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(?=.\d)(?=.[a-z])(?=.*[A-Z]).&#123;<span class="number">8</span>,<span class="number">10</span>&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>12 日期格式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^\d&#123;<span class="number">4</span>&#125;-\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;-\d&#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>13 一年的12个月(01～09和1～12)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(<span class="number">0</span>?[<span class="number">1</span><span class="number">-9</span>]|<span class="number">1</span>[<span class="number">0</span><span class="number">-2</span>])$</span><br></pre></td></tr></table></figure></p>
+<p>14 一个月的31天(01～09和1～31)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^((<span class="number">0</span>?[<span class="number">1</span><span class="number">-9</span>])|((<span class="number">1</span>|<span class="number">2</span>)[<span class="number">0</span><span class="number">-9</span>])|<span class="number">30</span>|<span class="number">31</span>)$</span><br></pre></td></tr></table></figure></p>
+<p>15 钱的输入格式：</p>
+<p>16 1.有四种钱的表示形式我们可以接受:”10000.00″ 和 “10,000.00”, 和没有 “分” 的 “10000” 和 “10,000”：<code>^[1-9][0-9]*$</code></p>
+<p>17 2.这表示任意一个不以0开头的数字,但是,这也意味着一个字符”0″不通过,所以我们采用下面的形式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(<span class="number">0</span>|[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]*)$</span><br></pre></td></tr></table></figure></p>
+<p>18 3.一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(<span class="number">0</span>|-?[<span class="number">1</span><span class="number">-9</span>][<span class="number">0</span><span class="number">-9</span>]*)$</span><br></pre></td></tr></table></figure></p>
+<p>19 4.这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧.下面我们要加的是说明可能的小数部分：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]+(.[<span class="number">0</span><span class="number">-9</span>]+)?$</span><br></pre></td></tr></table></figure></p>
+<p>20 5.必须说明的是,小数点后面至少应该有1位数,所以”10.”是不通过的,但是 “10” 和 “10.2” 是通过的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]+(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>21 6.这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]+(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>22 7.这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">3</span>&#125;(,[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">3</span>&#125;)*(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>23 8.1到3个数字,后面跟着任意个 逗号+3个数字,逗号成为可选,而不是必须：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^([<span class="number">0</span><span class="number">-9</span>]+|[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">3</span>&#125;(,[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">3</span>&#125;)*)(.[<span class="number">0</span><span class="number">-9</span>]&#123;<span class="number">1</span>,<span class="number">2</span>&#125;)?$</span><br></pre></td></tr></table></figure></p>
+<p>24 备注：这就是最终结果了,别忘了”<code>+</code>”可以用”<code>*</code>”替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉去掉那个反斜杠,一般的错误都在这里</p>
+<p>25 xml文件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^([a-zA-Z]+-?)+[a-zA-Z0<span class="number">-9</span>]+\.[x|X][m|M][l|L]$</span><br></pre></td></tr></table></figure></p>
+<p>26 中文字符的正则表达式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[\u4e00-\u9fa5]</span><br></pre></td></tr></table></figure></p>
+<p>27 双字节字符：<code>[^\x00-\xff]</code> (包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))</p>
+<p>28 空白行的正则表达式：<code>\n\s*\r</code> (可以用来删除空白行)</p>
+<p>29 HTML标记的正则表达式：<code>&lt;(\S?)[^&gt;]&gt;.?&lt;/\1&gt;|&lt;.? /&gt;</code> (网上流传的版本太糟糕，上面这个也仅仅能部分，对于复杂的嵌套标记依旧无能为力)</p>
+<p>30 首尾空白字符的正则表达式：^\s|\s$或(^\s)|(\s$) (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)</p>
+<p>31 腾讯QQ号：<code>[1-9][0-9]{4,}</code> (腾讯QQ号从10000开始)</p>
+<p>32 中国邮政编码：<code>[1-9]\d{5}(?!\d)</code> (中国邮政编码为6位数字)</p>
+<p>33 IP地址：<code>\d+.\d+.\d+.\d+</code> (提取IP地址时有用)</p>
+<p>34 IP地址：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((?:(?:<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>]|<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d|[<span class="number">01</span>]?\d?\d)\.)&#123;<span class="number">3</span>&#125;(?:<span class="number">25</span>[<span class="number">0</span><span class="number">-5</span>]|<span class="number">2</span>[<span class="number">0</span><span class="number">-4</span>]\d|[<span class="number">01</span>]?\d?\d))</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/&title=《梳理常用的正则表达式》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/&title=《梳理常用的正则表达式》 — _sUper.LEE的个人空间&source=一、校验数字的表达式" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2014/07/10/梳理常用的正则表达式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《梳理常用的正则表达式》 — _sUper.LEE的个人空间&url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/08/02/javascript 下常用的字符串操作/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javascript 下常用的字符串操作</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/06/25/梳理常见的CSS属性（二）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">梳理常见的CSS属性（二）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/&title=《梳理常用的正则表达式》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/&title=《梳理常用的正则表达式》 — _sUper.LEE的个人空间&source=一、校验数字的表达式" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2014/07/10/梳理常用的正则表达式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《梳理常用的正则表达式》 — _sUper.LEE的个人空间&url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2014/07/10/梳理常用的正则表达式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3a0W7DIAwF0P3/T3evk6pk1zbdFDg8RRMLnFZybfDXVzxeP8b735P5789Xb7t654KBgYHxWMbrdlzNqb4/WStZ93IPGBgYBzCS5atzknCchOb7dTEwMDCS53wT1ZQRAwMDYx5Mk03cp5L//LuBgYHxKEaervVK096h3kdqcQwMjAcyekdmf/P8kfsNDAyMRzFexXGfnCUz8yK2sCsMDIytGXmAm2N6QbywHwwMjE0Zk0P8Xp5WBUQfCgYGxtaMJHQmVwi9wHqPbwZlDAyMTRl5u+qknata9N6HWgwMjHMY1eSvx1t12XC5BwwMjMMY1cCXH+7nFwN5fRpVuhgYGA9n5FNXFZ/V7TbZGBgY2zGqRWwvUE5aN5K9YWBg7MqoNoHlLVyfC9O/fA8YGBibMpJCNDnKnwfrajjGwMA4gVFtCMsZkwuAUbMFBgbGdoz80D9vjMibJD7YbIGBgbERoxc054f4veaM8q8HBgbGdozq5ibp4CTRLDReYGBgbMSoHqslgbV3bTkKuBgYGIcx5odlCy4mq0UyBgbGAYxqe8Sk6M3bMlZEYgwMjGczXsVx/4Y8iK9KQDEwME5g9GJa7zIyX37x1jEwMLZgJEE2b1HNF16cPmJgYBzAmBy09ULqvNkCAwMDY+3mqt0f5StPDAwMjGKBml8eVD+gy//FwMA4gJGEy/zyYFX6WEgoMTAwtmb0GjJ6zan5Ud2CZBEDA2MHxjebuLwqwbwRQgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

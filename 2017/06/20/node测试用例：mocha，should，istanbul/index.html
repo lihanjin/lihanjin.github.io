@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>6.测试用例：mocha，should，istanbul | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《测试用例：mocha，should，istanbul》目标建立一个 lesson6 项目，在其中编写代码。 main.js: 其中有个 fibonacci 函数。fibonacci 的介绍见：http://en.wikipedia.org/wiki/Fibonacci_number 。 此函数的定义为 int fibonacci(int n)  当 n === 0 时，返回 0；n === 1时">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.测试用例：mocha，should，istanbul">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《测试用例：mocha，should，istanbul》目标建立一个 lesson6 项目，在其中编写代码。 main.js: 其中有个 fibonacci 函数。fibonacci 的介绍见：http://en.wikipedia.org/wiki/Fibonacci_number 。 此函数的定义为 int fibonacci(int n)  当 n === 0 时，返回 0；n === 1时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/4.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6.测试用例：mocha，should，istanbul">
+<meta name="twitter:description" content="《测试用例：mocha，should，istanbul》目标建立一个 lesson6 项目，在其中编写代码。 main.js: 其中有个 fibonacci 函数。fibonacci 的介绍见：http://en.wikipedia.org/wiki/Fibonacci_number 。 此函数的定义为 int fibonacci(int n)  当 n === 0 时，返回 0；n === 1时">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">6.测试用例：mocha，should，istanbul</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">6.测试用例：mocha，should，istanbul</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《测试用例：mocha，should，istanbul》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《测试用例：mocha，should，istanbul》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node测试用例：mocha，should，istanbul"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">6.测试用例：mocha，should，istanbul</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《测试用例：mocha，should，istanbul》"><a href="#《测试用例：mocha，should，istanbul》" class="headerlink" title="《测试用例：mocha，should，istanbul》"></a>《测试用例：mocha，should，istanbul》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>建立一个 lesson6 项目，在其中编写代码。</p>
+<p>main.js: 其中有个 fibonacci 函数。fibonacci 的介绍见：<a href="http://en.wikipedia.org/wiki/Fibonacci_number" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Fibonacci_number</a> 。</p>
+<p>此函数的定义为 <code>int fibonacci(int n)</code></p>
+<ul>
+<li>当 n === 0 时，返回 0；n === 1时，返回 1;</li>
+<li>n &gt; 1 时，返回 <code>fibonacci(n) === fibonacci(n-1) + fibonacci(n-2)</code>，如 <code>fibonacci(10) === 55</code>;</li>
+<li>n 不可大于10，否则抛错，因为 Node.js 的计算性能没那么强。</li>
+<li>n 也不可小于 0，否则抛错，因为没意义。</li>
+<li>n 不为数字时，抛错。</li>
+</ul>
+<p>test/main.test.js: 对 main 函数进行测试，并使行覆盖率和分支覆盖率都达到 100%。</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>学习使用测试框架 mocha : <a href="http://mochajs.org/" target="_blank" rel="noopener">http://mochajs.org/</a></li>
+<li>学习使用断言库 should : <a href="https://github.com/tj/should.js" target="_blank" rel="noopener">https://github.com/tj/should.js</a></li>
+<li>学习使用测试率覆盖工具 istanbul : <a href="https://github.com/gotwarlost/istanbul" target="_blank" rel="noopener">https://github.com/gotwarlost/istanbul</a></li>
+<li>简单 Makefile 的编写 : <a href="http://blog.csdn.net/haoel/article/details/2886" target="_blank" rel="noopener">http://blog.csdn.net/haoel/article/details/2886</a></li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>首先，作为一个 Node.js 项目，先执行 <code>npm init</code> 创建 package.json。</p>
+<p>其次，建立我们的 main.js 文件，编写 <code>fibonacci</code> 函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fibonacci = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> fibonacci(n<span class="number">-1</span>) + fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">require</span>.main === <span class="built_in">module</span>) &#123;</span><br><span class="line">  <span class="comment">// 如果是直接执行 main.js，则进入此处</span></span><br><span class="line">  <span class="comment">// 如果 main.js 被其他文件 require，则此处不会执行。</span></span><br><span class="line">  <span class="keyword">var</span> n = <span class="built_in">Number</span>(process.argv[<span class="number">2</span>]);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'fibonacci('</span> + n + <span class="string">') is'</span>, fibonacci(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>OK，这只是个简单的实现。</p>
+<p>我们可以执行试试</p>
+<p><code>$ node main.js 10</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>嗯，结果是 55，符合预期。</p>
+<p>接下来我们开始测试驱动开发，现在简单的实现已经完成，那我们就对它进行一下简单测试吧。</p>
+<p>我们先得把 main.js 里面的 fibonacci 暴露出来，这个简单。加一句</p>
+<p><code>exports.fibonacci = fibonacci;</code>（要是看不懂这句就去补补 Node.js 的基础知识吧）</p>
+<p>就好了。</p>
+<p>然后我们在 <code>test/main.test.js</code> 中引用我们的 main.js，并开始一个简单的测试。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: test/main.test.js</span></span><br><span class="line"><span class="keyword">var</span> main = <span class="built_in">require</span>(<span class="string">'../main'</span>);</span><br><span class="line"><span class="keyword">var</span> should = <span class="built_in">require</span>(<span class="string">'should'</span>);</span><br><span class="line"></span><br><span class="line">describe(<span class="string">'test/main.test.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'should equal 55 when n === 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    main.fibonacci(<span class="number">10</span>).should.equal(<span class="number">55</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>把测试先跑通，我们再讲这段测试代码的含义。</p>
+<p>装个全局的 mocha: <code>$ npm install mocha -g</code>。</p>
+<p><code>-g</code> 与 非<code>-g</code> 的区别，就是安装位置的区别，g 是 global 的意思。如果不加的话，则安装 mocha 在你的项目目录下面；如果加了，则这个 mocha 是安装在全局的，如果 mocha 有可执行命令的话，那么这个命令也会自动加入到你系统 $PATH 中的某个地方（在我的系统中，是这里 <code>/Users/alsotang/.nvm/v0.10.29/bin</code>）</p>
+<p>在 lesson6 目录下，直接执行</p>
+<p><code>$ mocha</code></p>
+<p>输出应如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>那么，代码中的 describe 和 it 是什么意思呢？其实就是 BDD 中的那些意思，把它们当做语法来记就好了。</p>
+<p>大家来看看 nodeclub 中，关于 topicController 的测试文件：</p>
+<p><a href="https://github.com/cnodejs/nodeclub/blob/master/test/controllers/topic.test.js" target="_blank" rel="noopener">https://github.com/cnodejs/nodeclub/blob/master/test/controllers/topic.test.js</a></p>
+<p>这文件的内容没有超出之前课程的范围吧。</p>
+<p><code>describe</code> 中的字符串，用来描述你要测的主体是什么；<code>it</code> 当中，描述具体的 case 内容。</p>
+<p>而引入的那个 should 模块，是个断言库。玩过 ruby 的同学应该知道 <code>rspec</code>，rspec 它把测试框架和断言库的事情一起做了，而在 Node.js 中，这两样东西的作用分别是 mocha 和 should 在协作完成。</p>
+<p>should 在 js 的 Object “基类”上注入了一个 <code>#should</code> 属性，这个属性中，又有着许许多多的属性可以被访问。</p>
+<p>比如测试一个数是不是大于3，则是 <code>(5).should.above(3)</code>；测试一个字符串是否有着特定前缀：<code>&#39;foobar&#39;.should.startWith(&#39;foo&#39;);</code>。should.js API 在：<a href="https://github.com/tj/should.js" target="_blank" rel="noopener">https://github.com/tj/should.js</a></p>
+<p>should.js 如果现在还是 version 3 的话，我倒是推荐大家去看看它的 API 和 源码；现在 should 是 version 4 了，API 丑得很，但为了不掉队，我还是一直用着它。我觉得 expect 麻烦，所以不用 expect，对了，expect 也是一个断言库：<a href="https://github.com/LearnBoost/expect.js/" target="_blank" rel="noopener">https://github.com/LearnBoost/expect.js/</a> 。</p>
+<p>回到正题，还记得我们 fibonacci 函数的几个要求吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* 当 n === 0 时，返回 0；n === 1时，返回 1;</span><br><span class="line">* n &gt; 1 时，返回 `fibonacci(n) === fibonacci(n-1) + fibonacci(n-2)`，如 `fibonacci(10) === 55`;</span><br><span class="line">* n 不可大于10，否则抛错，因为 Node.js 的计算性能没那么强。</span><br><span class="line">* n 也不可小于 0，否则抛错，因为没意义。</span><br><span class="line">* n 不为数字时，抛错。</span><br></pre></td></tr></table></figure>
+<p>我们用测试用例来描述一下这几个要求，更新后的 main.test.js 如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> main = <span class="built_in">require</span>(<span class="string">'../main'</span>);</span><br><span class="line"><span class="keyword">var</span> should = <span class="built_in">require</span>(<span class="string">'should'</span>);</span><br><span class="line"></span><br><span class="line">describe(<span class="string">'test/main.test.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'should equal 0 when n === 0'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    main.fibonacci(<span class="number">0</span>).should.equal(<span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should equal 1 when n === 1'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    main.fibonacci(<span class="number">1</span>).should.equal(<span class="number">1</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should equal 55 when n === 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    main.fibonacci(<span class="number">10</span>).should.equal(<span class="number">55</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should throw when n &gt; 10'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      main.fibonacci(<span class="number">11</span>);</span><br><span class="line">    &#125;).should.throw(<span class="string">'n should &lt;= 10'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should throw when n &lt; 0'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      main.fibonacci(<span class="number">-1</span>);</span><br><span class="line">    &#125;).should.throw(<span class="string">'n should &gt;= 0'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'should throw when n isnt Number'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      main.fibonacci(<span class="string">'呵呵'</span>);</span><br><span class="line">    &#125;).should.throw(<span class="string">'n should be a Number'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>还是比较清晰的吧？</p>
+<p>我们这时候跑一下 <code>$ mocha</code>，会发现后三个 case 都没过。</p>
+<p>于是我们更新 fibonacci 的实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fibonacci = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> n !== <span class="string">'number'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'n should be a Number'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'n should &gt;= 0'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'n should &lt;= 10'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fibonacci(n<span class="number">-1</span>) + fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>再跑一次 <code>$ mocha</code>，就过了。这就是传说中的测试驱动开发：先把要达到的目的都描述清楚，然后让现有的程序跑不过 case，再修补程序，让 case 通过。</p>
+<p>安装一个 istanbul : <code>$ npm i istanbul -g</code></p>
+<p>执行 <code>$ istanbul cover _mocha</code></p>
+<p>这会比直接使用 mocha 多一行覆盖率的输出，</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>可以看到，我们其中的分支覆盖率是 91.67%，行覆盖率是 87.5%。</p>
+<p>打开 <code>open coverage/lcov-report/index.html</code> 看看</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson6/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>其实这覆盖率是 100% 的，24 25 两行没法测。</p>
+<p>mocha 和 istanbul 的结合是相当无缝的，只要 mocha 跑得动，那么 istanbul 就接得进来。</p>
+<p>到此这门课其实就完了，剩下要说的内容，都是些比较细节的。比较懒的同学可以踩坑了之后再回来看。</p>
+<p>上面的课程，不完美的地方就在于 mocha 和 istanbul 版本依赖的问题，但为了不引入不必要的复杂性，所以上面就没提到这点了。</p>
+<p>假设你有一个项目A，用到了 mocha 的 version 3，其他人有个项目B，用到了 mocha 的 version 10，那么如果你 <code>npm i mocha -g</code> 装的是 version 3 的话，你用 <code>$ mocha</code> 是不兼容B项目的。因为 mocha 版本改变之后，很可能语法也变了，对吧。</p>
+<p>这时，跑测试用例的正确方法，应该是</p>
+<ol>
+<li><code>$ npm i mocha --save-dev</code>，装个 mocha 到项目目录中去</li>
+<li><code>$ ./node_modules/.bin/mocha</code>，用刚才安装的这个特定版本的 mocha，来跑项目的测试代码。</li>
+</ol>
+<p><code>./node_modules/.bin</code> 这个目录下放着我们所有依赖自带的那些可执行文件。</p>
+<p>每次输入这个很麻烦对吧？所以我们要引入 Makefile，让 Makefile 帮我们记住复杂的配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test:</span><br><span class="line">  ./node_modules/.bin/mocha</span><br><span class="line"></span><br><span class="line">cov test-cov:</span><br><span class="line">  ./node_modules/.bin/istanbul cover _mocha</span><br><span class="line"></span><br><span class="line">.PHONY: test cov test-cov</span><br></pre></td></tr></table></figure>
+<p>这时，我们只需要调用 <code>make test</code> 或者 <code>make cov</code>，就可以跑我们相应的测试了。</p>
+<p>至于 Makefile 怎么写？以及 .PHONY 是什么意思，请看这里：<a href="http://blog.csdn.net/haoel/article/details/2886" target="_blank" rel="noopener">http://blog.csdn.net/haoel/article/details/2886</a> ，左耳朵耗子陈皓2004年的文章。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/&title=《6.测试用例：mocha，should，istanbul》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/&title=《6.测试用例：mocha，should，istanbul》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《6.测试用例：mocha，should，istanbul》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/node正则表达式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">9.正则表达式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">7.浏览器端测试：mocha，chai，phantomjs</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/&title=《6.测试用例：mocha，should，istanbul》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/&title=《6.测试用例：mocha，should，istanbul》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《6.测试用例：mocha，should，istanbul》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node测试用例：mocha，should，istanbul/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3aQU7EMBAEQP7/abgiQaB7xoY9VE5oo7WnslJsevz2Fl/vn66nzz/fzT//evfr+E93j114eHh4i9L35SYjt6Xnj+mbcfDw8PCu8Z4GTUp5mjh/oSeFJmPi4eHhvTLv50+S0fJv5Y8MDw8P7zV5eVSRLAab9AAPDw/vf3ltcJAEEPsgOF9aDmQteHh4eDGvfYm/wt9X+nt4eHh46676/oU722TPttrfVIuHh4d3gbdvULXfnTXJNnPh4eHh/T0vJ7UBRHv4oP0cDw8P7wZvE7beOLTaxru/jIOHh4d3gXeqZZUsADN8G3D80t/Dw8PDO8TLt7n5MjAbYbYpj8JiPDw8vGu8TRGr6cudcB0u4+Hh4R3lJRvfWTDRFrQJIKKUGg8PD+8or10SkuWhfWTt0atki4+Hh4d3lpe39tvWVBsQ58eq8pgDDw8P7wZv9u99vhWelT6r5PHnwcPDwzvKa0uZbXOTkGK2TR/29PDw8PDWvNkxpln00B7Mms2Oh4eHd483WzbyRv6seTYrN5kdDw8Pb8/Lm1556UnYullg8kMJeHh4eDd4sxVjVvQs5ti35fDw8PBu8GbB62zxyCPg2QN9nBcPDw/vEC8PBdqXfnt+YRMKR78YHh4e3iFeG8i2DbO2uLMxMR4eHt493iyobdv8m1lmVDw8PLzbvFnE0Daokk357O7jI8bDw8P7E14+TXKIKnlkbSBStMrw8PDwjvLey6tdMPLlJMlL6gYbHh4e3gVe+6rNg9fZUrHZlNctMTw8PLyjZ5PyKdtX+ayFtook8PDw8K7x8mnywDfZju+jhyZ4wcPDw/sfXhsubGbZ14aHh4f3OrzNxne/yR4eusLDw8M7ymvj1zzqzYPXZDHIHwQeHh7ePd6p/+h/LiUJf2cLwIEgAw8PDy+t4QNt9l6TsixU4AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

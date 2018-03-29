@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>React课堂笔记第十讲（编码规范） | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="React">
+    <meta name="description" content="React课堂笔记第十讲（编码规范）Airbnb React/JSX Style Guide  A mostly reasonable approach to React and JSX 目录 Basic Rules Class vs React.createClass vs stateless Naming Declaration Alignment Quotes Spacing Props P">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React课堂笔记第十讲（编码规范）">
+<meta property="og:url" content="http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="React课堂笔记第十讲（编码规范）Airbnb React/JSX Style Guide  A mostly reasonable approach to React and JSX 目录 Basic Rules Class vs React.createClass vs stateless Naming Declaration Alignment Quotes Spacing Props P">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React课堂笔记第十讲（编码规范）">
+<meta name="twitter:description" content="React课堂笔记第十讲（编码规范）Airbnb React/JSX Style Guide  A mostly reasonable approach to React and JSX 目录 Basic Rules Class vs React.createClass vs stateless Naming Declaration Alignment Quotes Spacing Props P">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React课堂笔记第十讲（编码规范）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React课堂笔记第十讲（编码规范）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-12T05:22:01.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#React课堂笔记第十讲（编码规范）"><span class="post-toc-number">1.</span> <span class="post-toc-text">React课堂笔记第十讲（编码规范）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Basic-Rules"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Basic Rules</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Class-vs-React-createClass-vs-stateless"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Class vs React.createClass vs stateless</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Naming"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Naming</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Declaration"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Declaration</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Alignment"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">Alignment</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quotes"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Quotes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Spacing"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">Spacing</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Props"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">Props</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Parentheses"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">Parentheses</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Tags"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">Tags</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Methods"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">Methods</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Ordering"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">Ordering</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#isMounted"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">isMounted</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-React课堂笔记第十讲（编码规范）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React课堂笔记第十讲（编码规范）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="React课堂笔记第十讲（编码规范）"><a href="#React课堂笔记第十讲（编码规范）" class="headerlink" title="React课堂笔记第十讲（编码规范）"></a>React课堂笔记第十讲（编码规范）</h1><p>Airbnb React/JSX Style Guide</p>
+<p> <em>A mostly reasonable approach to React and JSX</em></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#basic-rules">Basic Rules</a></li>
+<li><a href="#class-vs-reactcreateclass-vs-stateless">Class vs <code>React.createClass</code> vs stateless</a></li>
+<li><a href="#naming">Naming</a></li>
+<li><a href="#declaration">Declaration</a></li>
+<li><a href="#alignment">Alignment</a></li>
+<li><a href="#quotes">Quotes</a></li>
+<li><a href="#spacing">Spacing</a></li>
+<li><a href="#props">Props</a></li>
+<li><a href="#parentheses">Parentheses</a></li>
+<li><a href="#tags">Tags</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#ordering">Ordering</a></li>
+<li><a href="#ismounted"><code>isMounted</code></a></li>
+</ol>
+<h2 id="Basic-Rules"><a href="#Basic-Rules" class="headerlink" title="Basic Rules"></a>Basic Rules</h2><ul>
+<li>Only include one React component per file.<ul>
+<li>However, multiple <a href="https://facebook.github.io/react/docs/reusable-components.html#stateless-functions" target="_blank" rel="noopener">Stateless, or Pure, Components</a> are allowed per file. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless" target="_blank" rel="noopener"><code>react/no-multi-comp</code></a>.</li>
+</ul>
+</li>
+<li>Always use JSX syntax.</li>
+<li>Do not use <code>React.createElement</code> unless you’re initializing the app from a file that is not JSX.</li>
+</ul>
+<h2 id="Class-vs-React-createClass-vs-stateless"><a href="#Class-vs-React-createClass-vs-stateless" class="headerlink" title="Class vs React.createClass vs stateless"></a>Class vs <code>React.createClass</code> vs stateless</h2><ul>
+<li><p>If you have internal state and/or refs, prefer <code>class extends React.Component</code> over <code>React.createClass</code> unless you have a very good reason to use mixins. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md" target="_blank" rel="noopener"><code>react/prefer-es6-class</code></a> <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md" target="_blank" rel="noopener"><code>react/prefer-stateless-function</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> Listing = React.createClass(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.state.hello&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Listing</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.state.hello&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>And if you don’t have state or refs, prefer normal functions (not arrow functions) over classes:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Listing</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.props.hello&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad (relying on function name inference is discouraged)</span></span><br><span class="line"><span class="keyword">const</span> Listing = <span class="function">(<span class="params">&#123; hello &#125;</span>) =&gt;</span> (</span><br><span class="line">  &lt;div&gt;&#123;hello&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ good</span></span><br><span class="line"><span class="regexp">function Listing(&#123; hello &#125;) &#123;</span></span><br><span class="line"><span class="regexp">  return &lt;div&gt;&#123;hello&#125;&lt;/</span>div&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Naming"><a href="#Naming" class="headerlink" title="Naming"></a>Naming</h2><ul>
+<li><strong>Extensions</strong>: Use <code>.jsx</code> extension for React components.</li>
+<li><strong>Filename</strong>: Use PascalCase for filenames. E.g., <code>ReservationCard.jsx</code>.</li>
+<li><p><strong>Reference Naming</strong>: Use PascalCase for React components and camelCase for their instances. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md" target="_blank" rel="noopener"><code>react/jsx-pascal-case</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">import</span> reservationCard <span class="keyword">from</span> <span class="string">'./ReservationCard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">import</span> ReservationCard <span class="keyword">from</span> <span class="string">'./ReservationCard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> ReservationItem = <span class="xml"><span class="tag">&lt;<span class="name">ReservationCard</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// good</span></span><br><span class="line"><span class="xml">const reservationItem = <span class="tag">&lt;<span class="name">ReservationCard</span> /&gt;</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Component Naming</strong>: Use the filename as the component name. For example, <code>ReservationCard.jsx</code> should have a reference name of <code>ReservationCard</code>. However, for root components of a directory, use <code>index.jsx</code> as the filename and use the directory name as the component name:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">import</span> Footer <span class="keyword">from</span> <span class="string">'./Footer/Footer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">import</span> Footer <span class="keyword">from</span> <span class="string">'./Footer/index'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">import</span> Footer <span class="keyword">from</span> <span class="string">'./Footer'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Declaration"><a href="#Declaration" class="headerlink" title="Declaration"></a>Declaration</h2><ul>
+<li><p>Do not use <code>displayName</code> for naming components. Instead, name the component by reference.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> React.createClass(&#123;</span><br><span class="line">  displayName: <span class="string">'ReservationCard'</span>,</span><br><span class="line">  <span class="comment">// stuff goes here</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ReservationCard</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Alignment"><a href="#Alignment" class="headerlink" title="Alignment"></a>Alignment</h2><ul>
+<li><p>Follow these alignment styles for JSX syntax. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md" target="_blank" rel="noopener"><code>react/jsx-closing-bracket-location</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo superLongParam=<span class="string">"bar"</span></span><br><span class="line">     anotherSuperLongParam=<span class="string">"baz"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  superLongParam=<span class="string">"bar"</span></span><br><span class="line">  anotherSuperLongParam=<span class="string">"baz"</span></span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// if props fit in one line then keep it on the same line</span></span><br><span class="line">&lt;Foo bar=<span class="string">"bar"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// children get indented normally</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  superLongParam=<span class="string">"bar"</span></span><br><span class="line">  anotherSuperLongParam=<span class="string">"baz"</span></span><br><span class="line">&gt;</span><br><span class="line">  &lt;Quux /&gt;</span><br><span class="line">&lt;<span class="regexp">/Foo&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Quotes"><a href="#Quotes" class="headerlink" title="Quotes"></a>Quotes</h2><ul>
+<li><p>Always use double quotes (<code>&quot;</code>) for JSX attributes, but single quotes for all other JS. eslint: <a href="http://eslint.org/docs/rules/jsx-quotes" target="_blank" rel="noopener"><code>jsx-quotes</code></a></p>
+<blockquote>
+<p>Why? JSX attributes <a href="http://eslint.org/docs/rules/jsx-quotes" target="_blank" rel="noopener">can’t contain escaped quotes</a>, so double quotes make conjunctions like <code>&quot;don&#39;t&quot;</code> easier to type.<br>Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo bar=<span class="string">'bar'</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo bar=<span class="string">"bar"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo style=&#123;&#123; <span class="attr">left</span>: <span class="string">"20px"</span> &#125;&#125; /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo style=&#123;&#123; <span class="attr">left</span>: <span class="string">'20px'</span> &#125;&#125; /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Spacing"><a href="#Spacing" class="headerlink" title="Spacing"></a>Spacing</h2><ul>
+<li><p>Always include a single space in your self-closing tag.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// very bad</span></span><br><span class="line">&lt;Foo                 /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo</span><br><span class="line"> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Do not pad JSX curly braces with spaces. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md" target="_blank" rel="noopener"><code>react/jsx-curly-spacing</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo bar=&#123; baz &#125; /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo bar=&#123;baz&#125; /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><ul>
+<li><p>Always use camelCase for prop names.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  UserName=<span class="string">"hello"</span></span><br><span class="line">  phone_number=&#123;<span class="number">12345678</span>&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  userName=<span class="string">"hello"</span></span><br><span class="line">  phoneNumber=&#123;<span class="number">12345678</span>&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Omit the value of the prop when it is explicitly <code>true</code>. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md" target="_blank" rel="noopener"><code>react/jsx-boolean-value</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  hidden=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  hidden</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Always include an <code>alt</code> prop on <code>&lt;img&gt;</code> tags. If the image is presentational, <code>alt</code> can be an empty string or the <code>&lt;img&gt;</code> must have <code>role=&quot;presentation&quot;</code>. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-has-alt.md" target="_blank" rel="noopener"><code>jsx-a11y/img-has-alt</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;img src=<span class="string">"hello.jpg"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;img src=<span class="string">"hello.jpg"</span> alt=<span class="string">"Me waving hello"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;img src=<span class="string">"hello.jpg"</span> alt=<span class="string">""</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;img src=<span class="string">"hello.jpg"</span> role=<span class="string">"presentation"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Do not use words like “image”, “photo”, or “picture” in <code>&lt;img&gt;</code> <code>alt</code> props. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-redundant-alt.md" target="_blank" rel="noopener"><code>jsx-a11y/img-redundant-alt</code></a></p>
+<blockquote>
+<p>Why? Screenreaders already announce <code>img</code> elements as images, so there is no need to include this information in the alt text.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;img src=<span class="string">"hello.jpg"</span> alt=<span class="string">"Picture of me waving hello"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;img src=<span class="string">"hello.jpg"</span> alt=<span class="string">"Me waving hello"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Use only valid, non-abstract <a href="https://www.w3.org/TR/wai-aria/roles#role_definitions" target="_blank" rel="noopener">ARIA roles</a>. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/aria-role.md" target="_blank" rel="noopener"><code>jsx-a11y/aria-role</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad - not an ARIA role</span></span><br><span class="line">&lt;div role=<span class="string">"datepicker"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bad - abstract ARIA role</span></span><br><span class="line">&lt;div role=<span class="string">"range"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;div role=<span class="string">"button"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Do not use <code>accessKey</code> on elements. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md" target="_blank" rel="noopener"><code>jsx-a11y/no-access-key</code></a></p>
+<blockquote>
+<p>Why? Inconsistencies between keyboard shortcuts and keyboard commands used by people using screenreaders and keyboards complicate accessibility.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;div accessKey=<span class="string">"h"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;div /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Parentheses"><a href="#Parentheses" class="headerlink" title="Parentheses"></a>Parentheses</h2><ul>
+<li><p>Wrap JSX tags in parentheses when they span more than one line. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md" target="_blank" rel="noopener"><code>react/wrap-multilines</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">className</span>=<span class="string">"long body"</span> <span class="attr">foo</span>=<span class="string">"bar"</span>&gt;</span></span></span><br><span class="line"><span class="xml">           <span class="tag">&lt;<span class="name">MyChild</span> /&gt;</span></span></span><br><span class="line"><span class="xml">         <span class="tag">&lt;/<span class="name">MyComponent</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;MyComponent className=<span class="string">"long body"</span> foo=<span class="string">"bar"</span>&gt;</span><br><span class="line">      &lt;MyChild /&gt;</span><br><span class="line">    &lt;<span class="regexp">/MyComponent&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ good, when single line</span></span><br><span class="line"><span class="regexp">render() &#123;</span></span><br><span class="line"><span class="regexp">  const body = &lt;div&gt;hello&lt;/</span>div&gt;;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span>&gt;</span>&#123;body&#125;<span class="tag">&lt;/<span class="name">MyComponent</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Tags"><a href="#Tags" class="headerlink" title="Tags"></a>Tags</h2><ul>
+<li><p>Always self-close tags that have no children. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md" target="_blank" rel="noopener"><code>react/self-closing-comp</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo className=<span class="string">"stuff"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Foo</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo className=<span class="string">"stuff"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>If your component has multi-line properties, close its tag on a new line. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md" target="_blank" rel="noopener"><code>react/jsx-closing-bracket-location</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  bar=<span class="string">"bar"</span></span><br><span class="line">  baz=<span class="string">"baz"</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&lt;Foo</span><br><span class="line">  bar=<span class="string">"bar"</span></span><br><span class="line">  baz=<span class="string">"baz"</span></span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><ul>
+<li><p>Use arrow functions to close over local variables.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ItemList</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;props.items.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> (</span><br><span class="line">        &lt;Item</span><br><span class="line">          key=&#123;item.key&#125;</span><br><span class="line">          onClick=&#123;() =&gt; doSomethingWith(item.name, index)&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Bind event handlers for the render method in the constructor. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md" target="_blank" rel="noopener"><code>react/jsx-no-bind</code></a></p>
+<blockquote>
+<p>Why? A bind call in the render path creates a brand new function on every single render.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  onClickDiv() &#123;</span><br><span class="line">    <span class="comment">// do stuff</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onClick</span>=<span class="string">&#123;this.onClickDiv.bind(this)&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// good</span></span><br><span class="line"><span class="xml">class extends React.Component &#123;</span></span><br><span class="line"><span class="xml">  constructor(props) &#123;</span></span><br><span class="line"><span class="xml">    super(props);</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    this.onClickDiv = this.onClickDiv.bind(this);</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  onClickDiv() &#123;</span></span><br><span class="line"><span class="xml">    // do stuff</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  render() &#123;</span></span><br><span class="line">    return &lt;div onClick=&#123;this.onClickDiv&#125; /&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Do not use underscore prefix for internal methods of a React component.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">React.createClass(&#123;</span><br><span class="line">  _onClickSubmit() &#123;</span><br><span class="line">    <span class="comment">// do stuff</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// other stuff</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  onClickSubmit() &#123;</span><br><span class="line">    <span class="comment">// do stuff</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// other stuff</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Be sure to return a value in your <code>render</code> methods. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/pull/502" target="_blank" rel="noopener"><code>require-render-return</code></a></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">render() &#123;</span><br><span class="line">  (<span class="xml"><span class="tag">&lt;<span class="name">div</span> /&gt;</span>);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// good</span></span><br><span class="line"><span class="xml">render() &#123;</span></span><br><span class="line"><span class="xml">  return (<span class="tag">&lt;<span class="name">div</span> /&gt;</span>);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Ordering"><a href="#Ordering" class="headerlink" title="Ordering"></a>Ordering</h2><ul>
+<li>Ordering for <code>class extends React.Component</code>:</li>
+</ul>
+<ol>
+<li>optional <code>static</code> methods</li>
+<li><code>constructor</code></li>
+<li><code>getChildContext</code></li>
+<li><code>componentWillMount</code></li>
+<li><code>componentDidMount</code></li>
+<li><code>componentWillReceiveProps</code></li>
+<li><code>shouldComponentUpdate</code></li>
+<li><code>componentWillUpdate</code></li>
+<li><code>componentDidUpdate</code></li>
+<li><code>componentWillUnmount</code></li>
+<li><em>clickHandlers or eventHandlers</em> like <code>onClickSubmit()</code> or <code>onChangeDescription()</code></li>
+<li><em>getter methods for <code>render</code></em> like <code>getSelectReason()</code> or <code>getFooterContent()</code></li>
+<li><em>Optional render methods</em> like <code>renderNavigation()</code> or <code>renderProfilePicture()</code></li>
+<li><code>render</code></li>
+</ol>
+<ul>
+<li><p>How to define <code>propTypes</code>, <code>defaultProps</code>, <code>contextTypes</code>, etc…</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> propTypes = &#123;</span><br><span class="line">  id: PropTypes.number.isRequired,</span><br><span class="line">  url: PropTypes.string.isRequired,</span><br><span class="line">  text: PropTypes.string,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> defaultProps = &#123;</span><br><span class="line">  text: <span class="string">'Hello World'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Link</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> methodsAreOk() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;this.props.url&#125;</span> <span class="attr">data-id</span>=<span class="string">&#123;this.props.id&#125;</span>&gt;</span>&#123;this.props.text&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Link.propTypes = propTypes;</span><br><span class="line">Link.defaultProps = defaultProps;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Link;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Ordering for <code>React.createClass</code>: eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md" target="_blank" rel="noopener"><code>react/sort-comp</code></a></p>
+</li>
+</ul>
+<ol>
+<li><code>displayName</code></li>
+<li><code>propTypes</code></li>
+<li><code>contextTypes</code></li>
+<li><code>childContextTypes</code></li>
+<li><code>mixins</code></li>
+<li><code>statics</code></li>
+<li><code>defaultProps</code></li>
+<li><code>getDefaultProps</code></li>
+<li><code>getInitialState</code></li>
+<li><code>getChildContext</code></li>
+<li><code>componentWillMount</code></li>
+<li><code>componentDidMount</code></li>
+<li><code>componentWillReceiveProps</code></li>
+<li><code>shouldComponentUpdate</code></li>
+<li><code>componentWillUpdate</code></li>
+<li><code>componentDidUpdate</code></li>
+<li><code>componentWillUnmount</code></li>
+<li><em>clickHandlers or eventHandlers</em> like <code>onClickSubmit()</code> or <code>onChangeDescription()</code></li>
+<li><em>getter methods for <code>render</code></em> like <code>getSelectReason()</code> or <code>getFooterContent()</code></li>
+<li><em>Optional render methods</em> like <code>renderNavigation()</code> or <code>renderProfilePicture()</code></li>
+<li><code>render</code></li>
+</ol>
+<h2 id="isMounted"><a href="#isMounted" class="headerlink" title="isMounted"></a><code>isMounted</code></h2><ul>
+<li><p>Do not use <code>isMounted</code>. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md" target="_blank" rel="noopener"><code>react/no-is-mounted</code></a></p>
+<blockquote>
+<p>Why? <a href="https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html" target="_blank" rel="noopener"><code>isMounted</code> is an anti-pattern</a>, is not available when using ES6 classes, and is on its way to being officially deprecated.</p>
+</blockquote>
+</li>
+</ul>
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/&title=《React课堂笔记第十讲（编码规范）》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/&title=《React课堂笔记第十讲（编码规范）》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React课堂笔记第十讲（编码规范）》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/12/React第三讲课堂笔记（数据流）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">React第三讲课堂笔记（数据流）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/05/12/React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/&title=《React课堂笔记第十讲（编码规范）》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/&title=《React课堂笔记第十讲（编码规范）》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React课堂笔记第十讲（编码规范）》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/05/12/React课堂笔记第十讲（编码规范）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3a0W7qQAwE0P7/T1Ppvl2pgRk7S6l08oQQhD1bKd6O/fUVX49/19U7j6dXcs/nd7taw20XHh4e3mjpzxc3+5krZMK+bUPx8PDwjvHuenAni8gxbZHAw8PD+zTe808mn7n3EI+Hh4f3+bz2P/38SN1uHB4eHt4n8JIj7CwO2FCT9dyWteDh4eFNelLRAfcTXh/s7+Hh4eEtuup5qUjebw/QbdPrh9/Fw8PDO8BLItpNQNB+cr8FxSQCHh4e3oKXxw2zQau8PLRxxjDMxcPDw1vz2hGBZDtm38pHr/KtwcPDwzvNm5FmD/d9VBEp8PDw8A7wklZTGxbcG160QwZ4eHh4v8vLw4hZs2pWqPLtxsPDwzvNawOF/P3Z3WbIFyk1Hh4e3oI3i1BnR+c88tj8lS7HrfDw8PBu4uUjAnlLrI0PNuBoK/Hw8PAO8JKIYTMQ0DbANm05PDw8vPfwckA7HDA7HM/iiehIjYeHh7fm5S2r2eM7LzZtQyvaAjw8PLwDvHYUII8G8gIwi4DbsoSHh4d3F2+2rPzhnkcbm/D3cjvw8PDw3sKbxbJtuJCXnLa0/PcaDw8P7wCvPaTmQwbDbtviWP+i8ODh4eEd4yWlInk/jxta0nAcAQ8PD+9W3uzH8u3Ig4bZ8f1F2IGHh4d3gNcebdvINR/eage/9kMMeHh4eDNe+7WW1I5MzYpNdKTGw8PDO8xra0u+oFlhyA/9l/8x4OHh4a15j/LKhwP2LatZlPxiMgIPDw9vzduEEXlwsIk52qJ1W4yLh4eH95SXF4NNBLxpiW0iDDw8PLxzvM3QQHuw3iDzKAQPDw/vL/LyoYFZoBwVMDw8PLxf5bURw73U5GiOh4eH905e3vSaLX1zt3aAAA8PD+80r21TJY/m2UN8Py4wROLh4eGlvG+TilS5+GOgcwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

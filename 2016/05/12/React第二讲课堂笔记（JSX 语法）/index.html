@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>React第二讲课堂笔记（JSX 语法） | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="React">
+    <meta name="description" content="React第二讲课堂笔记（JSX 语法）1. 什么是 JSX类似 xml 的语法，用来描述组件树1234567var HelloMessage = React.createClass(&amp;#123;  render: function() &amp;#123;    return &amp;lt;div&amp;gt;Hello &amp;#123;this.props.name&amp;#125;&amp;lt;/div&amp;gt;;  &amp;#125">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React第二讲课堂笔记（JSX 语法）">
+<meta property="og:url" content="http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="React第二讲课堂笔记（JSX 语法）1. 什么是 JSX类似 xml 的语法，用来描述组件树1234567var HelloMessage = React.createClass(&amp;#123;  render: function() &amp;#123;    return &amp;lt;div&amp;gt;Hello &amp;#123;this.props.name&amp;#125;&amp;lt;/div&amp;gt;;  &amp;#125">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React第二讲课堂笔记（JSX 语法）">
+<meta name="twitter:description" content="React第二讲课堂笔记（JSX 语法）1. 什么是 JSX类似 xml 的语法，用来描述组件树1234567var HelloMessage = React.createClass(&amp;#123;  render: function() &amp;#123;    return &amp;lt;div&amp;gt;Hello &amp;#123;this.props.name&amp;#125;&amp;lt;/div&amp;gt;;  &amp;#125">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React第二讲课堂笔记（JSX 语法）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React第二讲课堂笔记（JSX 语法）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-12T05:22:01.000Z" itemprop="datePublished" class="page-time">
+  2016-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#React第二讲课堂笔记（JSX-语法）"><span class="post-toc-number">1.</span> <span class="post-toc-text">React第二讲课堂笔记（JSX 语法）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-什么是-JSX"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 什么是 JSX</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-为什么要使用-JSX"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 为什么要使用 JSX</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-注释"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. 注释</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-命名"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. 命名</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-根元素个数"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5. 根元素个数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-嵌入变量"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6. 嵌入变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-styles"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">7. styles</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-JSX-SPREAD"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">8. JSX SPREAD</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-属性名不能和-js-关键字冲突"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">9. 属性名不能和 js 关键字冲突</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-React第二讲课堂笔记（JSX 语法）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React第二讲课堂笔记（JSX 语法）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="React第二讲课堂笔记（JSX-语法）"><a href="#React第二讲课堂笔记（JSX-语法）" class="headerlink" title="React第二讲课堂笔记（JSX 语法）"></a>React第二讲课堂笔记（JSX 语法）</h1><h2 id="1-什么是-JSX"><a href="#1-什么是-JSX" class="headerlink" title="1. 什么是 JSX"></a>1. <code>什么是 JSX</code></h2><p>类似 xml 的语法，用来描述组件树<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var HelloMessage = React.createClass(&#123;</span><br><span class="line">  render: function() &#123;</span><br><span class="line">    return &lt;div&gt;Hello &#123;this.props.name&#125;&lt;/div&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(&lt;HelloMessage name=&quot;John&quot; /&gt;, mountNode);</span><br></pre></td></tr></table></figure></p>
+<p>JSX是可选的，并不强制要求使用。如果不用JSX，用React提供的API写的话，应该是这样的，直接调用React的API来定义组件和DOM元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var HelloMessage = React.createClass(&#123;</span><br><span class="line">  displayName: &quot;HelloMessage&quot;,</span><br><span class="line">  render: function() &#123;</span><br><span class="line">    return React.createElement(&quot;div&quot;, null, &quot;Hello &quot;, this.props.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(React.createElement(HelloMessage, &#123;name: &quot;John&quot;&#125;), mountNode);</span><br></pre></td></tr></table></figure>
+<h2 id="2-为什么要使用-JSX"><a href="#2-为什么要使用-JSX" class="headerlink" title="2. 为什么要使用 JSX"></a>2. <code>为什么要使用 JSX</code></h2><p>你不需要为了 React 使用 JSX，可以直接使用纯粹的 JS。但我们更建议使用 JSX , <strong>因为它能定义简洁且我们熟知的包含属性的树状结构语法。</strong></p>
+<h2 id="3-注释"><a href="#3-注释" class="headerlink" title="3. 注释"></a>3. <code>注释</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">const name = &apos;yongfeng&apos;;</span><br><span class="line">const MyComponent = () =&gt; &#123;</span><br><span class="line">	&lt;Nav&gt;</span><br><span class="line">    &#123;/* 一般注释, 用 &#123;&#125; 包围 */&#125;</span><br><span class="line">    &lt;a</span><br><span class="line">      /* 多</span><br><span class="line">         行</span><br><span class="line">         注释 */</span><br><span class="line">      className=&#123; name ? &apos;a&apos; : &apos;b&apos; &#125; // 行尾注释</span><br><span class="line">      href=&quot;http://guoyongfeng.github.io/idoc&quot;</span><br><span class="line">    &gt; 注释 &lt;/a&gt;</span><br><span class="line">  &lt;/Nav&gt;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default MyComponent;</span><br></pre></td></tr></table></figure>
+<h2 id="4-命名"><a href="#4-命名" class="headerlink" title="4. 命名"></a>4. <code>命名</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">// 1. 组件命名遵循驼峰命名，首字母大写</span><br><span class="line">class ComponentDemo extends Component &#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    return &lt;div&gt; 你好，兄弟... &lt;/div&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default ComponentDemo;</span><br></pre></td></tr></table></figure>
+<h2 id="5-根元素个数"><a href="#5-根元素个数" class="headerlink" title="5. 根元素个数"></a>5. <code>根元素个数</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class ComponentDemo extends Component &#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">	// 以下写法直接报错</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        hello</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;h1&gt; hello h1 &lt;/h1&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default ComponentDemo;</span><br></pre></td></tr></table></figure>
+<p>React只有一个限制， 组件只能渲染单个根节点。如果你想要返回多个节点，它们必须被包含在同一个节点里。</p>
+<h2 id="6-嵌入变量"><a href="#6-嵌入变量" class="headerlink" title="6. 嵌入变量"></a>6. <code>嵌入变量</code></h2><p><code>{}花括号内可以写JS逻辑，表达式和方法定义都可以</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let person = &lt;Person name=&#123;window.isLoggedIn ? window.name : &apos;&apos;&#125; /&gt;;</span><br></pre></td></tr></table></figure>
+<h2 id="7-styles"><a href="#7-styles" class="headerlink" title="7. styles"></a>7. <code>styles</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class StyleDemo extends Component &#123;</span><br><span class="line">  render()&#123;</span><br><span class="line">    // 5. 在JS文件里面给组件定义样式</span><br><span class="line">    var MyComponentStyles = &#123;</span><br><span class="line">        color: &apos;blue&apos;,</span><br><span class="line">        fontSize: &apos;28px&apos;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">      &lt;div style=&#123;MyComponentStyles&#125;&gt;</span><br><span class="line">          可以直接这样写行内样式</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default StyleDemo;</span><br></pre></td></tr></table></figure>
+<h2 id="8-JSX-SPREAD"><a href="#8-JSX-SPREAD" class="headerlink" title="8. JSX SPREAD"></a>8. <code>JSX SPREAD</code></h2><p>可以通过 <code>{...obj}</code> 来批量设置一个对象的键值对到组件的属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class SpreadDemo extends Component &#123;</span><br><span class="line">  componentWillMount()&#123;</span><br><span class="line">    console.log(this.props);</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    return &lt;h1&gt; &#123;this.props.name&#125; is a &#123;this.props.type&#125; &lt;/h1&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default SpreadDemo;</span><br></pre></td></tr></table></figure>
+<h2 id="9-属性名不能和-js-关键字冲突"><a href="#9-属性名不能和-js-关键字冲突" class="headerlink" title="9. 属性名不能和 js 关键字冲突"></a>9. <code>属性名不能和 js 关键字冲突</code></h2><p>例如：<code>className readOnly htmlfor</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/&title=《React第二讲课堂笔记（JSX 语法）》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/&title=《React第二讲课堂笔记（JSX 语法）》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React第二讲课堂笔记（JSX 语法）》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/12/React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/05/11/vue总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Vue基础总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/&title=《React第二讲课堂笔记（JSX 语法）》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/&title=《React第二讲课堂笔记（JSX 语法）》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React第二讲课堂笔记（JSX 语法）》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/05/12/React第二讲课堂笔记（JSX 语法）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3a0W7bMAwF0P7/T3fAngZs8e6lxCAFjp8K15F1FEBiSH59xdf37+vvO3/e/35xPY/w/NnnEa5deHh4eKOpn09u9t/nmZwsBx4eHt427/kwmG3QyWI9P9MeEnh4eHifxnueRBuCz4J4PDw8vJ/FywPxPDieBdl4eHh4n8BLQthkEvmhMkvvLuZa8PDw8GJeG+B+wt+L9T08PDy8g6r6LFBOtunkCGmLXv94Lx4eHt4Cb5ZgnU03Z+TpiejAwMPDw1vjzTbiWdg9S08My294eHh4b+G1Sdu6KBVM/XyJ8fDw8DZ4SRidF+/3Cl3JoVL0RODh4eEd8Nr06+x4OJ96u0B4eHh427z2ADhPYeTlsdmyRt8hHh4e3iXeLPxtg91ZSSxH4uHh4e3xZmWtWSg8awVI3oiHh4f3Tl4Rko4aqtqEwsZy4OHh4W3w2haB/FNtIN6OHx1OeHh4eFd5s8J8HvK2ad9ZQjlqusLDw8O7xDsJmvNXnrRw5WPi4eHhvZN30igwS/ieFMba1i48PDy8Dd6soSpJWOQHw8nWX88HDw8P74DX/uxvN/c8adsuTfI14OHh4e3xToLgNpGRJF7bhXj5DB4eHt4y76R8NYvl2+aqOtGMh4eHt8BLHmobp/IWhOF0250fDw8Pb4H3PPVkuPYIyVPASUK5yEzj4eHhXeLlQ+TtU21bQHu/+GLw8PDw1nizg6ElzcppbRoXDw8Pb493K6HQTq5NecySJnh4eHgbvLbhqd302yaq82Jb3nCAh4eHd8JrD4PkyTypcd6M9Z/x8fDw8NZ4eeVoFgq3aYj2ejkaHh4e3sfw8uJZfufW4l44GPDw8PAu8drJzZK/Jy1WeHh4eO/k5SmG5/A3L03ladz2vXh4eHjbvNlP/TaYvtUWMDuo8PDw8C7xfgEWFmnOpv513AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

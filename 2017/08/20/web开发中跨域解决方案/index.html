@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>web开发中跨域解决方案 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Http">
+    <meta name="description" content="web开发中跨域解决方案什么是跨域？概念如下：只要协议、域名、端口有任何一个不同，都被当作是不同的  下面是具体的跨域情况详解    URL 说明 是否允许通信     http://www.a.com/a.js、http://www.a.com/b.js 同一域名下 允许   http://www.a.com/lab/a.js、http://www.a.com/script/b.js 同一域名下">
+<meta name="keywords" content="Http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web开发中跨域解决方案">
+<meta property="og:url" content="http://yoursite.com/2017/08/20/web开发中跨域解决方案/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="web开发中跨域解决方案什么是跨域？概念如下：只要协议、域名、端口有任何一个不同，都被当作是不同的  下面是具体的跨域情况详解    URL 说明 是否允许通信     http://www.a.com/a.js、http://www.a.com/b.js 同一域名下 允许   http://www.a.com/lab/a.js、http://www.a.com/script/b.js 同一域名下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web开发中跨域解决方案">
+<meta name="twitter:description" content="web开发中跨域解决方案什么是跨域？概念如下：只要协议、域名、端口有任何一个不同，都被当作是不同的  下面是具体的跨域情况详解    URL 说明 是否允许通信     http://www.a.com/a.js、http://www.a.com/b.js 同一域名下 允许   http://www.a.com/lab/a.js、http://www.a.com/script/b.js 同一域名下">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">web开发中跨域解决方案</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">web开发中跨域解决方案</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-20T04:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-08-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跨域/">跨域</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#web开发中跨域解决方案"><span class="post-toc-number">1.</span> <span class="post-toc-text">web开发中跨域解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、document-domain跨域"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">一、document.domain跨域</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、有src的标签"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二、有src的标签</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、JSONP"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">三、JSONP</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四、navigation-对象"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">四、navigation 对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#五、跨域资源共享（CORS）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">五、跨域资源共享（CORS）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#六、window-postMessage"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">六、window.postMessage</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#七、访问控制安全的讨论"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">七、访问控制安全的讨论</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-web开发中跨域解决方案"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">web开发中跨域解决方案</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-20 12:35:08" datetime="2017-08-20T04:35:08.000Z"  itemprop="datePublished">2017-08-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/跨域/">跨域</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="web开发中跨域解决方案"><a href="#web开发中跨域解决方案" class="headerlink" title="web开发中跨域解决方案"></a>web开发中跨域解决方案</h3><p><strong>什么是跨域？</strong><br>概念如下：只要协议、域名、端口有任何一个不同，都被当作是不同的</p>
+<hr>
+<p><strong>下面是具体的跨域情况详解</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">URL</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">是否允许通信</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com/a.js、http://www.a.com/b.js" target="_blank" rel="noopener">http://www.a.com/a.js、http://www.a.com/b.js</a></td>
+<td style="text-align:center">同一域名下</td>
+<td style="text-align:center">允许</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com/lab/a.js、http://www.a.com/script/b.js" target="_blank" rel="noopener">http://www.a.com/lab/a.js、http://www.a.com/script/b.js</a></td>
+<td style="text-align:center">同一域名下不同文件夹</td>
+<td style="text-align:center">允许</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com:8000/a.js、http://www.a.com/b.js" target="_blank" rel="noopener">http://www.a.com:8000/a.js、http://www.a.com/b.js</a></td>
+<td style="text-align:center">同一域名，不同端口</td>
+<td style="text-align:center">不允许</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com/a.js、http://www.a.com/b.js" target="_blank" rel="noopener">http://www.a.com/a.js、http://www.a.com/b.js</a></td>
+<td style="text-align:center">同一域名，不同协议</td>
+<td style="text-align:center">不允许</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com/a.js、http://70.32.92.74/b.js" target="_blank" rel="noopener">http://www.a.com/a.js、http://70.32.92.74/b.js</a></td>
+<td style="text-align:center">域名和域名对应ip</td>
+<td style="text-align:center">不允许</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com/a.js、http://script.a.com/b.js" target="_blank" rel="noopener">http://www.a.com/a.js、http://script.a.com/b.js</a></td>
+<td style="text-align:center">主域相同，子域不同</td>
+<td style="text-align:center">不允许（cookie也不允许）</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.a.com/a.js、http://a.com/b.js" target="_blank" rel="noopener">http://www.a.com/a.js、http://a.com/b.js</a></td>
+<td style="text-align:center">同一域名，不同二级域名（同上）</td>
+<td style="text-align:center">不允许（cookie也不允许）</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.cnblogs.com/a.js、http://www.a.com/b.js" target="_blank" rel="noopener">http://www.cnblogs.com/a.js、http://www.a.com/b.js</a></td>
+<td style="text-align:center">不同域名</td>
+<td style="text-align:center">不允许</td>
+</tr>
+</tbody>
+</table>
+<h4 id="一、document-domain跨域"><a href="#一、document-domain跨域" class="headerlink" title="一、document.domain跨域"></a>一、document.domain跨域</h4><hr>
+<ul>
+<li>原理：相同主域名不同子域名下的页面，可以设置<code>document.domain</code>让它们同域</li>
+<li>限制：同域<code>document</code>提供的是页面间的互操作，需要载入iframe页面</li>
+</ul>
+<blockquote>
+<p>下面几个域名下的页面都是可以通过document.domain跨域互操作的： <a href="http://a.com/foo" target="_blank" rel="noopener">http://a.com/foo</a>,<br><a href="http://b.a.com/bar" target="_blank" rel="noopener">http://b.a.com/bar</a>, <a href="http://c.a.com/bar。" target="_blank" rel="noopener">http://c.a.com/bar。</a><br>但只能以页面嵌套的方式来进行页面互操作，比如常见的iframe方式就可以完成页面嵌套</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// URL http://a.com/foo</span><br><span class="line">var ifr = document.createElement(&apos;iframe&apos;);</span><br><span class="line">ifr.src = &apos;http://b.a.com/bar&apos;; </span><br><span class="line">ifr.onload = function()&#123;</span><br><span class="line">    var ifrdoc = ifr.contentDocument || ifr.contentWindow.document;</span><br><span class="line">    ifrdoc.getElementsById(&quot;foo&quot;).innerHTML);</span><br><span class="line">&#125;;</span><br><span class="line">ifr.style.display = &apos;none&apos;;</span><br><span class="line">document.body.appendChild(ifr);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上述代码所在的URL是<a href="http://a.com/foo，它对http://b.a.com/bar的DOM访问要求后者将" target="_blank" rel="noopener">http://a.com/foo，它对http://b.a.com/bar的DOM访问要求后者将</a> document.domain往上设置一级</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// URL http://b.a.com/bar</span><br><span class="line">document.domain = &apos;a.com&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>document.domain只能从子域设置到主域，往下设置以及往其他域名设置都是不允许的， 在Chrome中给出的错误是这样的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught DOMException: Failed to set the &apos;domain&apos; property on &apos;Document&apos;: &apos;baidu.com&apos; is not a suffix of &apos;b.a.com&apos;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h4 id="二、有src的标签"><a href="#二、有src的标签" class="headerlink" title="二、有src的标签"></a>二、有src的标签</h4><hr>
+<ul>
+<li>原理：所有具有<code>src</code>属性的HTML标签都是可以跨域的，包括<code>&lt;img&gt;, &lt;script&gt;</code></li>
+<li>限制：需要创建一个<code>DOM</code>对象，只能用于<code>GET</code>方法</li>
+</ul>
+<blockquote>
+<ul>
+<li>在<code>document.body</code>中<code>append</code>一个具有<code>src</code>属性的<code>HTML</code>标签， <code>src</code>属性值指向的<code>URL</code>会以<code>GET</code>方法被访问，该访问是可以跨域的<br>其实样式表的<code>&lt;link&gt;</code>标签也是可以跨域的，只要是有<code>src</code>或<code>href</code>的<code>HTML</code>标签都有跨域的能力</li>
+</ul>
+</blockquote>
+<ul>
+<li>不同的HTML标签发送HTTP请求的时机不同，例如<code>&lt;img&gt;</code>在更改<code>src</code>属性时就会发送请求，而<code>script</code>, <code>iframe</code>, <code>link[rel=stylesheet]</code>只有在添加到<code>DOM</code>树之后才会发送<code>HTTP</code>请求：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var img = new Image();</span><br><span class="line">img.src = &apos;http://some/picture&apos;;        // 发送HTTP请求</span><br><span class="line">var ifr = $(&apos;&lt;iframe&gt;&apos;, &#123;src: &apos;http://b.a.com/bar&apos;&#125;);</span><br><span class="line">$(&apos;body&apos;).append(ifr);                  // 发送HTTP请求</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h4 id="三、JSONP"><a href="#三、JSONP" class="headerlink" title="三、JSONP"></a>三、JSONP</h4><hr>
+<ul>
+<li>原理：<code>&lt;script&gt;</code>是可以跨域的，而且在跨域脚本中可以直接回调当前脚本的函数</li>
+<li>限制：需要创建一个<code>DOM</code>对象并且添加到<code>DOM</code>树，只能用于<code>GET</code>方法</li>
+</ul>
+<blockquote>
+<p><code>JSONP</code>利用的是<code>&lt;script&gt;</code>可以跨域的特性，跨域URL返回的脚本不仅包含数据，还包含一个回调</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// URL: http://b.a.com/foo</span><br><span class="line">var data = &#123;</span><br><span class="line">    foo: &apos;bar&apos;,</span><br><span class="line">    bar: &apos;foo&apos;</span><br><span class="line">&#125;;</span><br><span class="line">callback(data);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后在我们在主站<a href="http://a.com中，可以这样来跨域获取http://b.a.com的数据：" target="_blank" rel="noopener">http://a.com中，可以这样来跨域获取http://b.a.com的数据：</a></li>
+</ul>
+<p>// URL: <a href="http://a.com/foo" target="_blank" rel="noopener">http://a.com/foo</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var callback = function(data)&#123;</span><br><span class="line">    // 处理跨域请求得到的数据</span><br><span class="line">&#125;;</span><br><span class="line">var script = $(&apos;&lt;script&gt;&apos;, &#123;src: &apos;http://b.a.com/bar&apos;&#125;);</span><br><span class="line">$(&apos;body&apos;).append(script);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其实<code>jQuery</code>已经封装了<code>JSONP</code>的使用，我们可以这样来</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.getJSON( &quot;http://b.a.com/bar?callback=callback&quot;, function( data )&#123;</span><br><span class="line">    // 处理跨域请求得到的数据</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>$.getJSON</code>与<code>$.get</code>的区别是前者会把<code>responseText</code>转换为<code>JSON</code>，而且当<code>URL</code>具有<code>callback</code>参数时， <code>jQuery</code>将会把它解释为一个<code>JSONP</code>请求，创建一个<code>&lt;script&gt;</code>标签来完成该请求</p>
+</blockquote>
+<p><br></p>
+<h4 id="四、navigation-对象"><a href="#四、navigation-对象" class="headerlink" title="四、navigation 对象"></a>四、navigation 对象</h4><hr>
+<ul>
+<li>原理：<code>iframe</code>之间是共享<code>navigator</code>对象的，用它来传递信息</li>
+<li>要求：IE6/7<blockquote>
+<p>有些人注意到了IE6/7的一个漏洞：<code>iframe</code>之间的<code>window.navigator</code>对象是共享的。 我们可以把它作为一个<code>Messenger</code>，通过它来传递信息。比如一个简单的委托：</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// a.com</span><br><span class="line">navigation.onData()&#123;</span><br><span class="line">    // 数据到达的处理函数</span><br><span class="line">&#125;</span><br><span class="line">typeof navigation.getData === &apos;function&apos; </span><br><span class="line">    || navigation.getData()</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// b.com</span><br><span class="line">navigation.getData = function()&#123;</span><br><span class="line">    $.get(&apos;/path/under/b.com&apos;)</span><br><span class="line">        .success(function(data)&#123;</span><br><span class="line">            typeof navigation.onData === &apos;function&apos;</span><br><span class="line">                || navigation.onData(data)</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>与<code>document.navigator</code>类似，<code>window.name</code>也是当前窗口所有页面所共享的。也可以用它来传递信息。 同样蛋疼的办法还有传递<code>Hash</code>（有些人叫锚点），这是因为每次浏览器打开一个<code>URL</code>时，<code>URL</code>后面的#xxx部分会保留下来，那么新的页面可以从这里获得上一个页面的数据<br><br></p>
+</blockquote>
+<h4 id="五、跨域资源共享（CORS）"><a href="#五、跨域资源共享（CORS）" class="headerlink" title="五、跨域资源共享（CORS）"></a>五、跨域资源共享（CORS）</h4><hr>
+<ul>
+<li>原理：服务器设置<code>Access-Control-Allow-OriginHTTP</code>响应头之后，浏览器将会允许跨域请求</li>
+<li><p>限制：浏览器需要支持<code>HTML5</code>，可以支持<code>POST</code>，<code>PUT</code>等方法</p>
+<blockquote>
+<p>前面提到的跨域手段都是某种意义上的<code>Hack</code>， HTML5标准中提出的跨域资源共享<code>（Cross Origin Resource Share，CORS</code>）才是正道。 它支持其他的<code>HTTP</code>方法如<code>PUT</code>, <code>POST</code>等，可以从本质上解决跨域问题。</p>
+</blockquote>
+</li>
+<li><p>例如，从<a href="http://a.com要访问http://b.com的数据，通常情况下`Chrome`会因跨域请求而报错" target="_blank" rel="noopener">http://a.com要访问http://b.com的数据，通常情况下`Chrome`会因跨域请求而报错</a></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot load http://b.com. No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource. Origin &apos;http://a.com&apos; is therefore not allowed access</span><br></pre></td></tr></table></figure>
+<ul>
+<li>错误原因是被请求资源没有设置<code>Access-Control-Allow-Origin</code>，所以我们在<code>b.com</code>的服务器中设置这个响应头字段即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *              # 允许所有域名访问，或者</span><br><span class="line">Access-Control-Allow-Origin: http://a.com   # 只允许所有域名访问</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h4 id="六、window-postMessage"><a href="#六、window-postMessage" class="headerlink" title="六、window.postMessage"></a>六、window.postMessage</h4><hr>
+<ul>
+<li>原理：<code>HTML5</code>允许窗口之间发送消息</li>
+<li>限制：浏览器需要支持<code>HTML5</code>，获取窗口句柄后才能相互通信<blockquote>
+<p>这是一个安全的跨域通信方法，<code>postMessage(message,targetOrigin)</code>也是<code>HTML5</code>引入的特性。 可以给任何一个<code>window</code>发送消息，不论是否同源。第二个参数可以是*但如果你设置了一个<code>URL</code>但不相符，那么该事件不会被分发。看一个普通的使用方式吧</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// URL: http://a.com/foo</span><br><span class="line">var win = window.open(&apos;http://b.com/bar&apos;);</span><br><span class="line">win.postMessage(&apos;Hello, bar!&apos;, &apos;http://b.com&apos;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// URL: http://b.com/bar</span><br><span class="line">window.addEventListener(&apos;message&apos;,function(event) &#123;</span><br><span class="line">    console.log(event.data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h4 id="七、访问控制安全的讨论"><a href="#七、访问控制安全的讨论" class="headerlink" title="七、访问控制安全的讨论"></a>七、访问控制安全的讨论</h4><hr>
+<ul>
+<li>在<code>HTML5</code>之前，<code>JSONP</code>已经成为跨域的事实标准了，<code>jQuery</code>都给出了支持。 值得注意的是它只是<code>Hack</code>，并没有产生额外的安全问题。 因为<code>JSONP</code>要成功获取数据，需要跨域资源所在服务器的配合，比如资源所在服务器需要自愿地回调一个合适的函数，所以服务器仍然有能力控制资源的跨域访问</li>
+<li>跨域的正道还是要使用<code>HTML5</code>提供的<code>CORS</code>头字段以及<code>window.postMessage</code>， 可以支持<code>POST,</code> <code>PUT</code>等<code>HTTP</code>方法，从机制上解决跨域问题。 值得注意的是<code>Access-Control-Allow-Origin</code>头字段是资源所在服务器设置的， 访问控制的责任仍然是在提供资源的服务器一方，这和<code>JSONP</code>是一样的</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Http/">Http</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/&title=《web开发中跨域解决方案》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/&title=《web开发中跨域解决方案》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/08/20/web开发中跨域解决方案/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《web开发中跨域解决方案》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/12/vue-router总结/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vue-Router整理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/node使用 promise 替代回调函数/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">17.使用 promise 替代回调函数</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/&title=《web开发中跨域解决方案》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/&title=《web开发中跨域解决方案》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/08/20/web开发中跨域解决方案/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《web开发中跨域解决方案》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/08/20/web开发中跨域解决方案/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHklEQVR42u3ay27CQAwF0P7/T9NtJUR67ckgxXOyQjRQnyzM+PHzE1+vP1f1/fd73u+//rbbLgwMjMcyXpdXcs/Kpz7dmceGgYFxDuNTBrt+3UuyyV/z2DAwMDCug+iFm6RXDAwMjBXG9TvXYSUBYWBgYKwUsSs9rmrfbGMtjoGB8UBG76u/83rLfAMDA+NRjG+2+5OU2owKAwNjNCNPcL0Qq4XxSjwYGBhTGdXVh7vKzrzcjR4WBgbGaEYyVswHA+VMHzyywnACAwPjGEbyD1aWJBJY76CJgYFxAmMlvVYHjckyWXUsgYGBMZWRF5DVQjRfv+hhCj08DAyM0YwkBeeMXqEbPQ4MDIzRjN6xr3q8y4vVXkLHwMCYzcjHlr3mWu+4WU3xGBgYsxlJiZiPBJKrl5qbBS0GBsYgRm/0mB8fVx5WedkCAwPjAEa5yRWnxepCRrVVh4GBcQLjrlWJHc246ASIgYExmtHLWr2SNQm9l9wxMDBmM+5KsnnLbCXJ/lPEYmBgHMDIi9hquPnSRv4zUN7XwMDAGMFIDoLVhv4NrbR8BouBgTGOsWNVYuW4WR1hYmBgnMCoprmVda7eKLS3uoGBgTGP0UuyvZFA3kQrJ1wMDIwDGL3Elx8Bdw8JMDAwMHrHvpUStLwtgoGBgbGhZM1TbTT4xMDAOIBRXYnIC9RquAkbAwPjNEbvoJbgewk0SehL8w0MDIwnMX4B1fz6CIf2e5kAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

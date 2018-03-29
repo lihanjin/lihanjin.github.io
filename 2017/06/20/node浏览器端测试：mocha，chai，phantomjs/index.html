@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>7.浏览器端测试：mocha，chai，phantomjs | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《浏览器端测试：mocha，chai，phantomjs》目标建立一个 lesson7 项目，在其中编写代码，我们暂时命名为 vendor根据下面的步骤，最终的项目结构应该长这样 这次我们测试的对象是上文提到的 fibonacci 函数 此函数的定义为 int fibonacci(int n)  当 n === 0 时，返回 0；n === 1时，返回 1; n &amp;gt; 1 时，返回 fibon">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7.浏览器端测试：mocha，chai，phantomjs">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《浏览器端测试：mocha，chai，phantomjs》目标建立一个 lesson7 项目，在其中编写代码，我们暂时命名为 vendor根据下面的步骤，最终的项目结构应该长这样 这次我们测试的对象是上文提到的 fibonacci 函数 此函数的定义为 int fibonacci(int n)  当 n === 0 时，返回 0；n === 1时，返回 1; n &amp;gt; 1 时，返回 fibon">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson7/1.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7.浏览器端测试：mocha，chai，phantomjs">
+<meta name="twitter:description" content="《浏览器端测试：mocha，chai，phantomjs》目标建立一个 lesson7 项目，在其中编写代码，我们暂时命名为 vendor根据下面的步骤，最终的项目结构应该长这样 这次我们测试的对象是上文提到的 fibonacci 函数 此函数的定义为 int fibonacci(int n)  当 n === 0 时，返回 0；n === 1时，返回 1; n &amp;gt; 1 时，返回 fibon">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson7/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">7.浏览器端测试：mocha，chai，phantomjs</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">7.浏览器端测试：mocha，chai，phantomjs</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《浏览器端测试：mocha，chai，phantomjs》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《浏览器端测试：mocha，chai，phantomjs》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前端脚本单元测试"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">前端脚本单元测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#浏览器环境执行"><span class="post-toc-number">1.2.1.1.</span> <span class="post-toc-text">浏览器环境执行</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#测试反馈"><span class="post-toc-number">1.2.1.2.</span> <span class="post-toc-text">测试反馈</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node浏览器端测试：mocha，chai，phantomjs"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">7.浏览器端测试：mocha，chai，phantomjs</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《浏览器端测试：mocha，chai，phantomjs》"><a href="#《浏览器端测试：mocha，chai，phantomjs》" class="headerlink" title="《浏览器端测试：mocha，chai，phantomjs》"></a>《浏览器端测试：mocha，chai，phantomjs》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>建立一个 lesson7 项目，在其中编写代码，我们暂时命名为 <em>vendor</em><br>根据下面的步骤，最终的项目结构应该长<a href="https://github.com/alsotang/node-lessons/tree/master/lesson7/vendor" target="_blank" rel="noopener">这样</a></p>
+<p>这次我们测试的对象是上文提到的 fibonacci 函数</p>
+<p>此函数的定义为 <code>int fibonacci(int n)</code></p>
+<ul>
+<li>当 n === 0 时，返回 0；n === 1时，返回 1;</li>
+<li>n &gt; 1 时，返回 <code>fibonacci(n) === fibonacci(n-1) + fibonacci(n-2)</code>，如 <code>fibonacci(10) === 55</code>;</li>
+</ul>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>学习使用测试框架 mocha 进行前端测试 : <a href="http://mochajs.org/" target="_blank" rel="noopener">http://mochajs.org/</a></li>
+<li>了解全栈的断言库 chai: <a href="http://chaijs.com/" target="_blank" rel="noopener">http://chaijs.com/</a></li>
+<li>了解 headless 浏览器 phantomjs: <a href="http://phantomjs.org/" target="_blank" rel="noopener">http://phantomjs.org/</a></li>
+</ol>
+<h3 id="前端脚本单元测试"><a href="#前端脚本单元测试" class="headerlink" title="前端脚本单元测试"></a>前端脚本单元测试</h3><p><a href="https://github.com/alsotang/node-lessons/tree/master/lesson6" target="_blank" rel="noopener">lesson6</a> 的内容都是针对后端环境中 node 的一些单元测试方案，出于应用健壮性的考量，针对前端 js 脚本的单元测试也非常重要。而前后端通吃，也是 mocha 的一大特点。</p>
+<p>首先，前端脚本的单元测试主要有两个困难需要解决。</p>
+<ol>
+<li><p>运行环境应当在浏览器中，可以操纵浏览器的DOM对象，且可以随意定义执行时的 html 上下文。</p>
+</li>
+<li><p>测试结果应当可以直接反馈给 mocha，判断测试是否通过。</p>
+</li>
+</ol>
+<h4 id="浏览器环境执行"><a href="#浏览器环境执行" class="headerlink" title="浏览器环境执行"></a>浏览器环境执行</h4><p>我们首先搭建一个测试原型，用 mocha 自带的脚手架可以自动生成。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd vendor            # 进入我们的项目文件夹</span><br><span class="line">npm i -g mocha       # 安装全局的 mocha 命令行工具</span><br><span class="line">mocha init .         # 生成脚手架</span><br></pre></td></tr></table></figure>
+<p>mocha就会自动帮我们生成一个简单的测试原型, 目录结构如下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── index.html       # 这是前端单元测试的入口</span><br><span class="line">├── mocha.css</span><br><span class="line">├── mocha.js</span><br><span class="line">└── tests.js         # 我们的单元测试代码将在这里编写</span><br></pre></td></tr></table></figure></p>
+<p>其中 index.html 是单元测试的入口，tests.js 是我们的测试用例文件。</p>
+<p>我们直接在 index.html 插入上述示例的 fibonacci 函数以及断言库 chaijs。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mocha"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'https://cdn.rawgit.com/chaijs/chai/master/chai.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> fibonacci = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="number">0</span>;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="number">1</span>;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> fibonacci(n<span class="number">-1</span>) + fibonacci(n<span class="number">-2</span>);</span></span><br><span class="line"><span class="undefined">  &#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在tests.js中写入对应测试用例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> should = chai.should();</span><br><span class="line">describe(<span class="string">'simple test'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'should equal 0 when n === 0'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.fibonacci(<span class="number">0</span>).should.equal(<span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这时打开index.html，可以发现测试结果，我们完成了浏览器端的脚本测试(注意我们调用了 <strong>window</strong> 对象)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/alsotang/node-lessons/master/lesson7/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h4 id="测试反馈"><a href="#测试反馈" class="headerlink" title="测试反馈"></a>测试反馈</h4><p>mocha没有提供一个命令行的前端脚本测试环境(因为我们的脚本文件需要运行在浏览器环境中)，因此我们使用phantomjs帮助我们搭建一个模拟环境。不重复制造轮子，这里直接使用mocha-phantomjs帮助我们在命令行运行测试。</p>
+<p>首先安装mocha-phanatomjs</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g mocha-phantomjs</span><br></pre></td></tr></table></figure>
+<p>然后在 index.html 的页面下加上这段兼容代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">mocha.run()</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">if</span> (<span class="built_in">window</span>.initMochaPhantomJS &amp;&amp; <span class="built_in">window</span>.location.search.indexOf(<span class="string">'skip'</span>) === <span class="number">-1</span>) &#123;</span></span><br><span class="line"><span class="undefined">    initMochaPhantomJS()</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="javascript">  mocha.ui(<span class="string">'bdd'</span>);</span></span><br><span class="line"><span class="undefined">  expect = chai.expect;</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  mocha.run();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这时候, 我们在命令行中运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mocha-phantomjs index.html --ssl-protocol=any --ignore-ssl-errors=true</span><br></pre></td></tr></table></figure>
+<p>结果展现是不是和后端代码测试很类似 :smile:</p>
+<p>更进一步，我们可以直接在 package.json 的 scripts 中添加<br>(package.json 通过 <code>npm init</code> 生成，这里不再赘述)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "test": "mocha-phantomjs index.html --ssl-protocol=any --ignore-ssl-errors=true"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>将mocha-phantomjs作为依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i mocha-phantomjs --save-dev</span><br></pre></td></tr></table></figure>
+<p>直接运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm test</span><br></pre></td></tr></table></figure>
+<p>运行结果如下:</p>
+<p>至此,我们实现了前端脚本的单元测试，基于 phanatomjs 你几乎可以调用所有的浏览器方法，而 mocha-phanatomjs 也可以很便捷地将测试结果反馈到 mocha，便于后续的持续集成。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/&title=《7.浏览器端测试：mocha，chai，phantomjs》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/&title=《7.浏览器端测试：mocha，chai，phantomjs》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《7.浏览器端测试：mocha，chai，phantomjs》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/node测试用例：mocha，should，istanbul/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">6.测试用例：mocha，should，istanbul</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/node线上部署：heroku/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">12.线上部署：heroku</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/&title=《7.浏览器端测试：mocha，chai，phantomjs》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/&title=《7.浏览器端测试：mocha，chai，phantomjs》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《7.浏览器端测试：mocha，chai，phantomjs》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACyUlEQVR42u3aQY7bQAwEwP3/pxMgpxhej7uHMxsHKJ0MW5ZUOpAEya+v+Pj153j+5u8j//X5nOe7rH89fODh4eFtPfqrY82bf5M81Rr/5lXi4eHhXeOtk0ES6JOYnLzWSZLAw8PD+zTe+mbJ4xYBffmC8PDw8P4X3jrEJ/+dtzbw8PDwPofXhvXk9uvie9JouNJrwcPDw+tq12IA9gmfL8738PDw8AZT9SQot63btgRv2xkP/8LDw8O7wGsH/JOyO29D5EkiSht4eHh4l3ltQyEpfNuWRPv63lDx8PDwjvKK8LpMEu2ga3J+nrrw8PDw7vHOBvq26bBOQvkg7WWvBQ8PD+8Cb7TSVDZh83MSdj0Aw8PDw7vGa4vmPHC3jL2mBh4eHt493l4x3S4/tS2JUwsKeHh4eD/JqxebgrQxb0zs3QUPDw/vHm+vGZGH+DYVta9ylPHw8PDwYl5+6claar4slTQvioYIHh4e3jXeXnHcpoH2oQ80cPHw8PCu8dqRf1te5wlmfubDk+Dh4eFd4OWpIiG1bYvJrwe61Hh4eHgD3rqkngf0dhFhPjZ7+BceHh7eUd7epdvZ2nz54GJKwMPDw9sqpieBPmmw5gOz9R2TV/DNN3h4eHhHecmp+QiqLX8n7Y9oHQEPDw/vGq9dZtqjtkuu7XJDfRs8PDy8Q7y8rZCPxNolg70C/ZvPeHh4eBd4k0F+klTONojz1HVgiwEPDw8vmA1N2G0zoi6Og3QVtXHx8PDwjvLaMdhkuJUvTiXF98tr4uHh4V3gTYLvXrhvW8NRu2GeZvDw8PDK++6tW+UD/ryBu9fOeJOi8PDw8K7x8gH/3iC/LaPzDPbm1eDh4eH9U15b5uaV+17JXozB8PDw8D6A15a8Zwvl4tnw8PDwrvH2hk+TcJ+PrCZNDTw8PLwbvPZBk8vlA/69Edde4Y6Hh4c35v0GABIDJxBnxxYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

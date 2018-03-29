@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>9.正则表达式 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《正则表达式》目标1var web_development = &quot;python php ruby javascript jsonp perhapsphpisoutdated&quot;; 找出其中 包含 p 但不包含 ph 的所有单词，即 [ &amp;#39;python&amp;#39;, &amp;#39;javascript&amp;#39;, &amp;#39;jsonp&amp;#39; ] 知识点 正则表达式的使用 js 中的正则表达式与">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9.正则表达式">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node正则表达式/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《正则表达式》目标1var web_development = &quot;python php ruby javascript jsonp perhapsphpisoutdated&quot;; 找出其中 包含 p 但不包含 ph 的所有单词，即 [ &amp;#39;python&amp;#39;, &amp;#39;javascript&amp;#39;, &amp;#39;jsonp&amp;#39; ] 知识点 正则表达式的使用 js 中的正则表达式与">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9.正则表达式">
+<meta name="twitter:description" content="《正则表达式》目标1var web_development = &quot;python php ruby javascript jsonp perhapsphpisoutdated&quot;; 找出其中 包含 p 但不包含 ph 的所有单词，即 [ &amp;#39;python&amp;#39;, &amp;#39;javascript&amp;#39;, &amp;#39;jsonp&amp;#39; ] 知识点 正则表达式的使用 js 中的正则表达式与">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">9.正则表达式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">9.正则表达式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《正则表达式》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《正则表达式》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node正则表达式"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">9.正则表达式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《正则表达式》"><a href="#《正则表达式》" class="headerlink" title="《正则表达式》"></a>《正则表达式》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> web_development = <span class="string">"python php ruby javascript jsonp perhapsphpisoutdated"</span>;</span><br></pre></td></tr></table></figure>
+<p>找出其中 包含 <code>p</code> 但不包含 <code>ph</code> 的所有单词，即</p>
+<p><code>[ &#39;python&#39;, &#39;javascript&#39;, &#39;jsonp&#39; ]</code></p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>正则表达式的使用</li>
+<li>js 中的正则表达式与 pcre(<a href="http://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions</a> ) 的区别</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p>开始这门课之前，大家先去看两篇文章。</p>
+<p>《正则表达式30分钟入门教程》：<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">http://deerchao.net/tutorials/regex/regex.htm</a></p>
+<p>上面这篇介绍了正则表达式的基础知识，但是对于零宽断言没有展开来讲，零宽断言看下面这篇：</p>
+<p>《正则表达式之：零宽断言不『消费』》：<a href="http://fxck.it/post/50558232873" target="_blank" rel="noopener">http://fxck.it/post/50558232873</a></p>
+<p>好了。</p>
+<p>在很久很久以前，有一门语言一度是字符串处理领域的王者，叫 perl。</p>
+<p>伴随着 perl，有一个类似正则表达式的标准被实现了出来，叫 pcre：Perl Compatible Regular Expressions。</p>
+<p>不遗憾的是，js 里面的正则与 pcre 不是兼容的。很多语言都这样。</p>
+<p>如果需要测试你自己写的正则表达式，建议上这里：<a href="http://refiddle.com/" target="_blank" rel="noopener">http://refiddle.com/</a> ，可以所见即所得地调试。</p>
+<p>接下来我们主要讲讲 js 中需要注意的地方，至于正则表达式的内容，上面那两篇文章足够学习了。</p>
+<p>第一，</p>
+<p>js 中，对于四种零宽断言，只支持 零宽度正预测先行断言 和 零宽度负预测先行断言 这两种。</p>
+<p>第二，</p>
+<p>js 中，正则表达式后面可以跟三个 flag，比如 <code>/something/igm</code>。</p>
+<p>他们的意义分别是，</p>
+<ul>
+<li>i 的意义是不区分大小写</li>
+<li>g 的意义是，匹配多个</li>
+<li>m 的意义是，是 <code>^</code> 和 <code>$</code> 可以匹配<strong>每</strong>一行的开头。</li>
+</ul>
+<p>分别举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/a/.test(<span class="string">'A'</span>) <span class="comment">// =&gt; false</span></span><br><span class="line">/a/i.test(<span class="string">'A'</span>) <span class="comment">// =&gt; true</span></span><br><span class="line"></span><br><span class="line"><span class="string">'hello hell hoo'</span>.match(<span class="regexp">/h.*?\b/</span>) <span class="comment">// =&gt; [ 'hello', index: 0, input: 'hello hell hoo' ]</span></span><br><span class="line"><span class="string">'hello hell hoo'</span>.match(<span class="regexp">/h.*?\b/g</span>) <span class="comment">// =&gt; [ 'hello', 'hell', 'hoo' ]</span></span><br><span class="line"></span><br><span class="line"><span class="string">'aaa\nbbb\nccc'</span>.match(<span class="regexp">/^[\s\S]*?$/g</span>) <span class="comment">// =&gt; [ 'aaa\nbbb\nccc' ]</span></span><br><span class="line"><span class="string">'aaa\nbbb\nccc'</span>.match(<span class="regexp">/^[\s\S]*?$/gm</span>) <span class="comment">// =&gt; [ 'aaa', 'bbb', 'ccc' ]</span></span><br></pre></td></tr></table></figure>
+<p>与 m 意义相关的，还有 <code>\A</code>, <code>\Z</code> 和 <code>\z</code></p>
+<p>他们的意义分别是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\A  字符串开头(类似^，但不受处理多行选项的影响)</span><br><span class="line">\Z  字符串结尾或行尾(不受处理多行选项的影响)</span><br><span class="line">\z  字符串结尾(类似$，但不受处理多行选项的影响)</span><br></pre></td></tr></table></figure>
+<p>在 js 中，g flag 会影响 <code>String.prototype.match()</code> 和 <code>RegExp.prototype.exec()</code> 的行为</p>
+<p><code>String.prototype.match()</code> 中，返回数据的格式会不一样，加 g 会返回数组，不加 g 则返回比较详细的信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="string">'hello hell'</span>.match(<span class="regexp">/h(.*?)\b/g</span>)</span><br><span class="line">[ <span class="string">'hello'</span>, <span class="string">'hell'</span> ]</span><br><span class="line"></span><br><span class="line">&gt; <span class="string">'hello hell'</span>.match(<span class="regexp">/h(.*?)\b/</span>)</span><br><span class="line">[ <span class="string">'hello'</span>,</span><br><span class="line">  <span class="string">'ello'</span>,</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  input: <span class="string">'hello hell'</span> ]</span><br></pre></td></tr></table></figure>
+<p><code>RegExp.prototype.exec()</code> 中，加 g 之后，如果你的正则不是字面量的正则，而是存储在变量中的话，特么的这个变量就会变得有记忆！！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="regexp">/h(.*?)\b/g</span>.exec(<span class="string">'hello hell'</span>)</span><br><span class="line">[ <span class="string">'hello'</span>,</span><br><span class="line">  <span class="string">'ello'</span>,</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  input: <span class="string">'hello hell'</span> ]</span><br><span class="line">&gt; <span class="regexp">/h(.*?)\b/g</span>.exec(<span class="string">'hello hell'</span>)</span><br><span class="line">[ <span class="string">'hello'</span>,</span><br><span class="line">  <span class="string">'ello'</span>,</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  input: <span class="string">'hello hell'</span> ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; <span class="keyword">var</span> re = <span class="regexp">/h(.*?)\b/g</span>;</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">&gt; re.exec(<span class="string">'hello hell'</span>)</span><br><span class="line">[ <span class="string">'hello'</span>,</span><br><span class="line">  <span class="string">'ello'</span>,</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  input: <span class="string">'hello hell'</span> ]</span><br><span class="line">&gt; re.exec(<span class="string">'hello hell'</span>)</span><br><span class="line">[ <span class="string">'hell'</span>,</span><br><span class="line">  <span class="string">'ell'</span>,</span><br><span class="line">  index: <span class="number">6</span>,</span><br><span class="line">  input: <span class="string">'hello hell'</span> ]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p>第三，</p>
+<p>大家知道，<code>.</code> 是不可以匹配 <code>\n</code> 的。如果我们想匹配的数据涉及到了跨行，比如下面这样的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> multiline = <span class="built_in">require</span>(<span class="string">'multiline'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> text = multiline.stripIndent(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    head</span></span><br></pre></td></tr></table></figure>
+<pre><code>code code2 .code3<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+
+foot
+</code></pre><p>*/<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果我们想把两个 \`\`\` 中包含的内容取出来，应该怎么办？</span><br><span class="line"></span><br><span class="line">直接用 `.` 匹配不到 `\n`，所以我们需要找到一个原子，能匹配包括 `\n` 在内的所有字符。</span><br><span class="line"></span><br><span class="line">这个原子的惯用写法就是 `[\s\S]`</span><br><span class="line"></span><br><span class="line">```js</span><br><span class="line">var match1 = text.match(/^```[\s\S]+?^```/gm);</span><br><span class="line">console.log(match1) // =&gt; [ &apos;```\ncode code2 code3```\n```&apos; ]</span><br><span class="line"></span><br><span class="line">// 这里有一种很骚的写法，[^] 与 [\s\S] 等价</span><br><span class="line">var match2 = text.match(/^```[^]+?^```/gm)</span><br><span class="line">console.log(match2) // =&gt; [ &apos;```\ncode code2 .code3```\n```&apos; ]</span><br></pre></td></tr></table></figure></p>
+<p>完。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node正则表达式/&title=《9.正则表达式》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node正则表达式/&title=《9.正则表达式》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node正则表达式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.正则表达式》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node正则表达式/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node正则表达式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/搭建 Node.js 开发环境/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">1.搭建 Node.js 开发环境</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/node测试用例：mocha，should，istanbul/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">6.测试用例：mocha，should，istanbul</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node正则表达式/&title=《9.正则表达式》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node正则表达式/&title=《9.正则表达式》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node正则表达式/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《9.正则表达式》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node正则表达式/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node正则表达式/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aQU7EMAwFUO5/6UFihQSt/ncKguRlVY06bV4XlmP77S1er4/1+frzL/f3fL3//glff39sYWBg/FvG63ZdbfHqv1cbajH53jAwMM5h5EH2HrkSrPMnY2BgYNwH2ZWQmoRODAwMjPWA24bjNrBiYGBgrBxi85CaP38WoDEwME5jzBoDv3P94/0NDAyMP894lWtWGpu1E4pdYWBgbM24T+aSo2Pb+MwblnnqiYGBsTfjqUPprKDWvuvyg2JgYBzGqMvxCy2E9eM0BgbGCYzZUEVS9ZoBVlJMDAyMXRl5U/DZ42v+3+GYBQYGxnaMduQif9ksZbxPQL95AgYGxmGMlSDb3jlLOi87sRgYGJsyfuJM3IbR5CMOPwEGBsamjLYlkIfF2ZPzNBEDA2NXRnJkHR4s4wZn27CMqoYYGBgbMWYHzrbEnxTs2utvfsHAwNiU8SpXXvSfNQyGJTwMDIwDGCujFUkhbCUBTYp6GBgYezOScJm/eAX2QBkOAwNjU0YSCtuBsHY47IGhMQwMjAMY7Vbyon/7afJEMMpwMTAwtmDMErW2PFdPfJTDHBgYGHsz1hsDbSn/2QIcBgbGCYw22OWJ2krSmaePGBgY5zDyIJunhsMeRRCm68wRAwNjI0ZbSmuDcvv2fAQEAwMD46nUsB3XaEc6MDAwMGbbWrm/TV4xMDBOYLRhrj2CtuD8o2BgYJzAWD9qztK++1A+TBAxMDB2Y7wDKlmenI9V5okAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

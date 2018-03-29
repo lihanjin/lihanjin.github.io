@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>javascript常用积累 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript,Snippet">
+    <meta name="description" content="一、JS动画与动作不一致解决: 123if(!$( &quot;#handle&quot;).is(&quot;:animated&quot;))&amp;#123;	//判断元素是否处于动画状态&amp;#125;">
+<meta name="keywords" content="JavaScript,Snippet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript常用积累">
+<meta property="og:url" content="http://yoursite.com/2016/01/14/js-snippets-summary/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="一、JS动画与动作不一致解决: 123if(!$( &quot;#handle&quot;).is(&quot;:animated&quot;))&amp;#123;	//判断元素是否处于动画状态&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript常用积累">
+<meta name="twitter:description" content="一、JS动画与动作不一致解决: 123if(!$( &quot;#handle&quot;).is(&quot;:animated&quot;))&amp;#123;	//判断元素是否处于动画状态&amp;#125;">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javascript常用积累</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javascript常用积累</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-14T00:20:43.000Z" itemprop="datePublished" class="page-time">
+  2016-01-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、JS动画与动作不一致解决"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、JS动画与动作不一致解决:</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、停止事件冒泡"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、停止事件冒泡</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、查看JS对象属性"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、查看JS对象属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四、页面刷新时禁用提交按钮"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、页面刷新时禁用提交按钮</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#五、获取事件"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、获取事件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#六、获取键盘码"><span class="post-toc-number">6.</span> <span class="post-toc-text">六、获取键盘码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#七、-鼠标滑入-滑出样式切换"><span class="post-toc-number">7.</span> <span class="post-toc-text">七、 鼠标滑入/滑出样式切换</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#八、点击鼠标-显示-隐藏切换"><span class="post-toc-number">8.</span> <span class="post-toc-text">八、点击鼠标,显示/隐藏切换</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#九、JS-调试"><span class="post-toc-number">9.</span> <span class="post-toc-text">九、JS 调试</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#十、为子元素集合绑定事件"><span class="post-toc-number">10.</span> <span class="post-toc-text">十、为子元素集合绑定事件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#十一、自定义IE浏览器渲染方式-解决IE10下JS或插件失效"><span class="post-toc-number">11.</span> <span class="post-toc-text">十一、自定义IE浏览器渲染方式(解决IE10下JS或插件失效):</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#十二、注册事件"><span class="post-toc-number">12.</span> <span class="post-toc-text">十二、注册事件</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-js-snippets-summary"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javascript常用积累</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-14 08:20:43" datetime="2016-01-14T00:20:43.000Z"  itemprop="datePublished">2016-01-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="一、JS动画与动作不一致解决"><a href="#一、JS动画与动作不一致解决" class="headerlink" title="一、JS动画与动作不一致解决:"></a>一、JS动画与动作不一致解决:</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!$( <span class="string">"#handle"</span>).is(<span class="string">":animated"</span>))&#123;</span><br><span class="line">	<span class="comment">//判断元素是否处于动画状态</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="二、停止事件冒泡"><a href="#二、停止事件冒泡" class="headerlink" title="二、停止事件冒泡"></a>二、停止事件冒泡</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">event.stopPropagation();</span><br><span class="line">- 禁止JS报错</span><br><span class="line">	<span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"><span class="comment">/*try to do*/</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e)&#123;</span><br><span class="line"><span class="comment">/*do this if try error */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三、查看JS对象属性"><a href="#三、查看JS对象属性" class="headerlink" title="三、查看JS对象属性"></a>三、查看JS对象属性</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">var</span> res = <span class="string">''</span> ; </span><br><span class="line"><span class="keyword">var</span> obj = <span class="built_in">eval</span>( obj );</span><br><span class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> p <span class="keyword">in</span> <span class="built_in">eval</span>( obj ) )&#123;</span><br><span class="line">		<span class="keyword">var</span> prop = p + <span class="string">':'</span> + obj[p] + <span class="string">'\n'</span> ; </span><br><span class="line">		res += prop ; </span><br><span class="line">	&#125;</span><br><span class="line">	alert( res );</span><br></pre></td></tr></table></figure>
+<h4 id="四、页面刷新时禁用提交按钮"><a href="#四、页面刷新时禁用提交按钮" class="headerlink" title="四、页面刷新时禁用提交按钮"></a>四、页面刷新时禁用提交按钮</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onbeforeunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="string">':submit'</span>).attr(<span class="string">'disabled'</span>,<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：<code>Opera</code> 浏览器不支持，其他浏览器避免在同一页面中使用 <code>&quot;javascrpt:&quot;</code> 等伪协议</p>
+<h4 id="五、获取事件"><a href="#五、获取事件" class="headerlink" title="五、获取事件"></a>五、获取事件</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getEvent = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> ieEvent = <span class="built_in">window</span>.event ; </span><br><span class="line">	<span class="keyword">var</span> ffEvent = <span class="built_in">arguments</span>.callee.caller.arguments[<span class="number">0</span>] ; </span><br><span class="line">	<span class="comment">//arguments.callee						当前执行函数</span></span><br><span class="line">	<span class="comment">//arguments.callee.caller				当前执行函数的调用者</span></span><br><span class="line">	<span class="comment">//arguments.callee.caller.arguments[0]	当前函数调用者的第一个参数</span></span><br><span class="line">	<span class="keyword">var</span> e = ieEvent || ffEvent ; </span><br><span class="line">	<span class="keyword">return</span> e ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取鼠标距离浏览器顶部 左侧的实际距离 兼容IE</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getXY</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> ev = ev || <span class="built_in">window</span>.event;</span><br><span class="line">	<span class="keyword">var</span> xx  = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> yy = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(ev.pageX)&#123; <span class="comment">//iE9+</span></span><br><span class="line">		xx = ev.pageX;</span><br><span class="line">		yy = ev.pageY;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123; </span><br><span class="line">		<span class="comment">//IE678 clientX,clientY + scroll</span></span><br><span class="line">		<span class="keyword">var</span> scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || </span><br><span class="line">				   <span class="built_in">document</span>.body.scrollTop;<span class="comment">//IE9+</span></span><br><span class="line">		<span class="keyword">var</span> scrollLeft = <span class="built_in">document</span>.documentElement.scrollLeft || </span><br><span class="line">					<span class="built_in">document</span>.body.scrollLeft;<span class="comment">//IE9+     </span></span><br><span class="line">		xx = ev.clientX + scrollLeft;</span><br><span class="line">		yy = ev.clientY + scrollTop;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		x:xx,</span><br><span class="line">		y:yy</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="六、获取键盘码"><a href="#六、获取键盘码" class="headerlink" title="六、获取键盘码"></a>六、获取键盘码</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getKCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> ieEvent = <span class="built_in">window</span>.event ; </span><br><span class="line">		<span class="keyword">var</span> ffEvent = <span class="built_in">arguments</span>.callee.caller.arguments[<span class="number">0</span>] ; </span><br><span class="line">		<span class="keyword">var</span> e = ieEvent || ffEvent ; </span><br><span class="line">		<span class="keyword">var</span> kCode = e.keyCode || e.which ;</span><br><span class="line">		<span class="keyword">return</span> kCode ;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="七、-鼠标滑入-滑出样式切换"><a href="#七、-鼠标滑入-滑出样式切换" class="headerlink" title="七、 鼠标滑入/滑出样式切换"></a>七、 鼠标滑入/滑出样式切换</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"div"</span>).on(<span class="string">"mouseover mouseout"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="keyword">this</span>).toggleClass(<span class="string">"over"</span>);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="八、点击鼠标-显示-隐藏切换"><a href="#八、点击鼠标-显示-隐藏切换" class="headerlink" title="八、点击鼠标,显示/隐藏切换"></a>八、点击鼠标,显示/隐藏切换</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#panel h5.head"</span>).toggle(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="keyword">this</span>).toggleClass(<span class="string">"highlight"</span>);</span><br><span class="line">	$(<span class="keyword">this</span>).next().toggle();</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="keyword">this</span>).toggleClass(<span class="string">"highlight"</span>);</span><br><span class="line">	$(<span class="keyword">this</span>).next().toggle();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="九、JS-调试"><a href="#九、JS-调试" class="headerlink" title="九、JS 调试"></a>九、JS 调试</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log() ;			<span class="comment">//打印变量</span></span><br><span class="line"><span class="built_in">console</span>.dir() ; 		<span class="comment">//打印对象</span></span><br><span class="line"><span class="built_in">console</span>.dirxml() ; 		<span class="comment">//打印节点</span></span><br><span class="line"><span class="built_in">console</span>.trace() ; 		<span class="comment">//打印函数调用轨迹</span></span><br><span class="line"><span class="built_in">window</span>.document.title = str;</span><br></pre></td></tr></table></figure>
+<h4 id="十、为子元素集合绑定事件"><a href="#十、为子元素集合绑定事件" class="headerlink" title="十、为子元素集合绑定事件"></a>十、为子元素集合绑定事件</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"div"</span>).delegate(<span class="string">"button"</span>,<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="string">"p"</span>).slideToggle();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="十一、自定义IE浏览器渲染方式-解决IE10下JS或插件失效"><a href="#十一、自定义IE浏览器渲染方式-解决IE10下JS或插件失效" class="headerlink" title="十一、自定义IE浏览器渲染方式(解决IE10下JS或插件失效):"></a>十一、自定义<code>IE</code>浏览器渲染方式(解决<code>IE10</code>下<code>JS</code>或插件失效):</h4><hr>
+<p>如果安装了<code>Chrome</code>内核，则使用<code>Chrome</code>内核来渲染页面<code>[chrome=1]</code>，如果未安装，则使用最高版本的IE内核进行渲染<code>[IE=edge]:</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="十二、注册事件"><a href="#十二、注册事件" class="headerlink" title="十二、注册事件"></a>十二、注册事件</h4><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标准浏览器</span></span><br><span class="line">form1.addEventListener(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    e.preventDefault();		<span class="comment">//阻止浏览器默认动作</span></span><br><span class="line">	e.stopPropagation();		<span class="comment">//阻止事件流产生</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IE8及更早版本IE浏览器</span></span><br><span class="line">form1.attachEvent(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	event.cancelBubble = <span class="literal">true</span>; <span class="comment">//阻止浏览器默认动作--IE8及更早版本IE浏览器</span></span><br><span class="line">	event.returnValue = <span class="literal">false</span>; <span class="comment">//阻止事件流产生--IE8及更早版本IE浏览器</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snippet/">Snippet</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/14/js-snippets-summary/&title=《javascript常用积累》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/14/js-snippets-summary/&title=《javascript常用积累》 — _sUper.LEE的个人空间&source=一、JS动画与动作不一致解决:
+123if(!$( "#handle").is(":animated"))&#123;	//判断元素是否处于动画状态&#1..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/14/js-snippets-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript常用积累》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/14/js-snippets-summary/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/14/js-snippets-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/14/jQuery-dom/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">jQuery之DOM操作小结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/13/gulp/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">gulp学习总结篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/14/js-snippets-summary/&title=《javascript常用积累》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/14/js-snippets-summary/&title=《javascript常用积累》 — _sUper.LEE的个人空间&source=一、JS动画与动作不一致解决:
+123if(!$( "#handle").is(":animated"))&#123;	//判断元素是否处于动画状态&#1..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/14/js-snippets-summary/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript常用积累》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/14/js-snippets-summary/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/14/js-snippets-summary/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3ay47CMAwFUP7/pxlptqOGa7ugITlZoYLanC6MH3k84vX8XX8/X3179Zv19avf3LYwMDC+lvFcrqtNrK+sr1/9Zv1SXlAxMDAOYORBNgm463i4fnp+NwwMDIw88PVWLw3FwMDAyBnV0JyE7HXKiIGBgVEtMpNHVkviD9XiGBgYX8iYDAbe/flD8w0MDIx/zHhH8dkbXo72g4GBsTVjUqz2it7k1VRTSQwMjHMYva3P2/rJ/dckDAyMvRl5qK0mc3ljLm/YPSaRHgMD42sZecDNC9r8ej5IiP4AMDAwjmFUH9krX3tXXgRfDAyMTRnzIvN506qGZgwMjHMYeemYFKvz15QH/SjsYmBgbMHohb9Joy1/u4U7Y2BgbM24K14lx796pW8+YMDAwDiN0TsKljTyeilgVFRjYGBszage8MoL2klSmL8IDAyMvRl5QlZI0VoHwqqvAAMDA6MaZHup5Py5l11DDAyMTRnVpnxy2KJ3pKw6hMDAwNibMQmU1QZZnmJOxqIYGBj7MXqpXq/RPw/NL861YWBgbMqYBNbqpvMiNt8hBgbGCYxncVWDYB6IqyV0dK4NAwNjC8Zd0TpJLt/RgMPAwDiHkQfZauN+Eqare8DAwDiBMTkYMTk2kf8DRPNYDAwMjAGsN2AoZLIYGBgYQXN/Ho7zNBQDA+NMRvVIVt6Ay0cCk7EBBgbG3oy78q7JwCC5z+SIBgYGxtcyfgDy9cxS3+2iqgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

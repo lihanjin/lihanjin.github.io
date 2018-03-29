@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>express、express-session实现了简易的登录 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="文档概览本文基于express、express-session实现了简易的登录/登出功能，完整的代码示例可以在这里找到。 环境初始化首先，初始化项目 1express -e 然后，安装依赖。 1npm install 接着，安装session相关的包。 1npm install --save express-session session-file-store session相关配置配置如下，并不">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="express、express-session实现了简易的登录">
+<meta property="og:url" content="http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="文档概览本文基于express、express-session实现了简易的登录/登出功能，完整的代码示例可以在这里找到。 环境初始化首先，初始化项目 1express -e 然后，安装依赖。 1npm install 接着，安装session相关的包。 1npm install --save express-session session-file-store session相关配置配置如下，并不">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="express、express-session实现了简易的登录">
+<meta name="twitter:description" content="文档概览本文基于express、express-session实现了简易的登录/登出功能，完整的代码示例可以在这里找到。 环境初始化首先，初始化项目 1express -e 然后，安装依赖。 1npm install 接着，安装session相关的包。 1npm install --save express-session session-file-store session相关配置配置如下，并不">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">express、express-session实现了简易的登录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">express、express-session实现了简易的登录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2016-01-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文档概览"><span class="post-toc-number">1.</span> <span class="post-toc-text">文档概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">环境初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#session相关配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">session相关配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现登录-登出接口"><span class="post-toc-number">4.</span> <span class="post-toc-text">实现登录/登出接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建测试账户数据"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">创建测试账户数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#登录、登出接口实现"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">登录、登出接口实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#登录态判断"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">登录态判断</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UI界面"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">UI界面</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-number">5.</span> <span class="post-toc-text">相关链接</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-express、express-session实现了简易的登录"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">express、express-session实现了简易的登录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-20 09:35:08" datetime="2016-01-20T01:35:08.000Z"  itemprop="datePublished">2016-01-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="文档概览"><a href="#文档概览" class="headerlink" title="文档概览"></a>文档概览</h2><p>本文基于express、express-session实现了简易的登录/登出功能，完整的代码示例可以在<a href="https://github.com/chyingp/nodejs-learning-guide/tree/master/examples/2016.12.06-session" target="_blank" rel="noopener">这里</a>找到。</p>
+<h2 id="环境初始化"><a href="#环境初始化" class="headerlink" title="环境初始化"></a>环境初始化</h2><p>首先，初始化项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">express -e</span><br></pre></td></tr></table></figure>
+<p>然后，安装依赖。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>接着，安装session相关的包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save express-session session-file-store</span><br></pre></td></tr></table></figure>
+<h2 id="session相关配置"><a href="#session相关配置" class="headerlink" title="session相关配置"></a>session相关配置</h2><p>配置如下，并不复杂，可以见代码注释，或者参考<a href="https://github.com/expressjs/session#options" target="_blank" rel="noopener">官方文档</a>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"><span class="keyword">var</span> FileStore = <span class="built_in">require</span>(<span class="string">'session-file-store'</span>)(session);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> identityKey = <span class="string">'skey'</span>;</span><br><span class="line"></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    name: identityKey,</span><br><span class="line">    secret: <span class="string">'chyingp'</span>,  <span class="comment">// 用来对session id相关的cookie进行签名</span></span><br><span class="line">    store: <span class="keyword">new</span> FileStore(),  <span class="comment">// 本地存储session（文本文件，也可以选择其他store，比如redis的）</span></span><br><span class="line">    saveUninitialized: <span class="literal">false</span>,  <span class="comment">// 是否自动保存未初始化的会话，建议false</span></span><br><span class="line">    resave: <span class="literal">false</span>,  <span class="comment">// 是否每次都重新保存会话，建议false</span></span><br><span class="line">    cookie: &#123;</span><br><span class="line">        maxAge: <span class="number">10</span> * <span class="number">1000</span>  <span class="comment">// 有效期，单位是毫秒</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<h2 id="实现登录-登出接口"><a href="#实现登录-登出接口" class="headerlink" title="实现登录/登出接口"></a>实现登录/登出接口</h2><h3 id="创建测试账户数据"><a href="#创建测试账户数据" class="headerlink" title="创建测试账户数据"></a>创建测试账户数据</h3><p>首先，在本地创建个文件，来保存可用于登录的账户信息，避免创建链接数据库的繁琐。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// users.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    items: [</span><br><span class="line">        &#123;<span class="attr">name</span>: <span class="string">'chyingp'</span>, <span class="attr">password</span>: <span class="string">'123456'</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="登录、登出接口实现"><a href="#登录、登出接口实现" class="headerlink" title="登录、登出接口实现"></a>登录、登出接口实现</h3><p>实现登录、登出接口，其中：</p>
+<ul>
+<li>登录：如果用户存在，则通过<code>req.regenerate</code>创建session，保存到本地，并通过<code>Set-Cookie</code>将session id保存到用户侧；</li>
+<li>登出：销毁session，并清除cookie；</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users = <span class="built_in">require</span>(<span class="string">'./users'</span>).items;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> findUser = <span class="function"><span class="keyword">function</span>(<span class="params">name, password</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> users.find(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item.name === name &amp;&amp; item.password === password;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 登录接口</span></span><br><span class="line">app.post(<span class="string">'/login'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> sess = req.session;</span><br><span class="line">    <span class="keyword">var</span> user = findUser(req.body.name, req.body.password);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(user)&#123;</span><br><span class="line">        req.session.regenerate(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(err)&#123;</span><br><span class="line">                <span class="keyword">return</span> res.json(&#123;<span class="attr">ret_code</span>: <span class="number">2</span>, <span class="attr">ret_msg</span>: <span class="string">'登录失败'</span>&#125;);                </span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            req.session.loginUser = user.name;</span><br><span class="line">            res.json(&#123;<span class="attr">ret_code</span>: <span class="number">0</span>, <span class="attr">ret_msg</span>: <span class="string">'登录成功'</span>&#125;);                           </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        res.json(&#123;<span class="attr">ret_code</span>: <span class="number">1</span>, <span class="attr">ret_msg</span>: <span class="string">'账号或密码错误'</span>&#125;);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 退出登录</span></span><br><span class="line">app.get(<span class="string">'/logout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 备注：这里用的 session-file-store 在destroy 方法里，并没有销毁cookie</span></span><br><span class="line">    <span class="comment">// 所以客户端的 cookie 还是存在，导致的问题 --&gt; 退出登陆后，服务端检测到cookie</span></span><br><span class="line">    <span class="comment">// 然后去查找对应的 session 文件，报错</span></span><br><span class="line">    <span class="comment">// session-file-store 本身的bug    </span></span><br><span class="line"></span><br><span class="line">    req.session.destroy(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.json(&#123;<span class="attr">ret_code</span>: <span class="number">2</span>, <span class="attr">ret_msg</span>: <span class="string">'退出登录失败'</span>&#125;);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// req.session.loginUser = null;</span></span><br><span class="line">        res.clearCookie(identityKey);</span><br><span class="line">        res.redirect(<span class="string">'/'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="登录态判断"><a href="#登录态判断" class="headerlink" title="登录态判断"></a>登录态判断</h3><p>用户访问 <a href="http://127.0.0.1:3000" target="_blank" rel="noopener">http://127.0.0.1:3000</a> 时，判断用户是否登录，如果是，则调到用户详情界面（简陋无比）；如果没有登录，则跳到登录界面；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sess = req.session;</span><br><span class="line">    <span class="keyword">var</span> loginUser = sess.loginUser;</span><br><span class="line">    <span class="keyword">var</span> isLogined = !!loginUser;</span><br><span class="line"></span><br><span class="line">    res.render(<span class="string">'index'</span>, &#123;</span><br><span class="line">        isLogined: isLogined,</span><br><span class="line">        name: loginUser || <span class="string">''</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="UI界面"><a href="#UI界面" class="headerlink" title="UI界面"></a>UI界面</h3><p>最后，看下登录、登出UI相关的代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>会话管理<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>会话管理<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>(<span class="attr">isLogined</span>)&#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>当前登录用户：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">name</span> %&gt;</span>，<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/logout"</span> <span class="attr">id</span>=<span class="string">"logout"</span>&gt;</span>退出登陆<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125;<span class="attr">else</span>&#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">"/login"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"chyingp"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"123456"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"登录"</span> <span class="attr">id</span>=<span class="string">"login"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/jquery-3.1.0.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    $(<span class="string">'#login'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span></span><br><span class="line"><span class="undefined">        evt.preventDefault();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">            url: <span class="string">'/login'</span>,</span></span><br><span class="line"><span class="javascript">            type: <span class="string">'POST'</span>,</span></span><br><span class="line"><span class="undefined">            data: &#123;</span></span><br><span class="line"><span class="javascript">                name: $(<span class="string">'#name'</span>).val(),</span></span><br><span class="line"><span class="javascript">                password: $(<span class="string">'#password'</span>).val()</span></span><br><span class="line"><span class="undefined">            &#125;,</span></span><br><span class="line"><span class="javascript">            success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(data.ret_code === <span class="number">0</span>)&#123;</span></span><br><span class="line"><span class="undefined">                    location.reload();</span></span><br><span class="line"><span class="undefined">                &#125;   </span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a href="https://github.com/expressjs/session" target="_blank" rel="noopener">https://github.com/expressjs/session</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/&title=《express、express-session实现了简易的登录》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/&title=《express、express-session实现了简易的登录》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《express、express-session实现了简易的登录》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/20/nodejs文件上传/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Nodejs实现文件上传</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/20/review-jQuery/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">jQuery笔记总结篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/&title=《express、express-session实现了简易的登录》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/&title=《express、express-session实现了简易的登录》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《express、express-session实现了简易的登录》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/20/express、express-session实现了简易的登录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aQW4CMQwFUO5/6VbqqlVh+LZjYPFmVQGd5GURWz+53eLn6+dJvv3/9+/n0efJ+69/M3rw8PDwWlO/HjKf3KNJXP8mHzGfMx4eHt42L5nQ9SfVqV9v98noUQHDw8PDeyvvupwk7XW1UZ6UHzw8PLxP4OVbeVI8kjLzhrqHh4eHF/OSiKFXAHrhQi8IxsPDw3sNr3oA9gl/L57v4eHh4Q1O1fM2unpwlUcSeTG4M1s8PDy8Bd71kJNDqV5gUW3co7KBh4eHt8zrXRE4ewlgAr7zTjw8PLyjvGSYZKNPvk2a4zwQiZYPDw8P7+W8JDy9nmK+xSfvL3+Oh4eHt8DLy8B8mEl5yOOS8gkeHh4e3piXvCgpFZM0dV6i8PDw8PZ4SUM8iR6SoKF36BXNHA8PD2+NlzfHk3O2XjHIl+PJdSs8PDy8Q7zqdYF8g06GnwQWheYbDw8P7yivOqE8nuiVit7FrHIyjYeHhzfgVQtD9eC/GjeUs+dePo2Hh4c34OXtaT7MqWgj/9+HS4aHh4e3zKtuxEk8UX1D/m3UZOPh4eEt8JLJJVv5ZNJJQerFHHh4eHjbvDxQ6A2ZL2WV96Qs4eHh4R3lzTfuXmrau45QPbrDw8PD2+DNm92zm/tKfIyHh4d3lNc7ku+R8osC86sJhcHw8PDwxrzedl+9GjUPL6L34OHh4S3w5lcBek1zrzyULw3g4eHhLfDygU+VkEJDPHj+1D08PDy8NV7evOYHWvlhf7VxjxYRDw8Pb4FX3moHpaIaK1RjixOVBA8PDy/lTULSXizba6yry4eHh4e3zUva4jy2mMCqBeDJ3PDw8PDeyusVibPLVC05eHh4eJ/D64ULyduqge+TRcHDw8Nb41WnWL0ylReY3gUFPDw8vFfyegdg+WFYfhUgKRgrDx4eHl76fANPR3OoL11M+QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

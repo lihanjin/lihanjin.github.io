@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>15.Mongodb 与 Mongoose 的使用 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《Mongodb 与 Mongoose 的使用》目标无明确目标 知识点 了解 mongodb (http://www.mongodb.org/ ) 学习 mongoose 的使用 (http://mongoosejs.com/ )  课程内容mongodbmongodb 这个名词相信大家不会陌生吧。有段时间 nosql 的概念炒得特别火，其中 hbase redis mongodb couchdb">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15.Mongodb 与 Mongoose 的使用">
+<meta property="og:url" content="http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《Mongodb 与 Mongoose 的使用》目标无明确目标 知识点 了解 mongodb (http://www.mongodb.org/ ) 学习 mongoose 的使用 (http://mongoosejs.com/ )  课程内容mongodbmongodb 这个名词相信大家不会陌生吧。有段时间 nosql 的概念炒得特别火，其中 hbase redis mongodb couchdb">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson15/1.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="15.Mongodb 与 Mongoose 的使用">
+<meta name="twitter:description" content="《Mongodb 与 Mongoose 的使用》目标无明确目标 知识点 了解 mongodb (http://www.mongodb.org/ ) 学习 mongoose 的使用 (http://mongoosejs.com/ )  课程内容mongodbmongodb 这个名词相信大家不会陌生吧。有段时间 nosql 的概念炒得特别火，其中 hbase redis mongodb couchdb">
+<meta name="twitter:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson15/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">15.Mongodb 与 Mongoose 的使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">15.Mongodb 与 Mongoose 的使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2016-07-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《Mongodb-与-Mongoose-的使用》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《Mongodb 与 Mongoose 的使用》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mongodb"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">mongodb</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装-mongodb"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">安装 mongodb</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mongoose"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">mongoose</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设计个简单博客程序"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">设计个简单博客程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#示例程序"><span class="post-toc-number">1.3.5.</span> <span class="post-toc-text">示例程序</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-nodeMongodb 与 Mongoose 的使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">15.Mongodb 与 Mongoose 的使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-07-20 09:35:08" datetime="2016-07-20T01:35:08.000Z"  itemprop="datePublished">2016-07-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《Mongodb-与-Mongoose-的使用》"><a href="#《Mongodb-与-Mongoose-的使用》" class="headerlink" title="《Mongodb 与 Mongoose 的使用》"></a>《Mongodb 与 Mongoose 的使用》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>无明确目标</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>了解 mongodb (<a href="http://www.mongodb.org/" target="_blank" rel="noopener">http://www.mongodb.org/</a> )</li>
+<li>学习 mongoose 的使用 (<a href="http://mongoosejs.com/" target="_blank" rel="noopener">http://mongoosejs.com/</a> )</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><h3 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h3><p>mongodb 这个名词相信大家不会陌生吧。有段时间 nosql 的概念炒得特别火，其中 hbase redis mongodb couchdb 之类的名词都相继进入了大众的视野。</p>
+<p>hbase 和 redis 和 mongodb 和 couchdb 虽然都属于 nosql 的大范畴。但它们关注的领域是不一样的。hbase 是存海量数据的，redis 用来做缓存，而 mongodb 和 couchdb 则试图取代一些使用 mysql 的场景。</p>
+<p>mongodb 的官网是这样介绍自己的：</p>
+<blockquote>
+<p>MongoDB (from “humongous”) is an open-source document database, and the leading NoSQL database. Written in C++</p>
+</blockquote>
+<p>开源、文档型、nosql。</p>
+<p>其中<strong>文档型</strong>是个重要的概念需要理解。</p>
+<p>在 sql 中，我们的数据层级是：数据库（db） -&gt; 表（table） -&gt; 记录（record）-&gt; 字段；在 mongodb 中，数据的层级是：数据库 -&gt; collection -&gt; document -&gt; 字段。这四个概念可以对应得上。</p>
+<p>文档型数据这个名字中，“文档”两个字很容易误解。其实这个文档就是 bson 的意思。bson 是 json 的超集，比如 json 中没法储存二进制类型，而 bson 拓展了类型，提供了二进制支持。mongodb 中存储的一条条记录都可以用 bson 来表示。所以你也可以认为，mongodb 是个存 bson 数据的数据库，或是存哈希数据的数据库。</p>
+<p>mongodb 相对于它的竞争对手们来说——比如 couchdb，它的一大优势就是尽可能提供与 sql 对应的概念。之前说了，sql 中的记录对应 mongodb 中的 document，记录这东西是一维的，而 document 可以嵌套很多层。在某些场景下，比如存储一个文章的 tags，mongodb 中的字段可以轻松存储数组类型，而 sql 中就需要设计个一对多的表关系出来。</p>
+<p>假设有一个 blog 应用，其中有张 Post 表，表中有用户发表的一些博客内容（post）。</p>
+<p>这些 post 文档的样子大概会是这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> post = &#123;</span><br><span class="line">  title: <span class="string">'呵呵的一天'</span>,</span><br><span class="line">  author: <span class="string">'alsotang'</span>,</span><br><span class="line">  content: <span class="string">'今天网速很差'</span>,</span><br><span class="line">  tags: [<span class="string">'呵呵'</span>, <span class="string">'网速'</span>, <span class="string">'差'</span>],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>mongodb 中有个最亮眼的特性，就是 <strong>Auto-Sharding</strong>，sharding 的意思可以理解成我们 scale sql 时的分表。</p>
+<p>在 mongodb 中，表与表之间是没有联系的，不像 sql 中一样，可以设定外键，可以进行表连接。mongodb 中，也无法支持事务。</p>
+<p>所以这样的表，无债一身轻。可以很轻易地 scale 至多个实例（假设实例都有不同的物理位置）上。在 mongodb 中，实时的那些查询，也就只能进行条件查询：某某大于一个值或某某等于一个值。而 sql 中，如果一张表的数据存在了多个实例上的话，当与其他表 join 时候，表之间的运来运去会是个很慢的过程，具体我也不太懂。</p>
+<p>反正使用 mongodb 时，一定要思考的两点就是：表 join 到底要不要，事务支持到底要不要。</p>
+<p>mongodb 中的索引特性跟 sql 中差不多，只是它对于嵌套的数据类型也提供了支持。在建立复合索引时，mongodb 可以指定不同字段的排序，比如两个字段 <code>is_top</code>（置顶） 和 <code>create_time</code>（创建时间） 要建立复合索引，我们可以指定 is_top 按正序排，create_time 按逆序排。mysql 说是有计划支持这个特性，不过目前也没什么消息。不过这点不重要。</p>
+<p>mongodb 中，collection 是 schema-less 的。在 sql 中，我们需要用建表语句来表明数据应该具有的形式，而 mongodb 中，可以在同一张里存各种各样不同的形式的数据。同一个 collection 中，可以有些 document 具有 100 个字段，而另一些，则只具有 5 个字段。如果你分不清这个特性的使用场景，那么请像使用 sql 一样的，尽可能保证一个 collection 中数据格式是统一的。这个 schema-less 的特性，有个比较典型的场景是用来存储日志类型的数据，可以搜搜看这方面的典型场景。</p>
+<p>mongodb 和 mysql 要我选的话，无关紧要的应用我会选择 mongodb，就当个简单的存 json 数据的数据库来用；如果是线上应用，肯定还是会选择 mysql。毕竟 sql 比较成熟，而且各种常用场景的最佳实践都有先例了。</p>
+<p>我所在的阿里巴巴数据平台，有各种各样的大数据系统。有些做离线计算，一算就是几个小时，算出来的结果被缓存起来，查询时候就可以实时得到结果，只是数据一致性上，不可避免会有 delay；有些做实时运算，可以在 1s 内从几千万条数据中算出一个复杂条件的结果。但它们都提供了 sql 的接口，也就是说，无论底层他们是如何让几百台机器 mapreduce，都让你可以用已有的 sql 知识进行查询。所以还是选择 sql 省事啊。</p>
+<p>这里还有个很好玩的网站：<a href="http://www.mongodb-is-web-scale.com/" target="_blank" rel="noopener">http://www.mongodb-is-web-scale.com/</a></p>
+<p>顺便说说 mongodb 与 redis 的不同。mongodb 是用来存非临时数据的，可以认为是存在硬盘上，而 redis 的数据可以认为都在内存中，存储临时数据，丢了也无所谓。对于稍微复杂的查询，redis 支持的查询方式太少太少了，几乎可以认为是 key-value 的。据说 instagram 的数据就全部存在 redis 中，用了好几个几十 G 内存的 aws ec2 机器在存。redis 也是支持把数据写入硬盘的，aof 貌似都过时了，好久没关注了。</p>
+<p>mongodb 与 hbase 的区别。如果说你已经在考虑使用 hbase 了的话，应该也不用我介绍它们的区别了吧..</p>
+<p>主题所限，就不展开讲了。这之间的选择和权衡，说起来真的是个很大的话题。</p>
+<p>我对这方面的话题很感兴趣，如果要讨论这方面话题的话，可以去 <a href="https://cnodejs.org/" target="_blank" rel="noopener">https://cnodejs.org/</a> 发个帖，详细描述一下场景然后 at 我（@alsotang）。</p>
+<p>mongodb 的官网中有一些特性介绍：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/alsotang/node-lessons/blob/master/lesson15/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>其中标有箭头的是基本概念，圆圈的是进阶概念，画叉的不必了解。</p>
+<h3 id="安装-mongodb"><a href="#安装-mongodb" class="headerlink" title="安装 mongodb"></a>安装 mongodb</h3><p>课程到这，一直忘记说 mongodb 的安装了。</p>
+<p>ubuntu: <a href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/" target="_blank" rel="noopener">http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/</a></p>
+<p>mac: <code>$ brew install mongodb</code></p>
+<p>装好以后，在命令行 <code>$ mongod</code>，然后另外开个 shell 窗口，输入 <code>$ mongo</code> 就能使用了。</p>
+<h3 id="mongoose"><a href="#mongoose" class="headerlink" title="mongoose"></a>mongoose</h3><p>mongoose 是个 odm。odm 的概念对应 sql 中的 orm。也就是 ruby on rails 中的 activerecord 那一层。orm 全称是 <code>Object-Relational Mapping</code>，对象关系映射；而 odm 是 <code>Object-Document Mapping</code>，对象文档映射。</p>
+<p>它的作用就是，在程序代码中，定义一下数据库中的数据格式，然后取数据时通过它们，可以把数据库中的 document 映射成程序中的一个对象，这个对象有 .save .update 等一系列方法，和 .title .author 等一系列属性。在调用这些方法时，odm 会根据你调用时所用的条件，自动转换成相应的 mongodb shell 语句帮你发送出去。自然地，在程序中链式调用一个个的方法要比手写数据库操作语句具有更大的灵活性和便利性。</p>
+<p>mongoose 的官网给出了类似这样一个示例，我改造了一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先引入 mongoose 这个模块</span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="comment">// 然后连接对应的数据库：mongodb://localhost/test</span></span><br><span class="line"><span class="comment">// 其中，前面那个 mongodb 是 protocol scheme 的名称；localhost 是 mongod 所在的地址；</span></span><br><span class="line"><span class="comment">// 端口号省略则默认连接 27017；test 是数据库的名称</span></span><br><span class="line"><span class="comment">// mongodb 中不需要建立数据库，当你需要连接的数据库不存在时，会自动创建一个出来。</span></span><br><span class="line"><span class="comment">// 关于 mongodb 的安全性，mongodb 我印象中安全机制很残废，用户名密码那套都做得不好，更</span></span><br><span class="line"><span class="comment">// 别提细致的用户权限控制了。不过不用担心，mongodb 的默认配置只接受来自本机的请求，内网都连不上。</span></span><br><span class="line"><span class="comment">// 当需要在内网中为其他机器提供 mongodb 服务时，或许可以去看看 iptables 相关的东西。</span></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/test'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面说了，我推荐在同一个 collection 中使用固定的数据形式。</span></span><br><span class="line"><span class="comment">// 在这里，我们创建了一个名为 Cat 的 model，它在数据库中的名字根据传给 mongoose.model 的第一个参数决定，mongoose 会将名词变为复数，在这里，collection 的名字会是 `cats`。</span></span><br><span class="line"><span class="comment">// 这个 model 的定义是，有一个 String 类型的 name，String 数组类型的 friends，Number 类型的 age。</span></span><br><span class="line"><span class="comment">// mongodb 中大多数的数据类型都可以用 js 的原生类型来表示。至于说 String 的长度是多少，Number 的精度是多少。String 的最大限度是 16MB，Number 的整型是 64-bit，浮点数的话，js 中 `0.1 + 0.2` 的结果都是乱来的。。就不指望什么了。。</span></span><br><span class="line"><span class="comment">// 这里可以看到各种示例：http://mongoosejs.com/docs/schematypes.html</span></span><br><span class="line"><span class="keyword">var</span> Cat = mongoose.model(<span class="string">'Cat'</span>, &#123;</span><br><span class="line">  name: <span class="built_in">String</span>,</span><br><span class="line">  friends: [<span class="built_in">String</span>],</span><br><span class="line">  age: <span class="built_in">Number</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// new 一个新对象，名叫 kitty</span></span><br><span class="line"><span class="comment">// 接着为 kitty 的属性们赋值</span></span><br><span class="line"><span class="keyword">var</span> kitty = <span class="keyword">new</span> Cat(&#123; <span class="attr">name</span>: <span class="string">'Zildjian'</span>, <span class="attr">friends</span>: [<span class="string">'tom'</span>, <span class="string">'jerry'</span>]&#125;);</span><br><span class="line">kitty.age = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用 .save 方法后，mongoose 会去你的 mongodb 中的 test 数据库里，存入一条记录。</span></span><br><span class="line">kitty.save(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="comment">// ...</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'meow'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们可以验证一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mongo</span></span><br><span class="line">MongoDB shell version: 2.6.4</span><br><span class="line">connecting to: test</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> show dbs</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> use <span class="built_in">test</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> show collections</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> db.cats.find()</span></span><br></pre></td></tr></table></figure>
+<p>会发现里面就有一条记录了。</p>
+<h3 id="设计个简单博客程序"><a href="#设计个简单博客程序" class="headerlink" title="设计个简单博客程序"></a>设计个简单博客程序</h3><p>如果要写个博客程序练手。数据库可以这样设计</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Post = mongoose.model(<span class="string">'Post'</span>, &#123;</span><br><span class="line">  title: <span class="built_in">String</span>,</span><br><span class="line">  content: <span class="built_in">String</span>,</span><br><span class="line">  author: <span class="built_in">String</span>,</span><br><span class="line">  create_at: <span class="built_in">Date</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>评论就不要自己做了，接入多说：<a href="http://duoshuo.com/" target="_blank" rel="noopener">http://duoshuo.com/</a></p>
+<p>编辑器就纯文本好了，用 markdown 写。</p>
+<p>用户系统也不做，硬编码几个管理员账号在配置文件中，然后用 http basic auth：<a href="https://github.com/jshttp/basic-auth" target="_blank" rel="noopener">https://github.com/jshttp/basic-auth</a> 来做验证。</p>
+<h3 id="示例程序"><a href="#示例程序" class="headerlink" title="示例程序"></a>示例程序</h3><p>Nodeclub 是使用 Node.js 和 MongoDB 开发的社区系统</p>
+<p><a href="https://github.com/cnodejs/nodeclub" target="_blank" rel="noopener">https://github.com/cnodejs/nodeclub</a></p>
+<p>完。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/&title=《15.Mongodb 与 Mongoose 的使用》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/&title=《15.Mongodb 与 Mongoose 的使用》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《15.Mongodb 与 Mongoose 的使用》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/20/node测试用例：supertest/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">10.测试用例：supertest</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/19/Javascript常用方法函数收集/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Javascript常用方法函数收集</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/&title=《15.Mongodb 与 Mongoose 的使用》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/&title=《15.Mongodb 与 Mongoose 的使用》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《15.Mongodb 与 Mongoose 的使用》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/07/20/nodeMongodb 与 Mongoose 的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3aQW4bMQwF0Nz/0i3QVRf1+H9SclLgzcpw7ImeDIgckl9f8fXrz/X367+v58+37+T3PHbh4eHhjZb+6mqX8uq7z3eb3eF5zXh4eHi3eUkwSI74NiQ8v87X8PJ9PDw8vG/lPX8yP8rbJB4PDw/v/+XNigL7UJEn5Xh4eHif5CXFiM1hPVtisp5jtRY8PDy8mDdrgH3v6+v9PTw8PLxRV7298jS9bZ7NVouHh4d3g3eqwJqMF+Tbkfy1CBh4eHh4F3j5sXt2ICApUuQFkTdgPDw8vMu8WVHg+YBu22xtSHgT3vDw8PAO8ZJb54WG9ltJo6ttg9U7h4eHhzfitWnuZiCgTbU3w1t4eHh4n+Hl78+WtRqNase/8PDw8C7zZsWFvMw6a4ythg/w8PDwrvHypbRP+m2C3m5ilFLj4eHhHeW1j/qzllUbcjZIPDw8vE/y8uJCUlbYh4pky4pmGB4eHt4h3tkxqVkxd9NaK4au8PDw8A7x9mlx3gBr/0u7BXh4eHif4c0e8tvGWH6I78et3vT38PDw8A7x8sT3XlsrKePWiTUeHh7ex3ltk6xNfzfDCsMyLh4eHt6ad2rsad8ky0NC+5Pg4eHh3eBtwsPzcR81qEaDAvU0BB4eHt5RXt2MXxRzZ9/NN674JfHw8PDWvPzI3gwHFDsdg6MLDw8P7ygvH4dq22PtUX6q5faP0Ss8PDy8C7y8LJuUfZNiwYFolgQ2PDw8vKO8U8fxqS1oG29vtgkPDw/vAm927M6KEbPSRtsM+9pHFTw8PLxFSj1r4e+bYTP2y/QdDw8P7xovDwabIa1NKWTWnMPDw8P7CbzZMEEbbNrggYeHh/czeW0B99RYQD6agIeHh/dJXjs4NWvnt0vcJNl4eHh493izhSYJbpv+ngoPeHh4eNd4vwHm232C06SI8gAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

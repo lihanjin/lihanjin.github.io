@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>jQuery与原生JS的DOM操作对比 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript,jQuery">
+    <meta name="description" content="1. 创建元素节点 原生JS创建元素节点: document.createElement(&amp;quot;p&amp;quot;); jQuery创建元素节点：$(&amp;#39;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&amp;#39;);">
+<meta name="keywords" content="JavaScript,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery与原生JS的DOM操作对比">
+<meta property="og:url" content="http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="1. 创建元素节点 原生JS创建元素节点: document.createElement(&amp;quot;p&amp;quot;); jQuery创建元素节点：$(&amp;#39;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&amp;#39;);">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery与原生JS的DOM操作对比">
+<meta name="twitter:description" content="1. 创建元素节点 原生JS创建元素节点: document.createElement(&amp;quot;p&amp;quot;); jQuery创建元素节点：$(&amp;#39;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&amp;#39;);">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">jQuery与原生JS的DOM操作对比</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">jQuery与原生JS的DOM操作对比</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-27T05:50:20.000Z" itemprop="datePublished" class="page-time">
+  2016-01-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-创建元素节点"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 创建元素节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-创建并添加文本节点"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 创建并添加文本节点:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-复制节点"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 复制节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-插入节点"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 插入节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-删除节点"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 删除节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-替换节点"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. 替换节点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-设置属性-获取属性"><span class="post-toc-number">7.</span> <span class="post-toc-text">7. 设置属性/获取属性</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-jQuery与原生JS的DOM操作对比"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">jQuery与原生JS的DOM操作对比</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-27 13:50:20" datetime="2016-01-27T05:50:20.000Z"  itemprop="datePublished">2016-01-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="1-创建元素节点"><a href="#1-创建元素节点" class="headerlink" title="1. 创建元素节点"></a>1. 创建元素节点</h3><ul>
+<li>原生JS创建元素节点: <code>document.createElement(&quot;p&quot;);</code></li>
+<li><p>jQuery创建元素节点：<code>$(&#39;&lt;p&gt;&lt;/p&gt;&#39;);</code></p>
+<a id="more"></a>
+<h3 id="2-创建并添加文本节点"><a href="#2-创建并添加文本节点" class="headerlink" title="2. 创建并添加文本节点:"></a>2. 创建并添加文本节点:</h3></li>
+<li><p>原生JS创建文本节点：<code>document.createTextNode(&quot;Text Content&quot;);</code></p>
+</li>
+<li><p>通常创建文本节点和创建元素节点配合使用，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> textEl = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello World."</span>);</span><br><span class="line"><span class="keyword">var</span> pEl = <span class="built_in">document</span>.createElement(<span class="string">"p"</span>);</span><br><span class="line">pEl.appendChild(textEl);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>jQuery创建并添加文本节点：<code>var $p = $(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;);</code></p>
+</li>
+</ul>
+<h3 id="3-复制节点"><a href="#3-复制节点" class="headerlink" title="3. 复制节点"></a>3. 复制节点</h3><ul>
+<li><p>原生JS复制节点: <code>var newEl = pEl.cloneNode(true);</code></p>
+<ul>
+<li><code>true</code>和<code>false</code>的区别：<ul>
+<li><code>true</code> ：克隆整个<code>&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;</code>节点</li>
+<li><code>false</code>：只克隆<code>&#39;&lt;p&gt;&lt;/p&gt;&#39;</code>，不克隆文本<code>&#39;Hello World.&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>jQuery</code>复制节点：<code>$newEl = $(&#39;#pEl&#39;).clone(true);</code></p>
+</li>
+</ul>
+<p><strong>注意：</strong>克隆节点要避免<code>ID</code>重复</p>
+<h3 id="4-插入节点"><a href="#4-插入节点" class="headerlink" title="4. 插入节点"></a>4. 插入节点</h3><ul>
+<li>原生JS向子节点列表的末尾添加新的子节点：<br><code>El.appendChild(newNode);</code></li>
+<li><p>原生JS在节点的已有子节点之前插入一个新的子节点：<br><code>El.insertBefore(newNode, targetNode);</code></p>
+</li>
+<li><p>在jQuery中，插入节点的方法比原生JS多的多：</p>
+<ul>
+<li><code>$(&#39;#El&#39;).append(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;);</code>             在匹配元素子节点列表结尾添加内容</li>
+<li><code>$(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;).appendTo(&#39;#El&#39;);</code>        把匹配元素添加到目标元素子节点列表结尾</li>
+<li><code>$(&#39;#El&#39;).prepend(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;);</code>     在匹配元素子节点列表开头添加内容</li>
+<li><code>$(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;).prependTo(&#39;#El&#39;);</code>  把匹配元素添加到目标元素子节点列表开头</li>
+<li><code>$(&#39;#El&#39;).before(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;);</code>         在匹配元素之前添加目标内容</li>
+<li><code>$(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;).insertBefore(&#39;#El&#39;);</code>       把匹配元素添加到目标元素之前</li>
+<li><code>$(&#39;#El&#39;).after(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;);</code>          在匹配元素之后添加目标内容</li>
+<li><code>$(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;).insertAfter(&#39;#El&#39;);</code>        把匹配元素添加到目标元素之后</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-删除节点"><a href="#5-删除节点" class="headerlink" title="5. 删除节点"></a>5. 删除节点</h3><ul>
+<li>原生JS删除节点: <code>El.parentNode.removeChild(El);</code></li>
+<li>jQuery删除节点:<code>$(&#39;#El&#39;).remove();</code></li>
+</ul>
+<h3 id="6-替换节点"><a href="#6-替换节点" class="headerlink" title="6. 替换节点"></a>6. 替换节点</h3><ul>
+<li><p>原生JS替换节点: <code>El.repalceChild(newNode, oldNode);</code><br>注意：<code>oldNode</code>必须是<code>parentEl</code>真实存在的一个子节点</p>
+</li>
+<li><p>jQuery替换节点:<code>$(&#39;p&#39;).replaceWith(&#39;&lt;p&gt;Hello World.&lt;/p&gt;&#39;);</code></p>
+</li>
+</ul>
+<h3 id="7-设置属性-获取属性"><a href="#7-设置属性-获取属性" class="headerlink" title="7. 设置属性/获取属性"></a>7. 设置属性/获取属性</h3><ul>
+<li><p>原生JS设置属性/获取属性:</p>
+<ul>
+<li><code>imgEl.setAttribute(&quot;title&quot;, &quot;logo&quot;);</code></li>
+<li><code>imgEl.getAttribute(&quot;title&quot;);</code></li>
+<li><code>checkboxEl.checked = true;</code></li>
+<li><code>checkboxEl.checked;</code></li>
+</ul>
+</li>
+<li><p>jQuery设置属性/获取属性:</p>
+<p> -<code>$(&quot;#logo&quot;).attr({&quot;title&quot;: &quot;logo&quot;});</code></p>
+<ul>
+<li><code>$(&quot;#logo&quot;).attr(&quot;title&quot;);</code></li>
+<li><code>$(&quot;#checkbox&quot;).prop({&quot;checked&quot;: true});</code></li>
+<li><code>$(&quot;#checkbox&quot;).prop(&quot;checked&quot;);</code></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/&title=《jQuery与原生JS的DOM操作对比》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/&title=《jQuery与原生JS的DOM操作对比》 — _sUper.LEE的个人空间&source=1. 创建元素节点
+原生JS创建元素节点: document.createElement(&quot;p&quot;);
+jQuery创建元素节点：$(&..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jQuery与原生JS的DOM操作对比》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/02/06/flex/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">弹性布局总结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/27/JavaScript之捕捉模型与冒泡模型/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JavaScript之捕捉模型与冒泡模型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/&title=《jQuery与原生JS的DOM操作对比》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/&title=《jQuery与原生JS的DOM操作对比》 — _sUper.LEE的个人空间&source=1. 创建元素节点
+原生JS创建元素节点: document.createElement(&quot;p&quot;);
+jQuery创建元素节点：$(&..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《jQuery与原生JS的DOM操作对比》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/27/jQuery与原生JS的DOM操作对比/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3ay07DMBAFUP7/p0FCLFiQ5M7DBaSTVZU2iU8WHveO397i4/3zuP+cfPv9fPJtcreFAw8PD6819KsjYVTvn4/h6nUkY8bDw8M7zZsUg2RCv3p88pS8SODh4eH9Nd6JoSflpPqK8fDw8P4OL1/gToY+CSbw8PDwXsnL44AeIA81egVpIWvBw8PDi3lbDbBXfv6F/h4eHh5eML3mLbHqtXkZ6D3l6yo8PDy8A7xkC1RvQ0A+oeeL72qQgYeHh3eCV40hdsOCKqC6zQsPDw/vBK863N3gNS8beSl66O/h4eHhLfF6t+sFvtUh7rbl8PDw8E7w8mV08q+/ukSuLsHLuQseHh7eEq/XasqvvS8SD1HCOPbFw8PD2+Xlf+mTSXyrtPRWxT+cx8PDwzvG603feWjb23wwuT8eHh7ead7WgHoL5aR45GUm2jSAh4eHN+D1QtVJO6o6uecv6/LpeHh4eKu8ZKKfb89K+m/VVxltR8DDw8M7xss3SFVD22rxKCyUkzKDh4eHd4CXX1ydxPOrJu23aCGOh4eHd4C3NZRqebh/elIwemE0Hh4e3oQ3n3An5+fPeniVeHh4eAd41Yg2b/zngcL9kdS0ciSBh4eHN+D1ooStRteJNhseHh7eaV5v6OVdXcWwuNowi7p8eHh4eKu86tK2Whgmzar8nr0lOx4eHl6P14tcexunJg2zfNJ/qHt4eHh4h3n5ZoL7X+a8XtFqFgY8PDy8Iu+9eCSYfPk7CRqisoGHh4d3gLcbRvSiit1X1iwweHh4eMXx5MvffGnbCzh64Uhh6wAeHh7eKi9vPuVRRf6y5u3/h8KAh4eH909481/mccalBQ8PD+9Xecn0ndztNS8FDw8P7zSv1+bPG1cJeL5loZCR4OHh4Q14vQbYpPW1e34SYeDh4eEVeR/dE9B1aBblSAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>11.作用域与闭包：this，var，(function () {}) | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《作用域与闭包：this，var，(function () {})》目标无具体目标 知识点 理解 js 中 var 的作用域 了解闭包的概念 理解 this 的指向  课程内容es6中新增了 let 关键词，与块级作用域，相关知识参考： http://es6.ruanyifeng.com/#docs/let  var 作用域先来看个简单的例子： 12345678910111213141516171">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11.作用域与闭包：this，var，(function () {})">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《作用域与闭包：this，var，(function () {})》目标无具体目标 知识点 理解 js 中 var 的作用域 了解闭包的概念 理解 this 的指向  课程内容es6中新增了 let 关键词，与块级作用域，相关知识参考： http://es6.ruanyifeng.com/#docs/let  var 作用域先来看个简单的例子： 12345678910111213141516171">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="11.作用域与闭包：this，var，(function () {})">
+<meta name="twitter:description" content="《作用域与闭包：this，var，(function () {})》目标无具体目标 知识点 理解 js 中 var 的作用域 了解闭包的概念 理解 this 的指向  课程内容es6中新增了 let 关键词，与块级作用域，相关知识参考： http://es6.ruanyifeng.com/#docs/let  var 作用域先来看个简单的例子： 12345678910111213141516171">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">11.作用域与闭包：this，var，(function () {})</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">11.作用域与闭包：this，var，(function () {})</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《作用域与闭包：this，var，-function-》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《作用域与闭包：this，var，(function () {})》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#var-作用域"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">var 作用域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#闭包"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">闭包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包的一个坑"><span class="post-toc-number">1.3.2.1.</span> <span class="post-toc-text">闭包的一个坑</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#this"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">this</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node作用域与闭包：this，var，(function () {})"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">11.作用域与闭包：this，var，(function () {})</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《作用域与闭包：this，var，-function-》"><a href="#《作用域与闭包：this，var，-function-》" class="headerlink" title="《作用域与闭包：this，var，(function () {})》"></a>《作用域与闭包：this，var，(function () {})》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>无具体目标</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>理解 js 中 var 的作用域</li>
+<li>了解闭包的概念</li>
+<li>理解 this 的指向</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><p><strong>es6中新增了 let 关键词，与块级作用域，相关知识参考： <a href="http://es6.ruanyifeng.com/#docs/let" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/let</a> </strong></p>
+<h3 id="var-作用域"><a href="#var-作用域" class="headerlink" title="var 作用域"></a>var 作用域</h3><p>先来看个简单的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">"parent_name"</span>;</span><br><span class="line">  <span class="keyword">var</span> age = <span class="number">13</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> child = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"child_name"</span>;</span><br><span class="line">    <span class="keyword">var</span> childAge = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// =&gt; child_name 13 0.3</span></span><br><span class="line">    <span class="built_in">console</span>.log(name, age, childAge);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  child();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// will throw Error</span></span><br><span class="line">  <span class="comment">// ReferenceError: childAge is not defined</span></span><br><span class="line">  <span class="built_in">console</span>.log(name, age, childAge);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">parent();</span><br></pre></td></tr></table></figure>
+<p>直觉地，内部函数可以访问外部函数的变量，外部不能访问内部函数的变量。上面的例子中内部函数 child 可以访问变量 age，而外部函数 parent 不可以访问 child 中的变量 childAge，因此会抛出没有定义变量的异常。</p>
+<p>有个重要的事，如果忘记var，那么变量就被声明为全局变量了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  value = <span class="string">"hello"</span>;</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">// 输出hello</span></span><br><span class="line"><span class="built_in">console</span>.log(global.value) <span class="comment">// 输出hello</span></span><br></pre></td></tr></table></figure>
+<p>这个例子可以很正常的输出 <code>hello</code>，是因为 <code>value</code> 变量在定义时，没有使用 <code>var</code> 关键词，所以被定义成了全局变量。在 Node 中，全局变量会被定义在 <code>global</code> 对象下；在浏览器中，全局变量会被定义在 <code>window</code> 对象下。</p>
+<p>如果你确实要定义一个全局变量的话，请显示地定义在 <code>global</code> 或者 <code>window</code> 对象上。</p>
+<p>这类不小心定义全局变量的问题可以被 jshint 检测出来，如果你使用 sublime 编辑器的话，记得装一个 <code>SublimeLinter</code> 插件，这是插件支持多语言的语法错误检测，js 的检测是原生支持的。</p>
+<p>JavaScript 中，变量的局部作用域是函数级别的。不同于 C 语言，在 C 语言中，作用域是块级别的。<br>JavaScript 中没有块级作用域。</p>
+<p>js 中，函数中声明的变量在整个函数中都有定义。比如如下代码段，变量 i 和 value 虽然是在 for 循环代码块中被定义，但在代码块外仍可以访问 i 和 value。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> value = <span class="string">"hello world"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">//输出10</span></span><br><span class="line">  <span class="built_in">console</span>.log(value);<span class="comment">//输出hello world</span></span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p>所以有种说法是：应该提前声明函数中需要用到的变量，即，在函数体的顶部声明可能用到的变量，这样就可以避免出现一些奇奇怪怪怪的 bug。</p>
+<p>但我个人不喜欢遵守这一点，一般都是现用现声明的。这类错误的检测交给 jshint 来做就好了。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包这个概念，在函数式编程里很常见，简单的说，就是使内部函数可以访问定义在外部函数中的变量。</p>
+<p>假如我们要实现一系列的函数：add10，add20，它们的定义是 <code>int add10(int n)</code>。</p>
+<p>为此我们构造了一个名为 adder 的构造器，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> adder = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> base = x;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n + base;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add10 = adder(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(add10(<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add20 = adder(<span class="number">20</span>);</span><br><span class="line"><span class="built_in">console</span>.log(add20(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<p>每次调用 adder 时，adder 都会返回一个函数给我们。我们传给 adder 的值，会保存在一个名为 base 的变量中。由于返回的函数在其中引用了 base 的值，于是 base 的引用计数被 +1。当返回函数不被垃圾回收时，则 base 也会一直存在。</p>
+<p>我暂时想不出什么实用的例子来，如果想深入理解这块，可以看看这篇 <a href="http://coolshell.cn/articles/6731.html" target="_blank" rel="noopener">http://coolshell.cn/articles/6731.html</a></p>
+<h4 id="闭包的一个坑"><a href="#闭包的一个坑" class="headerlink" title="闭包的一个坑"></a>闭包的一个坑</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, <span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这个代码块会打印五个 <code>5</code> 出来，而我们预想的结果是打印 0 1 2 3 4。</p>
+<p>之所以会这样，是因为 setTimeout 中的 i 是对外层 i 的引用。当 setTimeout 的代码被解释的时候，运行时只是记录了 i 的引用，而不是值。而当 setTimeout 被触发时，五个 setTimeout 中的 i 同时被取值，由于它们都指向了外层的同一个 i，而那个 i 的值在迭代完成时为 5，所以打印了五次 <code>5</code>。</p>
+<p>为了得到我们预想的结果，我们可以把 i 赋值成一个局部的变量，从而摆脱外层迭代的影响。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">idx</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(idx);</span><br><span class="line">    &#125;, <span class="number">5</span>);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>在函数执行时，this 总是指向调用该函数的对象。要判断 this 的指向，其实就是判断 this 所在的函数属于谁。</p>
+<p>在《javaScript语言精粹》这本书中，把 this 出现的场景分为四类，简单的说就是：</p>
+<ul>
+<li>有对象就指向调用对象</li>
+<li>没调用对象就指向全局对象</li>
+<li>用new构造就指向新对象</li>
+<li>通过 apply 或 call 或 bind 来改变 this 的所指。</li>
+</ul>
+<p>1）函数有所属对象时：指向所属对象</p>
+<p>函数有所属对象时，通常通过 <code>.</code> 表达式调用，这时 <code>this</code> 自然指向所属对象。比如下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;<span class="attr">value</span>: <span class="number">100</span>&#125;;</span><br><span class="line">myObject.getValue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.value);  <span class="comment">// 输出 100</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 输出 &#123; value: 100, getValue: [Function] &#125;，</span></span><br><span class="line">  <span class="comment">// 其实就是 myObject 对象本身</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myObject.getValue()); <span class="comment">// =&gt; 100</span></span><br></pre></td></tr></table></figure>
+<p><code>getValue()</code> 属于对象 <code>myObject</code>，并由 <code>myOjbect</code> 进行 <code>.</code> 调用，因此 <code>this</code> 指向对象 <code>myObject</code>。</p>
+<p>2) 函数没有所属对象：指向全局对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;<span class="attr">value</span>: <span class="number">100</span>&#125;;</span><br><span class="line">myObject.getValue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.value) <span class="comment">// =&gt; undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">// 输出全局对象 global</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  foo();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myObject.getValue()); <span class="comment">// =&gt; 100</span></span><br></pre></td></tr></table></figure>
+<p>在上述代码块中，<code>foo</code> 函数虽然定义在 <code>getValue</code> 的函数体内，但实际上它既不属于 <code>getValue</code> 也不属于 <code>myObject</code>。<code>foo</code> 并没有被绑定在任何对象上，所以当调用时，它的 <code>this</code> 指针指向了全局对象 <code>global</code>。</p>
+<p>据说这是个设计错误。</p>
+<p>3）构造器中的 this：指向新对象</p>
+<p>js 中，我们通过 <code>new</code> 关键词来调用构造函数，此时 this 会绑定在该新对象上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> SomeClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.value = <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myCreate = <span class="keyword">new</span> SomeClass();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myCreate.value); <span class="comment">// 输出100</span></span><br></pre></td></tr></table></figure>
+<p>顺便说一句，在 js 中，构造函数、普通函数、对象方法、闭包，这四者没有明确界线。界线都在人的心中。</p>
+<p>4) apply 和 call 调用以及 bind 绑定：指向绑定的对象</p>
+<p>apply() 方法接受两个参数第一个是函数运行的作用域，另外一个是一个参数数组(arguments)。</p>
+<p>call() 方法第一个参数的意义与 apply() 方法相同，只是其他的参数需要一个个列举出来。</p>
+<p>简单来说，call 的方式更接近我们平时调用函数，而 apply 需要我们传递 Array 形式的数组给它。它们是可以互相转换的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;<span class="attr">value</span>: <span class="number">100</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">foo(); <span class="comment">// 全局变量 global</span></span><br><span class="line">foo.apply(myObject); <span class="comment">// &#123; value: 100 &#125;</span></span><br><span class="line">foo.call(myObject); <span class="comment">// &#123; value: 100 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newFoo = foo.bind(myObject);</span><br><span class="line">newFoo(); <span class="comment">// &#123; value: 100 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>完。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/&title=《11.作用域与闭包：this，var，(function () {})》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/&title=《11.作用域与闭包：this，var，(function () {})》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《11.作用域与闭包：this，var，(function () {})》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/nodejs 中的那些最佳实践/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">14.js 中的那些最佳实践</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/何为 connect 中间件/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">18.何为 connect 中间件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/&title=《11.作用域与闭包：this，var，(function () {})》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/&title=《11.作用域与闭包：this，var，(function () {})》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《11.作用域与闭包：this，var，(function () {})》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node作用域与闭包：this，var，(function () {})/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADOUlEQVR42u3aQXKjUAwE0Nz/0p5tphzjlmSqjHisXA6G/2ChqPV/fuLj8XT8/v75zONvnq+Zf3O8ng8f2NjY2BdhPw6P43PyKz8/guT6xw8xX+cfq8XGxsZex3616OPPkzKTP+7J2l5+j42NjX17drXgJe1KfiQFEhsbGxs7YVdbgrzsHZ+TrBMbGxv7buxeS5DfPg/xqyXq9CwNGxsb++vZvaV85+dT5tvY2NjYX8zuRTmTjTjJr6rDhrICGxsbexG72mYkmLwB6LUKn9o8hI2Njb2DfRzZTArPpBTlQ4i8fYreITY2NvYF2dVF5APaSYNRfVjN0QI2Njb2CnZ1u0yP2hsnJ/fNr/lHK4KNjY29gp0XsOSf++PF5c3PmwzsUxEVNjY29gp2rz3oBUnV0CqPscoBEzY2NvYidrUJyUOfaiw1aWDKgwFsbGzsdexJtDRfxOQhVsfP2NjY2PvYyc/yiCeJpaoFMt+4U4jDsLGxsW/A7m3l6YU+vXalN8DAxsbGvgP7U23DGUUxHzm8eUzY2NjYi9h5EepF+Tk+GQNXA6xo4w42Njb2Cnb1QUwA5TLTej3Vl4GNjY29g503Cc0op9iW9N5YdQiNjY2NfXV2NfTP/9p7WHmpq8ZY/52PjY2NvZo92XYzqp8tdv6rQnaFjY2NfSl2dStMr3T1zu9t5SmMk7GxsbEXsXsFLImleu1KAujdN+pXsLGxsS/F7o1vk8HqGVPo5I5Ri4KNjY29iJ2UgcnNeiWql/zkhRMbGxt7HzsP7guFobhDZj4qzh8lNjY29h3YvVgnH8HOm5B8u8+bQS82Njb2InYv0KmODXqFqldKo94LGxsbexE7/xc/L2/z8cOnNve83KmEjY2NvYidF4NeiF8thAmyWkSxsbGx97EfxSMPhvL2pjcGTmKpNyNebGxs7BXsXgHIB8P5MKDXeFSDpDIeGxsb+yLsvGglsX6vEE7eUjXkwsbGxt7KzmP3vAbmYVOv7PU6C2xsbGzsajdTjajyNYwGzNjY2Ng3Zs+bh+p18u/L821sbGzsRex5mekx8pYjGQOckqVhY2Njfz27Gsf0op9eEUoYvWKJjY2NvYL9D6JaKyY8RCLWAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

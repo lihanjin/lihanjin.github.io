@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>12.线上部署：heroku | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《线上部署：heroku》目标将 https://github.com/Ricardo-Li/node-practice-2 (这个项目已经被删了。参照 https://github.com/alsotang/node-lessons/tree/master/lesson3 的代码自己操作一下吧。)这个项目部署上 heroku，成为一个线上项目 我部署的在这里 http://serene-fall">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.线上部署：heroku">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/node线上部署：heroku/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《线上部署：heroku》目标将 https://github.com/Ricardo-Li/node-practice-2 (这个项目已经被删了。参照 https://github.com/alsotang/node-lessons/tree/master/lesson3 的代码自己操作一下吧。)这个项目部署上 heroku，成为一个线上项目 我部署的在这里 http://serene-fall">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson12/1.png">
+<meta property="og:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson12/2.png">
+<meta property="og:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson12/3.png">
+<meta property="og:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson12/4.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12.线上部署：heroku">
+<meta name="twitter:description" content="《线上部署：heroku》目标将 https://github.com/Ricardo-Li/node-practice-2 (这个项目已经被删了。参照 https://github.com/alsotang/node-lessons/tree/master/lesson3 的代码自己操作一下吧。)这个项目部署上 heroku，成为一个线上项目 我部署的在这里 http://serene-fall">
+<meta name="twitter:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson12/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">12.线上部署：heroku</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">12.线上部署：heroku</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《线上部署：heroku》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《线上部署：heroku》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#知识点"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#课程内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">课程内容</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是-heroku"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">什么是 heroku</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-node线上部署：heroku"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">12.线上部署：heroku</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《线上部署：heroku》"><a href="#《线上部署：heroku》" class="headerlink" title="《线上部署：heroku》"></a>《线上部署：heroku》</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>将 <a href="https://github.com/Ricardo-Li/node-practice-2" target="_blank" rel="noopener">https://github.com/Ricardo-Li/node-practice-2</a> (这个项目已经被删了。参照 <a href="https://github.com/alsotang/node-lessons/tree/master/lesson3" target="_blank" rel="noopener">https://github.com/alsotang/node-lessons/tree/master/lesson3</a> 的代码自己操作一下吧。)这个项目部署上 heroku，成为一个线上项目</p>
+<p>我部署的在这里 <a href="http://serene-falls-9294.herokuapp.com/" target="_blank" rel="noopener">http://serene-falls-9294.herokuapp.com/</a></p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li>学习 heroku 的线上部署(<a href="https://www.heroku.com/" target="_blank" rel="noopener">https://www.heroku.com/</a> )</li>
+</ol>
+<h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><h3 id="什么是-heroku"><a href="#什么是-heroku" class="headerlink" title="什么是 heroku"></a>什么是 heroku</h3><p>heroku 是弄 ruby 的 paas 起家，现在支持多种语言环境，更甚的是它强大的 add-on 服务。</p>
+<p>paas 平台相信大家都不陌生。Google 有 gae，国内新浪有 sae。paas 平台相对 vps 来说，不需要你配置服务器，不需要装数据库，也不需要理会负载均衡。这一切都可以在平台上直接获取。</p>
+<p>你只要专注自己的业务，把应用的逻辑写好，然后发布上去，应用自然就上线了。数据库方面，如果你用 mysql，那么你可以从平台商那里得到一个 mysql 的地址、账号和密码，直接连接就能用。如果应用的流量增大，需要横向拓展，则只用去到 paas 平台的管理页面，增大服务器实例的数量即可，负载均衡会自动帮你完成。</p>
+<p>说起来，我之所以对于 web 开发产生兴趣也是因为当年 gae 的关系。那时候除了 gae 之外，没有别的 paas 平台，gae 是横空出世的。有款翻墙的软件，叫 gappproxy(<a href="https://code.google.com/p/gappproxy/" target="_blank" rel="noopener">https://code.google.com/p/gappproxy/</a> )——可以认为是 goagent 的前身——就是搭建在 gae 上面的，不仅快，而且免费。于是我就很想弄懂这样一个程序是如何开发的。好在 gappproxy 是开源的，于是我下了源码来看，那时候才大一，只学过 c，看到那些 python 代码就凌乱了。于是转头也去学 python，后来渐渐发现了 web 开发的乐趣，于是 ruby 和 node.js 也碰碰。后来 goagent 火起来了，我又去看了看它的代码，发现非常难看，就自己写了个 <a href="https://github.com/alsotang/keepagent" target="_blank" rel="noopener">https://github.com/alsotang/keepagent</a> 。不过现在回想起来，还是 goagent 的实现比较稳定以及效率高。</p>
+<p>heroku 的免费额度还是足够的，对于 demo 应用来说，放上去是绰绰有余的。各位搞 web 开发的大学生朋友，一定要试着让你开发的项目尽可能早地去线上跑，这样你的项目可以被其他人看到，能够促使你更有热情地进行进一步开发。这回我们放的是 cnode 社区的爬虫上去，你其实可以试着为你们学院或者学校的新闻站点写个爬虫，提供 json api，然后去申请个微信公共平台，每天推送学院网站的新闻。这东西辅导员是有需求的，可以做个给他们用。</p>
+<p>好了，我们先 clone <a href="https://github.com/Ricardo-Li/node-practice-2" target="_blank" rel="noopener">https://github.com/Ricardo-Li/node-practice-2</a> 这个项目。由于我们这回讲部署，所以代码就用现成的了，代码的内容就是 lesson 3（<a href="https://github.com/alsotang/node-lessons/tree/master/lesson3" target="_blank" rel="noopener">https://github.com/alsotang/node-lessons/tree/master/lesson3</a> ） 里面的那个爬虫。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/alsotang/node-lessons/blob/master/lesson12/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>clone 下来以后，我们去看看代码。代码中有两个特殊的地方，</p>
+<p>一个是一个叫 Procfile 的文件，内容是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web: node app.js</span><br></pre></td></tr></table></figure>
+<p>一个是 app.js 里面，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.listen(process.env.PORT || <span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
+<p>这两者都是为了部署 heroku 所做的。</p>
+<p>大家有没有想过，当部署一个应用上 paas 平台以后，paas 要为我们干些什么？</p>
+<p>首先，平台要有我们语言的运行时；</p>
+<p>然后，对于 node.js 来说，它要帮我们安装 package.json 里面的依赖；</p>
+<p>然后呢？然后需要启动我们的项目；</p>
+<p>然后把外界的流量导入我们的项目，让我们的项目提供服务。</p>
+<p>上面那两处特殊的地方，一个是启动项目的，一个是导流量的。</p>
+<p>heroku 虽然能推测出你的应用是 node.js 应用，但它不懂你的主程序是哪个，所以我们提供了 Procfile 来指导它启动我们的程序。</p>
+<p>而我们的程序，本来是监听 5000 端口的，但是 heroku 并不知道。当然，你也可以在 Procfile 中告诉 heroku，可如果大家都监听 5000 端口，这时候不就有冲突了吗？所以这个地方，heroku 使用了主动的策略，主动提供一个环境变量 <code>process.env.PORT</code> 来供我们监听。</p>
+<p>这样的话，一个简单 app 的配置就完成了。</p>
+<p>我们去 <a href="https://www.heroku.com/" target="_blank" rel="noopener">https://www.heroku.com/</a> 申请个账号，然后下载它的工具包 <a href="https://toolbelt.heroku.com/" target="_blank" rel="noopener">https://toolbelt.heroku.com/</a> ，然后再在命令行里面，通过 <code>heroku login</code> 来登录。</p>
+<p>上述步骤完成后，我们进入 <code>node-practice-2</code> 的目录，执行 <code>heroku create</code>。这时候，heroku 会为我们随机取一个应用名字，并提供一个 git 仓库给我们。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/alsotang/node-lessons/blob/master/lesson12/2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>接着，往 heroku 这个远端地址推送我们的 master 分支：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/alsotang/node-lessons/blob/master/lesson12/3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>heroku 会自动检测出我们是 node.js 程序，并安装依赖，然后按照 Procfile 进行启动。</p>
+<p>push 完成后，在命令键入 <code>heroku open</code>，则 heroku 会自动打开浏览器带我们去到相应的网址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/alsotang/node-lessons/blob/master/lesson12/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>到此课程也就结束了。</p>
+<p>随便聊聊 heroku 的 addon 吧。这个 addon 确实是个神奇的东西，反正在 heroku 之外我还没怎么见到这类概念。这些 addon 提供商，有些提供 redis 的服务，有些提供 mongodb，有些提供 mysql。你可以直接在 heroku 上面进行购买，然后 heroku 就会提供一段相应服务的地址和账号密码给你用来连接。</p>
+<p>大家可以去 <a href="https://addons.heroku.com/" target="_blank" rel="noopener">https://addons.heroku.com/</a> 这个页面看看，玲琅满目各种应用可以方便接入。之所以这类服务有市场，也是因为亚马逊的 aws 非常牛逼。为什么这么说呢，因为网络速度啊。如果现在在国内，你在 ucloud 买个主机，然后用个阿里云的 rds，那么应用的响应速度会因为 mysql 连接的问题卡得动不了。但在 heroku 这里，提供商们，包括 heroku 自己，都是构建在 aws 上面，这样一来，各种服务的互通其实走的是内网，速度很可以接受，于是各种 addon 提供商就做起来了。</p>
+<p>国内的话，其实在阿里云上面也可以考虑这么搞一搞。</p>
+<p>完。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node线上部署：heroku/&title=《12.线上部署：heroku》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node线上部署：heroku/&title=《12.线上部署：heroku》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node线上部署：heroku/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《12.线上部署：heroku》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node线上部署：heroku/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node线上部署：heroku/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/node浏览器端测试：mocha，chai，phantomjs/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">7.浏览器端测试：mocha，chai，phantomjs</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/一个最简单的 express 应用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">2.一个最简单的 express 应用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/node线上部署：heroku/&title=《12.线上部署：heroku》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/node线上部署：heroku/&title=《12.线上部署：heroku》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/node线上部署：heroku/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《12.线上部署：heroku》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/node线上部署：heroku/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/node线上部署：heroku/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aQW7DMAwEwP7/0ynQa+Fkl3KKRhqfAsepNTqwFMmvr/h6/Fy/P199e/XM8/tXz9x2YWBgfCzj8fR6zmgXna8hXxsGBsY5jDzIJktMfttu2Ys1Y2BgYIwCcRJS2zQUAwMDoz24zo6gORIDAwOjTdee/9FZME2C+M1ncQwMjA9krDQG3v35j/obGBgY/5jxWLjyV7Zty3olGBgYWzNm7cY27iXPJ9++WCEGBsamjPwAWRe/lp8ptgADA2Nrxspy82QxD8RXv63jPQYGxnaM9WDaFuaSTWwH0TAwME5j5GncrFiWJ3/DfiwGBsZGjDxdWwmjSULZlv8wMDDOYSQvbpuRycvyTanH1DAwMDZl5KEtX25emFsZ1yhO2xgYGB/LmAW+fIdungq52hQMDIwDGLMj5Sx9TO4km3s5ZoGBgbEdo24QLo9ozApqRYaLgYGxHWO9fJ+H5ra1UAx2YGBgHMDIE74Zrx3CaNNKDAyMvRmz5O8dA2FJU2GYzmJgYGzByEtds8JZ+/fbfwYYGBhnMtbHtmZhdGVtGBgYezPaUlq+6FkQj0psGBgYxzAe5bXShmxTwCJZxMDA2JpRNwtHDYPZ/buSSwwMjD0Ys1J+khTOhi2GARcDA+MAxuzU245KrB9fX1QNMTAwMMpSWvLbnFrXCDEwMI5krLcHVs7ZLzAYGBgHMJJXJqX55PV33cHAwDiHMRtxWGG3Rb31EQ0MDIyPZXwDaqyyUM7CNgYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

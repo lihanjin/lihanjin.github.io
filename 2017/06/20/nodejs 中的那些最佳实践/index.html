@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>14.js 中的那些最佳实践 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="《js 中的那些最佳实践》这个章节需要大家帮忙补充，一次性想不完那么多  JavaScript 语言精粹http://book.douban.com/subject/3590768/                                                                                                            这">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14.js 中的那些最佳实践">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="《js 中的那些最佳实践》这个章节需要大家帮忙补充，一次性想不完那么多  JavaScript 语言精粹http://book.douban.com/subject/3590768/                                                                                                            这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson14/1.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14.js 中的那些最佳实践">
+<meta name="twitter:description" content="《js 中的那些最佳实践》这个章节需要大家帮忙补充，一次性想不完那么多  JavaScript 语言精粹http://book.douban.com/subject/3590768/                                                                                                            这">
+<meta name="twitter:image" content="https://github.com/alsotang/node-lessons/blob/master/lesson14/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">14.js 中的那些最佳实践</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">14.js 中的那些最佳实践</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#《js-中的那些最佳实践》"><span class="post-toc-number">1.</span> <span class="post-toc-text">《js 中的那些最佳实践》</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-语言精粹"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">JavaScript 语言精粹</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-之美"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">JavaScript 之美</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#继承"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#callback-hell"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">callback hell</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控制流"><span class="post-toc-number">1.0.6.</span> <span class="post-toc-text">控制流</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本运算符"><span class="post-toc-number">1.0.7.</span> <span class="post-toc-text">基本运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#计算型属性"><span class="post-toc-number">1.0.8.</span> <span class="post-toc-text">计算型属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#运算符重载"><span class="post-toc-number">1.0.9.</span> <span class="post-toc-text">运算符重载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类型转换"><span class="post-toc-number">1.0.10.</span> <span class="post-toc-text">类型转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相等比较"><span class="post-toc-number">1.0.11.</span> <span class="post-toc-text">相等比较</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#嵌套类型"><span class="post-toc-number">1.0.12.</span> <span class="post-toc-text">嵌套类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拓展"><span class="post-toc-number">1.0.13.</span> <span class="post-toc-text">拓展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数式编程"><span class="post-toc-number">1.0.14.</span> <span class="post-toc-text">函数式编程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#泛型"><span class="post-toc-number">1.0.15.</span> <span class="post-toc-text">泛型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#权限控制"><span class="post-toc-number">1.0.16.</span> <span class="post-toc-text">权限控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设计模式"><span class="post-toc-number">1.0.17.</span> <span class="post-toc-text">设计模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#构建大型项目"><span class="post-toc-number">1.0.18.</span> <span class="post-toc-text">构建大型项目</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-nodejs 中的那些最佳实践"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">14.js 中的那些最佳实践</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="《js-中的那些最佳实践》"><a href="#《js-中的那些最佳实践》" class="headerlink" title="《js 中的那些最佳实践》"></a>《js 中的那些最佳实践》</h1><p><strong>这个章节需要大家帮忙补充，一次性想不完那么多</strong></p>
+<hr>
+<h3 id="JavaScript-语言精粹"><a href="#JavaScript-语言精粹" class="headerlink" title="JavaScript 语言精粹"></a>JavaScript 语言精粹</h3><p><a href="http://book.douban.com/subject/3590768/" target="_blank" rel="noopener">http://book.douban.com/subject/3590768/</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/alsotang/node-lessons/blob/master/lesson14/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>这本书很薄，只有 155 页，但该讲的几乎都讲了。大家想办法搞来看看吧（我总不能很没节操地给个电子版 PDF 链接在这里吧）。</p>
+<p>js 这门语言，水很浅。没有太复杂的地方可以钻，但特么的坑又多。</p>
+<p>上面的那本书是一定要看的。这本书专注在讲 js 语法，其他 js 的书都过多地涉及了浏览器知识。</p>
+<h3 id="JavaScript-之美"><a href="#JavaScript-之美" class="headerlink" title="JavaScript 之美"></a>JavaScript 之美</h3><ul>
+<li>其一：<a href="http://fxck.it/post/72326363595" target="_blank" rel="noopener">http://fxck.it/post/72326363595</a></li>
+<li>其二：<a href="http://fxck.it/post/73513189448" target="_blank" rel="noopener">http://fxck.it/post/73513189448</a></li>
+</ul>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>js 前端不懂有什么好办法，后端的话，很方便。</p>
+<p>用 node 官方的 <code>util</code> 库，下面是直接从官网摘抄来的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">"events"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyStream</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    events.EventEmitter.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">util.inherits(MyStream, events.EventEmitter);</span><br><span class="line"></span><br><span class="line">MyStream.prototype.write = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">"data"</span>, data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> stream = <span class="keyword">new</span> MyStream();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(stream <span class="keyword">instanceof</span> events.EventEmitter); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(MyStream.super_ === events.EventEmitter); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">stream.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Received data: "'</span> + data + <span class="string">'"'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">stream.write(<span class="string">"It works!"</span>); <span class="comment">// Received data: "It works!"</span></span><br></pre></td></tr></table></figure>
+<p>js 是面向对象的，但是是“基于原型的面向对象”，没有类。没有多重继承，没有接口。没有结构体，没有枚举类型。</p>
+<p>但它的字面量哈希和 function 都足够灵活，拼拼凑凑，上面那些东西都能“模拟”着用。</p>
+<p>说到没有类的这个问题，很多人总是要纠正其他人关于 js 原型的理解的。我觉得这是没有必要的。基于原型又不是很牛逼，ES6不是照样给出了 class 关键字吗。不管类还是原型都是为了抽象，烂的东西始终烂，不好理解的始终不好理解。</p>
+<p>最近学习 ios 的 swift，看见里面有不少相比 objc 舒服的改进。比如 objc 的“方法调用”，学的是 smalltalk 那一套，那不叫方法调用，而是消息传递。结果 swift 里面不照样是方法调用的形式？</p>
+<h3 id="callback-hell"><a href="#callback-hell" class="headerlink" title="callback hell"></a>callback hell</h3><p>用 eventproxy 和 async 已经能解决大部分问题。剩下的小部分问题，肯定是设计错误。：）</p>
+<p>参见：</p>
+<ul>
+<li>《使用 eventproxy 控制并发》：<a href="https://github.com/alsotang/node-lessons/tree/master/lesson4" target="_blank" rel="noopener">https://github.com/alsotang/node-lessons/tree/master/lesson4</a></li>
+<li>《使用 async 控制并发》：<a href="https://github.com/alsotang/node-lessons/tree/master/lesson5" target="_blank" rel="noopener">https://github.com/alsotang/node-lessons/tree/master/lesson5</a></li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>写 js 很少去定义类。Object 的便利在多数其他语言需要定义类的场景下都能直接用。</p>
+<p>js 中，用好 Number，String，Array，Object 和 Function 就够了。有时用用 RegExp。</p>
+<p>用于 js 这门语言本身的残废，大多数时候都采用“约定胜于配置”的思想来交互合作。</p>
+<h3 id="控制流"><a href="#控制流" class="headerlink" title="控制流"></a>控制流</h3><p>很常规，C 语言那套。</p>
+<h3 id="基本运算符"><a href="#基本运算符" class="headerlink" title="基本运算符"></a>基本运算符</h3><p>C 语言那套。二进制操作并不会降低效率，V8 很聪明的。</p>
+<h3 id="计算型属性"><a href="#计算型属性" class="headerlink" title="计算型属性"></a>计算型属性</h3><p>也就是帮一个对象的属性定义 get 和 set 方法，通过 <code>obj.value</code> 和 <code>obj.value=</code> 的形式来调用。</p>
+<p>koa(<a href="http://koajs.com/" target="_blank" rel="noopener">http://koajs.com/</a> ) 把这套玩得炉火纯青。</p>
+<h3 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h3><p>无</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>手动帮你需要转换的类型的类定义 <code>.toxxx</code> 方法，比如 <code>.toString</code>，<code>.toJSON</code>，<code>toNumber</code>。</p>
+<p>js 的隐式类型转换用一次坑一次。</p>
+<h3 id="相等比较"><a href="#相等比较" class="headerlink" title="相等比较"></a>相等比较</h3><p>在 js 中，务必使用 <code>===</code> 三个等于号来比较对象，或者自定义方法来比较，不要使用 <code>==</code>。</p>
+<p>我最近做一个项目，从数据库中取出的数据，虽然应该是字符型的，但有时它们是 String 的表示，有时是 Number 的表示。为了省事，会有人直接用 <code>==</code> 来对它们进行比较。这种时候，建议在比较时，把它们都转成 String 类型，然后用 <code>===</code> 来比较。</p>
+<p>比如 <code>var x = 31243; var y = &#39;31243&#39;</code>，比较时，这么做：<code>String(x) === String(y)</code></p>
+<h3 id="嵌套类型"><a href="#嵌套类型" class="headerlink" title="嵌套类型"></a>嵌套类型</h3><p>随便弄。</p>
+<p>function 构造函数、闭包、字面量哈希，都可以混在一起写，多少层都行，无限制。</p>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>当无法接触一个类的源码，又想帮这个类新增方法的时候。操作它的 prototype 就好了。但不推荐！</p>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>js 中，匿名函数非常的方便，有效利用函数式编程的特性可以使人写代码时心情愉悦。</p>
+<p>使用 lodash：<a href="https://lodash.com/docs" target="_blank" rel="noopener">https://lodash.com/docs</a></p>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>类型都经常忽略还泛型！every parammeter is 泛型 in js</p>
+<h3 id="权限控制"><a href="#权限控制" class="headerlink" title="权限控制"></a>权限控制</h3><p>类定义中，没有 public private 等关键词，都靠约定。而且经常有人突破约定。</p>
+<p>有些 http 方面的库，时不时就去 stub 原生 http 库的方法，0.11 时的 node.js 完全不按章法出牌，所以很多这些库都出现兼容性问题。</p>
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><p>《解密设计模式-王垠》</p>
+<p><a href="https://github.com/alsotang/node-lessons/blob/master/lesson14/%E8%A7%A3%E5%AF%86%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%8E%8B%E5%9E%A0.md" target="_blank" rel="noopener">https://github.com/alsotang/node-lessons/blob/master/lesson14/%E8%A7%A3%E5%AF%86%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%8E%8B%E5%9E%A0.md</a></p>
+<h3 id="构建大型项目"><a href="#构建大型项目" class="headerlink" title="构建大型项目"></a>构建大型项目</h3><p>从 npm 上面寻找质量高的库，并用质量高的方式拼凑起来。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/&title=《14.js 中的那些最佳实践》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/&title=《14.js 中的那些最佳实践》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《14.js 中的那些最佳实践》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/nodecookie 和 session/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">16.cookie 和 session</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/node作用域与闭包：this，var，(function () {})/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">11.作用域与闭包：this，var，(function () {})</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/&title=《14.js 中的那些最佳实践》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/&title=《14.js 中的那些最佳实践》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《14.js 中的那些最佳实践》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/nodejs 中的那些最佳实践/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3aO25DMQwEwNz/0gmQKoU/u6SEuJhXGYEja2RAopf6+oqf79/n7+u/f3n992ejteMkIw8fPDw8vNHUnz37CSUTfT31ZD5PFxcPDw/vGi85DNpjIwHnsOS/8PDw8D6N92YLTj6sXI52UfDw8PA+mfe6OE4OhmTM5DUeHh7ef/Hyj2yj23zrz8v6K1kLHh4eXsybNcD+9/X1/h4eHh7eqKu+L3zbCHjT9HowTzw8PLwLvFn7alY054Fs2zx7c3jg4eHhHeUl2/3sEsAmRMhn9ebgwcPDw7vGm12lKorasuzOryxEBwMeHh7eUd4m/8zDhXy6bXSbgPHw8PBu8E6V0e2KbthFZIyHh4d3lJdPdHZlajO5dszoSMDDw8M7xGs34vYwiKr4soCOLhzg4eHhXeC1x0Mb6c5CivxzIzweHh7eBV7eiDo73WhbH7XlihocDw8Pb8FLtuC2ON5cpcrxw+8NDw8Pb8RrLzC1oUNLysv01aUBPDw8vAUv39DPTi55/2yHjwprPDw8vEO8vJGfTysp0PN3tkg8PDy8G7y2nb8vwWchSH6Z4MHNCDw8PLzLvAODrq9P7RcODw8P7x4vby9tpniKuvosPDw8vKO8zba7CSbay1uzNhseHh7eWd6pBlXbQmtb/vmYD743PDw8vKO8JFrdl9H3fge0S4+Hh4e3532XTx71blpcyX2H4lvCw8PDO8rLh85DijaYaA+VWRyMh4eHd4q3PxiSEDaJJJISuS3Z8fDw8G7wZrVoGwoUKUgZ3eZHGh4eHt5ZXtuenzW02ug2/00Q/UrAw8PDu8DLw4J2urNYYZbQPvhfPDw8vI/h5Zt1Hmoky5EsJR4eHt7n8NreWntUbAru+pzBw8PDW/NmUWx7VKy2+HjJVjEuHh4eXlobHwgINpex8lAjHxMPDw/vAu8H3UppzuEwbhYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

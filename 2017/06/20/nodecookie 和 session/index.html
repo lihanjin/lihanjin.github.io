@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>16.cookie 和 session | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="cookie 和 session众所周知，HTTP 是一个无状态协议，所以客户端每次发出请求时，下一次请求无法得知上一次请求所包含的状态数据，如何能把一个用户的状态数据关联起来呢？ 比如在淘宝的某个页面中，你进行了登陆操作。当你跳转到商品页时，服务端如何知道你是已经登陆的状态？ cookie首先产生了 cookie 这门技术来解决这个问题，cookie 是 http 协议的一部分，它的处理分为如下">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="16.cookie 和 session">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/nodecookie 和 session/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="cookie 和 session众所周知，HTTP 是一个无状态协议，所以客户端每次发出请求时，下一次请求无法得知上一次请求所包含的状态数据，如何能把一个用户的状态数据关联起来呢？ 比如在淘宝的某个页面中，你进行了登陆操作。当你跳转到商品页时，服务端如何知道你是已经登陆的状态？ cookie首先产生了 cookie 这门技术来解决这个问题，cookie 是 http 协议的一部分，它的处理分为如下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/Ricardo-Li/node-lessons/blob/master/lesson16/1.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="16.cookie 和 session">
+<meta name="twitter:description" content="cookie 和 session众所周知，HTTP 是一个无状态协议，所以客户端每次发出请求时，下一次请求无法得知上一次请求所包含的状态数据，如何能把一个用户的状态数据关联起来呢？ 比如在淘宝的某个页面中，你进行了登陆操作。当你跳转到商品页时，服务端如何知道你是已经登陆的状态？ cookie首先产生了 cookie 这门技术来解决这个问题，cookie 是 http 协议的一部分，它的处理分为如下">
+<meta name="twitter:image" content="https://github.com/Ricardo-Li/node-lessons/blob/master/lesson16/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">16.cookie 和 session</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">16.cookie 和 session</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2017-06-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cookie-和-session"><span class="post-toc-number">1.</span> <span class="post-toc-text">cookie 和 session</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cookie"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#express-中的-cookie"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">express 中的 cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#session"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">session</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#各种存储的利弊"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">各种存储的利弊</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#signedCookie"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">signedCookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cookie-session"><span class="post-toc-number">1.0.6.</span> <span class="post-toc-text">cookie-session</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#session-cookie"><span class="post-toc-number">1.0.7.</span> <span class="post-toc-text">session cookie</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#etag-当做-session，保存-http-会话"><span class="post-toc-number">1.0.8.</span> <span class="post-toc-text">etag 当做 session，保存 http 会话</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-nodecookie 和 session"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">16.cookie 和 session</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-20 09:35:08" datetime="2017-06-20T01:35:08.000Z"  itemprop="datePublished">2017-06-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="cookie-和-session"><a href="#cookie-和-session" class="headerlink" title="cookie 和 session"></a>cookie 和 session</h1><p>众所周知，HTTP 是一个无状态协议，所以客户端每次发出请求时，下一次请求无法得知上一次请求所包含的状态数据，如何能把一个用户的状态数据关联起来呢？</p>
+<p>比如在淘宝的某个页面中，你进行了登陆操作。当你跳转到商品页时，服务端如何知道你是已经登陆的状态？</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>首先产生了 cookie 这门技术来解决这个问题，cookie 是 http 协议的一部分，它的处理分为如下几步：</p>
+<ul>
+<li>服务器向客户端发送 cookie。<ul>
+<li>通常使用 HTTP 协议规定的 set-cookie 头操作。</li>
+<li>规范规定 cookie 的格式为 name = value 格式，且必须包含这部分。</li>
+</ul>
+</li>
+<li>浏览器将 cookie 保存。</li>
+<li>每次请求浏览器都会将 cookie 发向服务器。</li>
+</ul>
+<p>其他可选的 cookie 参数会影响将 cookie 发送给服务器端的过程，主要有以下几种：</p>
+<ul>
+<li>path：表示 cookie 影响到的路径，匹配该路径才发送这个 cookie。</li>
+<li>expires 和 maxAge：告诉浏览器这个 cookie 什么时候过期，expires 是 UTC 格式时间，maxAge 是 cookie 多久后过期的相对时间。当不设置这两个选项时，会产生 session cookie，session cookie 是 transient 的，当用户关闭浏览器时，就被清除。一般用来保存 session 的 session_id。</li>
+<li>secure：当 secure 值为 true 时，cookie 在 HTTP 中是无效，在 HTTPS 中才有效。</li>
+<li>httpOnly：浏览器不允许脚本操作 document.cookie 去更改 cookie。一般情况下都应该设置这个为 true，这样可以避免被 xss 攻击拿到 cookie。</li>
+</ul>
+<h3 id="express-中的-cookie"><a href="#express-中的-cookie" class="headerlink" title="express 中的 cookie"></a>express 中的 cookie</h3><p>express 在 4.x 版本之后，session管理和cookies等许多模块都不再直接包含在express中，而是需要单独添加相应模块。</p>
+<p>express4 中操作 cookie 使用 <code>cookie-parser</code> 模块(<a href="https://github.com/expressjs/cookie-parser" target="_blank" rel="noopener">https://github.com/expressjs/cookie-parser</a> )。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="comment">// 首先引入 cookie-parser 这个模块</span></span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 cookieParser 中间件，cookieParser(secret, options)</span></span><br><span class="line"><span class="comment">// 其中 secret 用来加密 cookie 字符串（下面会提到 signedCookies）</span></span><br><span class="line"><span class="comment">// options 传入上面介绍的 cookie 可选参数</span></span><br><span class="line">app.use(cookieParser());</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 如果请求中的 cookie 存在 isVisit, 则输出 cookie</span></span><br><span class="line">  <span class="comment">// 否则，设置 cookie 字段 isVisit, 并设置过期时间为1分钟</span></span><br><span class="line">  <span class="keyword">if</span> (req.cookies.isVisit) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.cookies);</span><br><span class="line">    res.send(<span class="string">"再次欢迎访问"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.cookie(<span class="string">'isVisit'</span>, <span class="number">1</span>, &#123;<span class="attr">maxAge</span>: <span class="number">60</span> * <span class="number">1000</span>&#125;);</span><br><span class="line">    res.send(<span class="string">"欢迎第一次访问"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>cookie 虽然很方便，但是使用 cookie 有一个很大的弊端，cookie 中的所有数据在客户端就可以被修改，数据非常容易被伪造，那么一些重要的数据就不能存放在 cookie 中了，而且如果 cookie 中数据字段太多会影响传输效率。为了解决这些问题，就产生了 session，session 中的数据是保留在服务器端的。</p>
+<p>session 的运作通过一个 <code>session_id</code> 来进行。<code>session_id</code> 通常是存放在客户端的 cookie 中，比如在 express 中，默认是 <code>connect.sid</code> 这个字段，当请求到来时，服务端检查 cookie 中保存的 session_id 并通过这个 session_id 与服务器端的 session data 关联起来，进行数据的保存和修改。</p>
+<p>这意思就是说，当你浏览一个网页时，服务端随机产生一个 1024 比特长的字符串，然后存在你 cookie 中的 <code>connect.sid</code> 字段中。当你下次访问时，cookie 会带有这个字符串，然后浏览器就知道你是上次访问过的某某某，然后从服务器的存储中取出上次记录在你身上的数据。由于字符串是随机产生的，而且位数足够多，所以也不担心有人能够伪造。伪造成功的概率比坐在家里编程时被邻居家的狗突然闯入并咬死的几率还低。</p>
+<p>session 可以存放在 1）内存、2）cookie本身、3）redis 或 memcached 等缓存中，或者4）数据库中。线上来说，缓存的方案比较常见，存数据库的话，查询效率相比前三者都太低，不推荐；cookie session 有安全性问题，下面会提到。</p>
+<p>express 中操作 session 要用到 <code>express-session</code> (<a href="https://github.com/expressjs/session" target="_blank" rel="noopener">https://github.com/expressjs/session</a> ) 这个模块，主要的方法就是 <code>session(options)</code>，其中 options 中包含可选参数，主要有：</p>
+<ul>
+<li>name: 设置 cookie 中，保存 session 的字段名称，默认为 <code>connect.sid</code> 。</li>
+<li>store: session 的存储方式，默认存放在内存中，也可以使用 redis，mongodb 等。express 生态中都有相应模块的支持。</li>
+<li>secret: 通过设置的 secret 字符串，来计算 hash 值并放在 cookie 中，使产生的 signedCookie 防篡改。</li>
+<li>cookie: 设置存放 session id 的 cookie 的相关选项，默认为<ul>
+<li>(default: { path: ‘/‘, httpOnly: true, secure: false, maxAge: null })</li>
+</ul>
+</li>
+<li>genid: 产生一个新的 session_id 时，所使用的函数， 默认使用 <code>uid2</code> 这个 npm 包。</li>
+<li>rolling: 每个请求都重新设置一个 cookie，默认为 false。</li>
+<li>resave: 即使 session 没有被修改，也保存 session 值，默认为 true。</li>
+</ul>
+<p>1） 在内存中存储 session</p>
+<p><code>express-session</code> 默认使用内存来存 session，对于开发调试来说很方便。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="comment">// 首先引入 express-session 这个模块</span></span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">5000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按照上面的解释，设置 session 的可选参数</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  secret: <span class="string">'recommand 128 bytes random string'</span>, <span class="comment">// 建议使用 128 个字符的随机字符串</span></span><br><span class="line">  cookie: &#123; <span class="attr">maxAge</span>: <span class="number">60</span> * <span class="number">1000</span> &#125;</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 检查 session 中的 isVisit 字段</span></span><br><span class="line">  <span class="comment">// 如果存在则增加一次，否则为 session 设置 isVisit 字段，并初始化为 1。</span></span><br><span class="line">  <span class="keyword">if</span>(req.session.isVisit) &#123;</span><br><span class="line">    req.session.isVisit++;</span><br><span class="line">    res.send(<span class="string">'&lt;p&gt;第 '</span> + req.session.isVisit + <span class="string">'次来此页面&lt;/p&gt;'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.session.isVisit = <span class="number">1</span>;</span><br><span class="line">    res.send(<span class="string">"欢迎第一次来这里"</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(req.session);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>2） 在 redis 中存储 session</p>
+<p>session 存放在内存中不方便进程间共享，因此可以使用 redis 等缓存来存储 session。</p>
+<p>假设你的机器是 4 核的，你使用了 4 个进程在跑同一个 node web 服务，当用户访问进程1时，他被设置了一些数据当做 session 存在内存中。而下一次访问时，他被负载均衡到了进程2，则此时进程2的内存中没有他的信息，认为他是个新用户。这就会导致用户在我们服务中的状态不一致。</p>
+<p>使用 redis 作为缓存，可以使用 <code>connect-redis</code> 模块(<a href="https://github.com/tj/connect-redis" target="_blank" rel="noopener">https://github.com/tj/connect-redis</a> )来得到 redis 连接实例，然后在 session 中设置存储方式为该实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"><span class="keyword">var</span> redisStore = <span class="built_in">require</span>(<span class="string">'connect-redis'</span>)(session);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">5000</span>);</span><br><span class="line"></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  <span class="comment">// 假如你不想使用 redis 而想要使用 memcached 的话，代码改动也不会超过 5 行。</span></span><br><span class="line">  <span class="comment">// 这些 store 都遵循着统一的接口，凡是实现了那些接口的库，都可以作为 session 的 store 使用，比如都需要实现 .get(keyString) 和 .set(keyString, value) 方法。</span></span><br><span class="line">  <span class="comment">// 编写自己的 store 也很简单</span></span><br><span class="line">  store: <span class="keyword">new</span> redisStore(),</span><br><span class="line">  secret: <span class="string">'somesecrettoken'</span></span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(req.session.isVisit) &#123;</span><br><span class="line">    req.session.isVisit++;</span><br><span class="line">    res.send(<span class="string">'&lt;p&gt;第 '</span> + req.session.isVisit + <span class="string">'次来到此页面&lt;/p&gt;'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.session.isVisit = <span class="number">1</span>;</span><br><span class="line">    res.send(<span class="string">'欢迎第一次来这里'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们可以运行 <code>redis-cli</code> 查看结果，如图可以看到 redis 中缓存结果。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/Ricardo-Li/node-lessons/blob/master/lesson16/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="各种存储的利弊"><a href="#各种存储的利弊" class="headerlink" title="各种存储的利弊"></a>各种存储的利弊</h3><p>上面我们说到，session 的 store 有四个常用选项：1）内存 2）cookie 3）缓存 4）数据库</p>
+<p>其中，开发环境存内存就好了。一般的小程序为了省事，如果不涉及状态共享的问题，用内存 session 也没问题。但内存 session 除了省事之外，没有别的好处。</p>
+<p>cookie session 我们下面会提到，现在说说利弊。用 cookie session 的话，是不用担心状态共享问题的，因为 session 的 data 不是由服务器来保存，而是保存在用户浏览器端，每次用户访问时，都会主动带上他自己的信息。当然在这里，安全性之类的，只要遵照最佳实践来，也是有保证的。它的弊端是增大了数据量传输，利端是方便。</p>
+<p>缓存方式是最常用的方式了，即快，又能共享状态。相比 cookie session 来说，当 session data 比较大的时候，可以节省网络传输。推荐使用。</p>
+<p>数据库 session。除非你很熟悉这一块，知道自己要什么，否则还是老老实实用缓存吧。</p>
+<h3 id="signedCookie"><a href="#signedCookie" class="headerlink" title="signedCookie"></a>signedCookie</h3><p>上面都是讲基础，现在讲一些专业点的。</p>
+<p>上面有提到</p>
+<blockquote>
+<p>cookie 虽然很方便，但是使用 cookie 有一个很大的弊端，cookie 中的所有数据在客户端就可以被修改，数据非常容易被伪造</p>
+</blockquote>
+<p>其实不是这样的，那只是为了方便理解才那么写。要知道，计算机领域有个名词叫 <strong>签名</strong>，专业点说，叫 <strong>信息摘要算法</strong>。</p>
+<p>比如我们现在面临着一个菜鸟开发的网站，他用 cookie 来记录登陆的用户凭证。相应的 cookie 长这样：<code>dotcom_user=alsotang</code>，它说明现在的用户是 alsotang 这个用户。如果我在浏览器中装个插件，把它改成 <code>dotcom_user=ricardo</code>，服务器一读取，就会误认为我是 ricardo。然后我就可以进行 ricardo 才能进行的操作了。之前 web 开发不成熟的时候，用这招甚至可以黑个网站下来，把 cookie 改成 <code>dotcom_user=admin</code> 就行了，唉，那是个玩黑客的黄金年代啊。</p>
+<p>OK，现在我有一些数据，不想存在 session 中，想存在 cookie 中，怎么保证不被篡改呢？答案很简单，签个名。</p>
+<p>假设我的服务器有个秘密字符串，是 <code>this_is_my_secret_and_fuck_you_all</code>，我为用户 cookie 的 <code>dotcom_user</code> 字段设置了个值 <code>alsotang</code>。cookie 本应是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">dotcom_user</span>: <span class="string">'alsotang'</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的。</p>
+<p>而如果我们签个名，比如把 <code>dotcom_user</code> 的值跟我的 secret_string 做个 sha1</p>
+<p><code>sha1(&#39;this_is_my_secret_and_fuck_you_all&#39; + &#39;alsotang&#39;) === &#39;4850a42e3bc0d39c978770392cbd8dc2923e3d1d&#39;</code></p>
+<p>然后把 cookie 变成这样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  dotcom_user: <span class="string">'alsotang'</span>,</span><br><span class="line">  <span class="string">'dotcom_user.sig'</span>: <span class="string">'4850a42e3bc0d39c978770392cbd8dc2923e3d1d'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一来，用户就没法伪造信息了。一旦它更改了 cookie 中的信息，则服务器会发现 hash 校验的不一致。</p>
+<p>毕竟他不懂我们的 secret_string 是什么，而暴力破解哈希值的成本太高。</p>
+<h3 id="cookie-session"><a href="#cookie-session" class="headerlink" title="cookie-session"></a>cookie-session</h3><p><del><br>上面一直提到 session 可以存在 cookie 中，现在来讲讲具体的思路。这里所涉及的专业名词叫做 对称加密。</del></p>
+<p>假设我们想在用户的 cookie 中存 session data，使用一个名为 <code>session_data</code> 的字段。</p>
+<p>存</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sessionData = &#123;<span class="attr">username</span>: <span class="string">'alsotang'</span>, <span class="attr">age</span>: <span class="number">22</span>, <span class="attr">company</span>: <span class="string">'alibaba'</span>, <span class="attr">location</span>: <span class="string">'hangzhou'</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>这段信息的话，可以将 <code>sessionData</code> 与我们的 <code>secret_string</code> 一起做个对称加密，存到 cookie 的 <code>session_data</code> 字段中，只要你的 <code>secret_string</code> 足够长，那么攻击者也是无法获取实际 session 内容的。对称加密之后的内容对于攻击者来说相当于一段乱码。</p>
+<p>而当用户下次访问时，我们就可以用 <code>secret_string</code> 来解密 <code>sessionData</code>，得到我们需要的 session data。</p>
+<p>signedCookies 跟 cookie-session 还是有区别的：</p>
+<p>1）是前者信息可见不可篡改，后者不可见也不可篡改</p>
+<p>2）是前者一般是长期保存，而后者是 session cookie<br></p>
+<p>cookie-session 的实现跟 signedCookies 差不多。</p>
+<p>不过 cookie-session 我个人建议不要使用，有受到回放攻击的危险。</p>
+<p>回放攻击指的是，比如一个用户，它现在有 100 积分，积分存在 session 中，session 保存在 cookie 中。他先复制下现在的这段 cookie，然后去发个帖子，扣掉了 20 积分，于是他就只有 80 积分了。而他现在可以将之前复制下的那段 cookie 再粘贴回去浏览器中，于是服务器在一些场景下会认为他又有了 100 积分。</p>
+<p>如果避免这种攻击呢？这就需要引入一个第三方的手段来验证 cookie session，而验证所需的信息，一定不能存在 cookie 中。这么一来，避免了这种攻击后，使用 cookie session 的好处就荡然无存了。如果为了避免攻击而引入了缓存使用的话，那不如把 cookie session 也一起放进缓存中。</p>
+<h3 id="session-cookie"><a href="#session-cookie" class="headerlink" title="session cookie"></a>session cookie</h3><p>初学者容易犯的一个错误是，忘记了 session_id 在 cookie 中的存储方式是 session cookie。即，当用户一关闭浏览器，浏览器 cookie 中的 session_id 字段就会消失。</p>
+<p>常见的场景就是在开发用户登陆状态保持时。</p>
+<p>假如用户在之前登陆了你的网站，你在他对应的 session 中存了信息，当他关闭浏览器再次访问时，你还是不懂他是谁。所以我们要在 cookie 中，也保存一份关于用户身份的信息。</p>
+<p>比如有这样一个用户</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">username</span>: <span class="string">'alsotang'</span>, <span class="attr">age</span>: <span class="number">22</span>, <span class="attr">company</span>: <span class="string">'alibaba'</span>, <span class="attr">location</span>: <span class="string">'hangzhou'</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以考虑把这四个字段的信息都存在 session 中，而在 cookie，我们用 signedCookies 来存个 username。</p>
+<p>登陆的检验过程伪代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span> (req.session.user) &#123;</span><br><span class="line">  <span class="comment">// 获取 user 并进行下一步</span></span><br><span class="line">  next()</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (req.signedCookies[<span class="string">'username'</span>]) &#123;</span><br><span class="line">  <span class="comment">// 如果存在则从数据库中获取这个 username 的信息，并保存到 session 中</span></span><br><span class="line">  getuser(<span class="function"><span class="keyword">function</span> (<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">    req.session.user = user;</span><br><span class="line">    next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 当做为登陆用户处理</span></span><br><span class="line">  next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="etag-当做-session，保存-http-会话"><a href="#etag-当做-session，保存-http-会话" class="headerlink" title="etag 当做 session，保存 http 会话"></a>etag 当做 session，保存 http 会话</h3><p>很黑客的一种玩法：<a href="https://cnodejs.org/topic/5212d82d0a746c580b43d948" target="_blank" rel="noopener">https://cnodejs.org/topic/5212d82d0a746c580b43d948</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/nodecookie 和 session/&title=《16.cookie 和 session》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/nodecookie 和 session/&title=《16.cookie 和 session》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/nodecookie 和 session/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《16.cookie 和 session》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/nodecookie 和 session/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/nodecookie 和 session/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/06/20/nodebenchmark 怎么写/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">8.benchmark 怎么写</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/06/20/nodejs 中的那些最佳实践/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">14.js 中的那些最佳实践</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/06/20/nodecookie 和 session/&title=《16.cookie 和 session》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/06/20/nodecookie 和 session/&title=《16.cookie 和 session》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/06/20/nodecookie 和 session/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《16.cookie 和 session》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/06/20/nodecookie 和 session/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/06/20/nodecookie 和 session/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3ay07DQAwFUP7/p8MWqZBe2ylSnDMrVJJhThdm/Pj6itfxsl4//+v5n59U37p4YWBg3JZxnK6Ecb7z+Q7513S+AwYGxhMYySEmcS/h5X8XAwMDI9muGnwnSAwMDIwq4/z5JFmtprsYGBgYeRKbp6mTK+bHc3EMDIwbMvLU9P9//kh/AwMD41aMo7iShLZ3NRydCgMDYzXjqjLZpIUwuT5iYGA8h5FsWh2VyKnV9sMbKgYGxjpGXrpKxiPOd6t+BTkSAwNjNyNPGuelt0IzMv5tueiGgYGxglHdotduTApzZTYGBsZSRq8oP2l/9kpvb3bAwMBYzYhK7cXA2hsvS8Ju9C8BAwPjAYxeUO6xq5fFcgsTAwNjEaOa9SYhNT/EfPgMAwNjNyO5bOWp7FXDFvmpMDAwnsBIjpKPXFSPOAEXeh0YGBiLGHkYnbQ/8xJ/c0QDAwNjHaM38tV7sjpaccGwBQYGxgpG3jjsFcKqxf18h6gHi4GBsZpRxVSLcfk1MRnOwMDAeBpjfmnrFdR6bdRmXwIDA2MFI3ltEkDn70YBFwMDYwXjKK5e6lu43rVamxgYGLsZ+eptOk9cmzMjGBgY6xhJkM1T017YveD6iIGB8QBGNfD10s5k/2arAAMDA2N8u5w/f3HAxcDAWM1ILpGTka/kJL+8i4GB8QBGfrhqaaw6ApuEVwwMjKcxJhe1vOVZLaVdNd6BgYFxc8Y3cTYNy/vTLwEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

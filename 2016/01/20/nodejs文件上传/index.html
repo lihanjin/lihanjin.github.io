@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Nodejs实现文件上传 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="NodeJS">
+    <meta name="description" content="关于作者正在填坑：《Nodejs学习笔记》 / 《Express学习笔记》  社区链接：云栖社区 / github / 新浪微博 / 知乎 / Segmentfault / 博客园  / 站酷 概览图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。 常用的开源组件有multer、formidable等，借助这两个开源组件，可以轻松搞定图片上传。 本文主要讲解以下内容，">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs实现文件上传">
+<meta property="og:url" content="http://yoursite.com/2016/01/20/nodejs文件上传/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="关于作者正在填坑：《Nodejs学习笔记》 / 《Express学习笔记》  社区链接：云栖社区 / github / 新浪微博 / 知乎 / Segmentfault / 博客园  / 站酷 概览图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。 常用的开源组件有multer、formidable等，借助这两个开源组件，可以轻松搞定图片上传。 本文主要讲解以下内容，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs实现文件上传">
+<meta name="twitter:description" content="关于作者正在填坑：《Nodejs学习笔记》 / 《Express学习笔记》  社区链接：云栖社区 / github / 新浪微博 / 知乎 / Segmentfault / 博客园  / 站酷 概览图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。 常用的开源组件有multer、formidable等，借助这两个开源组件，可以轻松搞定图片上传。 本文主要讲解以下内容，">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Nodejs实现文件上传</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Nodejs实现文件上传</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-20T01:35:08.000Z" itemprop="datePublished" class="page-time">
+  2016-01-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于作者"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于作者</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概览"><span class="post-toc-number">2.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境初始化"><span class="post-toc-number">3.</span> <span class="post-toc-text">环境初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基础例子：单图上传"><span class="post-toc-number">4.</span> <span class="post-toc-text">基础例子：单图上传</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基础例子：多图上传"><span class="post-toc-number">5.</span> <span class="post-toc-text">基础例子：多图上传</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取上传的图片的信息"><span class="post-toc-number">6.</span> <span class="post-toc-text">获取上传的图片的信息</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义文件上传路径、名称"><span class="post-toc-number">7.</span> <span class="post-toc-text">自定义文件上传路径、名称</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义本地保存的路径"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">自定义本地保存的路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义本地保存的文件名"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">自定义本地保存的文件名</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在后面"><span class="post-toc-number">8.</span> <span class="post-toc-text">写在后面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-number">9.</span> <span class="post-toc-text">相关链接</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-nodejs文件上传"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Nodejs实现文件上传</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-20 09:35:08" datetime="2016-01-20T01:35:08.000Z"  itemprop="datePublished">2016-01-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h2><p>正在填坑：<a href="https://chyingp.gitbooks.io/nodejs/" target="_blank" rel="noopener">《Nodejs学习笔记》</a> / <a href="https://www.gitbook.com/book/chyingp/express/details" target="_blank" rel="noopener">《Express学习笔记》</a> </p>
+<p>社区链接：<a href="https://yq.aliyun.com/users/1970729537231450?spm=5176.100240.searchblog.12.xDc8pM&amp;do=login" target="_blank" rel="noopener">云栖社区</a> / <a href="https://github.com/chyingp" target="_blank" rel="noopener">github</a> / <a href="http://weibo.com/chyingp?is_all=1" target="_blank" rel="noopener">新浪微博</a> / <a href="https://www.zhihu.com/people/chen-ying-ping-57" target="_blank" rel="noopener">知乎</a> / <a href="https://segmentfault.com/u/chyingp" target="_blank" rel="noopener">Segmentfault</a> / <a href="http://chyingp.cnblogs.com/" target="_blank" rel="noopener">博客园</a>  / <a href="http://www.zcool.com.cn/u/346408" target="_blank" rel="noopener">站酷</a></p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。</p>
+<p>常用的开源组件有<strong>multer</strong>、<strong>formidable</strong>等，借助这两个开源组件，可以轻松搞定图片上传。</p>
+<p>本文主要讲解以下内容，后续章节会对技术实现细节进行深入挖掘。本文所有例子均有代码示例，可在<a href="../examples/2016.11.07-advanced-express-multer/">这里</a>查看。</p>
+<ul>
+<li>基础例子：借助express、multer实现单图、多图上传。</li>
+<li>常用API：获取上传的图片的信息。</li>
+<li>进阶使用：自定义保存的图片路径、名称。</li>
+</ul>
+<h2 id="环境初始化"><a href="#环境初始化" class="headerlink" title="环境初始化"></a>环境初始化</h2><p>非常简单，一行命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express multer multer --save</span><br></pre></td></tr></table></figure>
+<p>每个示例下面，都有下面两个文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  upload-custom-filename git:(master) ✗ tree -L 1</span><br><span class="line">.</span><br><span class="line">├── app.js <span class="comment"># 服务端代码，用来处理文件上传请求</span></span><br><span class="line">├── form.html <span class="comment"># 前端页面，用来上传文件</span></span><br></pre></td></tr></table></figure>
+<h2 id="基础例子：单图上传"><a href="#基础例子：单图上传" class="headerlink" title="基础例子：单图上传"></a>基础例子：单图上传</h2><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-single">这里</a>。</p>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-single/app.js">app.js</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> multer  = <span class="built_in">require</span>(<span class="string">'multer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> upload = multer(&#123; <span class="attr">dest</span>: <span class="string">'upload/'</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单图上传</span></span><br><span class="line">app.post(<span class="string">'/upload'</span>, upload.single(<span class="string">'logo'</span>), <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    res.send(&#123;<span class="attr">ret_code</span>: <span class="string">'0'</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/form'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> form = fs.readFileSync(<span class="string">'./form.html'</span>, &#123;<span class="attr">encoding</span>: <span class="string">'utf8'</span>&#125;);</span><br><span class="line">    res.send(form);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-single/form.html">form.html</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/upload-single"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>单图上传<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"logo"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br></pre></td></tr></table></figure>
+<p>访问 <a href="http://127.0.0.1:3000/form" target="_blank" rel="noopener">http://127.0.0.1:3000/form</a> ，选择图片，点击“提交”，done。然后，你就会看到 upload 目录下多了个图片。</p>
+<h2 id="基础例子：多图上传"><a href="#基础例子：多图上传" class="headerlink" title="基础例子：多图上传"></a>基础例子：多图上传</h2><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-multi">这里</a>。</p>
+<p>代码简直不能更简单，将前面的 upload.single(‘logo’) 改成 upload.array(‘logo’, 2) 就行。表示：同时支持2张图片上传，并且 name 属性为 logo。</p>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-multi/app.js">app.js</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> multer  = <span class="built_in">require</span>(<span class="string">'multer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> upload = multer(&#123; <span class="attr">dest</span>: <span class="string">'upload/'</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多图上传</span></span><br><span class="line">app.post(<span class="string">'/upload'</span>, upload.array(<span class="string">'logo'</span>, <span class="number">2</span>), <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    res.send(&#123;<span class="attr">ret_code</span>: <span class="string">'0'</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/form'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> form = fs.readFileSync(<span class="string">'./form.html'</span>, &#123;<span class="attr">encoding</span>: <span class="string">'utf8'</span>&#125;);</span><br><span class="line">    res.send(form);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-multi/form.html">form.html</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/upload-multi"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>多图上传<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"logos"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"logos"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>同样的测试步骤，不赘述。</p>
+<h2 id="获取上传的图片的信息"><a href="#获取上传的图片的信息" class="headerlink" title="获取上传的图片的信息"></a>获取上传的图片的信息</h2><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-get-file-info">这里</a>。</p>
+<p>很多时候，除了将图片保存在服务器外，我们还需要做很多其他事情，比如将图片的信息存到数据库里。</p>
+<p>常用的信息比如原始文件名、文件类型、文件大小、本地保存路径等。借助multer，我们可以很方便的获取这些信息。</p>
+<p>还是单文件上传的例子，此时，multer会将文件的信息写到 req.file 上，如下代码所示。</p>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-get-file-info/app.js">app.js</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> multer  = <span class="built_in">require</span>(<span class="string">'multer'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> upload = multer(&#123; <span class="attr">dest</span>: <span class="string">'upload/'</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单图上传</span></span><br><span class="line">app.post(<span class="string">'/upload'</span>, upload.single(<span class="string">'logo'</span>), <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> file = req.file;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'文件类型：%s'</span>, file.mimetype);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'原始文件名：%s'</span>, file.originalname);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'文件大小：%s'</span>, file.size);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'文件保存路径：%s'</span>, file.path);</span><br><span class="line"></span><br><span class="line">    res.send(&#123;<span class="attr">ret_code</span>: <span class="string">'0'</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/form'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> form = fs.readFileSync(<span class="string">'./form.html'</span>, &#123;<span class="attr">encoding</span>: <span class="string">'utf8'</span>&#125;);</span><br><span class="line">    res.send(form);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-get-file-info/form.html">form.html</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/upload"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>单图上传<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"logo"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>启动服务，上传文件后，就会看到控制台下打印出的信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件类型：image/png</span><br><span class="line">原始文件名：1.png</span><br><span class="line">文件大小：18379</span><br><span class="line">文件保存路径：upload/b7e4bb22375695d92689e45b551873d9</span><br></pre></td></tr></table></figure>
+<h2 id="自定义文件上传路径、名称"><a href="#自定义文件上传路径、名称" class="headerlink" title="自定义文件上传路径、名称"></a>自定义文件上传路径、名称</h2><p>有的时候，我们想要定制文件上传的路径、名称，multer也可以方便的实现。</p>
+<h3 id="自定义本地保存的路径"><a href="#自定义本地保存的路径" class="headerlink" title="自定义本地保存的路径"></a>自定义本地保存的路径</h3><p>非常简单，比如我们想将文件上传到 my-upload 目录下，修改下 dest 配置项就行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var upload = multer(&#123; dest: &apos;upload/&apos; &#125;);</span><br></pre></td></tr></table></figure>
+<p>在上面的配置下，所有资源都是保存在同个目录下。有时我们需要针对不同文件进行个性化设置，那么，可以参考下一小节的内容。</p>
+<h3 id="自定义本地保存的文件名"><a href="#自定义本地保存的文件名" class="headerlink" title="自定义本地保存的文件名"></a>自定义本地保存的文件名</h3><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-custom-filename">这里</a>。</p>
+<p>代码稍微长一点，单同样简单。multer 提供了 <strong>storage</strong> 这个参数来对资源保存的路径、文件名进行个性化设置。</p>
+<p>使用注意事项如下：</p>
+<ul>
+<li>destination：设置资源的保存路径。注意，如果没有这个配置项，默认会保存在 /tmp/uploads 下。此外，路径需要自己创建。</li>
+<li>filename：设置资源保存在本地的文件名。</li>
+</ul>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-custom-filename/app.js">app.js</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var multer  = require(&apos;multer&apos;)</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">var createFolder = function(folder)&#123;</span><br><span class="line">    try&#123;</span><br><span class="line">        fs.accessSync(folder); </span><br><span class="line">    &#125;catch(e)&#123;</span><br><span class="line">        fs.mkdirSync(folder);</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var uploadFolder = &apos;./upload/&apos;;</span><br><span class="line"></span><br><span class="line">createFolder(uploadFolder);</span><br><span class="line"></span><br><span class="line">// 通过 filename 属性定制</span><br><span class="line">var storage = multer.diskStorage(&#123;</span><br><span class="line">    destination: function (req, file, cb) &#123;</span><br><span class="line">        cb(null, uploadFolder);    // 保存的路径，备注：需要自己创建</span><br><span class="line">    &#125;,</span><br><span class="line">    filename: function (req, file, cb) &#123;</span><br><span class="line">        // 将保存文件名设置为 字段名 + 时间戳，比如 logo-1478521468943</span><br><span class="line">        cb(null, file.fieldname + &apos;-&apos; + Date.now());  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 通过 storage 选项来对 上传行为 进行定制化</span><br><span class="line">var upload = multer(&#123; storage: storage &#125;)</span><br><span class="line"></span><br><span class="line">// 单图上传</span><br><span class="line">app.post(&apos;/upload&apos;, upload.single(&apos;logo&apos;), function(req, res, next)&#123;</span><br><span class="line">    var file = req.file;</span><br><span class="line">    res.send(&#123;ret_code: &apos;0&apos;&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&apos;/form&apos;, function(req, res, next)&#123;</span><br><span class="line">    var form = fs.readFileSync(&apos;./form.html&apos;, &#123;encoding: &apos;utf8&apos;&#125;);</span><br><span class="line">    res.send(form);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+<p><a href="../examples/2016.11.07-advanced-express-multer/upload-custom-filename/form.html">form.html</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/upload"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>单图上传<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"logo"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试步骤不赘述，访问一下就知道效果了。</p>
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>本文对multer的基础用法进行了介绍，并未涉及过多原理性的东西。俗话说 <strong>授人以渔不如授人以渔</strong>，在后续的章节里，会对文件上传的细节进行挖掘，好让读者朋友对文件上传加深进一步的认识。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>multer官方文档：<a href="https://github.com/expressjs/multer" target="_blank" rel="noopener">https://github.com/expressjs/multer</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/20/nodejs文件上传/&title=《Nodejs实现文件上传》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/20/nodejs文件上传/&title=《Nodejs实现文件上传》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/20/nodejs文件上传/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Nodejs实现文件上传》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/20/nodejs文件上传/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/20/nodejs文件上传/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/20/JavaScript中this的一些用法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaScript中的this的一些用法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/20/express、express-session实现了简易的登录/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">express、express-session实现了简易的登录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/01/20/nodejs文件上传/&title=《Nodejs实现文件上传》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/01/20/nodejs文件上传/&title=《Nodejs实现文件上传》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/01/20/nodejs文件上传/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Nodejs实现文件上传》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/01/20/nodejs文件上传/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/01/20/nodejs文件上传/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACGklEQVR42u3aS47CMBAFQO5/aUaafZj3bGdE7PIKoZC4smjcn9crXu/fdfX5al1dk/928cLAwHgsI9/K1a8+3ye5wwIqBgbGAYw8yOYRL78m+fzHnjEwMDDKzeUrCeIYGBgYawPu2Ddf97+BgYHxlYw8mWxDbRLEZ8p5GBgYJzDmGwP3ff7X/gYGBsZXMubTzrWlt8H9YGBgbM1ISmmfHz9WLEuo7d0wMDDOYbQFsjawjh1Ao3tiYGBsysiDXR5wx/LNvJEw9Q+AgYHxWEZyIBtrc7YBNN8VBgbGOYy2ED8fKMdGzZJgjYGBcRojH4NoH7/2dWBgYJzAGJvOaIv4CalNtjEwMM5h3BE688A6Rrq8EgMDY1PGfDMyb3CO3S1KpDEwMA5gfD7A5a2Cu9PaSzAGBsYBjJniV/LgtmxXvzIMDIzDGHlWmAxPzIxo5MdEDAyMvRlt8lmMPgSvIwnN7YgGBgbGroz28WPjX6uOm1MzIxgYGA9njAXQvN3YlvDqtgEGBsYBjDYdHQvEeSrbBm4MDIy9GfMF+qQxkLcN6hIbBgbG1ox3uXLwzIGvfi4GBsbWjHzlLYH2Ye1LaducGBgYezBWjVbkx8o8bS5eEAYGxgGMtW3ImUJefj0GBgZGXiZLxrzuS2UxMDAw2iJ+sumZPBsDA+NkxnwAHRvXKA5/+ckRAwNjO8aCSY0yQW0LfPMjGhgYGI9l/ACmv/oIolYw4wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

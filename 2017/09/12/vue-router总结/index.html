@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Vue-Router整理 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Vue">
+    <meta name="description" content="##VUE-ROUTER API文档   一.&amp;lt;router-link&amp;gt;1.Props  to 类型:string | Location required表示目标路由的链接。当被点击后，内部会立刻把to的值传到router.push()，所以这个值是可以一个字符串或者是描述目标位置的对象。12345678910111213141516171819&amp;lt;!-- 字符串 --&amp;gt; &amp;">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-Router整理">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/vue-router总结/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="##VUE-ROUTER API文档   一.&amp;lt;router-link&amp;gt;1.Props  to 类型:string | Location required表示目标路由的链接。当被点击后，内部会立刻把to的值传到router.push()，所以这个值是可以一个字符串或者是描述目标位置的对象。12345678910111213141516171819&amp;lt;!-- 字符串 --&amp;gt; &amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://otue68nu2.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170919105103.png">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue-Router整理">
+<meta name="twitter:description" content="##VUE-ROUTER API文档   一.&amp;lt;router-link&amp;gt;1.Props  to 类型:string | Location required表示目标路由的链接。当被点击后，内部会立刻把to的值传到router.push()，所以这个值是可以一个字符串或者是描述目标位置的对象。12345678910111213141516171819&amp;lt;!-- 字符串 --&amp;gt; &amp;">
+<meta name="twitter:image" content="http://otue68nu2.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170919105103.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Vue-Router整理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Vue-Router整理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-12T14:24:08.000Z" itemprop="datePublished" class="page-time">
+  2017-09-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Vue/">Vue</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-lt-router-link-gt"><span class="post-toc-number">1.</span> <span class="post-toc-text">一.&lt;router-link&gt;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#将”激活时的CSS类名”应用在外层元素"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">将”激活时的CSS类名”应用在外层元素</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-lt-router-view-gt"><span class="post-toc-number">2.</span> <span class="post-toc-text">二.&lt;router-view&gt;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#属性"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#行为表现"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">行为表现</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-路由信息对象"><span class="post-toc-number">3.</span> <span class="post-toc-text">三.路由信息对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由信息对象的属性"><span class="post-toc-number">4.</span> <span class="post-toc-text">路由信息对象的属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四-Router构造配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">四.Router构造配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五-Router实例"><span class="post-toc-number">6.</span> <span class="post-toc-text">五.Router实例</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-vue-router总结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Vue-Router整理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-12 22:24:08" datetime="2017-09-12T14:24:08.000Z"  itemprop="datePublished">2017-09-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Vue/">Vue</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>##VUE-ROUTER API文档</p>
+<hr>
+<p><br></p>
+<h3 id="一-lt-router-link-gt"><a href="#一-lt-router-link-gt" class="headerlink" title="一.&lt;router-link&gt;"></a>一.<code>&lt;router-link&gt;</code></h3><p>1.<code>Props</code></p>
+<ul>
+<li><code>to</code><ul>
+<li>类型:<code>string</code> | <code>Location</code></li>
+<li><code>required</code><br>表示目标路由的链接。当被点击后，内部会立刻把<code>to</code>的值传到<code>router.push()</code>，所以这个值是可以一个字符串或者是描述目标位置的对象。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 字符串 --&gt;</span><br><span class="line"> &lt;router-link to=&quot;home&quot;&gt;Home&lt;/router-link&gt;</span><br><span class="line"> &lt;!-- 渲染结果 --&gt;</span><br><span class="line"> &lt;a href=&quot;home&quot;&gt;Home&lt;/a&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 使用 v-bind 的 JS 表达式 --&gt;</span><br><span class="line"> &lt;router-link v-bind:to=&quot;&apos;home&apos;&quot;&gt;Home&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 不写 v-bind 也可以，就像绑定别的属性一样 --&gt;</span><br><span class="line"> &lt;router-link :to=&quot;&apos;home&apos;&quot;&gt;Home&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 同上 --&gt;</span><br><span class="line"> &lt;router-link :to=&quot;&#123; path: &apos;home&apos; &#125;&quot;&gt;Home&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 命名的路由 --&gt;</span><br><span class="line"> &lt;router-link :to=&quot;&#123; name: &apos;user&apos;, params: &#123; userId: 123 &#125;&#125;&quot;&gt;User&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 带查询参数，下面的结果为 /register?plan=private --&gt;</span><br><span class="line"> &lt;router-link :to=&quot;&#123; path: &apos;register&apos;, query: &#123; plan: &apos;private&apos; &#125;&#125;&quot;&gt;Register&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><code>to</code>可以是字符串或者表达式，动态设置需要加上<code>v-bind</code>或：  <code>path</code>路径 <code>params</code>传参 <code>query</code>问号后面的值。</p>
+<ul>
+<li><code>replace</code></li>
+<li>类型:<code>boolean</code></li>
+<li>默认值:<code>false</code><br>设置了<code>replace</code>的属性话，当点击时，会调用<code>router.replace()</code>而不是<code>router.push()</code><br>于是导航不会留下<code>history</code>记录。<br><code>&lt;router-link :to=&quot;{path: &#39;/home&#39;} replace&gt;&lt;/router-link&gt;&quot;</code></li>
+<li><code>append</code></li>
+<li>类型:<code>boolean</code></li>
+<li>默认值:<code>false</code><br>设置<code>append</code>属性后，则在当前(相对)路径前添加基路径。例如，我们从/a导航到一个相对路径<code>b</code>，如果没有配置<code>append</code>，则路径为<code>/b</code>,如果赔了，则为<code>/a/b</code><br><code>&lt;router-link :to=&quot;{path : &quot;relative/path&quot; append} &lt;/router-link&gt;&quot;</code></li>
+<li><code>tag</code><ul>
+<li>类型: <code>string</code></li>
+<li>默认值: <code>&quot;a&quot;</code><br>有时候想要 <code>&lt;router-link&gt;</code> 渲染成某种标签，例如 <code>&lt;li&gt;</code>。 于是我们使用 tag prop 类指定何种标签，同样它还是会监听点击，触发导航。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/foo&quot; tag=&quot;li&quot;&gt;foo&lt;/router-link&gt;</span><br><span class="line">&lt;!-- 渲染结果 --&gt;</span><br><span class="line">&lt;li&gt;foo&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>active-class</code></li>
+<li>类型:<code>string</code></li>
+<li>默认值:”<code>router-link-active</code>“<br>设置链接激活时使用的<code>css</code>类名。默认值可以通过路由的构造选项<code>linkActiveClass</code>来全局配置。</li>
+<li><code>exact</code><ul>
+<li>类型:<code>boolean</code></li>
+<li>默认值:<code>false</code><br>“是否激活” 默认类名的依据是 <code>inclusive match</code> （全包含匹配）。 举个例子，如果当前的路径是 <code>/a</code> 开头的，那么 <code>&lt;router-link to=&quot;/a&quot;&gt;</code> 也会被设置 <code>CSS</code> 类名。</li>
+</ul>
+</li>
+</ul>
+<p>按照这个规则，<code>&lt;router-link to=&quot;/&quot;&gt;</code> 将会点亮各个路由！想要链接使用 “<code>exact</code> 匹配模式”，则使用 <code>exact</code> 属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 这个链接只会在地址为 / 的时候被激活 --&gt;</span><br><span class="line">&lt;router-link to=&quot;/&quot; exact&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>events<ul>
+<li>类型: string | Array<string></string></li>
+<li>默认值: ‘click’<br>声明可以用来触发导航的时间。可以是一个字符串或是一个包含字符串的数组</li>
+</ul>
+</li>
+</ul>
+<h4 id="将”激活时的CSS类名”应用在外层元素"><a href="#将”激活时的CSS类名”应用在外层元素" class="headerlink" title="将”激活时的CSS类名”应用在外层元素"></a><strong>将”激活时的CSS类名”应用在外层元素</strong></h4><p>有时候我们要让 “激活时的CSS类名” 应用在外层元素，而不是 <code>&lt;a&gt;</code> 标签本身，那么可以用 <code>&lt;router-link&gt;</code> 渲染外层元素，包裹着内层的原生 <code>&lt;a&gt;</code> 标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link tag=&quot;li&quot; to=&quot;/foo&quot;&gt;</span><br><span class="line">  &lt;a&gt;/foo&lt;/a&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+<p>在这种情况下，<code>&lt;a&gt;</code> 将作为真实的链接（它会获得正确的 <code>href</code> 的），而 “激活时的CSS类名” 则设置到外层的<br><br><br><br></p>
+<hr>
+<h3 id="二-lt-router-view-gt"><a href="#二-lt-router-view-gt" class="headerlink" title="二.&lt;router-view&gt;"></a>二.<code>&lt;router-view&gt;</code></h3><p><code>&lt;router-view&gt;</code>组件是一个functional组件，渲染路径匹配到的视图组件。<code>&lt;router-view&gt;</code>渲染的组件还可以内嵌自己的<code>&lt;router-view&gt;</code>，根据嵌套的路径，渲染嵌套组件。</p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
+<li>name <ul>
+<li>类型:string</li>
+<li>默认值:”default”<br>如果<code>&lt;router-view&gt;</code>设置了名称，则会渲染对应的路由配置中comonents下的相应组件。查看命名视图中的列子。<h4 id="行为表现"><a href="#行为表现" class="headerlink" title="行为表现"></a>行为表现</h4>其他属性（非router-view使用的属性）都直接传给渲染的组件，很多时候，每个路由的数据都是包含在路由的参数中。<br>因为它也是一个组件，可以配合<code>&lt;transtion&gt;</code>和<code>&lt;keep-alive&gt;</code>使用，如果两者结合使用一定要保证在内层使用<code>&lt;keep-alive&gt;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition&gt;</span><br><span class="line">  &lt;keep-alive&gt;</span><br><span class="line">    &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">  &lt;/keep-alive&gt;</span><br><span class="line">&lt;/transition&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br></p>
+<hr>
+<h3 id="三-路由信息对象"><a href="#三-路由信息对象" class="headerlink" title="三.路由信息对象"></a>三.路由信息对象</h3><p>一个route object（路由信息对象）表示当前激活的路由的状态信息，包含了当前的url解析得到的信息，还有url匹配到的route record （路由记录）</p>
+<p>  route object是immutable（不可变）的，每次成功的导航后都会产生一个新的对象。</p>
+<p>  route object出现在多个地方：</p>
+<ul>
+<li>组件内的<code>this.$route</code>和<code>$route watcher</code>回调（监测变化处理）；</li>
+<li><code>router.match(location)</code>的返回值</li>
+<li>导航钩子的参数:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> router.beforeEach((to,from,next)=&gt;&#123;</span><br><span class="line">	//ro 和 from 都是路由信息对象</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="路由信息对象的属性"><a href="#路由信息对象的属性" class="headerlink" title="路由信息对象的属性"></a>路由信息对象的属性</h3><ul>
+<li>$route.path<ul>
+<li>类型:string<br>  字符串，对应当前的路径，总是解析为绝对路径，如<code>&quot;/foo/bar&quot;</code>。</li>
+</ul>
+</li>
+<li>$route.params<ul>
+<li>类型:Object<br>一个key/value对象，包含了动态片段和全匹配片段，如果没有路由参数，就是一个空对象。</li>
+</ul>
+</li>
+<li>$route.query<ul>
+<li>类型：Object<br>一个key/value对象，表示URL查询参数。例如，对于路径/foo?user=1,则有<code>$route.query.user=1</code>,如果没有查询参数，则是一个空对象。</li>
+</ul>
+</li>
+<li>$route.hash<ul>
+<li>类型:string<br>当前路由的hash值（带#），如果没有hash值，则为空字符串。</li>
+</ul>
+</li>
+<li>$route.fullPath<ul>
+<li>类型:string<br>完成解析后的URL，包含查询参数和hash的完整路径。</li>
+</ul>
+</li>
+<li>$route.matched<ul>
+<li>类型:<code>Array&lt;RouteRecord&gt;</code><br>一个数组，包含当前路由的所有嵌套路径片段的路由记录。路由记录就是routes配置数组中的对象副本（还有在children数组）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    // 下面的对象就是 route record</span><br><span class="line">    &#123; path: &apos;/foo&apos;, component: Foo,</span><br><span class="line">      children: [</span><br><span class="line">        // 这也是个 route record</span><br><span class="line">        &#123; path: &apos;bar&apos;, component: Bar &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>当 URL 为 /foo/bar，<code>$route.matched</code> 将会是一个包含从上到下的所有对象（副本）。</p>
+<ul>
+<li>$route.name</li>
+</ul>
+<p>当前路由的名称，如果有的话。（查看 命名路由）<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://otue68nu2.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170919105103.png" alt="enter image description here" title="">
+                </div>
+                <div class="image-caption">enter image description here</div>
+            </figure><br><br><br><br></p>
+<hr>
+<h3 id="四-Router构造配置"><a href="#四-Router构造配置" class="headerlink" title="四.Router构造配置"></a>四.Router构造配置</h3><p><strong>routes</strong></p>
+<ul>
+<li>类型<code>Array&lt;RouteConfig&gt;</code><br>  RouteConfig的类型定义：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	declare type RouteConfig = &#123;</span><br><span class="line">  path: string;//路径</span><br><span class="line">  component?: Component;//组件</span><br><span class="line">  name?: string; // for named routes (命名路由)</span><br><span class="line">  components?: &#123; [name: string]: Component &#125;; // for named views (命名视图组件)</span><br><span class="line">  redirect?: string | Location | Function;//重定向</span><br><span class="line">  alias?: string | Array&lt;string&gt;;//别名</span><br><span class="line">  children?: Array&lt;RouteConfig&gt;; // for nested routes</span><br><span class="line">  beforeEnter?: (to: Route, from: Route, next: Function) =&gt; void;//全局route注册之前的钩子</span><br><span class="line">  meta?: any;//路由配置元信息meta字段</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>mode</strong></p>
+<ul>
+<li>类型:<code>string</code></li>
+<li>默认值:<code>&quot;hash‘(浏览器环境) | &quot;abstract&quot;(Node.js环境)</code></li>
+<li>可选值:<code>&quot;hash&quot; | &quot;history&quot; | &quot;abstract&quot;</code><br>  配置路由模式：<ul>
+<li>hash:使用URL hash值来做路由，支持所有浏览器，包括不支持HTML5 History Api的浏览器</li>
+<li>history:依赖HTML5 History API和服务器配置，查看<a href="https://router.vuejs.org/zh-cn/essentials/history-mode.html" target="_blank" rel="noopener">HTML5 History模式 </a></li>
+<li>abstract:支持所有JavaScript运行环境，如Node.js服务器端。如果发现没有浏览器的API,路由会自动强制进入这个模式<br><strong>base</strong></li>
+</ul>
+</li>
+<li>类型:string</li>
+<li>默认值:”/“<br>应用的基路径。例如，如果整个单页面应用服务在<code>/app/</code>下，然后base就应该设为<code>&quot;/app/&quot;</code>。<br><strong>linkActiveClass</strong></li>
+<li>类型:string</li>
+<li>默认值:”router-link-active”<br>全局配置<router-link>的默认[激活cass类名]。参考router-link<br><strong>scrollBehavior</strong></router-link></li>
+<li>类型:function<br>  签名：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	(</span><br><span class="line">  to: Route,</span><br><span class="line">  from: Route,</span><br><span class="line">  savedPosition?: &#123; x: number, y: number &#125;</span><br><span class="line">) =&gt; &#123; x: number, y: number &#125; | &#123; selector: string &#125; | ?&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>更多详情参考<a href="https://router.vuejs.org/zh-cn/advanced/scroll-behavior.html" target="_blank" rel="noopener"> 滚动行为</a>.<br><br><br><br></p>
+<hr>
+<h3 id="五-Router实例"><a href="#五-Router实例" class="headerlink" title="五.Router实例"></a>五.Router实例</h3><p><strong>属性</strong><br>router.app</p>
+<ul>
+<li>类型:Vue instace<br>  配置了router的Vue根实例。</li>
+</ul>
+<p>route.mode</p>
+<ul>
+<li>类型:string<br>  路由使用的<a href="https://router.vuejs.org/zh-cn/api/options.html#mode" target="_blank" rel="noopener">模式</a>。 </li>
+</ul>
+<p>router.currentRoute</p>
+<ul>
+<li>类型:Route<br>当前路由对应的路由信息对象<a href="https://router.vuejs.org/zh-cn/api/route-object.html" target="_blank" rel="noopener">信息对象</a><br><strong>方法</strong></li>
+<li>router.beforeEach(guard)路由加载之前</li>
+<li>router.befireResolve(guard)此时异步组件已加载完成</li>
+<li>router.afterEach(hood)<br>  增加全局的导航钩子</li>
+<li>router.push(location,ONccomplete?,onAbort?)</li>
+<li>router.replace(location,ONccomplete?,onAbort?)</li>
+<li>router.go(n)</li>
+<li>router.back()</li>
+<li>router.forward()<br>动态的导航到一个新 url。</li>
+<li>router.getMatchedComponents(location?)</li>
+</ul>
+<p>返回目标位置或是当前路由匹配的组件数组（是数组的定义/构造类，不是实例）。通常在服务端渲染的数据预加载时时候。</p>
+<ul>
+<li>router.resolve(location, current?, append?)<br>解析目标位置，返回包含如下属性的对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  location: Location;</span><br><span class="line">  route: Route;</span><br><span class="line">  href: string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>router.addRoutes(routes)</li>
+</ul>
+<p>动态添加更多的路由规则。参数必须是一个符合 routes 选项要求的数组。</p>
+<ul>
+<li>router.onReady(callback)</li>
+</ul>
+<p>添加一个会在第一次路由跳转完成时被调用的回调函数。此方法通常用于等待异步的导航钩子完成，比如在进行服务端渲染的时候。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/12/vue-router总结/&title=《Vue-Router整理》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/12/vue-router总结/&title=《Vue-Router整理》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/12/vue-router总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue-Router整理》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/09/12/vue-router总结/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/12/vue-router总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/12/vue官网总结.1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vue官网基础整理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/20/web开发中跨域解决方案/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">web开发中跨域解决方案</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/12/vue-router总结/&title=《Vue-Router整理》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/12/vue-router总结/&title=《Vue-Router整理》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/12/vue-router总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue-Router整理》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/09/12/vue-router总结/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/12/vue-router总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3aQY7DIAwF0N7/0pltpZmQb5yMFHisqqglPBausfl84nF8je8nvz/Pff/sVzcPDAyM1zKO4Ri/IH9xPv/4+ekbMTAwNmCcvTgJqf3AOjcDBgYGxnjq8VJy8NkGYWBgYNzFqC50nEpWtwYDA2M3RnLIHE89TiLz3z5+FsfAwHghI6+6///nR/obGBgYr2IcxfFEapgU8i5WhYGBsTQjD3BJaayaOBYOqMl6MDAwFmX0w2g/ZFevl/3xTQwMjKUZnYNlXgjLW6FzSSQGBsbajLvCZdJIyJPIvAGAgYGxAyMJfNVldWar4jEwMHZg5MWvpDTWD6D5lrUWgYGB8VpGHkw7R9O55sHFJmJgYCzNSAJi5wiaB8080bzoxGJgYGzAmHtSXXq1YBelmBgYGFsy8lZi8rJqWlm9KIaBgbE2o1DYKt7CysN69dh8cTkMAwNjIUanVTnXbKhuU6HQhoGBsSgjKXhVS2bVaxOdMt/p/wYGBsY2jLnLFnNFutvaDBgYGIsyytew2uE4TxMLjU8MDIzNGEmTssqrNgzKfwMYGBjbMDqFsxw5F3wvjr4YGBiLMo7i6ATZ/HhcpmJgYCzNyMdceldNBJPZ5hqiGBgYb2fMHTU7ieAj6SMGBsYGjE7gqzYM5jYlynMxMDAwGsjqddhyPouBgYFRvLqaJ5dzKeZt/Q0MDIxXMZJFzAXW6qWxuUtmGBgYazNaR8d2gM4Xd0NTEwMD432MH1YKS6maS7uFAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JavaScript面向对象程序设计 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript">
+    <meta name="description" content="object对象">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript面向对象程序设计">
+<meta property="og:url" content="http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="object对象">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript面向对象程序设计">
+<meta name="twitter:description" content="object对象">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JavaScript面向对象程序设计</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JavaScript面向对象程序设计</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-07-26T16:36:43.000Z" itemprop="datePublished" class="page-time">
+  2015-07-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+<article id="post-JavaScript面向对象程序设计"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JavaScript面向对象程序设计</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-07-27 00:36:43" datetime="2015-07-26T16:36:43.000Z"  itemprop="datePublished">2015-07-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li><strong>object对象</strong><a id="more"></a>
+<ul>
+<li>new关键字代表的是新开辟一块内存空间</li>
+<li>没有被引用的内存空间，会在适当的时候被销毁<ul>
+<li>两句代码含义等同<ul>
+<li><code>var person = new Object()</code>;</li>
+<li><code>var person = {};</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>访问对象的属性除了用 对象引用<code>.属性</code> <code>key</code>以外，还可以使用对象引用<code>[属性key]</code></li>
+</ul>
+<ul>
+<li><p><strong>面向对象的程序设计</strong></p>
+<ul>
+<li><p><code>function</code>构造器</p>
+<ul>
+<li><strong>共同点:</strong><ul>
+<li>动态创建一块内存空间，闭包</li>
+</ul>
+</li>
+<li><strong>不同点:</strong><ul>
+<li>函数调用是没有办法拿到空间的地址的，而且这块地址是一块临时地址，执行完函数之后，就会销毁</li>
+<li><code>new</code>开辟内存空间，把这块空间的地址返回，这块空间就有可能长期的被引用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>prototype</code>原型</strong></p>
+<ul>
+<li>通过原型使通过同样一个构造器所<code>new（创建）</code>出来的对象具有相同的属性和行为</li>
+<li><code>prototype</code>本质就是一个对象</li>
+</ul>
+</li>
+<li><p><code>foreach</code></p>
+</li>
+<li><p><strong><code>this</code></strong> 指代当前创建的这块内存 <code>this.name=name</code> 指代当前内存中的这个name属性 接收外界传过来的值</p>
+</li>
+<li><p><strong>继承</strong></p>
+</li>
+</ul>
+<ul>
+<li>本质就是从一个<code>prototype</code>对象中把它的功能都<code>copy</code>到另一个<code>prototype</code>对象</li>
+<li><p>继承为什么要循环</p>
+</li>
+<li><p><strong>封装</strong>(面向对象程序设计过程)</p>
+<ul>
+<li>1：找对象  小头爸爸  大头儿子  饭</li>
+<li>2：抽象（类，构造器）</li>
+<li>3：创建对象并且建立关系（操作对象）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>prototype内存解析</strong></p>
+<ul>
+<li><code>prototype</code>是原型，是一块所有对应构造器创建的对象都共享的内存空间</li>
+<li>在面向对象设计程序的时候，属性应该是对应的空间的，而功能应该是<code>prototype</code>公共空间的</li>
+</ul>
+</li>
+<li><p><strong>通过prototype扩展功能</strong></p>
+<ul>
+<li>所有的构造器都是继承于<code>Object</code>构造器的，因此只要<code>Object</code>的原型里有的功能，所有的对象都有</li>
+</ul>
+</li>
+<li><p><strong>call、apply方法</strong></p>
+<ul>
+<li><code>func.call（obj）</code>：调用func的时候，以<code>obj</code>这个对象的作用域去调用</li>
+<li><p>改变函数在调用的时候里面闭包的作用域</p>
+</li>
+<li><p><code>call(obj,arg1,arg2,arg3)</code>;<code>call</code>第一个参数传对象，可以是<code>null</code>。参数以逗号分开进行传值，参数可以是任何类型。<br><code>apply(obj,[arg1,arg2,arg3])</code>;<code>apply</code>第一个参数传对象，参数可以是数组或者<code>arguments</code>对象</p>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/&title=《JavaScript面向对象程序设计》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/&title=《JavaScript面向对象程序设计》 — _sUper.LEE的个人空间&source=
+object对象" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript面向对象程序设计》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/07/27/JavaScript词法分析和作用域闭包/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaScript词法分析和作用域闭包</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/27/JavaScript语言基础之正则表达式(十)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JavaScript语言基础之正则表达式(十)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/&title=《JavaScript面向对象程序设计》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/&title=《JavaScript面向对象程序设计》 — _sUper.LEE的个人空间&source=
+object对象" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JavaScript面向对象程序设计》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/27/JavaScript面向对象程序设计/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3ay44iQQwEQP7/p2elva6ATLtqhtFGn1Dz6AqQ2saVj0d8fP092sfPnn195t/zz15/7MDDw8MbLf3ZkSzu2buSL+j1epIzb66Oh4eHd413qhgkN/p9aSmKBx4eHt6P8lpAWzyShhsPDw/vd/HyAjAbQySTBDw8PLzP4SXDiHYR7RLb9x6eteDh4eHFvHsbYPcef8T+Hh4e3n/J+7pw5Jv97Y2+XgkeHh7eBV7SLrfLer2U2Yi2jXM98iQXHh4e3ojXblzlpE0ByPvkaJiLh4eHd5TXbvy3W/6zMcemCEUZBDw8PLwRbxa3ygtAG6KabXQVvxseHh7emX3/YuS6ec2s1Z4VMDw8PLx7vMS9b7jbaNTsS3y6v4eHh4d3mZe8uQUkS5ltkr35SfDw8PAu8NrFtUOKfTFov+43oSs8PDy8NS//29/emts2fRPzKnIQeHh4eGte/tHRn//RVlbeQO9bbTw8PLwbvFm4Kl/cJigwGzrj4eHhneXNQk7JGLdt3Ntni+gAHh4e3gVecoE2OpBHrPJSkTfcUTICDw8Pb81rb7v54vIScqp9x8PDw7vN22xT5c304alJMurFw8PDu8Brm9281Z6NEopBQz62wMPDw7vAyy+WN9ObzEJ+rWLojIeHh3eUt2l520hW0i63AQI8PDy87+flN+g2IpCPJzbjhnwcjIeHh3eKl2/zz27Ns6DAJo4QJcvw8PDw1rw8bjU7MysSw5rWLhEPDw+vhLWD0c2NOx/vbsoJHh4e3j3eZjCRDAXOjoDza9VIPDw8vJKXF4N20e0nb0JdT38xPDw8vGu8ffhpVoXysEI7ecDDw8P7HF7+bFsS2kFzVFTw8PDwfpTXhqVmUYN9fAEPDw/ve3ibwNPsNbOvNWnK8fDw8G7zZk1tvpT2zKZBPxAdwMPDw3v1mX8AJXmxhpmFU54AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

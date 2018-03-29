@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JS 中的 call、apply、bind 方法 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript">
+    <meta name="description" content="call()、apply()、bind()都是函数对象的一个方法，它们的作用都是改变函数的调用对象。它的使用极大的简化了代码的调用  一、方法定义 call方法 语法  1fun.call(thisArg[, arg1[, arg2[, ...]]])  thisArg：fun函数运行时指定的this值，可能的值为： 不传，或者传null，undefined， this指向window对象 传递">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 中的 call、apply、bind 方法">
+<meta property="og:url" content="http://yoursite.com/2014/12/13/call-apply-bind/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="call()、apply()、bind()都是函数对象的一个方法，它们的作用都是改变函数的调用对象。它的使用极大的简化了代码的调用  一、方法定义 call方法 语法  1fun.call(thisArg[, arg1[, arg2[, ...]]])  thisArg：fun函数运行时指定的this值，可能的值为： 不传，或者传null，undefined， this指向window对象 传递">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 中的 call、apply、bind 方法">
+<meta name="twitter:description" content="call()、apply()、bind()都是函数对象的一个方法，它们的作用都是改变函数的调用对象。它的使用极大的简化了代码的调用  一、方法定义 call方法 语法  1fun.call(thisArg[, arg1[, arg2[, ...]]])  thisArg：fun函数运行时指定的this值，可能的值为： 不传，或者传null，undefined， this指向window对象 传递">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JS 中的 call、apply、bind 方法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JS 中的 call、apply、bind 方法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-12-13T06:55:24.000Z" itemprop="datePublished" class="page-time">
+  2014-12-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、方法定义"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、方法定义</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、call、apply、bind的区别"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、call、apply、bind的区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、运用场景"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、运用场景</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-call-apply-bind"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JS 中的 call、apply、bind 方法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014-12-13 14:55:24" datetime="2014-12-13T06:55:24.000Z"  itemprop="datePublished">2014-12-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <ul>
+<li><code>call()</code>、<code>apply()</code>、<code>bind()</code>都是函数对象的一个方法，它们的作用都是改变函数的调用对象。它的使用极大的简化了代码的调用</li>
+</ul>
+<h4 id="一、方法定义"><a href="#一、方法定义" class="headerlink" title="一、方法定义"></a>一、方法定义</h4><ul>
+<li><strong>call方法</strong></li>
+<li>语法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.call(thisArg[, arg1[, arg2[, ...]]])</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>thisArg</code>：<code>fun</code>函数运行时指定的<code>this</code>值，可能的值为：<ul>
+<li>不传，或者传<code>null</code>，<code>undefined</code>， <code>this</code>指向<code>window</code>对象</li>
+<li>传递另一个函数的函数名<code>fun2</code>，<code>this</code>指向函数fun2的引用<br>值为原始值(数字，字符串，布尔值),this会指向该原始值的自动包装对象，如 String、Number、Boolean</li>
+<li>传递一个对象，函数中的<code>this</code>指向这个对象</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><strong>apply方法</strong></li>
+<li><p>语法：<code>apply([thisObj[,argArray]])</code></p>
+<ul>
+<li>定义：应用某一对象的一个方法，用另一个对象替换当前对象。   </li>
+<li>说明：<code>apply</code>的第一个参数<code>thisObj</code>和<code>call</code>方法的一样，第二个参数<code>argArray</code>为一个传参数组<code>thisObj</code>如果未传，那么 <code>Global</code>对象被用作 <code>thisObj</code></li>
+</ul>
+</li>
+<li><p><strong>bind方法</strong></p>
+<ul>
+<li><p>在<code>ECMAScript5</code>中扩展了叫<code>bind</code>的方法（<code>IE6,7,8</code>不支持）</p>
+</li>
+<li><p>语法：<code>bind([thisObj[,arg1[, arg2[, [,.argN]]]]])</code></p>
+</li>
+<li><p>定义：应用某一对象的一个方法，用另一个对象替换当前对象。</p>
+</li>
+<li><p>说明：<code>bind</code>的<code>thisObj</code>参数也和<code>call</code>方法一样，<code>thisObj</code>如果未传，那么 <code>Global</code>对象被用作 <code>thisObj</code>。arg1 … argN可传可不传。如果不传，可以在调用的时候再传。如果传了，调用的时候则可以不传，调用的时候如果你还是传了，则不生效</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">    name:&quot;tsrot&quot;,</span><br><span class="line">    age:24,</span><br><span class="line">    sayHello:function(age)&#123;</span><br><span class="line">        console.log(this.name);</span><br><span class="line">        console.log(age);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">var son = &#123;</span><br><span class="line"> name:&quot;xieliqun&quot;</span><br><span class="line"> &#125;;</span><br><span class="line">var boundFunc = person.sayHello.bind(son);</span><br><span class="line">boundFunc(25);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var boundFunc = person.sayHello.bind(son,25);</span><br><span class="line">boundFunc();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var boundFunc = person.sayHello.bind(son,25);</span><br><span class="line">boundFunc(30);</span><br></pre></td></tr></table></figure>
+<h4 id="二、call、apply、bind的区别"><a href="#二、call、apply、bind的区别" class="headerlink" title="二、call、apply、bind的区别"></a>二、call、apply、bind的区别</h4><ul>
+<li><code>call</code>的<code>arg</code>传参需一个一个传，<code>apply</code>则直接传一个数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function hello(name,age)&#123;</span><br><span class="line"> console.log(name);</span><br><span class="line">  console.log(age);</span><br><span class="line">  &#125;</span><br><span class="line">hello.call(this,&quot;tsrot&quot;,24);</span><br><span class="line">hello.apply(this,[&quot;tsrot&quot;,24]);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>call</code>和<code>apply</code>直接执行函数，而<code>bind</code>需要再一次调用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    x: 81,</span><br><span class="line">    &#125;;</span><br><span class="line">var foo = &#123;</span><br><span class="line">    getX: function() &#123;</span><br><span class="line">        return this.x;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">console.log(foo.getX.bind(obj)());  </span><br><span class="line">console.log(foo.getX.call(obj));    </span><br><span class="line">console.log(foo.getX.apply(obj));</span><br></pre></td></tr></table></figure>
+<h4 id="三、运用场景"><a href="#三、运用场景" class="headerlink" title="三、运用场景"></a>三、运用场景</h4><ul>
+<li>实现继承</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Animal(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.showName = function () &#123;</span><br><span class="line">    console.log(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">function Cat(name) &#123;</span><br><span class="line">  Animal.call(this, name); </span><br><span class="line">  &#125;</span><br><span class="line">var cat = new Cat(&apos;Black Cat&apos;);</span><br><span class="line">cat.showName();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数组追加</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var array1 = [1 , 2 , 3, 5];</span><br><span class="line">var array2 = [&quot;xie&quot; , &quot;li&quot; , &quot;qun&quot; , &quot;tsrot&quot;];</span><br><span class="line">Array.prototype.push.apply(array1, array2);</span><br><span class="line">console.log(array1);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取数组中的最大值和最小值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var num = [1,3,5,7,2,-10,11];</span><br><span class="line">var maxNum = Math.max.apply(Math, num);</span><br><span class="line">var minNum = Math.min.apply(Math, num);</span><br><span class="line">console.log(maxNum); </span><br><span class="line">console.log(minNum);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将伪数组转化为数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var fakeArr = &#123;0:&apos;a&apos;,1:&apos;b&apos;,length:2&#125;;</span><br><span class="line">var arr1 = Array.prototype.slice.call(fakeArr);</span><br><span class="line">console.log(arr1[0]); </span><br><span class="line">var arr2 = [].slice.call(fakeArr);</span><br><span class="line">console.log(arr2[0]); </span><br><span class="line">arr1.push(&quot;c&quot;);</span><br><span class="line">console.log(arr1);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>保存this变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var foo = &#123;</span><br><span class="line">    bar : 1,</span><br><span class="line">    eventBind: function()&#123;</span><br><span class="line">        var _this = this ;</span><br><span class="line">        $(&apos;.someClass&apos;).on(&apos;click&apos;,function(event) &#123;</span><br><span class="line">            console.log(_this.bar);     </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">var foo = &#123;</span><br><span class="line">    bar : 1,</span><br><span class="line">    eventBind: function()&#123;</span><br><span class="line">        $(&apos;.someClass&apos;).on(&apos;click&apos;,function(event) &#123;</span><br><span class="line">            console.log(this.bar);      </span><br><span class="line">        &#125;.bind(this));</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2014/12/13/call-apply-bind/&title=《JS 中的 call、apply、bind 方法》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2014/12/13/call-apply-bind/&title=《JS 中的 call、apply、bind 方法》 — _sUper.LEE的个人空间&source=
+call()、apply()、bind()都是函数对象的一个方法，它们的作用都是改变函数的调用对象。它的使用极大的简化了代码的调用
+
+一、方法定义
+ca..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2014/12/13/call-apply-bind/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JS 中的 call、apply、bind 方法》 — _sUper.LEE的个人空间&url=http://yoursite.com/2014/12/13/call-apply-bind/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2014/12/13/call-apply-bind/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/12/24/javascript常用代码片段/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">javascript代码片段</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/11/26/Ajax-summary/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Ajax总结篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2014/12/13/call-apply-bind/&title=《JS 中的 call、apply、bind 方法》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2014/12/13/call-apply-bind/&title=《JS 中的 call、apply、bind 方法》 — _sUper.LEE的个人空间&source=
+call()、apply()、bind()都是函数对象的一个方法，它们的作用都是改变函数的调用对象。它的使用极大的简化了代码的调用
+
+一、方法定义
+ca..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2014/12/13/call-apply-bind/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JS 中的 call、apply、bind 方法》 — _sUper.LEE的个人空间&url=http://yoursite.com/2014/12/13/call-apply-bind/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2014/12/13/call-apply-bind/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3awW7CMBAEUP7/p6nUU6VCmFmHqjgvJwQN8eOw9Xr2douv+/f17P2fn/5+J/nL39ftHRcGBsbHMpKvO378MTtZ1vFzIyoGBsYFGO1S8hKZLOL4J4v+AWBgYGDEpbBdVk7CwMDAyAtujlnZ/GFgYGDMmth8I7jesr6xF8fAwPhARhsM/OXrN+YbGBgYH8K4j66VNnVW3F/chYGBsTXjeDzirPqWH+ElwxnRsjAwMDZizMYp6t/p1EjgwRowMDAuw1iKD4PFteFB0dBiYGBszUiWu/Lg5N52sOPpyjEwMDZltMMNZ8WTLa/IYDEwMLZjtMf6+YbvrGJdNNgYGBibMmbjWXnAMLsrH/jAwMC4AmNlEe1YxgqyOPLDwMDYjpGHlLM4oT2MGzbJGBgYWzPa0HHWrOat8qytxcDA2JuxMk7RbvLycDQJAzAwMK7DWHnMLLacsYeHdBgYGFsw8k3erOHMD/TzAYsHrzEwMLZmtGMNecyZt8F5ozucGcHAwNiOkR/3t21tvsVsD/IwMDCuxmgb0XxZbRTabkAxMDD2ZpxVEFt8XVKTuzAwMLZjnNV2tkV5ffDiwakhBgbGpozZjisPOFtS/g3DEBQDA+NjGUmRXV9c29zWBRcDA+MCjFmguB4zDEfBMDAwMOLCmkcLs2JaNNUYGBgYQcPZbvLaPvtFmcbAwLgAo40kVwLOdsij3jliYGBsx5gFA8nDVoLP5Ec5Id/AwMD474wvxQ36CAFVKuIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

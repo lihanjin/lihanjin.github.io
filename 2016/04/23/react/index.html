@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>React知识点小结 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="React">
+    <meta name="description" content="1.react 和jq的区别？reactjs 是个mvc的组件化框架,jquery 只是个函数库。 2.为什么要用react 写项目？单页面应用 运行速度快 3.React 语法基于jsx   、  javascript xml      （nodejs里面的模板ejs）jsx怎么理解？ javascript xml 混合写   ReactDOM.render(        &amp;lt;div&amp;gt">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React知识点小结">
+<meta property="og:url" content="http://yoursite.com/2016/04/23/react/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="1.react 和jq的区别？reactjs 是个mvc的组件化框架,jquery 只是个函数库。 2.为什么要用react 写项目？单页面应用 运行速度快 3.React 语法基于jsx   、  javascript xml      （nodejs里面的模板ejs）jsx怎么理解？ javascript xml 混合写   ReactDOM.render(        &amp;lt;div&amp;gt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React知识点小结">
+<meta name="twitter:description" content="1.react 和jq的区别？reactjs 是个mvc的组件化框架,jquery 只是个函数库。 2.为什么要用react 写项目？单页面应用 运行速度快 3.React 语法基于jsx   、  javascript xml      （nodejs里面的模板ejs）jsx怎么理解？ javascript xml 混合写   ReactDOM.render(        &amp;lt;div&amp;gt">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React知识点小结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React知识点小结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-23T14:24:08.000Z" itemprop="datePublished" class="page-time">
+  2016-04-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-react-和jq的区别？"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.react 和jq的区别？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-为什么要用react-写项目？"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.为什么要用react 写项目？</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-React-语法基于jsx-、-javascript-xml-（nodejs里面的模板ejs）"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.React 语法基于jsx   、  javascript xml      （nodejs里面的模板ejs）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-模板里面渲染数据"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 模板里面渲染数据   {}</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-定义数据"><span class="post-toc-number">5.</span> <span class="post-toc-text">5.定义数据</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6-定义模板"><span class="post-toc-number">6.</span> <span class="post-toc-text">6.定义模板</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6-定义组件"><span class="post-toc-number">7.</span> <span class="post-toc-text">6.定义组件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#7-模板里面执行方式"><span class="post-toc-number">8.</span> <span class="post-toc-text">7.模板里面执行方式</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#8-获取数据-以及更改数据"><span class="post-toc-number">9.</span> <span class="post-toc-text">8.获取数据 以及更改数据</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#9-input-框-onChange事件会传递一个事件对象"><span class="post-toc-number">10.</span> <span class="post-toc-text">9.input 框  onChange事件会传递一个事件对象</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#10-ref-获取dom节点"><span class="post-toc-number">11.</span> <span class="post-toc-text">10.ref  获取dom节点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#11-给模板里面的元素加属性"><span class="post-toc-number">12.</span> <span class="post-toc-text">11.    给模板里面的元素加属性</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#12-父子组件传值"><span class="post-toc-number">13.</span> <span class="post-toc-text">12.父子组件传值</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#13-父子给组件传值的时候-propTypes-defaultProps"><span class="post-toc-number">14.</span> <span class="post-toc-text">13.父子给组件传值的时候 propTypes  defaultProps</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#14-生命周期函数"><span class="post-toc-number">15.</span> <span class="post-toc-text">14.生命周期函数</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#15-axios请求数据"><span class="post-toc-number">16.</span> <span class="post-toc-text">15.axios请求数据</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#16-创建单文件组件"><span class="post-toc-number">17.</span> <span class="post-toc-text">16.创建单文件组件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#17-路由配置-坑-（老版本）"><span class="post-toc-number">18.</span> <span class="post-toc-text">17.路由配置  坑 （老版本）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#18-模板上面解析html"><span class="post-toc-number">19.</span> <span class="post-toc-text">18.模板上面解析html</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#19-父子路由、路由的嵌套"><span class="post-toc-number">20.</span> <span class="post-toc-text">19.父子路由、路由的嵌套</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#20-js跳转路由。"><span class="post-toc-number">21.</span> <span class="post-toc-text">20.js跳转路由。</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#21-swiper的使用"><span class="post-toc-number">22.</span> <span class="post-toc-text">21.swiper的使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#22-ant-desigin-react的UI框架"><span class="post-toc-number">23.</span> <span class="post-toc-text">22.ant desigin  react的UI框架</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#23-导航选中。"><span class="post-toc-number">24.</span> <span class="post-toc-text">23.导航选中。</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-react"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React知识点小结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-04-23 22:24:08" datetime="2016-04-23T14:24:08.000Z"  itemprop="datePublished">2016-04-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="1-react-和jq的区别？"><a href="#1-react-和jq的区别？" class="headerlink" title="1.react 和jq的区别？"></a>1.react 和jq的区别？</h1><p>reactjs 是个mvc的组件化框架,jquery 只是个函数库。</p>
+<h1 id="2-为什么要用react-写项目？"><a href="#2-为什么要用react-写项目？" class="headerlink" title="2.为什么要用react 写项目？"></a>2.为什么要用react 写项目？</h1><pre><code>单页面应用 运行速度快
+</code></pre><h1 id="3-React-语法基于jsx-、-javascript-xml-（nodejs里面的模板ejs）"><a href="#3-React-语法基于jsx-、-javascript-xml-（nodejs里面的模板ejs）" class="headerlink" title="3.React 语法基于jsx   、  javascript xml      （nodejs里面的模板ejs）"></a>3.React 语法基于jsx   、  javascript xml      （nodejs里面的模板ejs）</h1><p>jsx怎么理解？ javascript xml 混合写</p>
+<p>  ReactDOM.render(<br>        <code>&lt;div&gt;
+            &lt;h2&gt;你和React&lt;/h2&gt;
+            &lt;ul&gt;
+                &lt;li&gt;列表1&lt;/li&gt;
+                &lt;li&gt;列表1&lt;/li&gt;   {/**/}
+                &lt;li&gt;列表1&lt;/li&gt;
+            &lt;/ul&gt;           
+        &lt;/div&gt;</code><br>        ,<br>        document.getElementById(‘box’)</p>
+<pre><code>)
+</code></pre><h1 id="4-模板里面渲染数据"><a href="#4-模板里面渲染数据" class="headerlink" title="4. 模板里面渲染数据   {}"></a>4. 模板里面渲染数据   {}</h1><h1 id="5-定义数据"><a href="#5-定义数据" class="headerlink" title="5.定义数据"></a>5.定义数据</h1><p>es5 </p>
+<pre><code>getInitialState:function(){  
+    return{  
+
+        msg:&apos;这是InitialState里面的数据&apos;,
+        name:&apos;张三&apos;,
+        list:&apos;&apos;
+    }
+
+}
+
+
+用这里的数据： this.state.数据名称
+</code></pre><p>es6 </p>
+<pre><code>  constructor(props){
+
+    super(props);     
+
+    this.state={
+        msg:&apos;这是Life的msg&apos;,
+        name:&apos;张三&apos;,
+        list:&apos;&apos;
+    }    
+}     
+
+
+用这里的数据：this.state.数据名称
+</code></pre><h1 id="6-定义模板"><a href="#6-定义模板" class="headerlink" title="6.定义模板"></a>6.定义模板</h1><pre><code>render(){
+
+        return(
+            &lt;div&gt;
+
+                &lt;h2&gt;这是一个内容组件-{this.state.msg}--{this.state.name}&lt;/h2&gt;
+            &lt;/div&gt;
+        )
+    }
+</code></pre><h1 id="6-定义组件"><a href="#6-定义组件" class="headerlink" title="6.定义组件"></a>6.定义组件</h1><pre><code>es5 
+    var Header=React.createClass({
+
+        getInitialState:function(){  
+            return{  
+
+                msg:&apos;这是InitialState里面的数据&apos;,
+                name:&apos;张三&apos;,
+                list:&apos;&apos;
+            }
+
+        },
+
+        render(){
+
+            return (
+                &lt;div&gt;&lt;/div&gt;
+            )
+        }
+    })
+</code></pre><p>es6 </p>
+<pre><code>class Header extends React.Component{
+
+       constructor(props){
+
+               super(props);
+
+               //数据
+
+               this.state={
+
+                   msg:&apos;这是一个头部组件&apos;
+               }
+
+               this.run=this.run.bind(this);
+
+       }
+       run(){
+
+       }
+       render(){
+
+           return (
+
+               &lt;div&gt;&lt;/div&gt;
+           )
+       }
+
+
+}
+
+暴露:
+
+export default Header;
+
+
+
+其他地方引入：
+
+import Header from &apos;./Header.js&apos;;  //引入 js
+</code></pre><h1 id="7-模板里面执行方式"><a href="#7-模板里面执行方式" class="headerlink" title="7.模板里面执行方式"></a>7.模板里面执行方式</h1><pre><code>onClick    注意大小写  注意不要写引号  不要写()
+
+onClick={this.run}
+
+onChange  
+
+
+传值：
+
+onClick={this.run.bind(this,&apos;传递的数据&apos;)}
+</code></pre><h1 id="8-获取数据-以及更改数据"><a href="#8-获取数据-以及更改数据" class="headerlink" title="8.获取数据 以及更改数据"></a>8.获取数据 以及更改数据</h1><pre><code>获取
+this.state.数据
+
+更改
+
+this.setState({
+
+    msg:&apos;更改后的数据&apos;
+})
+</code></pre><h1 id="9-input-框-onChange事件会传递一个事件对象"><a href="#9-input-框-onChange事件会传递一个事件对象" class="headerlink" title="9.input 框  onChange事件会传递一个事件对象"></a>9.input 框  onChange事件会传递一个事件对象</h1><pre><code>&lt;input onChange={this.方法}     /&gt;
+
+ console.log(e);
+
+方法(){
+
+    e.target.value
+
+}
+</code></pre><h1 id="10-ref-获取dom节点"><a href="#10-ref-获取dom节点" class="headerlink" title="10.ref  获取dom节点"></a>10.ref  获取dom节点</h1><pre><code>给元素加ref属性   比如： &lt;div ref=&apos;home&apos;&gt;&lt;/div&gt;     
+
+this.refs.home  获取dom节点
+</code></pre><h1 id="11-给模板里面的元素加属性"><a href="#11-给模板里面的元素加属性" class="headerlink" title="11.    给模板里面的元素加属性"></a>11.    给模板里面的元素加属性</h1><pre><code>注意：
+
+    className 设置class
+
+    htmlFor   设置for  
+
+    style=&quot;对象&quot;
+
+    &lt;div&gt;
+       &lt;label htmlFor=&quot;user&quot;&gt;用户名： &lt;/label&gt;
+       &lt;input type=&quot;text&quot; id=&quot;user&quot; placeholder=&quot;用户名&quot; /&gt;
+    &lt;/div&gt;
+
+其他的以前怎么写还是怎么写  id
+</code></pre><h1 id="12-父子组件传值"><a href="#12-父子组件传值" class="headerlink" title="12.父子组件传值"></a>12.父子组件传值</h1><pre><code>1.父组件给子组件传值，子组件获取父组件的数据和方法
+
+    1.父组件  调用子组件的时候传值    
+        &lt;Header msg=&apos;这是一个数据&apos; h={this} /&gt;
+
+    2.子组件获取父亲组件的数据
+
+        this.props.msg
+
+ 2.子组件给父组件传值 ，父组件获取子组件的数据和方法
+
+     1.父组件调用子组件的时候定义ref
+         &lt;Header ref=&apos;header&apos; /&gt;
+
+     2.this.refs.header拿到了子组件的对象。可以获取子组件的数据和方法
+</code></pre><h1 id="13-父子给组件传值的时候-propTypes-defaultProps"><a href="#13-父子给组件传值的时候-propTypes-defaultProps" class="headerlink" title="13.父子给组件传值的时候 propTypes  defaultProps"></a>13.父子给组件传值的时候 propTypes  defaultProps</h1><pre><code>子组件里面通过 propTypes  可以验证父组件传递数据的合法性
+
+
+defaultProps 父组件不给子组件传值的时候的默认值
+
+
+
+Header.propTypes = {
+  text: PropTypes.string   /*指定 text是字符串类型*/
+};
+
+//不传值的时候  给props一个默认值
+Header.defaultProps = {
+  username: &apos;张三&apos;
+};
+</code></pre><h1 id="14-生命周期函数"><a href="#14-生命周期函数" class="headerlink" title="14.生命周期函数"></a>14.生命周期函数</h1><pre><code>生命周期函数：
+
+   组件加载之前  加载完成    更新数据   销毁组件触发的一系列的方法就是生命周期函数
+
+
+componentWillMount   
+
+
+componentDidMount  
+
+
+https://facebook.github.io/react/docs/react-component.html
+</code></pre><h1 id="15-axios请求数据"><a href="#15-axios请求数据" class="headerlink" title="15.axios请求数据"></a>15.axios请求数据</h1><pre><code>https://github.com/mzabriskie/axios
+
+
+1.安装
+2.引入   
+3.使用
+
+//1.cnpm install axios  --save
+
+//2.import axios from &apos;axios&apos;; 
+
+//3.看官方文档使用
+</code></pre><h1 id="16-创建单文件组件"><a href="#16-创建单文件组件" class="headerlink" title="16.创建单文件组件"></a>16.创建单文件组件</h1><pre><code>https://facebook.github.io/react/docs/installation.html
+
+
+
+1.安装脚手架 （ 项目生成工具）    只需要安装一次
+
+
+npm install -g create-react-app    /  cnpm install -g create-react-app
+
+
+2.创建项目  （可以创建）
+
+create-react-app  项目名称
+
+cd 项目名称
+
+npm start 运行项目
+
+
+例如:
+
+create-react-app reactdemo01
+
+cd reactdemo01  
+
+npm start 执行项目
+
+
+3.运行  打开项目
+
+npm start
+
+
+4.正式打包 
+
+npm run build
+</code></pre><h1 id="17-路由配置-坑-（老版本）"><a href="#17-路由配置-坑-（老版本）" class="headerlink" title="17.路由配置  坑 （老版本）"></a>17.路由配置  坑 （老版本）</h1><pre><code>1.安装react-router 
+
+    注意要指定版本安装
+
+    npm info react-router  查看路由的版本
+
+
+
+    cnpm install react-router@2.8.1    老版本的稳定版本
+
+
+
+2.引入import { Router, Route, Link } from &apos;react-router&apos;    
+
+(index.js  App.js)
+
+
+3.定义组件  首页 Home组件  新闻 News组件
+
+
+
+4.配置路由 （ index.js）
+
+
+
+    /  加载APP组件
+
+
+    /home   加载Home组件
+
+    /news  加载News组件
+
+    ReactDOM.render((
+      &lt;Router&gt;
+        &lt;Route path=&quot;/&quot; component={App}&gt;
+          &lt;Route path=&quot;home&quot; component={Home} /&gt;
+          &lt;Route path=&quot;news&quot; component={Inbox}&gt;     
+          &lt;/Route&gt;
+           &lt;Route path=&quot;newscontent/:aid&quot; component={NewsContent}&gt;     
+          &lt;/Route&gt;
+        &lt;/Route&gt;
+      &lt;/Router&gt;
+    ), document.body)
+
+
+
+
+5.配置 加载的组件 的显示的地方   （App.js）
+
+
+  {this.props.children}
+
+
+6.页面跳转 （组件的跳转）   (任何的组件里面都可以写)
+
+     &lt;ul&gt;
+      &lt;li&gt;&lt;Link to=&quot;/about&quot;&gt;About&lt;/Link&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;Link to=&quot;/inbox&quot;&gt;Inbox&lt;/Link&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+ 7.Link动态传值
+
+
+&lt;li&gt;&lt;Link to={&apos;/newscontent/&apos;+aid}&gt;新闻详情&lt;/Link&gt;&lt;/li&gt;
+
+
+     &lt;Link to={{pathname:'newscontent/'+this.state.aid,query:{name:'zhangsan'}}}&gt;跳转新闻详情&lt;/Link&gt;
+
+ 8.获取动态传值
+
+      {this.props.params.aid}
+</code></pre><h1 id="18-模板上面解析html"><a href="#18-模板上面解析html" class="headerlink" title="18.模板上面解析html"></a>18.模板上面解析html</h1><pre><code>https://facebook.github.io/react/docs/dom-elements.html
+
+
+function createMarkup() {
+  return {__html: &apos;&lt;h2&gt;这是一个h2&lt;/h2&gt;&apos;};
+}
+
+
+render(){
+    return (
+
+        &lt;div&gt;
+            &lt;div dangerouslySetInnerHTML={this.createMarkup()} /&gt;;
+        &lt;/div&gt;
+    )
+
+}
+</code></pre><h1 id="19-父子路由、路由的嵌套"><a href="#19-父子路由、路由的嵌套" class="headerlink" title="19.父子路由、路由的嵌套"></a>19.父子路由、路由的嵌套</h1><p>嵌套路由</p>
+<p>1.父路由下面配置子路由<br>            <route path="news" component="{News}">      </route></p>
+<pre><code>        &lt;Route path=&quot;add&quot; component={NewsAdd} /&gt;
+         &lt;Route path=&quot;list&quot; component={NewsList} /&gt; 
+&lt;/Route&gt;    
+</code></pre><p>2.父组件里面的模板上面加上</p>
+<pre><code>{this.props.children}  来显示子路由
+</code></pre><p>*/</p>
+<p>import Home from ‘./components/Home.js’;<br>    import Welcome from ‘./components/Welcome.js’;</p>
+<p>import News from ‘./components/News.js’;<br>    import NewsList from ‘./components/NewsList.js’;<br>    import NewsAdd from ‘./components/NewsAdd.js’;</p>
+<p>ReactDOM.render(</p>
+<pre><code>&lt;Router history={browserHistory}&gt;
+    &lt;Route path=&quot;/&quot; component={App}&gt;
+        &lt;IndexRedirect to=&quot;/home/welcome&quot; /&gt;
+
+        &lt;Route path=&quot;home&quot; component={Home}&gt;
+              &lt;IndexRoute component={Welcome}/&gt;
+              &lt;Route path=&quot;welcome&quot; component={Welcome} /&gt;
+
+        &lt;/Route&gt;
+
+        &lt;Route path=&quot;news&quot; component={News}&gt;      
+
+                &lt;Route path=&quot;add&quot; component={NewsAdd} /&gt;
+                 &lt;Route path=&quot;list&quot; component={NewsList} /&gt; 
+        &lt;/Route&gt;    
+
+
+    &lt;/Route&gt;
+&lt;/Router&gt;, 
+</code></pre><p>点击加class    </p>
+<pre><code>&lt;ul&gt;
+            &lt;li&gt;&lt;Link to=&quot;/home&quot; activeClassName=&quot;active&quot; onlyActiveOnIndex={true} &gt;首页&lt;/Link&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;Link to=&quot;/news&quot; activeClassName=&quot;active&quot; &gt;新闻&lt;/Link&gt;&lt;/li&gt;
+    &lt;/ul&gt;  
+
+
+onlyActiveOnIndex={true} 如果加上这个数据 路由和设置的路由完全相等的情况选中
+</code></pre><h1 id="20-js跳转路由。"><a href="#20-js跳转路由。" class="headerlink" title="20.js跳转路由。"></a>20.js跳转路由。</h1><pre><code>browserHistory.push(&apos;home&apos;);
+</code></pre><h1 id="21-swiper的使用"><a href="#21-swiper的使用" class="headerlink" title="21.swiper的使用"></a>21.swiper的使用</h1><pre><code>1.cnpm install swiper --save
+
+
+
+2、import Swiper from &apos;swiper&apos;;
+
+
+3.引入swiper.css
+
+
+4.自己改变元素的高度
+
+
+5.componentDidMount实例化Swiper   
+
+    componentDidMount(){
+    //DOM操作
+    var mySwiper = new Swiper(&apos;.swiper-container&apos;, {
+        autoplay: 5000,//可选选项，自动滑动
+    })
+    }
+</code></pre><h1 id="22-ant-desigin-react的UI框架"><a href="#22-ant-desigin-react的UI框架" class="headerlink" title="22.ant desigin  react的UI框架"></a>22.ant desigin  react的UI框架</h1><pre><code>官网https://ant.design/index-cn
+
+
+1.安装
+
+        cnpm install antd  --save
+
+
+2.引入
+
+        import { Button } from &apos;antd&apos;;            
+
+3.引入css         
+
+        1.新建一个自己的css
+
+        2.在自己的css中引入 antd的css
+
+        @import &apos;~antd/dist/antd.css&apos;;
+
+4.看文档使用            
+
+
+
+
+报错怎么办？
+
+
+提取里面的antd.css ,自己引入
+</code></pre><h1 id="23-导航选中。"><a href="#23-导航选中。" class="headerlink" title="23.导航选中。"></a>23.导航选中。</h1><pre><code>&lt;ul&gt;
+            &lt;li&gt;&lt;Link to=&quot;/home&quot; activeClassName=&quot;active&quot; onlyActiveOnIndex={true} &gt;首页&lt;/Link&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;Link to=&quot;/news&quot; activeClassName=&quot;active&quot; &gt;新闻&lt;/Link&gt;&lt;/li&gt;
+    &lt;/ul&gt;  
+
+
+onlyActiveOnIndex={true} 如果加上这个数据 路由和设置的路由完全相等的情况选中
+</code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/04/23/react/&title=《React知识点小结》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/04/23/react/&title=《React知识点小结》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/04/23/react/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React知识点小结》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/04/23/react/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/04/23/react/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/11/vue基础/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vue基础整理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/17/73条日常Linux-shell命令汇总/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">73条日常Linux shell命令汇总</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/04/23/react/&title=《React知识点小结》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/04/23/react/&title=《React知识点小结》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/04/23/react/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React知识点小结》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/04/23/react/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/04/23/react/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByElEQVR42u3aQW6DQAwF0Nz/0q3UVaWGybcNA5UeK0Qm8NiM7G9er/j4+jnW57+vHB1/17yuOHBxccfc/AFH69d3OyKu73n4Sri4uBu5yea1xiXohP7BhouL+zBu8jLrwiUvlXBxcf8Ld40+q6HCxcV9DrcXZPSCj/X603o1XFzcAfeswHRyfkO+i4uL25pKzAchk6HLm6fj4uJu4SaRx/r6ZGU+aLkQgYuLu2x78rakujIKO5IxDC4u7nZu3orMG57kU4w3T8TFxd3O7TUtefmSlEQfWixcXNwt3KTISIKMar+VbGcFNC4u7qncXoiZF0DzKUmUteDi4m7h5oi8yZkEJbi4uDu5yWAjAVVHJr35CC4u7h5uPgjJP8Gslke4uLjP5OZbVXWPnN8fFxd3PzdvPPJtLm+B8qYIFxd3JzcpR+bb3CRAwcXFvYs7GZFWI5VqMIqLi3sXtxdq9EYjeRBTmMTi4uKeyu3NNHNEb0Cb/IqLi3s1t9oCVaEnF0O4uLgbudVy5KyPMwrNDy4u7iO51UdWP9eImiJcXNzHc/MypfovXFzcJ3Crm0svbO1FIc1YBBcXd8CtFit54ZI3Qr3IFRcX9wLuN7oIJQtp/uwBAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>
