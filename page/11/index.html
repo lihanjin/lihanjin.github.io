@@ -187,11 +187,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之定时器"
+            <article id="post-js-scope"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-10 12:50:43" datetime="2016-01-10T04:50:43.000Z"  itemprop="datePublished">2016-01-10</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -205,7 +205,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之定时器/">JavaScript之定时器</a>
+      <a class="post-title-link" href="/2016/01/10/js-scope/">JavaScript作用域分析总结</a>
     </h3>
   
 
@@ -216,22 +216,33 @@
 
     
         
-window定时器
+原文链接 http://blog.poetries.top/2017/01/10/js-scope
 
-setIntval(表达式,毫秒)
-clearIntval(定时器对象)
-setTimeout(表达式,毫秒)
-clearTimeout(定时器对象)
+一、JS解析顺序和作用域：
+解析顺序：
+定义（先找var  function）  
+执行 ( 在逐步执行 )
+注意:如果函数名和var定义的变量相同，var会被函数覆盖
+
+
+作用域：
+每个script是一个作用域
+每个函数{}是一个作用域
+程序每执行到一个作用域，都是按照解析顺序解析代码；
+作用域链:从内往外找要找函数内的变量；
+
+
+
     
 
-        <a href="/2015/07/27/JavaScript之定时器/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/10/js-scope/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li></ul>
 
     </div>
     
@@ -240,14 +251,14 @@ clearTimeout(定时器对象)
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript-DOM事件"
+            <article id="post-web Socket和Socket.IO框架"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-10 12:35:08" datetime="2016-01-10T04:35:08.000Z"  itemprop="datePublished">2016-01-10</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
 
 
 
@@ -258,7 +269,7 @@ clearTimeout(定时器对象)
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript-DOM事件/">JavaScript-DOM事件</a>
+      <a class="post-title-link" href="/2016/01/10/web Socket和Socket.IO框架/">web Socket和Socket.IO框架</a>
     </h3>
   
 
@@ -268,18 +279,17 @@ clearTimeout(定时器对象)
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-DOM 事件就是指 当页面上发生某一件事的时候激发某一个函数 相当监听/触发设备
+        web Socket和Socket.IO框架####HTTP无法轻松实现实时应用：● HTTP协议是无状态的，服务器只会响应来自客户端的请求，但是它与客户端之间不具备持续连接。● 我们可以非常轻松的捕获浏览器上发生的事件（比如用户点击了盒子），这个事件可以轻松产生与服务器的数据交互（比如Ajax）。但是，反过来却是不可能的：服务器端发生了一个事件，服务器无法将这个事件的信息实时主动通知它的客...
     
 
-        <a href="/2015/07/27/JavaScript-DOM事件/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/10/web Socket和Socket.IO框架/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
 
     </div>
     
@@ -288,14 +298,14 @@ DOM 事件就是指 当页面上发生某一件事的时候激发某一个函数
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之函数表达式&amp;arguments详解"
+            <article id="post-jQuery基础之Ajax（六）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 22:30:08" datetime="2016-01-07T14:30:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -306,7 +316,7 @@ DOM 事件就是指 当页面上发生某一件事的时候激发某一个函数
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之函数表达式&arguments详解/">JavaScript之函数表达式&amp;arguments详解</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery基础之Ajax（六）/">jQuery基础之Ajax（六）</a>
     </h3>
   
 
@@ -317,17 +327,19 @@ DOM 事件就是指 当页面上发生某一件事的时候激发某一个函数
 
     
         
-This与arguments
+ajax : Asynchronous Javascript And XML （异步的JavaScript和XML）
+
+创建ajax对象 var xhr = new XMLHttpRequest();
     
 
-        <a href="/2015/07/27/JavaScript之函数表达式&arguments详解/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery基础之Ajax（六）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -336,14 +348,14 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript与Unicode编码"
+            <article id="post-jQuery基础之Event（五）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 22:10:08" datetime="2016-01-07T14:10:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -354,7 +366,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript与Unicode编码/">JavaScript与Unicode编码</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery基础之Event（五）/">jQuery基础之Event（五）</a>
     </h3>
   
 
@@ -365,18 +377,17 @@ This与arguments
 
     
         
-字符集的概念：
-字符集：就是–编码–&gt;字符的映射
+什么是Event？
     
 
-        <a href="/2015/07/27/JavaScript与Unicode编码/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery基础之Event（五）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -385,14 +396,14 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之面向对象中的多态"
+            <article id="post-jQuery基础之插件（六）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 22:10:08" datetime="2016-01-07T14:10:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -403,7 +414,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之面向对象中的多态/">JavaScript之面向对象中的多态</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery基础之插件（六）/">jQuery基础之插件（六）</a>
     </h3>
   
 
@@ -414,17 +425,17 @@ This与arguments
 
     
         
-多态:同一个父类继承出来的子类各有各的形态
+什么是插件插件(Plugin)也称为jQuery的扩展。以jQuery核心代码为基础编写的符合一定规范的应用程序。通过`js文件的方式引用。
     
 
-        <a href="/2015/07/27/JavaScript之面向对象中的多态/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery基础之插件（六）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -433,14 +444,14 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之面向对象中的封装"
+            <article id="post-jQuery操作DOM（三）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 21:10:08" datetime="2016-01-07T13:10:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -451,7 +462,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之面向对象中的封装/">JavaScript之面向对象中的封装</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery操作DOM（三）/">jQuery操作DOM（三）</a>
     </h3>
   
 
@@ -461,20 +472,17 @@ This与arguments
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-对象的属性外界是可读可写 如何来达到封装的额目的？
-
-答：可通过闭包+局部变量来完成
+        操作DOM
     
 
-        <a href="/2015/07/27/JavaScript之面向对象中的封装/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery操作DOM（三）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -483,14 +491,14 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript对象"
+            <article id="post-jQuery动画基础（四）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 21:10:08" datetime="2016-01-07T13:10:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -501,7 +509,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript对象/">JavaScript对象</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery动画基础（四）/">jQuery动画基础（四）</a>
     </h3>
   
 
@@ -511,17 +519,19 @@ This与arguments
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        创建对象
+        介绍jQuery动画
+
+JavaScript语言本身不支持动画设计，必须通过改变`CSS来实现动画效果。
     
 
-        <a href="/2015/07/27/JavaScript对象/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery动画基础（四）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -530,14 +540,14 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之面向对象中的静态方法-静态属性"
+            <article id="post-jQuery选择器及优化（二）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 21:05:08" datetime="2016-01-07T13:05:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -548,7 +558,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之面向对象中的静态方法-静态属性/">JavaScript之面向对象中的静态方法-静态属性</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery选择器及优化（二）/">jQuery选择器及优化（二）</a>
     </h3>
   
 
@@ -558,18 +568,17 @@ This与arguments
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-面向对象中的静态方法-静态属性：没有new对象 也能引用静态方法属性
+        层级选择器:通过DOM的嵌套关系匹配元素
     
 
-        <a href="/2015/07/27/JavaScript之面向对象中的静态方法-静态属性/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery选择器及优化（二）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -578,14 +587,14 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript词法分析和作用域闭包"
+            <article id="post-jQuery概述及学习纲要j（一）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 00:50:43" datetime="2015-07-26T16:50:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-07 19:35:08" datetime="2016-01-07T11:35:08.000Z"  itemprop="datePublished">2016-01-07</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -596,7 +605,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript词法分析和作用域闭包/">JavaScript词法分析和作用域闭包</a>
+      <a class="post-title-link" href="/2016/01/07/jQuery概述及学习纲要j（一）/">jQuery概述（一）</a>
     </h3>
   
 
@@ -607,21 +616,19 @@ This与arguments
 
     
         
-在函数运行时 会进词法分析（预编译）
-预编译做了哪些工作
-分析参数
-分析变量声明(分析带var的变量声明)
-分析函数声明
+jQuery是什么:
+是一个javascript代码仓库，我们称之为javascript框架。
+是一个快速的简洁的javascript框架，可以简化查询DOM对象、处理事件、制作动画、处理Ajax交互过程。
     
 
-        <a href="/2015/07/27/JavaScript词法分析和作用域闭包/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/07/jQuery概述及学习纲要j（一）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -630,11 +637,11 @@ This与arguments
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript面向对象程序设计"
+            <article id="post-js-props"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 00:36:43" datetime="2015-07-26T16:36:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2015-12-13 23:35:24" datetime="2015-12-13T15:35:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -648,7 +655,7 @@ This与arguments
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript面向对象程序设计/">JavaScript面向对象程序设计</a>
+      <a class="post-title-link" href="/2015/12/13/js-props/">JavaScript及jQuery中的各种宽高属性图解</a>
     </h3>
   
 
@@ -659,10 +666,19 @@ This与arguments
 
     
         
-object对象
+原文链接 http://blog.poetries.top/2016/12/13/js-props声明：本文根据慕课网学习视频整理
+
+强烈建议打开控制台自己动手练习一遍，这样印象才会深刻
+第一部分 JavaScript中的宽高属性
+一、与window相关的宽高属性
+1.1 window.location和document.location
+
+window对象的location属性引用的是location对象，表示该窗口中当前显示文档的URL
+document的对象的location属性也是引用location对象
+所以 window.location === document.location    //true
     
 
-        <a href="/2015/07/27/JavaScript面向对象程序设计/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-props/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -682,7 +698,7 @@ object对象
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
     </div>
 </nav>
 

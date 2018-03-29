@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>计算机基础 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="计算机">
+    <meta name="description" content="数据结构与算法 算法  整理自《算法 第四版》  Leetcode 题解  对题目做了一个分类，并对每种题型的解题思想做了总结。 已经整理了 300+ 的题目，基本涵盖所有经典题目，持续整理中。  剑指 offer 题解  目录按《剑指 Offer 第二版》编排，在牛客网的在线编程中出现的题目都已经 AC。 很多题目都在 Leetcode 中出现过，所以一些解题思路就不在这里重复写了。想要看解题思">
+<meta name="keywords" content="计算机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机基础">
+<meta property="og:url" content="http://yoursite.com/2015/07/12/计算机基础/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="数据结构与算法 算法  整理自《算法 第四版》  Leetcode 题解  对题目做了一个分类，并对每种题型的解题思想做了总结。 已经整理了 300+ 的题目，基本涵盖所有经典题目，持续整理中。  剑指 offer 题解  目录按《剑指 Offer 第二版》编排，在牛客网的在线编程中出现的题目都已经 AC。 很多题目都在 Leetcode 中出现过，所以一些解题思路就不在这里重复写了。想要看解题思">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-29T15:06:20.447Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机基础">
+<meta name="twitter:description" content="数据结构与算法 算法  整理自《算法 第四版》  Leetcode 题解  对题目做了一个分类，并对每种题型的解题思想做了总结。 已经整理了 300+ 的题目，基本涵盖所有经典题目，持续整理中。  剑指 offer 题解  目录按《剑指 Offer 第二版》编排，在牛客网的在线编程中出现的题目都已经 AC。 很多题目都在 Leetcode 中出现过，所以一些解题思路就不在这里重复写了。想要看解题思">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">计算机基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">计算机基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-07-12T14:24:08.000Z" itemprop="datePublished" class="page-time">
+  2015-07-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机/">计算机</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据结构与算法"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据结构与算法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#网络"><span class="post-toc-number">2.</span> <span class="post-toc-text">网络</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#操作系统"><span class="post-toc-number">3.</span> <span class="post-toc-text">操作系统</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#面向对象"><span class="post-toc-number">4.</span> <span class="post-toc-text">面向对象</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据库"><span class="post-toc-number">5.</span> <span class="post-toc-text">数据库</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java"><span class="post-toc-number">6.</span> <span class="post-toc-text">Java</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编码实践"><span class="post-toc-number">7.</span> <span class="post-toc-text">编码实践</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#资料下载"><span class="post-toc-number">8.</span> <span class="post-toc-text">资料下载</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">9.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-计算机基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">计算机基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-07-12 22:24:08" datetime="2015-07-12T14:24:08.000Z"  itemprop="datePublished">2015-07-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机/">计算机</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/算法.md" target="_blank" rel="noopener">算法</a></p>
+</blockquote>
+<p>整理自《算法 第四版》</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Leetcode%20题解.md" target="_blank" rel="noopener">Leetcode 题解</a></p>
+</blockquote>
+<p>对题目做了一个分类，并对每种题型的解题思想做了总结。</p>
+<p>已经整理了 300+ 的题目，基本涵盖所有经典题目，持续整理中。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/剑指%20offer%20题解.md" target="_blank" rel="noopener">剑指 offer 题解</a></p>
+</blockquote>
+<p>目录按《剑指 Offer 第二版》编排，在牛客网的在线编程中出现的题目都已经 AC。</p>
+<p>很多题目都在 Leetcode 中出现过，所以一些解题思路就不在这里重复写了。想要看解题思路的话，可以看《剑指 Offer》原书，或者先看 Leetcode 题解，看完 Leetcode 题解再看剑指 Offer 会觉得很容易。</p>
+<h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机网络.md" target="_blank" rel="noopener">计算机网络</a></p>
+</blockquote>
+<p>整理自《计算机网络 第七版》，重点内容会在标题之后加 *。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/HTTP.md" target="_blank" rel="noopener">HTTP</a></p>
+</blockquote>
+<p>整理自《图解 HTTP》</p>
+<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机操作系统.md" target="_blank" rel="noopener">计算机操作系统</a></p>
+</blockquote>
+<p>整理自《现代操作系统》</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Linux.md" target="_blank" rel="noopener">Linux</a></p>
+</blockquote>
+<p>整理自《鸟哥的 Linux 私房菜》</p>
+<h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/设计模式.md" target="_blank" rel="noopener">设计模式</a></p>
+</blockquote>
+<p>整理自《Head First 设计模式》，这本书内容废话太多，笔记内容提取了重点部分。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/面向对象思想.md" target="_blank" rel="noopener">面向对象思想</a></p>
+</blockquote>
+<p>一些面向对象思想和原则</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/SQL%20语法.md" target="_blank" rel="noopener">SQL 语法</a></p>
+</blockquote>
+<p>整理自《SQL 必知必会》，原书内容不多，笔记内容会更简洁。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/MySQL.md" target="_blank" rel="noopener">MySQL</a></p>
+</blockquote>
+<p>整理自《高性能 MySQL》，重点整理。</p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/JVM.md" target="_blank" rel="noopener">JVM</a></p>
+</blockquote>
+<p>整理自《深入理解 Java 虚拟机》，包括内存模型、垃圾回收和类加载机制。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20容器.md" target="_blank" rel="noopener">Java 容器</a></p>
+</blockquote>
+<p>容器的一些总结，包含容器源码的分析。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/Java%20IO.md" target="_blank" rel="noopener">Java IO</a></p>
+</blockquote>
+<p>File、InputStream 和 OutputStream、Reader 和 Writer、Serializable、Socket 以及 NIO</p>
+<h1 id="编码实践"><a href="#编码实践" class="headerlink" title="编码实践"></a>编码实践</h1><blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/重构.md" target="_blank" rel="noopener">重构</a></p>
+</blockquote>
+<p>重构是对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其可理解性，降低其修改成本。</p>
+<blockquote>
+<p><a href="https://github.com/CyC2018/InnterviewNotes/blob/master/notes/编写可读代码的艺术.md" target="_blank" rel="noopener">编写可读代码的艺术</a></p>
+</blockquote>
+<p>编程有很大一部分时间是在阅读代码，可读性良好的代码能够大大提高编程效率。</p>
+<h1 id="资料下载"><a href="#资料下载" class="headerlink" title="资料下载"></a>资料下载</h1><blockquote>
+<p><a href="https://pan.baidu.com/s/1o9oD1s2#list/path=%2F" target="_blank" rel="noopener">百度网盘</a></p>
+</blockquote>
+<p>一些 PDF 书籍</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>原文发表在 <a href="https://www.nowcoder.com/discuss/66985" target="_blank" rel="noopener">牛客网：计算机基础知识整理</a></p>
+<p>:star: :star: :star:</p>
+<p>牛客网上有很多优质面经，面经往往会给出一些面试需要准备的知识列表，但是这些知识列表都很零散，不适合系统地进行学习。为此，楼主选取了一些计算机经典书籍和材料，对面试相关的计算机基础知识做了比较系统整理，希望对大家有所帮助。</p>
+<p>整理的笔记开源在 Github 上，包括数据结构与算法、网络、操作系统、面向对象。 Github 仓库提供相关 PDF 书籍的下载，基本都是高清版本。</p>
+<p>如有笔误，直接在 Github 上进行编辑修改就行，楼主会及时 Merge。</p>
+<p>想要支持楼主的话，在 Github 仓库点个 Star 即可。</p>
+<p>笔记基本是楼主一个字一个字打上去的，笔记内容可供个人随意使用，转载请注明出处，毕竟写了这么久没那么轻松~</p>
+<p>楼主作为一个轻度强迫症患者，笔记内容会尽量保证排版美观，可读性好。有时候找不到好看的图，会选择自己画一个，可见楼主的强迫症多严重。为了让笔记内容更整洁，前前后后做了很多次修改，也写了一个为中英混排文档进行排版的脚本，来提高笔记的可读性。</p>
+<p>为了上传笔记到 Github 上，也花了不少时间。楼主使用的笔记软件是为知笔记，怎么把笔记内容提取成文本文档，并且提取笔记中的图片就是一个问题。Github 使用的是 GFM 来渲染 md 文档，和普通的 Markdown 不太一样，例如 GFM 不支持 MathJax 公式，也不支持 TOC 标记，为此需要替换 MathJax 公式为 Codecogs 的云服务和重新生成 TOC 目录。楼主实现了脚本解决了上述的问题，并且整个过程可以一键进行，包括 Git 同步到仓库中。有需要该工具的话可以在我的 Github 中找到。</p>
+<p>:star: :star: :star:</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机/">计算机</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/12/计算机基础/&title=《计算机基础》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/12/计算机基础/&title=《计算机基础》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/12/计算机基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机基础》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/12/计算机基础/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/12/计算机基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/07/26/JavaScript语言基础之变量(一)/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaScript语言基础之变量(一)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/04/14/es6-coding-style/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ES6编码风格</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2015/07/12/计算机基础/&title=《计算机基础》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2015/07/12/计算机基础/&title=《计算机基础》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2015/07/12/计算机基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《计算机基础》 — _sUper.LEE的个人空间&url=http://yoursite.com/2015/07/12/计算机基础/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2015/07/12/计算机基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3aS2rEQAxFUe9/0w5kFhqX75PcAauuR6ExcZ0aCP2OAz/n78Pf/Hyf/H71zmOPDBkyXss4l88n4+ooV79cHYt/F1FlyJCxAWMdZDux/MRPegUyZMiQcRX40iDbOaIMGTJk1P4dSd1I2CUXJEOGDBm1YjL+QClZ/GItLkOGjBcy0sHAf/79xfmGDBkyXsI4S09tqElSyeJ5ZMiQMZqxXoNIlypIArd+n/z/eMtDhgwZIxg8LPJDkOK2tqJxc/UyZMgYzegH2fXh0tUKPmaQIUPGbEanHZ8mf2kLL7gsGTJkjGZ0VrJI8Vlby+gUyTJkyJjN4AE0LTJ5lpomkTJkyNiNwZvyacJHwLVWnQwZMvZh8CFimiDyZLHT8pMhQ8ZsRm3lqwbgg1LOQIMBGTJkvJxBxgDpIletV18bcB5kUipDhowRjNoR08FkpxlHviVDhowdGLXgyGHfaMOheleGDBkjGJ3VB97E5609PkaVIUPGngxyXJ7MkcK4dmVBu02GDBmDGMV2/EMRj6SPN1cgQ4aMDRhpscoTvk7KGFy6DBkyRjN4SK1dAV+2SL8YzzdkyJDxQkat7CTH4sVn7Qr+/CJDhozRjNpQsxY6a6PQeC1MhgwZQxmdINsZiKY57E3AlSFDxgaM9cc6a6ZPRf0bmAwZMmQ01k9JEklKWdQvlCFDxvaMzi+8MZcWwzJkyNiHQYrYWilL2moPBHoZMmSMZqSDgc4Ik6d96ShUhgwZQxk/ZcVLqa8u+NoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

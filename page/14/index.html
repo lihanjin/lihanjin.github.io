@@ -187,11 +187,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-javascript笔记基础总结篇"
+            <article id="post-JavaScript中三种绑定事件的方式与去除绑定"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2014-09-24 10:33:00" datetime="2014-09-24T02:33:00.000Z"  itemprop="datePublished">2014-09-24</time>
+        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -205,7 +205,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/09/24/javascript笔记基础总结篇/">javascript笔记总结篇</a>
+      <a class="post-title-link" href="/2015/07/27/JavaScript中三种绑定事件的方式与去除绑定/">JavaScript中三种绑定事件的方式与去除绑定</a>
     </h3>
   
 
@@ -216,20 +216,12 @@
 
     
         
-转载请声明出处 博客原文
-
-随手翻阅以前的学习笔记，顺便整理一下放在这里，方便自己复习，也希望你有也有帮助吧
-第一课时 入门基础
-知识点：
-
-操作系统就是个应用程序
-只要是应用程序都要占用物理内存
-浏览器本身也是一个应用程序
-浏览器本身只懂得解析HTML
-调用浏览器这个应用程序的一个功能绘制
+绑定事件的第1种办法：
+函数写在结构层里面
+非常不好，使页面很混乱，行为与结构得不到分离
     
 
-        <a href="/2014/09/24/javascript笔记基础总结篇/" class="post-more waves-effect waves-button">
+        <a href="/2015/07/27/JavaScript中三种绑定事件的方式与去除绑定/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -245,11 +237,11 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-DOM编程之API学习总结篇"
+            <article id="post-JavaScript之IE,火狐兼容事件对象"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2014-09-22 17:10:43" datetime="2014-09-22T09:10:43.000Z"  itemprop="datePublished">2014-09-22</time>
+        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -263,7 +255,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/09/22/DOM编程之API学习总结篇/">DOM编程之API学习总结篇</a>
+      <a class="post-title-link" href="/2015/07/27/JavaScript之IE,火狐兼容事件对象/">JavaScript之IE,火狐兼容事件对象</a>
     </h3>
   
 
@@ -273,26 +265,17 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-原文 链接
-
-一、基本类型介绍
-1.1 Node类型
-
-DOM1级定义了一个Node接口，该接口由DOM中所有节点类型实现。这个Node接口在JS中是作为Node类型实现的。在IE9以下版本无法访问到这个类型，JS中所有节点都继承自Node类型，都共享着相同的基本属性和方法
-Node有一个属性nodeType表示Node的类型，它是一个整数，其数值分别表示相应的Node类型
-
-
+        1234567document.getElementById('par').addEventListener ('click',function (ev)&#123;		ev = ev||window.event;// 在IE下ev为null window.event为真 || &amp;&amp;在php和js中不同  在js中 第一个真 就返回 否则返回第二个		alert(ev.screenX+ev.screenY)&#125;		);	document.getElementById('son').addEventListener ('click',function ()&#123;alert('son')&#125;);
     
 
-        <a href="/2014/09/22/DOM编程之API学习总结篇/" class="post-more waves-effect waves-button">
+        <a href="/2015/07/27/JavaScript之IE,火狐兼容事件对象/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </div>
     
@@ -301,211 +284,11 @@ Node有一个属性nodeType表示Node的类型，它是一个整数，其数值�
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Emmet常用快捷键"
+            <article id="post-JavaScript词法分析和作用域闭包"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2014-09-09 21:00:08" datetime="2014-09-09T13:00:08.000Z"  itemprop="datePublished">2014-09-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Front-End/">Front-End</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/09/09/Emmet常用快捷键/">Emmet常用快捷键</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        基本语法
-
-div+div&gt;p&gt;span+em^bq
-    
-
-        <a href="/2014/09/09/Emmet常用快捷键/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emmet/">Emmet</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-CSS中的BFC"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2014-09-07 18:20:08" datetime="2014-09-07T10:20:08.000Z"  itemprop="datePublished">2014-09-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/09/07/CSS中的BFC/">CSS中的BFC</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        BFC 是什么？
-BFC (Block Formatting Contexts) 即块级格式化上下文，从样式上看，它与普通的容器没有什么区别，但是从功能上，BFC 可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器没有的一些特性，例如可以包含浮动元素，使到它可以包含浮动元素，从而防止出现高度塌陷的问题
-    
-
-        <a href="/2014/09/07/CSS中的BFC/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-DIV+CSS系统学习笔记回顾"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2014-09-06 18:24:08" datetime="2014-09-06T10:24:08.000Z"  itemprop="datePublished">2014-09-06</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/09/06/DIV+CSS系统学习笔记回顾/">DIV+CSS系统学习笔记回顾</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        第一部分 HTML
-第一章 职业规划和前景
-
-职业方向规划定位：
-
-web前端开发工程师
-web网站架构师
-自己创业
-转岗管理或其他
-    
-
-        <a href="/2014/09/06/DIV+CSS系统学习笔记回顾/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XHTML/">XHTML</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-PS基本切图及应用"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2014-08-08 15:30:43" datetime="2014-08-08T07:30:43.000Z"  itemprop="datePublished">2014-08-08</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Front-End/">Front-End</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/08/08/PS基本切图及应用/">PS基本切图及应用</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        之前一直用别人切好的页面，心中很是惭愧，为不在麻烦于他人，还是重新打开很久没用过得PS，学习了一下如何切页面，顺便整理一下近期学到的PS切图的基本方法。
-美工一般只提供设计稿，那么问题来了，我们如何把设计稿切成自己想要的图片呢，今天我们来简单学习一下如何切图：
-    
-
-        <a href="/2014/08/08/PS基本切图及应用/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PS/">PS</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-javascript 下常用的字符串操作"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2014-08-02 17:35:08" datetime="2014-08-02T09:35:08.000Z"  itemprop="datePublished">2014-08-02</time>
+        <time class="post-time" title="2015-07-27 00:50:43" datetime="2015-07-26T16:50:43.000Z"  itemprop="datePublished">2015-07-27</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -519,7 +302,7 @@ web网站架构师
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/08/02/javascript 下常用的字符串操作/">javascript 下常用的字符串操作</a>
+      <a class="post-title-link" href="/2015/07/27/JavaScript词法分析和作用域闭包/">JavaScript词法分析和作用域闭包</a>
     </h3>
   
 
@@ -529,17 +312,22 @@ web网站架构师
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        charAt() 返回在指定位置的字符。
+        
+在函数运行时 会进词法分析（预编译）
+预编译做了哪些工作
+分析参数
+分析变量声明(分析带var的变量声明)
+分析函数声明
     
 
-        <a href="/2014/08/02/javascript 下常用的字符串操作/" class="post-more waves-effect waves-button">
+        <a href="/2015/07/27/JavaScript词法分析和作用域闭包/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snippet/">Snippet</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </div>
     
@@ -548,59 +336,14 @@ web网站架构师
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-梳理常用的正则表达式"
+            <article id="post-JavaScript面向对象程序设计"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2014-07-10 01:04:51" datetime="2014-07-09T17:04:51.000Z"  itemprop="datePublished">2014-07-10</time>
+        <time class="post-time" title="2015-07-27 00:36:43" datetime="2015-07-26T16:36:43.000Z"  itemprop="datePublished">2015-07-27</time>
 
         
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/07/10/梳理常用的正则表达式/">梳理常用的正则表达式</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一、校验数字的表达式
-    
-
-        <a href="/2014/07/10/梳理常用的正则表达式/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-梳理常见的CSS属性（二）"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2014-06-25 23:56:31" datetime="2014-06-25T15:56:31.000Z"  itemprop="datePublished">2014-06-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
 
 
 
@@ -611,7 +354,7 @@ web网站架构师
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/06/25/梳理常见的CSS属性（二）/">梳理常见的CSS属性（二）</a>
+      <a class="post-title-link" href="/2015/07/27/JavaScript面向对象程序设计/">JavaScript面向对象程序设计</a>
     </h3>
   
 
@@ -622,16 +365,17 @@ web网站架构师
 
     
         
+object对象
     
 
-        <a href="/2014/06/25/梳理常见的CSS属性（二）/" class="post-more waves-effect waves-button">
+        <a href="/2015/07/27/JavaScript面向对象程序设计/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </div>
     
@@ -640,14 +384,14 @@ web网站架构师
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-css常用属性梳理（一）"
+            <article id="post-JavaScript语言基础之正则表达式(十)"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2014-06-25 23:24:17" datetime="2014-06-25T15:24:17.000Z"  itemprop="datePublished">2014-06-25</time>
+        <time class="post-time" title="2015-07-27 00:09:43" datetime="2015-07-26T16:09:43.000Z"  itemprop="datePublished">2015-07-27</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
 
 
 
@@ -658,7 +402,165 @@ web网站架构师
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2014/06/25/css常用属性梳理（一）/">css常用属性梳理（一）</a>
+      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之正则表达式(十)/">JavaScript语言基础之正则表达式(十)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+Regex
+
+a.[]一个字符的范围
+b.有顺序要求的
+c.\w==[a-zA-Z0-9_]  \d==[0-9]
+d.{count}设置匹配数量比如\w{5}，{c1,c2}
+e.//的正则表达式匹配局部，/^$/的正则表达式是匹配全部
+f.()的作用就是为了分组匹配
+g.+代表的是1-N个，*代表的是0-N个
+h.?代表该字符要不没有要不就有一个
+i..代表的是任意字符
+
+
+
+
+附录：...
+    
+
+        <a href="/2015/07/27/JavaScript语言基础之正则表达式(十)/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JavaScript语言基础之Window属性(八)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之Window属性(八)/">JavaScript语言基础之Window属性(八)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+一些讨论
+    
+
+        <a href="/2015/07/27/JavaScript语言基础之Window属性(八)/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JavaScript语言基础之DOM操作(九)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之DOM操作(九)/">JavaScript语言基础之DOM操作(九)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        DOM 操作
+    
+
+        <a href="/2015/07/27/JavaScript语言基础之DOM操作(九)/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JavaScript语言基础之数组(七)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之数组(七)/">JavaScript语言基础之数组(七)</a>
     </h3>
   
 
@@ -671,14 +573,109 @@ web网站架构师
         
     
 
-        <a href="/2014/06/25/css常用属性梳理（一）/" class="post-more waves-effect waves-button">
+        <a href="/2015/07/27/JavaScript语言基础之数组(七)/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JavaScript语言基础之流程控制(五)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015-07-26 23:50:43" datetime="2015-07-26T15:50:43.000Z"  itemprop="datePublished">2015-07-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之流程控制(五)/">JavaScript语言基础之流程控制(五)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+条件结构  if  if...else  if...else if...else
+    
+
+        <a href="/2015/07/26/JavaScript语言基础之流程控制(五)/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JavaScript语言基础之字符串方法(四)"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2015-07-26 23:46:43" datetime="2015-07-26T15:46:43.000Z"  itemprop="datePublished">2015-07-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之字符串方法(四)/">JavaScript语言基础之字符串方法(四)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+    
+
+        <a href="/2015/07/26/JavaScript语言基础之字符串方法(四)/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </div>
     
@@ -691,7 +688,7 @@ web网站架构师
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/13/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/15/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/13/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/15/">下一页</a>
     </div>
 </nav>
 

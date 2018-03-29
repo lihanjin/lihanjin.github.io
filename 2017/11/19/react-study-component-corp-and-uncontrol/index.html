@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>React之组件的协同及（不）可控组件（五） | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JavaScript,react">
+    <meta name="description" content="一、为什么要进行组件的协同 我们在实际的开发项目的时候，不会只用几个组件，有时候遇到大型的项目，可能会有成千上百的组件，难免会遇到有功能重复的组件。要进行修改，就会修改大部分的文件。所以我们需要进行组件的协同开发。">
+<meta name="keywords" content="JavaScript,react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React之组件的协同及（不）可控组件（五）">
+<meta property="og:url" content="http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="一、为什么要进行组件的协同 我们在实际的开发项目的时候，不会只用几个组件，有时候遇到大型的项目，可能会有成千上百的组件，难免会遇到有功能重复的组件。要进行修改，就会修改大部分的文件。所以我们需要进行组件的协同开发。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1480597-ca3cbaafe961fa83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1480597-dc00c2b2c9ac3807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1480597-ceca4b322b820239.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1480597-34b3ac31175733e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1480597-daeeefc5cd7c054d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-29T15:27:25.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React之组件的协同及（不）可控组件（五）">
+<meta name="twitter:description" content="一、为什么要进行组件的协同 我们在实际的开发项目的时候，不会只用几个组件，有时候遇到大型的项目，可能会有成千上百的组件，难免会遇到有功能重复的组件。要进行修改，就会修改大部分的文件。所以我们需要进行组件的协同开发。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1480597-ca3cbaafe961fa83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">React之组件的协同及（不）可控组件（五）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">React之组件的协同及（不）可控组件（五）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-18T17:10:24.000Z" itemprop="datePublished" class="page-time">
+  2017-11-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、为什么要进行组件的协同"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、为什么要进行组件的协同</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、什么是组件的协同使用？"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、什么是组件的协同使用？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、如何实现组件的协同使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、如何实现组件的协同使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、组件嵌套的含义"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、组件嵌套的含义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、组件嵌套的优缺点"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、组件嵌套的优缺点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六、Mixin"><span class="post-toc-number">6.</span> <span class="post-toc-text">六、Mixin</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#七、不可控组件"><span class="post-toc-number">7.</span> <span class="post-toc-text">七、不可控组件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#八、可控组件"><span class="post-toc-number">8.</span> <span class="post-toc-text">八、可控组件</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-react-study-component-corp-and-uncontrol"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">React之组件的协同及（不）可控组件（五）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-19 01:10:24" datetime="2017-11-18T17:10:24.000Z"  itemprop="datePublished">2017-11-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、为什么要进行组件的协同"><a href="#一、为什么要进行组件的协同" class="headerlink" title="一、为什么要进行组件的协同"></a>一、为什么要进行组件的协同</h2><ul>
+<li>我们在实际的开发项目的时候，不会只用几个组件，有时候遇到大型的项目，可能会有成千上百的组件，难免会遇到有功能重复的组件。要进行修改，就会修改大部分的文件。所以我们需要进行组件的协同开发。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/1480597-ca3cbaafe961fa83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="">
+                </div>
+                <div class="image-caption">image.png</div>
+            </figure>
+<h2 id="二、什么是组件的协同使用？"><a href="#二、什么是组件的协同使用？" class="headerlink" title="二、什么是组件的协同使用？"></a>二、什么是组件的协同使用？</h2><ul>
+<li>组件的协同本质上是对组件的一种组织、管理的方式。</li>
+<li>目的：<ul>
+<li>逻辑清晰：这是组件与组件之间的逻辑</li>
+<li>代码模块化</li>
+<li>封装细节：像面向对象一样将常用的方法以及数据封装起来</li>
+<li>提高代码的复用性：因为是组件，相当于一个封装好的东西，用的时候直接调用</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、如何实现组件的协同使用"><a href="#三、如何实现组件的协同使用" class="headerlink" title="三、如何实现组件的协同使用"></a>三、如何实现组件的协同使用</h2><ul>
+<li>第一种：增加一个父组件，将其他的组件进行嵌套，更多的是实现代码的封装</li>
+<li>第二种：通过一些操作从后台获取数据，<code>React</code>中的<code>Mixin</code>，更多的是实现代码的复用</li>
+</ul>
+<h2 id="四、组件嵌套的含义"><a href="#四、组件嵌套的含义" class="headerlink" title="四、组件嵌套的含义"></a>四、组件嵌套的含义</h2><ul>
+<li>组件嵌套的本质是父子关系</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/1480597-dc00c2b2c9ac3807.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="">
+                </div>
+                <div class="image-caption">image.png</div>
+            </figure>
+<h2 id="五、组件嵌套的优缺点"><a href="#五、组件嵌套的优缺点" class="headerlink" title="五、组件嵌套的优缺点"></a>五、组件嵌套的优缺点</h2><ul>
+<li>优点：<ul>
+<li>逻辑清晰：父子关系类似于人类中的父子关系</li>
+<li>模块化开发：每个模块对应一个功能，不同的模块可以同步开发</li>
+<li>封装细节：开发者必须要关注组件的功能，不需要了解细节</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>编写难度高：父子组件的关系需要经过深思熟虑，贸然编写可能导致关系混乱，代码难以维护</li>
+<li>无法掌握所有细节：使用者只知道组件的用法，不知道实现细节，遇到问题难以修复</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、Mixin"><a href="#六、Mixin" class="headerlink" title="六、Mixin"></a>六、Mixin</h2><p><strong>Mixin的含义</strong></p>
+<ul>
+<li><code>Mixin=一组方法</code>。</li>
+<li>他的目的是横向抽离出组件的相似代码，把组件的共同作用以及效果的代码提出来</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/1480597-ceca4b322b820239.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="">
+                </div>
+                <div class="image-caption">image.png</div>
+            </figure>
+<p><strong>Mixin的优缺点</strong></p>
+<ul>
+<li>优点<ul>
+<li>代码复用：抽离出通用的代码，减少开发成本，提高开发效率</li>
+<li>即插即用：可以使用许多现有的<code>Mixin</code>来开发自己的代码</li>
+<li>适应性强：改动一次代码，影响多个组件</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>编写难度高：<code>Mixin</code>可能被用在各种环境中，想要兼容多种环境就需要更多的  - 码与逻辑，通用的代价是提高复杂度</li>
+<li>降低代码的可读性：组件的优势在于将逻辑与是界面直接结合在一起，<code>Mixin</code>本质上会分散逻辑，理解起来难度大</li>
+</ul>
+</li>
+</ul>
+<h2 id="七、不可控组件"><a href="#七、不可控组件" class="headerlink" title="七、不可控组件"></a>七、不可控组件</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/1480597-34b3ac31175733e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="">
+                </div>
+                <div class="image-caption">image.png</div>
+            </figure>
+<ul>
+<li>上图：<code>defaultValue</code>的值是固定的，这就是一个不可控组件</li>
+<li>如果要获取<code>input</code>的<code>value</code>值，只有使用<code>ref</code>获取节点来获取值</li>
+</ul>
+<h2 id="八、可控组件"><a href="#八、可控组件" class="headerlink" title="八、可控组件"></a>八、可控组件</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://upload-images.jianshu.io/upload_images/1480597-daeeefc5cd7c054d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="">
+                </div>
+                <div class="image-caption">image.png</div>
+            </figure>
+<ul>
+<li><code>defaultValue</code>的值是根据状态确定了，只需要拿到<code>this.state.value</code>的值就可以了</li>
+<li>这里需要注意一下：使用<code>value</code>的值是不可修改的，<code>defaultValue</code>的值是可以修改的</li>
+</ul>
+<p><strong>可控组件的优点</strong></p>
+<ul>
+<li>符合<code>React</code>的数据流</li>
+<li>数据存储在<code>state</code>中，便于获取</li>
+<li>便于处理数据</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/&title=《React之组件的协同及（不）可控组件（五）》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/&title=《React之组件的协同及（不）可控组件（五）》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React之组件的协同及（不）可控组件（五）》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/19/react-study-build-env/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">React之环境的搭建（一）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/08/react-styled-components/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">浅谈styled-components</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/&title=《React之组件的协同及（不）可控组件（五）》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/&title=《React之组件的协同及（不）可控组件（五）》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《React之组件的协同及（不）可控组件（五）》 — _sUper.LEE的个人空间&url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/11/19/react-study-component-corp-and-uncontrol/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqUlEQVR42u3awW4iQQwE0Pz/T2evkXYDVXY3sNKbU0QI6TeHsSn76yu+vn9cf7+S//a39//8q8f/8evGhYeHh7c4en7cx/jkiO3R89uHh4eH9xpe8nF52agPEd/E/Mx4eHh4n8NLGt899TEYDw8P73/k5Yx76QEeHh7ee3n5x+VhRP6eTch7LGvBw8PDm3SwRYT63p+vzPfw8PDw1s1rXiTahjtfF1idFg8PD+8Crx3b55i2/d2040/eiYeHh3eNd2rdKikbpwLcqPzg4eHhXeAlze7m9STayIPj9pbh4eHhneVtRkr5wsGqIS7Hb79+V8DDw8M7xJs1x0UjuygGs6JV3Dk8PDy8ES8fOM2GVW0IOysS0XwPDw8P7yivfeAmDW6+WHC2fT9QT/Dw8PDitLMtD49f3w/J8kjiSWuOh4eHd5mXIPOQoh1rzQpSVP3w8PDwDvHaZncT4J5aEShKCB4eHt4FXvudPS8n7a3ZhBFRTIyHh4d3jbd/rG/GZrMxW7F0hYeHh7fmtUP9/UArDzLaJYN/nBAPDw/vMu9UYWhj2VmzHpUlPDw8vMu8fBkrXzJoFwjyUDh6HQ8PD+8lvPZBXMepowCiXSzAw8PDew1v1gTng/wWkI/EnmxG4OHh4R3lteHsqUPPbtZs/IaHh4d3j5fHE3mEsTnoqhhsjo6Hh4cX886uVb0rDYgiCTw8PLyjvE3MOvuEFlOvI+Dh4eEd5X2XV94on70deZnBw8PDu83b1JNTwW67oFCvXuHh4eFd4CXFYLj2VIYdm2ijjnHx8PDw1rxjA6egwU1a9tn1ZHUADw8P78N4M8zsJhatNh4eHt4H8Gat8z6cHRYVPDw8vGu85PGdBAebcVeOLP4WDw8P7wIv/5KfB6+zktAuZh278PDw8FLeH6y+nHH0U02fAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

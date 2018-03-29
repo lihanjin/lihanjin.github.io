@@ -187,11 +187,60 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-js-prototype"
+            <article id="post-gulp-works"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
+        <time class="post-time" title="2016-01-21 17:40:43" datetime="2016-01-21T09:40:43.000Z"  itemprop="datePublished">2016-01-21</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Build/">Build</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/21/gulp-works/">基于gulp的工作流配置</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+配置一套基于gulp的工作流，满足日常的基本开发。
+
+    
+
+        <a href="/2016/01/21/gulp-works/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-JavaScript中this的一些用法"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-01-20 20:09:43" datetime="2016-01-20T12:09:43.000Z"  itemprop="datePublished">2016-01-20</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -205,7 +254,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/12/13/js-prototype/">OOP之原型与原型链</a>
+      <a class="post-title-link" href="/2016/01/20/JavaScript中this的一些用法/">JavaScript中的this的一些用法</a>
     </h3>
   
 
@@ -215,322 +264,17 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        prototype原型对象
+        一、global this
 
-每个函数都有一个默认的prototype属性，其实际上还是一个对象，如果被用在继承中，姑且叫做原型对象
-在构造函数中的prototype中定义的属性和方法，会被创建的对象所继承下来。举个栗子：
-    
-
-        <a href="/2015/12/13/js-prototype/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型链/">原型链</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-js-inherit"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
-
-
-
-    </div>
+总结起来就是：在浏览器里面this是老大，它等价于window对象，如果你声明一些全局变量(不管在任何地方)，这些变量都会作为this的属性。
+在node里面，有两种执行JavaScript代码的方式，一种是直接执行写好的JavaScript文件，另外一种是直接在里面执行一行行代码。
+对于直接运行一行行JavaScript代码的方式，global才是老大，this和它是等价的。在这种情况下，和浏览器比较相似
+也就是声明一些全局变量会自动添加给老大global，顺带也会添加给this。
+但是在node里面直接脚本文件就不一样了，你声明的全局变量不会自动添加到this，但是会添加到global对象。所以相同点是，在全局范围内，全局变量终究是属于老大的
 
     
 
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/12/13/js-inherit/">JS继承的几种方法总结</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-由于js不像java那样是真正面向对象的语言，js是基于对象的，它没有类的概念
-所以，要想实现继承，可以用js的原型prototype机制或者用apply和call方法去实现。在面向对象的语言中，我们使用类来创建一个自定义对象。然而js中所有事物都是对象，那么用什么办法来创建自定义对象呢？
-这就需要用到js的原型：我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（prototype）的一个拷贝 （实际上不是拷贝而是链接，只不过这种链接是不可见，新实例化的对象内部有一个看不见的Proto指针，指向原型对象）。
-
-    
-
-        <a href="/2015/12/13/js-inherit/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-js-inner-func"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-12-13 14:50:24" datetime="2015-12-13T06:50:24.000Z"  itemprop="datePublished">2015-12-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/12/13/js-inner-func/">JS常用的内置函数整理</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        String字符串对象
-length 属性 长度
-concat(String) 连接两个或更多个字符
-indexOf(string) 返回出现字符的位置
-substr(num1,[num2])截取字符串
-toLowerCase()转成小写
-toUpperCase()转成大写
-replace(str1,str2) 字符串替换
-
-    
-
-        <a href="/2015/12/13/js-inner-func/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内置对象/">内置对象</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-HTML5+CSS3基础回顾 "
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-10-19 09:35:08" datetime="2015-10-19T01:35:08.000Z"  itemprop="datePublished">2015-10-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/HTML5/">HTML5</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/10/19/HTML5+CSS3基础回顾 /">HTML5+CSS3整体回顾</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-转载请声明 原文链接
-
-这篇文章主要总结H5的一些新增的功能以及一些基础归纳，这里只是一个提纲，并不是很详细，后面会一直完善补充新的内容，本文是一些笔记记录，放在这里供自己参考也供他人学习！
-    
-
-        <a href="/2015/10/19/HTML5+CSS3基础回顾 /" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-CSS 组合选择符用法总结"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-09-04 16:50:32" datetime="2015-09-04T08:50:32.000Z"  itemprop="datePublished">2015-09-04</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/09/04/CSS 组合选择符用法总结/">CSS 组合选择符用法总结</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        组合选择符基本介绍
-    
-
-        <a href="/2015/09/04/CSS 组合选择符用法总结/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-实用的60个CSS代码片段"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-08-13 12:25:08" datetime="2015-08-13T04:25:08.000Z"  itemprop="datePublished">2015-08-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/08/13/实用的60个CSS代码片段/">实用的60个CSS代码片段</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        1、垂直对齐
-如果你用CSS，则你会有困惑：我该怎么垂直对齐容器中的元素？现在，利用CSS3的Transform，可以很优雅的解决这个困惑：
-1234567.verticalcenter&#123;    position: relative;    top: 50%;    -webkit-transform: translateY(-50%);    -o-transform: translateY(-50%);    transform: translateY(-50%);&#125;
-使用这个技巧，从单行文本、段落到box，都会垂直对齐。目前浏览器对Transform的支持是需要关注的，Chrome 4, Opera 10, Safari 3, Firefox 3, and Internet Explorer 9均支持该属性
-    
-
-        <a href="/2015/08/13/实用的60个CSS代码片段/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snippet/">Snippet</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-JavaScript中property和attribute的区别"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2015-07-27 13:50:20" datetime="2015-07-27T05:50:20.000Z"  itemprop="datePublished">2015-07-27</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript中property和attribute的区别/">JavaScript中property和attribute的区别</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-1. 定义
-
-property（元素属性）：DOM 节点是一个对象，因此，可以添加自定义的属性以及方法。property 的值可以是任何的数据类型，对大小写敏感。自定义的property不会出现在 html 中，只存在 JavaSctipt 中。
-attribute（标签属性）：attribute 只能是字符串，大小写不敏感，出现在 innerHTML 中，通过类数组attributes可以罗列所有的 attribute。
-
-
-
-
-2. 相同之处
-    
-
-        <a href="/2015/07/27/JavaScript中property和attribute的区别/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/20/JavaScript中this的一些用法/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -546,14 +290,14 @@ attribute（标签属性）：attribute 只能是字符串，大小写不敏感�
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之事件的中断传播与行为阻止"
+            <article id="post-review-jQuery"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:50:43" datetime="2015-07-27T03:50:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-20 09:35:08" datetime="2016-01-20T01:35:08.000Z"  itemprop="datePublished">2016-01-20</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
 
 
 
@@ -564,7 +308,7 @@ attribute（标签属性）：attribute 只能是字符串，大小写不敏感�
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之事件的中断传播与行为阻止/">JavaScript之事件的中断传播与行为阻止</a>
+      <a class="post-title-link" href="/2016/01/20/review-jQuery/">jQuery笔记总结篇</a>
     </h3>
   
 
@@ -575,19 +319,20 @@ attribute（标签属性）：attribute 只能是字符串，大小写不敏感�
 
     
         
-如何中断事件的传播？
-stopPropagation()    w3c取消冒泡
-cancleBubble = true     IE取消冒泡
+原文链接 http://blog.poetries.top/2016/10/20/review-jQuery
+
+首先，来了解一下jQuery学习的整体思路
+
     
 
-        <a href="/2015/07/27/JavaScript之事件的中断传播与行为阻止/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/20/review-jQuery/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
     </div>
     
@@ -596,14 +341,14 @@ cancleBubble = true     IE取消冒泡
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript中三种绑定事件的方式与去除绑定"
+            <article id="post-express、express-session实现了简易的登录"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-20 09:35:08" datetime="2016-01-20T01:35:08.000Z"  itemprop="datePublished">2016-01-20</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
 
 
 
@@ -614,7 +359,7 @@ cancleBubble = true     IE取消冒泡
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript中三种绑定事件的方式与去除绑定/">JavaScript中三种绑定事件的方式与去除绑定</a>
+      <a class="post-title-link" href="/2016/01/20/express、express-session实现了简易的登录/">express、express-session实现了简易的登录</a>
     </h3>
   
 
@@ -624,20 +369,24 @@ cancleBubble = true     IE取消冒泡
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-绑定事件的第1种办法：
-函数写在结构层里面
-非常不好，使页面很混乱，行为与结构得不到分离
+        文档概览本文基于express、express-session实现了简易的登录/登出功能，完整的代码示例可以在这里找到。
+环境初始化首先，初始化项目
+1express -e
+然后，安装依赖。
+1npm install
+接着，安装session相关的包。
+1npm install --save express-session session-file-store
+session相关配置配置如下...
     
 
-        <a href="/2015/07/27/JavaScript中三种绑定事件的方式与去除绑定/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/20/express、express-session实现了简易的登录/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
 
     </div>
     
@@ -646,11 +395,163 @@ cancleBubble = true     IE取消冒泡
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript之IE,火狐兼容事件对象"
+            <article id="post-nodejs文件上传"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 11:40:43" datetime="2015-07-27T03:40:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2016-01-20 09:35:08" datetime="2016-01-20T01:35:08.000Z"  itemprop="datePublished">2016-01-20</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/20/nodejs文件上传/">Nodejs实现文件上传</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        关于作者正在填坑：《Nodejs学习笔记》 / 《Express学习笔记》 
+社区链接：云栖社区 / github / 新浪微博 / 知乎 / Segmentfault / 博客园  / 站酷
+概览图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。
+常用的开源组件有multer、formidable等，借助这两个开源组件，可以轻松搞定图片上传。
+本文主要讲解以下...
+    
+
+        <a href="/2016/01/20/nodejs文件上传/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-nodejs的async"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-01-20 09:35:08" datetime="2016-01-20T01:35:08.000Z"  itemprop="datePublished">2016-01-20</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/NodeJS/">NodeJS</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/20/nodejs的async/">Nodejs的async</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        async模块是为了解决嵌套金字塔,和异步流程控制而生.常用的方法介绍1.安装  npm install async --save2.引入  var async = require(&#39;async&#39;)
+1var async = require(&apos;async&apos;)
+//series: 串行执行，一个函数数组中的每个函数，每一个函数执行完成之后才能执行下一个函数。...
+    
+
+        <a href="/2016/01/20/nodejs的async/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-jQuery-dom"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-01-14 10:20:43" datetime="2016-01-14T02:20:43.000Z"  itemprop="datePublished">2016-01-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/14/jQuery-dom/">jQuery之DOM操作小结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、过滤器
+1 匹配指定元素的父
+
+elem.parent([exp])
+
+2 匹配指定元素的子元素
+    
+
+        <a href="/2016/01/14/jQuery-dom/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-js-snippets-summary"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-01-14 08:20:43" datetime="2016-01-14T00:20:43.000Z"  itemprop="datePublished">2016-01-14</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -664,7 +565,7 @@ cancleBubble = true     IE取消冒泡
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript之IE,火狐兼容事件对象/">JavaScript之IE,火狐兼容事件对象</a>
+      <a class="post-title-link" href="/2016/01/14/js-snippets-summary/">javascript常用积累</a>
     </h3>
   
 
@@ -674,17 +575,118 @@ cancleBubble = true     IE取消冒泡
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        1234567document.getElementById('par').addEventListener ('click',function (ev)&#123;		ev = ev||window.event;// 在IE下ev为null window.event为真 || &amp;&amp;在php和js中不同  在js中 第一个真 就返回 否则返回第二个		alert(ev.screenX+ev.screenY)&#125;		);	document.getElementById('son').addEventListener ('click',function ()&#123;alert('son')&#125;);
+        一、JS动画与动作不一致解决:
+123if(!$( "#handle").is(":animated"))&#123;	//判断元素是否处于动画状态&#125;
     
 
-        <a href="/2015/07/27/JavaScript之IE,火狐兼容事件对象/" class="post-more waves-effect waves-button">
+        <a href="/2016/01/14/js-snippets-summary/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snippet/">Snippet</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-gulp"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-01-13 18:20:43" datetime="2016-01-13T10:20:43.000Z"  itemprop="datePublished">2016-01-13</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Build/">Build</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/13/gulp/">gulp学习总结篇</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+声明 本教程整理于互联网
+
+一、gulp 入门简介
+gulp 是基于 node 实现Web 前端自动化开发的工具，利用它能够极大的提高开发效率。
+在 Web 前端开发工作中有很多“重复工作”，比如压缩CSS/JS文件。而这些工作都是有规律的。找到这些规律，并编写 gulp 配置代码,让 gulp 自动执行这些“重复工作”。
+    
+
+        <a href="/2016/01/13/gulp/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-react加node仿饿了么"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-01-13 14:55:24" datetime="2016-01-13T06:55:24.000Z"  itemprop="datePublished">2016-01-13</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/13/react加node仿饿了么/">react加node仿饿了么</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言　　最近一段时间一直在学习React的相关知识，，这次决定用React去模仿一个移动端App,看了很多自己用过的App,最后决定模仿做饿了么移动端App,写下这篇博客，记录实践中的心得体会
+项目构建基于react、react-redux、react-router、antd、mongodb实现单个商家页部分，后台数据通过nodejs模拟实现。1.安装脚手架工具   （单文件组件项目生成工具...
+    
+
+        <a href="/2016/01/13/react加node仿饿了么/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
 
     </div>
     
@@ -697,7 +699,7 @@ cancleBubble = true     IE取消冒泡
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
     </div>
 </nav>
 

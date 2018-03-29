@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>基于鸟哥linux私房菜整理的常用基本命令 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux">
+    <meta name="description" content="1、显示日期的指令： date">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于鸟哥linux私房菜整理的常用基本命令">
+<meta property="og:url" content="http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="1、显示日期的指令： date">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363935954_6311.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363935980_1369.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363935990_8670.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363935996_9522.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936042_6658.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936054_8908.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936069_2896.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936109_3235.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936120_9820.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936132_1780.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936145_2758.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936183_6281.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936183_6281.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936198_8642.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936213_8090.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936248_2355.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936259_4661.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936285_4549.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936297_1247.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936306_6088.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936321_4240.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936353_8065.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936364_8540.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936378_2040.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936391_3459.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936405_1275.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936421_3936.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936434_7475.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936447_1389.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936473_8128.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936488_3487.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936513_9642.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936523_3283.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936534_8970.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936546_1932.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936558_1163.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936571_2352.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936609_6282.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936621_3423.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936634_1541.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936651_6458.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936671_4557.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936684_7797.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936710_9067.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936728_2729.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936748_3301.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936798_8160.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936808_2619.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936819_8586.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936832_1025.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936847_2396.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936857_7179.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936868_1680.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936877_4715.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936886_3351.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936897_2939.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936910_4210.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936932_2949.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936932_2949.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936946_1973.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363936956_5666.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937757_9288.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937773_3082.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937784_2757.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937793_4694.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937802_1953.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937816_9269.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937900_4463.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363937990_3354.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363938001_5653.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363938031_1319.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363938044_9852.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363938052_3223.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/22/1363938061_6833.png">
+<meta property="og:updated_time" content="2018-03-22T11:04:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于鸟哥linux私房菜整理的常用基本命令">
+<meta name="twitter:description" content="1、显示日期的指令： date">
+<meta name="twitter:image" content="http://img.my.csdn.net/uploads/201303/22/1363935954_6311.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">基于鸟哥linux私房菜整理的常用基本命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">基于鸟哥linux私房菜整理的常用基本命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-17T01:19:02.000Z" itemprop="datePublished" class="page-time">
+  2016-04-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Back-end/">Back-end</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+<article id="post-基于鸟哥linux私房菜整理的常用基本命令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">基于鸟哥linux私房菜整理的常用基本命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-04-17 09:19:02" datetime="2016-04-17T01:19:02.000Z"  itemprop="datePublished">2016-04-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Back-end/">Back-end</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>1、显示日期的指令： date</strong><br><a id="more"></a><br><img src="http://img.my.csdn.net/uploads/201303/22/1363935954_6311.png" alt="此处输入图片的描述"></p>
+<p><strong>2、显示日历的指令：cal</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363935980_1369.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363935990_8670.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363935996_9522.png" alt="此处输入图片的描述"></p>
+<p><strong>3、简单好用的计算器：bc</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936042_6658.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936054_8908.png" alt="此处输入图片的描述"></p>
+<p>怎么10/100会变成0呢？这是因为bc预设仅输出整数，如果要输出小数点下位数，那么就必须要执行 scale=number ，那个number就是小数点位数，例如：</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936069_2896.png" alt="此处输入图片的描述"></p>
+<p><strong>4、重要的几个热键[Tab],[ctrl]-c, [ctrl]-d</strong> </p>
+<ul>
+<li><p><code>[Tab]</code>按键—具有『命令补全』不『档案补齐』的功能</p>
+</li>
+<li><p><code>[Ctrl]-c</code>按键—让当前的程序『停掉』</p>
+</li>
+<li><p><code>[Ctrl]-d</code>按键—通常代表着：『键盘输入结束(End Of File, EOF 戒 End OfInput)』的意思；另外，他也可以用来取代exit</p>
+</li>
+</ul>
+<p><strong>5、man</strong></p>
+<p>退出用q，<br>man -f man</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936109_3235.png" alt="此处输入图片的描述"></p>
+<p><strong>6、数据同步写入磁盘： sync</strong></p>
+<p>输入sync，那举在内存中尚未被更新的数据，就会被写入硬盘中；所以，这个挃令在系统关机戒重新启劢乀前， 径重要喔！最好多执行几次！</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936120_9820.png" alt="此处输入图片的描述"></p>
+<p><strong>7、惯用的关机指令：shutdown</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936132_1780.png" alt="此处输入图片的描述"></p>
+<p>此外，需要注意的是，时间参数请务必加入指令中，否则shutdown会自动跳到 run-level 1 (就是单人维护的登入情况)，这样就伤脑筋了！底下提供几个时间参数的例子吧：</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936145_2758.png" alt="此处输入图片的描述"></p>
+<p>重启，关机： reboot, halt,poweroff</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936183_6281.png" alt="此处输入图片的描述"></p>
+<p><strong>8、切换执行等级： init</strong></p>
+<ul>
+<li><p><strong>Linux共有七种执行等级：</strong></p>
+<ul>
+<li><p>–run level 0 :关机</p>
+</li>
+<li><p>–run level 3 :纯文本模式</p>
+</li>
+<li><p>–run level 5 :含有图形接口模式</p>
+</li>
+<li><p>–run level 6 :重新启动</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>使用init这个指令来切换各模式：</p>
+<p>如果你想要关机的话，除了上述的shutdown -h now以及poweroff之外，你也可以使用如下的指令来关机：  </p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936183_6281.png" alt="此处输入图片的描述"></p>
+<p><strong>9、改变文件的所属群组：chgrp</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936198_8642.png" alt="此处输入图片的描述"></p>
+<p><strong>10、改变文件拥有者：chown</strong></p>
+<p>他还可以顸便直接修改群组的名称</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936213_8090.png" alt="此处输入图片的描述"></p>
+<p><strong>11、改变文件的权限：chmod</strong></p>
+<p>权限的设定方法有两种， 分别可以使用数字或者是符号来进行权限的变更。</p>
+<p>–数字类型改变档案权限：</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936248_2355.png" alt="此处输入图片的描述"></p>
+<p>–符号类型改变档案权限：</p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936259_4661.png" alt="此处输入图片的描述"></p>
+<p><strong>12、查看版本信息等</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936285_4549.png" alt="此处输入图片的描述"></p>
+<p><strong>13、变换目录：cd</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936297_1247.png" alt="此处输入图片的描述"></p>
+<p><strong>14、显示当前所在目录：pwd</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936306_6088.png" alt="此处输入图片的描述"></p>
+<p><strong>15、建立新目录：mkdir</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936321_4240.png" alt="此处输入图片的描述"></p>
+<p>不建议常用-p这个选项，因为担心如果你打错字，那么目录名称就回变得乱七八糟的</p>
+<p><strong>16、删除『空』的目录：rmdir</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936353_8065.png" alt="此处输入图片的描述"></p>
+<p><strong>17、档案与目录的显示：ls</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936364_8540.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936378_2040.png" alt="此处输入图片的描述"></p>
+<p><strong>18、复制档案或目录：cp</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936391_3459.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936405_1275.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936421_3936.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936434_7475.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936447_1389.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936473_8128.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936488_3487.png" alt="此处输入图片的描述"></p>
+<p><strong>19、移除档案或目录：rm</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936513_9642.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936523_3283.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936534_8970.png" alt="此处输入图片的描述"></p>
+<p><strong>20、移动档案与目录，或更名：mv</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936546_1932.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936558_1163.png" alt="此处输入图片的描述"></p>
+<p><strong>21、取得路径的文件名与目录名：basename，dirname</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936571_2352.png" alt="此处输入图片的描述"></p>
+<p><strong>22、由第一行开始显示档案内容：cat</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936609_6282.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936621_3423.png" alt="此处输入图片的描述"></p>
+<p><strong>23、从最后一行开始显示：tac（可以看出 tac 是 cat 的倒着写）</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936634_1541.png" alt="此处输入图片的描述"></p>
+<p><strong>24、显示的时候，顺道输出行号：nl</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936651_6458.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936671_4557.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936684_7797.png" alt="此处输入图片的描述"></p>
+<p><strong>25、一页一页的显示档案内容：more</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936710_9067.png" alt="此处输入图片的描述"></p>
+<p><strong>26、与 more 类似，但是比 more 更好的是，他可以往前翻页：less</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936728_2729.png" alt="此处输入图片的描述"></p>
+<p><strong>27、只看头几行：head</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936748_3301.png" alt="此处输入图片的描述"></p>
+<p><strong>28、只看尾几行：tail</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936798_8160.png" alt="此处输入图片的描述"></p>
+<p><strong>29、以二进制的放置读取档案内容：od</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936808_2619.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936819_8586.png" alt="此处输入图片的描述"></p>
+<p><strong>30、修改档案时间或新建档案：touch</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936832_1025.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936847_2396.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936857_7179.png" alt="此处输入图片的描述"></p>
+<p><strong>31、档案预设权限：umask</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936868_1680.png" alt="此处输入图片的描述"></p>
+<p><strong>32、配置文件档案隐藏属性：chattr</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936877_4715.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936886_3351.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936897_2939.png" alt="此处输入图片的描述"></p>
+<p><strong>33、显示档案隐藏属性：lsattr</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936910_4210.png" alt="此处输入图片的描述"></p>
+<p><strong>34、观察文件类型：file</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936932_2949.png" alt="此处输入图片的描述"></p>
+<p><strong>35、寻找【执行挡】：which</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936932_2949.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363936946_1973.png" alt="此处输入图片的描述"></p>
+<p><strong>36、寻找特定档案：whereis</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363936956_5666.png" alt="此处输入图片的描述"></p>
+<p><strong>37、寻找特定档案：locate</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363937757_9288.png" alt="此处输入图片的描述"></p>
+<p><strong>38、寻找特定档案：find</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363937773_3082.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363937784_2757.png" alt="此处输入图片的描述"></p>
+<p><strong>39、压缩文件和读取压缩文件：gzip，zcat</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363937793_4694.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363937802_1953.png" alt="此处输入图片的描述"></p>
+<p><strong>40、压缩文件和读取压缩文件：bzip2，bzcat</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363937816_9269.png" alt="此处输入图片的描述"></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363937900_4463.png" alt="此处输入图片的描述"></p>
+<p><strong>41、压缩文件和读取压缩文件：tar</strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/22/1363937990_3354.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363938001_5653.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363938031_1319.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363938044_9852.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363938052_3223.png" alt="此处输入图片的描述"><br><img src="http://img.my.csdn.net/uploads/201303/22/1363938061_6833.png" alt="此处输入图片的描述"><br>  <a href="http://img.my.csdn.net/uploads/201303/22/1363936183_6281.png" target="_blank" rel="noopener">12</a>: <a href="http://img.my.csdn.net/uploads/201303/22/1363936158_46941]" target="_blank" rel="noopener">http://img.my.csdn.net/uploads/201303/22/1363936158_46941]</a>: <a href="http://img.my.csdn.net/uploads/201303/22/1363936145_2758.png" target="_blank" rel="noopener">http://img.my.csdn.net/uploads/201303/22/1363936145_2758.png</a></p>
+<p>  <a href="http://img.my.csdn.net/uploads/201303/22/1363936932_2949.png" target="_blank" rel="noopener">58</a>: <a href="http://img.my.csdn.net/uploads/201303/22/1363936923_33797]" target="_blank" rel="noopener">http://img.my.csdn.net/uploads/201303/22/1363936923_33797]</a>: <a href="http://img.my.csdn.net/uploads/201303/22/1363936910_4210.png" target="_blank" rel="noopener">http://img.my.csdn.net/uploads/201303/22/1363936910_4210.png</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/&title=《基于鸟哥linux私房菜整理的常用基本命令》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/&title=《基于鸟哥linux私房菜整理的常用基本命令》 — _sUper.LEE的个人空间&source=1、显示日期的指令： date" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于鸟哥linux私房菜整理的常用基本命令》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/04/17/73条日常Linux-shell命令汇总/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">73条日常Linux shell命令汇总</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/13/vue加nodejs仿海底捞/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">vue加nodejs仿海底捞</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/&title=《基于鸟哥linux私房菜整理的常用基本命令》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/&title=《基于鸟哥linux私房菜整理的常用基本命令》 — _sUper.LEE的个人空间&source=1、显示日期的指令： date" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于鸟哥linux私房菜整理的常用基本命令》 — _sUper.LEE的个人空间&url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/04/17/基于鸟哥linux私房菜整理的常用基本命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLUlEQVR42u3aSW7jQBAEQP//056rAcNSZhWFEVvBkyBx6WgCLtfy9RUf3z+On9/8/vzX+b9/be/z+8zHT7ngwMbGxr4J+/vhkTAe37mlJnd4/DIeW7CxsbFPZW/CTB5U8u+TYPY4rD55LjY2NvYHs2fLatOPWSKEjY2NjZ0HsE3Z6K9rkxTicYKEjY2N/cns9l/8tpSTFI82z31hLQ0bGxv77dmvKPT/r88v6W9jY2NjvzH7uzzaAJYvK0lX8u+fKLCxsbEPYrfLas9sE4m8AdymGdjY2NinspMSfxvMks1qQ9F+lKd4h9jY2Ni3Ym+KR68YtWkD0qxRgY2NjX0ee9bizcNS3srNB27ybXpSVMLGxsa+OTtJRfLRmU0wu3Z858l6sLGxsY9jtwlGXsqflZmSq9rXEHWVsbGxsW/LvmpcJi/xbJrKm9QFGxsb+zx226x9XYs3b07kobTodWNjY2Pflr0p1rdjkbONmwWtYdzGxsbGviG7DV2bhCRv0O63vq6oYWNjY9+cnZzUFvQ3125GiPKXgY2NjX0S+3WLmKUu+xLSMA/DxsbGviH72gGa/RZsilZF+oSNjY19HPvask5e4t9s36oVjY2NjX0oexYYNg3aWTvhgl+xsbGxj2bPGr150actDOUBr0hvsLGxsQ9lt0lI3iRui0dt0T8f5cHGxsb+BHayuKtSiLapnG/6k83FxsbGPo6dN2g3k0F5stG2JZJ19lEOGxsb+x7sTSu3bRXkBabN+cV2Y2NjYx/Hbkdw9kM5+4RnVqjCxsbGPpXdlv5nwz0zTF7qypMfbGxs7PPYeThpx3pmS5yFurxdjY2NjX0qO79pGzDaxc0CZNFywMbGxj6O3bZ+Zw3jJFzlW/y1ObCxsbGPYM8SiXYcJ1loe//V07GxsbEPYl/1N79tsrZNgtmdL8BjY2Nj34Sdk9riURtO8obBLF3BxsbGPpvdBoZNipI3bveFpKg9gI2NjY0dpw2zRsUmxP75krCxsbE/mD0bmtmkGfvaGDY2NvYnsGel/1n5vt2CfeNhVUvDxsbGfnv2PklIeHl4S0Z52ibEMEHCxsbGfnf2P4h7ct4y4gwbAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>

@@ -187,11 +187,11 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之正则表达式(十)"
+            <article id="post-js-event-listener"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 00:09:43" datetime="2015-07-26T16:09:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -205,7 +205,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之正则表达式(十)/">JavaScript语言基础之正则表达式(十)</a>
+      <a class="post-title-link" href="/2015/12/13/js-event-listener/">JS 中的事件绑定、事件监听、事件委托</a>
     </h3>
   
 
@@ -215,33 +215,20 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-Regex
+        事件绑定
 
-a.[]一个字符的范围
-b.有顺序要求的
-c.\w==[a-zA-Z0-9_]  \d==[0-9]
-d.{count}设置匹配数量比如\w{5}，{c1,c2}
-e.//的正则表达式匹配局部，/^$/的正则表达式是匹配全部
-f.()的作用就是为了分组匹配
-g.+代表的是1-N个，*代表的是0-N个
-h.?代表该字符要不没有要不就有一个
-i..代表的是任意字符
+要想让 JavaScript对用户的操作作出响应，首先要对 DOM 元素绑定事件处理函数。所谓事件处理函数，就是处理用户操作的函数，不同的操作对应不同的名称
 
-
-
-
-附录：...
     
 
-        <a href="/2015/07/27/JavaScript语言基础之正则表达式(十)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-event-listener/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li></ul>
 
     </div>
     
@@ -250,11 +237,11 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之Window属性(八)"
+            <article id="post-js-inherit"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -268,7 +255,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之Window属性(八)/">JavaScript语言基础之Window属性(八)</a>
+      <a class="post-title-link" href="/2015/12/13/js-inherit/">JS继承的几种方法总结</a>
     </h3>
   
 
@@ -279,17 +266,20 @@ i..代表的是任意字符
 
     
         
-一些讨论
+由于js不像java那样是真正面向对象的语言，js是基于对象的，它没有类的概念
+所以，要想实现继承，可以用js的原型prototype机制或者用apply和call方法去实现。在面向对象的语言中，我们使用类来创建一个自定义对象。然而js中所有事物都是对象，那么用什么办法来创建自定义对象呢？
+这就需要用到js的原型：我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（prototype）的一个拷贝 （实际上不是拷贝而是链接，只不过这种链接是不可见，新实例化的对象内部有一个看不见的Proto指针，指向原型对象）。
+
     
 
-        <a href="/2015/07/27/JavaScript语言基础之Window属性(八)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-inherit/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
 
     </div>
     
@@ -298,11 +288,11 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之数组(七)"
+            <article id="post-js-arr"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -316,7 +306,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之数组(七)/">JavaScript语言基础之数组(七)</a>
+      <a class="post-title-link" href="/2015/12/13/js-arr/">Javascript数组详解</a>
     </h3>
   
 
@@ -326,17 +316,19 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
+        数组的定义
+
+数组是按序号排列的一组值，每个值的位置都有编号（从0开始）。数组本质上是一种特殊的对象。它的键名是按（0，1，2...）排列的一组数字
     
 
-        <a href="/2015/07/27/JavaScript语言基础之数组(七)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-arr/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
 
     </div>
     
@@ -345,11 +337,11 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之DOM操作(九)"
+            <article id="post-js-oop-and-class"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-27 00:05:43" datetime="2015-07-26T16:05:43.000Z"  itemprop="datePublished">2015-07-27</time>
+        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -363,7 +355,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/JavaScript语言基础之DOM操作(九)/">JavaScript语言基础之DOM操作(九)</a>
+      <a class="post-title-link" href="/2015/12/13/js-oop-and-class/">OOP之类与对象</a>
     </h3>
   
 
@@ -373,17 +365,19 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        DOM 操作
+        对象
+对象的含义
+所谓对象，就是一种无序的数据集合，由若干个“键值对”（key-value）构成
     
 
-        <a href="/2015/07/27/JavaScript语言基础之DOM操作(九)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-oop-and-class/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
 
     </div>
     
@@ -392,11 +386,11 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之流程控制(五)"
+            <article id="post-js-prototype"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-26 23:50:43" datetime="2015-07-26T15:50:43.000Z"  itemprop="datePublished">2015-07-26</time>
+        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -410,7 +404,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之流程控制(五)/">JavaScript语言基础之流程控制(五)</a>
+      <a class="post-title-link" href="/2015/12/13/js-prototype/">OOP之原型与原型链</a>
     </h3>
   
 
@@ -420,18 +414,20 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-条件结构  if  if...else  if...else if...else
+        prototype原型对象
+
+每个函数都有一个默认的prototype属性，其实际上还是一个对象，如果被用在继承中，姑且叫做原型对象
+在构造函数中的prototype中定义的属性和方法，会被创建的对象所继承下来。举个栗子：
     
 
-        <a href="/2015/07/26/JavaScript语言基础之流程控制(五)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-prototype/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型链/">原型链</a></li></ul>
 
     </div>
     
@@ -440,11 +436,11 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之字符串方法(四)"
+            <article id="post-js-oop"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-26 23:46:43" datetime="2015-07-26T15:46:43.000Z"  itemprop="datePublished">2015-07-26</time>
+        <time class="post-time" title="2015-12-13 14:55:24" datetime="2015-12-13T06:55:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -458,7 +454,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之字符串方法(四)/">JavaScript语言基础之字符串方法(四)</a>
+      <a class="post-title-link" href="/2015/12/13/js-oop/">OOP之面向对象</a>
     </h3>
   
 
@@ -469,16 +465,20 @@ i..代表的是任意字符
 
     
         
+一般面向对象包含：继承，封装，多态，抽象
+
+对象形式的继承
+浅拷贝
     
 
-        <a href="/2015/07/26/JavaScript语言基础之字符串方法(四)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-oop/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
 
     </div>
     
@@ -487,11 +487,11 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之运算符(三)"
+            <article id="post-js-inner-func"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-26 22:46:43" datetime="2015-07-26T14:46:43.000Z"  itemprop="datePublished">2015-07-26</time>
+        <time class="post-time" title="2015-12-13 14:50:24" datetime="2015-12-13T06:50:24.000Z"  itemprop="datePublished">2015-12-13</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
@@ -505,7 +505,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之运算符(三)/">JavaScript语言基础之运算符(三)</a>
+      <a class="post-title-link" href="/2015/12/13/js-inner-func/">JS常用的内置函数整理</a>
     </h3>
   
 
@@ -515,20 +515,25 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-算术运算符(+,-,*,/,%,++,--`)
-如果引用所指的地方是null的话，那么在运算中就会自动变成0
-%运算符 如：4%5取模 模是4  7%5取模 模是7-5=2
+        String字符串对象
+length 属性 长度
+concat(String) 连接两个或更多个字符
+indexOf(string) 返回出现字符的位置
+substr(num1,[num2])截取字符串
+toLowerCase()转成小写
+toUpperCase()转成大写
+replace(str1,str2) 字符串替换
+
     
 
-        <a href="/2015/07/26/JavaScript语言基础之运算符(三)/" class="post-more waves-effect waves-button">
+        <a href="/2015/12/13/js-inner-func/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内置对象/">内置对象</a></li></ul>
 
     </div>
     
@@ -537,14 +542,14 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之数据类型(二)"
+            <article id="post-HTML5+CSS3基础回顾 "
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-26 21:46:43" datetime="2015-07-26T13:46:43.000Z"  itemprop="datePublished">2015-07-26</time>
+        <time class="post-time" title="2015-10-19 09:35:08" datetime="2015-10-19T01:35:08.000Z"  itemprop="datePublished">2015-10-19</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/HTML5/">HTML5</a></li></ul>
 
 
 
@@ -555,7 +560,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之数据类型(二)/">JavaScript语言基础之数据类型(二)</a>
+      <a class="post-title-link" href="/2015/10/19/HTML5+CSS3基础回顾 /">HTML5+CSS3整体回顾</a>
     </h3>
   
 
@@ -565,17 +570,20 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        一、JavaScript中基本的数据类型查看数据类型用：typeof 变量名
+        
+转载请声明 原文链接
+
+这篇文章主要总结H5的一些新增的功能以及一些基础归纳，这里只是一个提纲，并不是很详细，后面会一直完善补充新的内容，本文是一些笔记记录，放在这里供自己参考也供他人学习！
     
 
-        <a href="/2015/07/26/JavaScript语言基础之数据类型(二)/" class="post-more waves-effect waves-button">
+        <a href="/2015/10/19/HTML5+CSS3基础回顾 /" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li></ul>
 
     </div>
     
@@ -584,14 +592,14 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之函数基础(六)"
+            <article id="post-CSS 组合选择符用法总结"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-26 21:46:43" datetime="2015-07-26T13:46:43.000Z"  itemprop="datePublished">2015-07-26</time>
+        <time class="post-time" title="2015-09-04 16:50:32" datetime="2015-09-04T08:50:32.000Z"  itemprop="datePublished">2015-09-04</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
 
 
 
@@ -602,7 +610,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之函数基础(六)/">JavaScript语言基础之函数基础(六)</a>
+      <a class="post-title-link" href="/2015/09/04/CSS 组合选择符用法总结/">CSS 组合选择符用法总结</a>
     </h3>
   
 
@@ -612,17 +620,17 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        代码内存解析
+        组合选择符基本介绍
     
 
-        <a href="/2015/07/26/JavaScript语言基础之函数基础(六)/" class="post-more waves-effect waves-button">
+        <a href="/2015/09/04/CSS 组合选择符用法总结/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
 
     </div>
     
@@ -631,14 +639,14 @@ i..代表的是任意字符
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JavaScript语言基础之变量(一)"
+            <article id="post-实用的60个CSS代码片段"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2015-07-26 20:46:43" datetime="2015-07-26T12:46:43.000Z"  itemprop="datePublished">2015-07-26</time>
+        <time class="post-time" title="2015-08-13 12:25:08" datetime="2015-08-13T04:25:08.000Z"  itemprop="datePublished">2015-08-13</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CSS/">CSS</a></li></ul>
 
 
 
@@ -649,7 +657,7 @@ i..代表的是任意字符
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/26/JavaScript语言基础之变量(一)/">JavaScript语言基础之变量(一)</a>
+      <a class="post-title-link" href="/2015/08/13/实用的60个CSS代码片段/">实用的60个CSS代码片段</a>
     </h3>
   
 
@@ -659,25 +667,20 @@ i..代表的是任意字符
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-关于变量的一些讨论
-变量是内存中的一段存储空间，变量的值就是一段地址 存储的是值（变量名本质是地址的一个别名）
-变量本质是一个空盒子，里面记录了一个内存地址，使能找到内存中的对象，保存了指向具体的实在的东西的地址
-在js语言中 不必像php那样神明引用赋值， 不用加&amp;取地址
-在js中三种默认是引用赋值的：数组 对象 函数
-变量存在栈中，对象存在堆中
-变量的意义：方便我们去操作对象
-var b = document.body  含义：把body这个对象在内存中的地址放到b变量里面，变量b（b是内存地址的别名）本身也存在内存中，以后的操作是针对body这个地址
+        1、垂直对齐
+如果你用CSS，则你会有困惑：我该怎么垂直对齐容器中的元素？现在，利用CSS3的Transform，可以很优雅的解决这个困惑：
+1234567.verticalcenter&#123;    position: relative;    top: 50%;    -webkit-transform: translateY(-50%);    -o-transform: translateY(-50%);    transform: translateY(-50%);&#125;
+使用这个技巧，从单行文本、段落到box，都会垂直对齐。目前浏览器对Transform的支持是需要关注的，Chrome 4, Opera 10, Safari 3, Firefox 3, and Internet Explorer 9均支持该属性
     
 
-        <a href="/2015/07/26/JavaScript语言基础之变量(一)/" class="post-more waves-effect waves-button">
+        <a href="/2015/08/13/实用的60个CSS代码片段/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Snippet/">Snippet</a></li></ul>
 
     </div>
     
@@ -690,7 +693,7 @@ var b = document.body  含义：把body这个对象在内存中的地址放到b�
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/11/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/11/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/13/">下一页</a>
     </div>
 </nav>
 
