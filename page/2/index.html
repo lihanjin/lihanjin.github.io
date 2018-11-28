@@ -187,14 +187,14 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-react-study-build-env"
+            <article id="post-redux-study-action-store-reducer"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-11-19 01:10:24" datetime="2017-11-18T17:10:24.000Z"  itemprop="datePublished">2017-11-19</time>
+        <time class="post-time" title="2017-11-19 16:10:24" datetime="2017-11-19T08:10:24.000Z"  itemprop="datePublished">2017-11-19</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Front-End/">Front-End</a></li></ul>
 
 
 
@@ -205,7 +205,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/19/react-study-build-env/">React之环境的搭建（一）</a>
+      <a class="post-title-link" href="/2017/11/19/redux-study-action-store-reducer/">Redux之action、store、reducer分析（六）</a>
     </h3>
   
 
@@ -215,19 +215,14 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        一、什么是react
-react是由Facebook开发的一个JavaScript库，而不是一个框架。当时Facebook需要解决一个问题，开发（或者说是构建）一个数据不断变化的大型应用。而数据变化会带来两个很严重的问题
+        
+redux的核心概念就是store、action、reducer，从调用关系来看如下所示
 
-二、react的特点
-简单：学习简单，代码简单
-声明式（编程）：自动DOM操作
-
-
-React的核心是组件，组件的设计目的是提升代码的复用率、降低测试难度和代码复杂度。
-...
+1store.dispatch(action) --&gt; reducer(state, action) --&gt; final state
+123456789101112131415161718192021222324252627282930// reducer方法, 传入的参数有两个// s...
     
 
-        <a href="/2017/11/19/react-study-build-env/" class="post-more waves-effect waves-button">
+        <a href="/2017/11/19/redux-study-action-store-reducer/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -294,62 +289,6 @@ XML或者HTML
     
 
         <a href="/2017/11/19/react-study-jsx-dom/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-react-study-life-props-state"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-19 01:10:24" datetime="2017-11-18T17:10:24.000Z"  itemprop="datePublished">2017-11-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/19/react-study-life-props-state/">React之组件的生命周期以及属性状态（三）</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一、什么是生命周期
-                
-                    
-                    
-                
-                image.png
-            
-
-组件本质是状态机，输入确定，输出一定确定
-一个state对应一个render，状态转换的时候会触发不同的函数，从而让开发者有机会做出响应，可以...
-    
-
-        <a href="/2017/11/19/react-study-life-props-state/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -477,6 +416,62 @@ Action是数据从应用传递到 store/state 的载体，也是开启一次完�
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-react-study-life-props-state"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-19 01:10:24" datetime="2017-11-18T17:10:24.000Z"  itemprop="datePublished">2017-11-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/19/react-study-life-props-state/">React之组件的生命周期以及属性状态（三）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、什么是生命周期
+                
+                    
+                    
+                
+                image.png
+            
+
+组件本质是状态机，输入确定，输出一定确定
+一个state对应一个render，状态转换的时候会触发不同的函数，从而让开发者有机会做出响应，可以...
+    
+
+        <a href="/2017/11/19/react-study-life-props-state/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-react-study-component-corp-and-uncontrol"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -517,6 +512,62 @@ Action是数据从应用传递到 store/state 的载体，也是开启一次完�
     
 
         <a href="/2017/11/19/react-study-component-corp-and-uncontrol/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-react-study-build-env"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-19 01:10:24" datetime="2017-11-18T17:10:24.000Z"  itemprop="datePublished">2017-11-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/react/">react</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/19/react-study-build-env/">React之环境的搭建（一）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、什么是react
+react是由Facebook开发的一个JavaScript库，而不是一个框架。当时Facebook需要解决一个问题，开发（或者说是构建）一个数据不断变化的大型应用。而数据变化会带来两个很严重的问题
+
+二、react的特点
+简单：学习简单，代码简单
+声明式（编程）：自动DOM操作
+
+
+React的核心是组件，组件的设计目的是提升代码的复用率、降低测试难度和代码复杂度。
+...
+    
+
+        <a href="/2017/11/19/react-study-build-env/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -685,58 +736,6 @@ Fiddler是位于客户端和服务器端的HTTP代理，也是目前最常用的
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fiddler/">Fiddler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调试/">调试</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-微信小程序方法"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-09-30 11:16:12" datetime="2017-09-30T03:16:12.000Z"  itemprop="datePublished">2017-09-30</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Wechat/">Wechat</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/09/30/微信小程序方法/">微信小程序一些常用方法</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        微信小程序
-
-最近一个月都在写小程序，有用到一些封装方法和深坑记录一下
-
-1.微信小程序路由跳转navigateTo封装
-12345678910111213141516171819202122232425262728const parse = (query) =&gt; &#123;  return Object.keys(query).map(key =&gt; `$&#123;key&#...
-    
-
-        <a href="/2017/09/30/微信小程序方法/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wechat/">Wechat</a></li></ul>
 
     </div>
     
