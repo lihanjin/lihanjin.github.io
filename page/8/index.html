@@ -187,7 +187,66 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-React第三讲课堂笔记（数据流）"
+            <article id="post-vue"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-05-12 22:24:08" datetime="2016-05-12T14:24:08.000Z"  itemprop="datePublished">2016-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Vue/">Vue</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/05/12/vue/">Vue基础代码整理</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        一、数据绑定
+1.解析html标签使用三个 
+{{{html标签}}},{{msg}}
+
+2.支持三元表达式
+双向绑定{{name==='hello world'?'1':'2'}}  
+
+3.通过v-model实现双向数据绑定
+&lt;input type=&quot;text&quot; v-model=&quot;name&quot;&gt;
+
+
+二、vue暴露的方法
+1. var v...
+    
+
+        <a href="/2016/05/12/vue/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-React第五讲课堂笔记（DOM操作）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -205,7 +264,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/12/React第三讲课堂笔记（数据流）/">React第三讲课堂笔记（数据流）</a>
+      <a class="post-title-link" href="/2016/05/12/React第五讲课堂笔记（DOM操作）/">React第五讲课堂笔记（DOM操作）</a>
     </h3>
   
 
@@ -215,12 +274,68 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        React第三讲课堂笔记（数据流）1. state setState可以把组件当成一个状态机，我们给组件传入数据作为输入，组件在内部进行逻辑处理，之后返回一段HTML结构作为输出。
-而传入的数据即为props，组件内部的状态控制即为state，每一次状态对应于组件的一个 ui 。
-12345678910111213141516171819202122232425262728import Re...
+        React第五讲课堂笔记（DOM操作）1. React 中获取DOM的两种方式
+ReactDOM.findDOMNode
+this.refs.xxx
+
+获取DOM后可以方便结合现有非 react 类库的使用，通过 ref/refs 可以取得组件实例，进而取得原生节点，不过尽量通过 state/props 更新组件，不要使用该功能去更新组件的DOM。
+2. 示例一123456789101112...
     
 
-        <a href="/2016/05/12/React第三讲课堂笔记（数据流）/" class="post-more waves-effect waves-button">
+        <a href="/2016/05/12/React第五讲课堂笔记（DOM操作）/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-React第八讲课堂笔记（表单操作）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/05/12/React第八讲课堂笔记（表单操作）/">React第八讲课堂笔记（表单操作）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        React第八讲课堂笔记（表单操作）1. React表单组件和 html 的不同点
+value/checked 属性设置后，用户输入无效
+textarea 的值要设置在 value 属性
+
+1&lt;textarea name=&quot;description&quot; value=&quot;This is a description.&quot; /&gt;
+
+select 的 va...
+    
+
+        <a href="/2016/05/12/React第八讲课堂笔记（表单操作）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -293,7 +408,7 @@ Prop...
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-React第五讲课堂笔记（DOM操作）"
+            <article id="post-React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -311,7 +426,60 @@ Prop...
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/12/React第五讲课堂笔记（DOM操作）/">React第五讲课堂笔记（DOM操作）</a>
+      <a class="post-title-link" href="/2016/05/12/React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）/">React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）用 React.createClass 或者 React.Component 定义组件时允许传入相应的配置及组件 API 的使用，包括组件生命周期提供的一系列钩子函数。
+
+                
+                    
+                    
+                
+    ...
+    
+
+        <a href="/2016/05/12/React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）/" class="post-more waves-effect waves-button">
+            post.continue_reading
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-React第六讲课堂笔记（事件）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/05/12/React第六讲课堂笔记（事件）/">React第六讲课堂笔记（事件）</a>
     </h3>
   
 
@@ -325,11 +493,11 @@ Prop...
 ReactDOM.findDOMNode
 this.refs.xxx
 
-获取DOM后可以方便结合现有非 react 类库的使用，通过 ref/refs 可以取得组件实例，进而取得原生节点，不过尽量通过 state/props 更新组件，不要使用该功能去更新组件的DOM。
-2. 示例一123456789101112...
+获取DOM后可以方便结合现有非 react 类库的使用，通过 ref/refs 可以取得组件实例，进而取得原生节点，不过尽量通过 state/props 更新组件，不要使用该功能去更新组件的
+React第六讲课堂笔记（事件）可以通过设置原生 ...
     
 
-        <a href="/2016/05/12/React第五讲课堂笔记（DOM操作）/" class="post-more waves-effect waves-button">
+        <a href="/2016/05/12/React第六讲课堂笔记（事件）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -402,7 +570,7 @@ React为了更高超的性能而使用虚拟DOM作为其不同的实现。 它�
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-React第八讲课堂笔记（表单操作）"
+            <article id="post-React第三讲课堂笔记（数据流）"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -420,7 +588,7 @@ React为了更高超的性能而使用虚拟DOM作为其不同的实现。 它�
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/12/React第八讲课堂笔记（表单操作）/">React第八讲课堂笔记（表单操作）</a>
+      <a class="post-title-link" href="/2016/05/12/React第三讲课堂笔记（数据流）/">React第三讲课堂笔记（数据流）</a>
     </h3>
   
 
@@ -430,117 +598,12 @@ React为了更高超的性能而使用虚拟DOM作为其不同的实现。 它�
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        React第八讲课堂笔记（表单操作）1. React表单组件和 html 的不同点
-value/checked 属性设置后，用户输入无效
-textarea 的值要设置在 value 属性
-
-1&lt;textarea name=&quot;description&quot; value=&quot;This is a description.&quot; /&gt;
-
-select 的 va...
+        React第三讲课堂笔记（数据流）1. state setState可以把组件当成一个状态机，我们给组件传入数据作为输入，组件在内部进行逻辑处理，之后返回一段HTML结构作为输出。
+而传入的数据即为props，组件内部的状态控制即为state，每一次状态对应于组件的一个 ui 。
+12345678910111213141516171819202122232425262728import Re...
     
 
-        <a href="/2016/05/12/React第八讲课堂笔记（表单操作）/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-React第六讲课堂笔记（事件）"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/12/React第六讲课堂笔记（事件）/">React第六讲课堂笔记（事件）</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        React第五讲课堂笔记（DOM操作）1. React 中获取DOM的两种方式
-ReactDOM.findDOMNode
-this.refs.xxx
-
-获取DOM后可以方便结合现有非 react 类库的使用，通过 ref/refs 可以取得组件实例，进而取得原生节点，不过尽量通过 state/props 更新组件，不要使用该功能去更新组件的
-React第六讲课堂笔记（事件）可以通过设置原生 ...
-    
-
-        <a href="/2016/05/12/React第六讲课堂笔记（事件）/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-React第七讲课堂笔记（组件嵌套）"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/12/React第七讲课堂笔记（组件嵌套）/">React第七讲课堂笔记（组件嵌套）</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        React第七讲课堂笔记（组件嵌套）组件间的嵌套是在开发过程中最为常用的，其中会有以下几种组件嵌套的方式。
-1. 受限组件 &amp;&amp; 非受限组件受限组件示例：123render() &#123;  return &lt;input type=&quot;text&quot; value=&quot;Hello!&quot; /&gt;;&#125;
-非受限组件示例：123rend...
-    
-
-        <a href="/2016/05/12/React第七讲课堂笔记（组件嵌套）/" class="post-more waves-effect waves-button">
+        <a href="/2016/05/12/React第三讲课堂笔记（数据流）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -588,59 +651,6 @@ React第六讲课堂笔记（事件）可以通过设置原生 ...
     
 
         <a href="/2016/05/12/React第二讲课堂笔记（JSX 语法）/" class="post-more waves-effect waves-button">
-            post.continue_reading
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2016-05-12 13:22:01" datetime="2016-05-12T05:22:01.000Z"  itemprop="datePublished">2016-05-12</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/React/">React</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/05/12/React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）/">React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）用 React.createClass 或者 React.Component 定义组件时允许传入相应的配置及组件 API 的使用，包括组件生命周期提供的一系列钩子函数。
-
-                
-                    
-                    
-                
-    ...
-    
-
-        <a href="/2016/05/12/React第四讲课堂笔记（定义组件的方法以及理解组件生命周期）/" class="post-more waves-effect waves-button">
             post.continue_reading
         </a>
     </div>
@@ -709,7 +719,7 @@ React第六讲课堂笔记（事件）可以通过设置原生 ...
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
     </div>
 </nav>
 

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>webpack4配置详解 | _sUper.LEE的个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="webpack">
+    <meta name="description" content="来源网络  一、entry12345678910111213141516//方式一：单文件写法entry: &amp;#123;	index: &apos;./src/pages/route.js&apos;,	//about: &apos;./src/pages/about.js&apos;,	//other:()=&amp;gt;&amp;#123;...&amp;#125;&amp;#125;//方式二：多文件写法entry: &amp;#123;	/*index:[		&apos;w">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack4配置详解">
+<meta property="og:url" content="http://yoursite.com/2018/11/18/webpack4配置详解/index.html">
+<meta property="og:site_name" content="_sUper.LEE的个人空间">
+<meta property="og:description" content="来源网络  一、entry12345678910111213141516//方式一：单文件写法entry: &amp;#123;	index: &apos;./src/pages/route.js&apos;,	//about: &apos;./src/pages/about.js&apos;,	//other:()=&amp;gt;&amp;#123;...&amp;#125;&amp;#125;//方式二：多文件写法entry: &amp;#123;	/*index:[		&apos;w">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/10/166fb92aa53f846f">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/10/166fb92b5f33e92c">
+<meta property="og:updated_time" content="2018-11-28T15:08:47.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack4配置详解">
+<meta name="twitter:description" content="来源网络  一、entry12345678910111213141516//方式一：单文件写法entry: &amp;#123;	index: &apos;./src/pages/route.js&apos;,	//about: &apos;./src/pages/about.js&apos;,	//other:()=&amp;gt;&amp;#123;...&amp;#125;&amp;#125;//方式二：多文件写法entry: &amp;#123;	/*index:[		&apos;w">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/11/10/166fb92aa53f846f">
+    
+        <link rel="alternate" type="application/atom+xml" title="_sUper.LEE的个人空间" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+    <style>
+                .timeline #cloud-tie-wrapper{
+            display: none;
+        }
+        body .page-content .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: -1;
+            width: 4px;
+            height: 100%;
+            margin-left: -2px;
+            background: #dadada;
+        }
+        /* // 时间线 */
+        body #busuanzi_container_page_pv{
+            display: none!important;
+        }
+        body .comments{
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                padding: 42px 26px 0;
+        }
+        body .post-copyright .content{
+                margin-bottom: 0em; 
+            padding: 0px; 
+        }
+        body img{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/3.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">_sUper.LEE</h5>
+          <a href="mailto:1213219813@qq.com" title="1213219813@qq.com" class="mail">1213219813@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tools"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                工具资源
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+      
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">webpack4配置详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="global.search_input_hint">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">webpack4配置详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-18T06:32:12.000Z" itemprop="datePublished" class="page-time">
+  2018-11-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Front-End/">Front-End</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+ 
+</header>
+        <!-- //particles 
+  <div id="particles-js"></div>
+    <style type="text/css">
+        #particles-js {
+               position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: -1;
+                /* background-color: #26AFE3; */
+                left: 0;
+                bottom: 0;
+                right: 0;
+        }
+    </style> -->
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、entry"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、entry</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、output"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、output</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、hash"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、hash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、mode"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、mode</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、devtool"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、devtool</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六、optimization"><span class="post-toc-number">6.</span> <span class="post-toc-text">六、optimization</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#七、resolve-配置模块如何解析"><span class="post-toc-number">7.</span> <span class="post-toc-text">七、resolve - 配置模块如何解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#八、module-rules-编译规则"><span class="post-toc-number">8.</span> <span class="post-toc-text">八、module.rules - 编译规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#九、项目中常用loader"><span class="post-toc-number">9.</span> <span class="post-toc-text">九、项目中常用loader</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十、plugins-插件"><span class="post-toc-number">10.</span> <span class="post-toc-text">十、plugins - 插件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十一、plugins-loader-区别"><span class="post-toc-number">11.</span> <span class="post-toc-text">十一、plugins/loader 区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十二、webpack-dev-server"><span class="post-toc-number">12.</span> <span class="post-toc-text">十二、webpack-dev-server</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#十三、webpack4删除的点"><span class="post-toc-number">13.</span> <span class="post-toc-text">十三、webpack4删除的点</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-webpack4配置详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">webpack4配置详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-18 14:32:12" datetime="2018-11-18T06:32:12.000Z"  itemprop="datePublished">2018-11-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Front-End/">Front-End</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>来源网络</p>
+</blockquote>
+<h2 id="一、entry"><a href="#一、entry" class="headerlink" title="一、entry"></a>一、entry</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一：单文件写法</span></span><br><span class="line">entry: &#123;</span><br><span class="line">	index: <span class="string">'./src/pages/route.js'</span>,</span><br><span class="line">	<span class="comment">//about: './src/pages/about.js',</span></span><br><span class="line">	<span class="comment">//other:()=&gt;&#123;...&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二：多文件写法</span></span><br><span class="line">entry: &#123;</span><br><span class="line">	<span class="comment">/*index:[</span></span><br><span class="line"><span class="comment">		'webpack-hot-middleware/client',</span></span><br><span class="line"><span class="comment">		'./src/root.js'</span></span><br><span class="line"><span class="comment">	],*/</span></span><br><span class="line">	index: [<span class="string">'./src/root.js'</span>],</span><br><span class="line">	vendors : [<span class="string">'react'</span>,<span class="string">'react-dom'</span>,<span class="string">'redux'</span>,<span class="string">'react-router'</span>,<span class="string">'classnames'</span>],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、output"><a href="#二、output" class="headerlink" title="二、output"></a>二、output</h2><ul>
+<li><code>path</code>: 输出文件的目录，</li>
+<li><code>filename</code>:输出的文件名，它一般跟你<code>entry</code>配置相对应，如：<code>js/[name].js</code> <code>name</code>在这里表示的是<code>[index、vendors]</code>，</li>
+<li><code>chunkFilename</code>：块，配置了它，非入口<code>entry</code>的模块，会帮自动拆分文件，也就是大家常说的按需加载，与路由中的 <code>require.ensure</code>相互应</li>
+<li><code>publicPath</code>：文件输出的公共路径，</li>
+<li><code>pathinfo</code>：即保留相互依赖的包中的注释信息，这个基本不用主动设置它，它默认 - <code>development</code> 模式时的默认值是 <code>true</code>，而在 <code>production</code> 模式时的默认值是 <code>false</code>，</li>
+<li>主要的就是这些，还有一些其他的<code>library</code>、<code>libraryTarget</code>、<code>auxiliaryComment</code>等</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">	path: path.resolve(__dirname, <span class="string">'../assets'</span>),</span><br><span class="line">	filename: <span class="string">'js/[name].js'</span>,</span><br><span class="line">	chunkFilename: <span class="string">'js/[name].[chunkhash:8].js'</span>,</span><br><span class="line">	publicPath: <span class="string">'/_static_/'</span>, <span class="comment">//最终访问的路径就是：localhost:3000/_static_/js/*.js</span></span><br><span class="line">	<span class="comment">//pathinfo:true,</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、hash"><a href="#三、hash" class="headerlink" title="三、hash"></a>三、hash</h2><blockquote>
+<p>常用的有三种</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>模板</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hash</code></td>
+<td>模块标识符的<code>hash</code>,一般应用于<code>filename：&#39;[name].[hash].js&#39;</code></td>
+</tr>
+<tr>
+<td><code>chunkhash</code></td>
+<td>按需加载块内容的<code>hash</code>，根据chunk自身的内容计算而来,<code>&#39;js/[name].[chunkhash:8].js&#39;</code></td>
+</tr>
+<tr>
+<td><code>contenthash</code></td>
+<td>这个没有用过，看了下文档它是在提取<code>css</code>文件时根据内容计算而来的 <code>hash</code> ，结合<code>ExtractTextWebpackPlugin</code>插件使用</td>
+</tr>
+<tr>
+<td><code>hash</code>长度</td>
+<td>默认<code>20</code>，可自定:<code>[hash:8]</code>、<code>[chunkhash:16]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="四、mode"><a href="#四、mode" class="headerlink" title="四、mode"></a>四、mode</h2><ul>
+<li>这个属于<code>webpack4</code>才新增的，4之前大家一般用<code>DefinePlugin</code>插件设置</li>
+<li><code>mode：development`</code>，<code>production</code>，<code>none</code>，</li>
+<li><code>development</code> : 开发模式，打包的代码不会被压缩，开启代码调试，</li>
+<li><code>production</code> : 生产模式，则正好反之。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//方法一</span></span><br><span class="line">webpack --mode development/production</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二</span></span><br><span class="line">……</span><br><span class="line">mode:<span class="string">'development/production'</span></span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<h2 id="五、devtool"><a href="#五、devtool" class="headerlink" title="五、devtool"></a>五、devtool</h2><ul>
+<li>控制是否生成，以及如何生成 <code>source map</code>文件，开发环境下更有利于定位问题，默认 <code>false</code></li>
+<li>当然它的开启，也会影响编译的速度，所以生产环境一定一定记得关闭</li>
+<li>常用的值<ul>
+<li><code>cheap-eval-source-map</code></li>
+<li><code>eval-source-map</code></li>
+<li><code>cheap-module-eval-source-map</code></li>
+<li><code>inline-cheap-module-source-map</code>等等，</li>
+<li>更详细的可以去<a href="https://webpack.js.org/concepts/" target="_blank" rel="noopener">官方查看</a></li>
+</ul>
+</li>
+<li>一般使用：<code>eval-source-map</code>较多，每个都有它不一样的特性</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/11/10/166fb92aa53f846f" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="六、optimization"><a href="#六、optimization" class="headerlink" title="六、optimization"></a>六、optimization</h2><ul>
+<li><code>optimization</code>是<code>webpack4</code>新增的，主要是用来让开发者根据需要自定义一些优化构建打包的策略配置</li>
+<li><code>minimize：true/false</code>,告诉<code>webpack</code>是否开启代码最小化压缩</li>
+<li><code>minimizer</code>：自定<code>js</code>优化配置，会覆盖默认的配置，结合<code>UglifyJsPlugin</code>插件使用</li>
+<li><code>removeEmptyChunks: bool</code> 值，它检测并删除空的块。将设置为<code>false</code>将禁用此优化</li>
+<li><code>nodeEnv</code>：它并不是<code>node</code>里的环境变量，设置后可以在代码里使用 <code>process.env.NODE_ENV === &#39;development&#39;</code>来判断一些逻辑，生产环境<code>UglifyJsPlugin</code>会自动删除无用代码</li>
+<li><code>splitChunks</code> ：取代了<code>CommonsChunkPlugin</code>，自动分包拆分、代码拆分，详细默认默认配置，只会作用于异步加载的代码块 —— <code>chunks:&#39;async&#39;</code>，它有三个值：<code>all</code>,<code>async</code>,<code>initial</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//环境变更也可以直接 在启动中设置</span></span><br><span class="line"> <span class="comment">//webpack --env.NODE_ENV=local --env.production --progress</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//splitChunks 默认配置</span></span><br><span class="line">splitChunks: &#123;</span><br><span class="line">  chunks: <span class="string">'async'</span>,</span><br><span class="line">  minSize: <span class="number">30000</span>,</span><br><span class="line">  maxSize: <span class="number">0</span>,</span><br><span class="line">  minChunks: <span class="number">1</span>,</span><br><span class="line">  maxAsyncRequests: <span class="number">5</span>,</span><br><span class="line">  maxInitialRequests: <span class="number">3</span>,</span><br><span class="line">  automaticNameDelimiter: <span class="string">'~'</span>,</span><br><span class="line">  name: <span class="literal">true</span>,</span><br><span class="line">  cacheGroups: &#123;</span><br><span class="line">    vendors: &#123;</span><br><span class="line">      test: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">      priority: <span class="number">-10</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">      minChunks: <span class="number">2</span>,</span><br><span class="line">      priority: <span class="number">-20</span>,</span><br><span class="line">      reuseExistingChunk: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>runtimeChunk</code>: 提取 <code>webpack</code>运行时代码,它可以设置为：<code>boolean</code>、<code>Object</code></li>
+<li>该配置开启时，会覆盖 入口指定的名称</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">	runtimeChunk:<span class="literal">true</span>,<span class="comment">//方式一</span></span><br><span class="line">  runtimeChunk: &#123;</span><br><span class="line">    name: <span class="function"><span class="params">entrypoint</span> =&gt;</span> <span class="string">`runtimechunk~<span class="subst">$&#123;entrypoint.name&#125;</span>`</span> <span class="comment">//方式二</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/11/10/166fb92b5f33e92c" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="七、resolve-配置模块如何解析"><a href="#七、resolve-配置模块如何解析" class="headerlink" title="七、resolve - 配置模块如何解析"></a>七、resolve - 配置模块如何解析</h2><ul>
+<li><code>extensions</code>：自动解析确定的扩展,省去你引入组件时写后缀的麻烦，</li>
+<li><code>alias</code>：非常重要的一个配置，它可以配置一些短路径，</li>
+<li><code>modules</code>：<code>webpack</code>解析模块时应该搜索的目录，<br>其他 <code>plugins</code>、<code>unsafeCache</code>、<code>enforceExtension</code>，基本没有怎么用到</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//extensions 后缀可以省略，</span></span><br><span class="line"><span class="keyword">import</span> Toast <span class="keyword">from</span> <span class="string">'src/components/toast'</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// alias ,短路径</span></span><br><span class="line"><span class="keyword">import</span> Modal <span class="keyword">from</span> <span class="string">'../../../components/modal'</span> </span><br><span class="line"><span class="comment">//简写</span></span><br><span class="line"><span class="keyword">import</span> Modal <span class="keyword">from</span> <span class="string">'src/components/modal'</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">resolve: &#123;</span><br><span class="line">  extensions: [<span class="string">'.js'</span>, <span class="string">'.jsx'</span>,<span class="string">'.ts'</span>,<span class="string">'.tsx'</span>, <span class="string">'.scss'</span>,<span class="string">'.json'</span>,<span class="string">'.css'</span>],</span><br><span class="line">  alias: &#123;</span><br><span class="line">    src :path.resolve(__dirname, <span class="string">'../src'</span>),</span><br><span class="line">    components :path.resolve(__dirname, <span class="string">'../src/components'</span>),</span><br><span class="line">    utils :path.resolve(__dirname, <span class="string">'../src/utils'</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  modules: [<span class="string">'node_modules'</span>],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="八、module-rules-编译规则"><a href="#八、module-rules-编译规则" class="headerlink" title="八、module.rules - 编译规则"></a>八、module.rules - 编译规则</h2><ul>
+<li><code>rules</code>：也就是之前的<code>loaders</code>，</li>
+<li><code>test</code> ： 正则表达式，匹配编译的文件，</li>
+<li><code>exclude</code>：排除特定条件，如通常会写<code>node_modules</code>，即把某些目录<code>/</code>文件过滤掉，</li>
+<li><code>include</code>：它正好与<code>exclude</code>相反，</li>
+<li><code>use -loader</code> ：必须要有它，它相当于是一个 <code>test</code> 匹配到的文件对应的解析器，<code>babel-loader</code>、<code>style-loader</code>、<code>sass-loader</code>、<code>url-loader</code>等等，</li>
+<li><code>use - options</code>：它与<code>loader</code>配合使用，可以是一个字符串或对象，它的配置可以直接简写在<code>loader</code>内一起，它下面还有<code>presets</code>、<code>plugins</code>等属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">	rules: [</span><br><span class="line">		&#123;</span><br><span class="line">			test: <span class="regexp">/\.(js|jsx)$/</span>,</span><br><span class="line">			exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">			use: [</span><br><span class="line">				&#123;</span><br><span class="line">					loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">					options: &#123;</span><br><span class="line">						presets: [</span><br><span class="line">							[<span class="string">'env'</span>,</span><br><span class="line">							&#123;</span><br><span class="line">								targets: &#123;</span><br><span class="line">								browsers: CSS_BROWSERS,</span><br><span class="line">							&#125;,</span><br><span class="line">						&#125;],<span class="string">'react'</span>, <span class="string">'es2015'</span>, <span class="string">'stage-0'</span></span><br><span class="line">						],</span><br><span class="line">						plugins: [</span><br><span class="line">							<span class="string">'transform-runtime'</span>,</span><br><span class="line">							<span class="string">'add-module-exports'</span>,</span><br><span class="line">						],</span><br><span class="line">					&#125;,</span><br><span class="line">				&#125;,</span><br><span class="line">			],</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			test: <span class="regexp">/\.(scss|css)$/</span>,</span><br><span class="line">			use: [</span><br><span class="line">				<span class="string">'style-loader'</span>,</span><br><span class="line">				&#123;<span class="attr">loader</span>: <span class="string">'css-loader'</span>,<span class="attr">options</span>:&#123;<span class="attr">plugins</span>: [<span class="built_in">require</span>(<span class="string">'autoprefixer'</span>)(&#123;<span class="attr">browsers</span>: CSS_BROWSERS,&#125;),],<span class="attr">sourceMap</span>: <span class="literal">true</span>&#125;&#125;,</span><br><span class="line">				&#123;<span class="attr">loader</span>: <span class="string">'postcss-loader'</span>,<span class="attr">options</span>:&#123;<span class="attr">plugins</span>: [<span class="built_in">require</span>(<span class="string">'autoprefixer'</span>)(&#123;<span class="attr">browsers</span>: CSS_BROWSERS,&#125;),],<span class="attr">sourceMap</span>: <span class="literal">true</span>&#125;&#125;,</span><br><span class="line">				&#123;<span class="attr">loader</span>: <span class="string">'sass-loader'</span>,<span class="attr">options</span>:&#123;<span class="attr">sourceMap</span>: <span class="literal">true</span>&#125;&#125;</span><br><span class="line">			]</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			test: <span class="regexp">/\.(png|jpg|jpeg|gif)$/</span>,</span><br><span class="line">			exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">			use: [</span><br><span class="line">				&#123;</span><br><span class="line">					loader: <span class="string">'url-loader?limit=12&amp;name=images/[name].[hash:8].[ext]'</span>,</span><br><span class="line">				&#125;,</span><br><span class="line">			],</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			test: <span class="regexp">/\.(woff|woff2|ttf|eot|svg)$/</span>,</span><br><span class="line">			exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">			use: [</span><br><span class="line">				&#123;</span><br><span class="line">					loader: <span class="string">'file-loader?name=fonts/[name].[hash:8].[ext]'</span>,</span><br><span class="line">				&#125;,</span><br><span class="line">			],</span><br><span class="line">		&#125;,</span><br><span class="line">	],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="九、项目中常用loader"><a href="#九、项目中常用loader" class="headerlink" title="九、项目中常用loader"></a>九、项目中常用loader</h2><ul>
+<li><code>babel-loader</code>、<code>awesome-typescript-loader</code> js*/ts编译，</li>
+<li><code>css-loader</code>、<code>postcss-loader</code>、<code>sass-loader</code>、<code>less-loader</code>、<code>style-loader</code> 等<code>css</code>样式处理</li>
+<li><code>file-loader</code>、<code>url-loader</code>、<code>html-loader</code>等图片<code>/svg/html</code>等的处理</li>
+</ul>
+<h2 id="十、plugins-插件"><a href="#十、plugins-插件" class="headerlink" title="十、plugins - 插件"></a>十、plugins - 插件</h2><ul>
+<li><code>UglifyJsPlugin</code></li>
+<li><code>HotModuleReplacementPlugin</code></li>
+<li><code>NoEmitOnErrorsPlugin</code></li>
+<li><code>HtmlWebPackPlugin</code></li>
+<li><code>ExtractTextPlugin</code></li>
+<li><code>PreloadWebpackPlugin</code></li>
+</ul>
+<h2 id="十一、plugins-loader-区别"><a href="#十一、plugins-loader-区别" class="headerlink" title="十一、plugins/loader 区别"></a>十一、plugins/loader 区别</h2><ul>
+<li><code>loader</code>的作用在于解析文件，比如把<code>ES6</code>转换成<code>es5</code>,甚至<code>ES3</code>,毕竟还有万恶的IE嘛；把<code>Sass</code>、<code>Less</code>解析成<code>CSS</code>，给<code>CSS</code>自动加上兼容的前缀；对图片进行一个解析等等</li>
+<li><code>plugins</code>对<code>loader</code>干的事情进行优化分类、提取精华(公共代码提取)、做压缩处理(<code>js/css/html</code>压缩)、输出指定的目录等</li>
+</ul>
+<h2 id="十二、webpack-dev-server"><a href="#十二、webpack-dev-server" class="headerlink" title="十二、webpack-dev-server"></a>十二、webpack-dev-server</h2><ul>
+<li><code>contentBase</code> ：告诉服务(<code>dev server</code>)在哪里查找文件，默认不指定会在是当期项目根目录，</li>
+<li><code>historyApiFallback</code>:可以是<code>boolean</code>、 <code>object</code>，默认响应的入口文件，包括<code>404</code>都会指向这里，<code>object</code>见下面示例</li>
+<li><code>compress</code>：启用 <code>gzip</code> 压缩，</li>
+<li><code>publicPath</code>：它其实就是 <code>output.publicPath</code>，当你改变了它，即会覆盖了<code>output</code>的配置，</li>
+<li><code>stats</code>： 可以自定控制要显示的编译细节信息，</li>
+<li><code>proxy</code>：它其实就是<code>http-proxy-middleware</code>，可以进行处理一些代理的请求</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一：不配置方式二的内容</span></span><br><span class="line"> webpack-dev-server --config webpack/webpack.config.dev.js</span><br><span class="line"><span class="comment">//指定 端口： --port=8080 </span></span><br><span class="line"><span class="comment">//开启热更新：--hot</span></span><br><span class="line"><span class="comment">//gzip： --compress</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二</span></span><br><span class="line">devServer : </span><br><span class="line">	contentBase:<span class="string">'./assets'</span>,</span><br><span class="line">	host: <span class="string">'0.0.0.0'</span>,</span><br><span class="line">	port: <span class="number">9089</span>,</span><br><span class="line">	publicPath: <span class="string">'/assets/'</span>,</span><br><span class="line">	historyApiFallback: &#123;</span><br><span class="line">		index: <span class="string">'/views/index.html'</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	匹配路径，进入不同的入口文件，首席填坑官∙苏南的专栏,公Z好：honeyBadger8</span></span><br><span class="line"><span class="comment">	rewrites: [</span></span><br><span class="line"><span class="comment">			&#123; from: /^\/$/, to: '/views/landing.html' &#125;,</span></span><br><span class="line"><span class="comment">			&#123; from: /^\/subpage/, to: '/views/subpage.html' &#125;,</span></span><br><span class="line"><span class="comment">			&#123; from: /./, to: '/views/404.html' &#125;</span></span><br><span class="line"><span class="comment">		]</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	compress: <span class="literal">true</span>,</span><br><span class="line">	noInfo: <span class="literal">true</span>,</span><br><span class="line">	inline: <span class="literal">true</span>,</span><br><span class="line">	hot: <span class="literal">true</span>,</span><br><span class="line">	stats: &#123;</span><br><span class="line">		colors: <span class="literal">true</span>,</span><br><span class="line">		chunks: <span class="literal">false</span></span><br><span class="line">	&#125;,</span><br><span class="line">	proxy:&#123;</span><br><span class="line">		<span class="string">'/mockApi'</span>: <span class="string">'https://easy-mock.com/project/5a0aad39eace86040263d'</span> ,<span class="comment">//请求可直接写成  /mockApi/api/login...</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="十三、webpack4删除的点"><a href="#十三、webpack4删除的点" class="headerlink" title="十三、webpack4删除的点"></a>十三、webpack4删除的点</h2><ul>
+<li><code>module.loaders</code></li>
+<li><code>NoErrorsPlugin</code></li>
+<li><code>CommonsChunkPlugin</code></li>
+<li><code>DefinePlugin</code></li>
+<li><code>OccurenceOrderPlugin</code></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/logo.jpg" alt="_sUper.LEE">
+            _sUper.LEE
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/11/18/webpack4配置详解/&title=《webpack4配置详解》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/11/18/webpack4配置详解/&title=《webpack4配置详解》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/11/18/webpack4配置详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack4配置详解》 — _sUper.LEE的个人空间&url=http://yoursite.com/2018/11/18/webpack4配置详解/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/11/18/webpack4配置详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/11/20/Docker/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Docker小结篇</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/01/服务器使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Nginx服务器配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=true"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/ewm.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <!-- <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>footer.license</span>
+        </p>
+    </div> -->
+    <div class="bottom">
+        <p><span>_sUper.LEE &copy; 2015 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+  
+</footer>
+
+    </main>
+    <div class="mask" id="mask">
+  
+</div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/11/18/webpack4配置详解/&title=《webpack4配置详解》 — _sUper.LEE的个人空间&pic=http://yoursite.com/img/logo.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/11/18/webpack4配置详解/&title=《webpack4配置详解》 — _sUper.LEE的个人空间&source=LEE Blog" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/11/18/webpack4配置详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack4配置详解》 — _sUper.LEE的个人空间&url=http://yoursite.com/2018/11/18/webpack4配置详解/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/11/18/webpack4配置详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3awY7DIAxF0f7/T3ek2Y5C77NJRzE3q6pVgMPCNdivF37ev8/617/P1a/rt9ZztR4ZMmQ8lkGGu/q8HqezETFVhgwZBzDWQfZqaALgy023TIYMGTL4Qt/hs55dhgwZMnYFXJ7wkW/+7X9DhgwZj2KkV2b98NqfV4YMGecw0sLANz/fWN+QIUPGQxj9AEoSvl2B+3I9MmTIGM24Okbe0dtACgz8cPsiL8iQIWMco3YdVltQbSUfxpQhQ8ZQRi2lq01cKwOgvwEZMmSMZnSG3tU2QVJGNKMMGTKGMnY1bPFAyTeoeNEmQ4aMcQyyuFqgTL/n13nxWVyGDBkPZ/DCZFrO7CSFaQiWIUPGaYxamwUPmrtKDugULkOGjBGM2qV/MSzia7W0vUOGDBmnMe4oXqaBlWzfh4ArQ4aMQQyeAnYKCfwCrjiXDBkyRjM6jQ48NSTtaGkrGKpvyJAhYxyDLPc7h9taoVSGDBknMNLDZyekBmEU534yZMg4mdGZOL2AS1NStFwZMmSMZqwTvqC42B65FXBlyJAxgpEeUHnDROfqvxXiZciQMYjxDh8ScHkKSN5CGyRDhozRjPTYmV6B8YBbC/oyZMg4h5EG2Vqzaa3hlQR6GTJknMPoHGjva//iJVUZMmTI4CkgD99pS9m27FWGDBmjGfzibG8qiQK0DBkyDmDwEJlO0L9WizNHGTJkjGOkhQGStPHyZG0TN9Q3ZMiQ8QzGD9hkGQav+lERAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+<!-- <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/particles.min.js"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/app.min.js"></script> -->
+</body>
+</html>
